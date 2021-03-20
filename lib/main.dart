@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'src/utils/utils.dart';
+import 'src/utils/shared_pref.dart';
 import 'src/presentation/presentation.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPref.getInstance();
+
   runApp(MyApp());
 }
 
@@ -10,7 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: RegisterScreen(),
+      home: LoginScreen(),
+      routes: Routes.routes,
     );
   }
 }

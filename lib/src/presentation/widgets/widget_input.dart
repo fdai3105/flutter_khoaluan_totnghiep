@@ -11,6 +11,7 @@ class WidgetInput extends StatelessWidget {
   final BorderRadius borderRadius;
   final Icon prefixIcon;
   final Icon sufferIcon;
+  final String value;
 
   const WidgetInput(
       {Key key,
@@ -22,7 +23,8 @@ class WidgetInput extends StatelessWidget {
       this.prefixIcon,
       this.sufferIcon,
       this.onChanged,
-      this.hintStyle})
+      this.hintStyle,
+      this.value})
       : super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class WidgetInput extends StatelessWidget {
       data: Theme.of(context).copyWith(primaryColor: focusColor),
       child: TextFormField(
         onChanged: onChanged,
+        initialValue: value ?? '',
         decoration: InputDecoration(
           labelText: hint ?? '',
           labelStyle: hintStyle,
@@ -45,6 +48,12 @@ class WidgetInput extends StatelessWidget {
           prefixIcon: prefixIcon,
           suffixIcon: sufferIcon,
         ),
+        validator: (value) {
+          if (value.isEmpty) {
+            return 'This field is required';
+          }
+          return null;
+        },
       ),
     );
   }

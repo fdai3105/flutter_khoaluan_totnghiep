@@ -1,2 +1,2 @@
-export 'base_screen.dart';
+export 'base_widget.dart';
 export 'base_viewmodel.dart';
