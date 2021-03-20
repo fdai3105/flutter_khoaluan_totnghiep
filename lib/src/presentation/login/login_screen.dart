@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../utils/utils.dart';
 import '../base/base.dart';
 import 'login.dart';
 import '../../resources/repositories/auth.dart';
@@ -83,7 +84,9 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, Routes.forgot);
+                            },
                             style: ButtonStyle(
                                 overlayColor: MaterialStateProperty.all(
                                     Colors.transparent)),
@@ -115,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                         overlayColor:
                             MaterialStateProperty.all(Colors.transparent),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Sign up',
                         style: TextStyle(
                           color: AppColors.primary,

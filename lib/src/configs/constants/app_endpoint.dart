@@ -6,6 +6,7 @@ class AppEndpoint {
   ///
   static const String register = 'register';
   static const String login = 'login';
+  static const String forgotPassword = 'password/email';
 
   ///
   static const String getProducts = 'product';

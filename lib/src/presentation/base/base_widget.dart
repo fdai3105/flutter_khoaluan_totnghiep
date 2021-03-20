@@ -18,7 +18,7 @@ class BaseWidget<T extends BaseViewModel> extends StatefulWidget {
       : super(key: key);
 
   @override
-  _BaseWidgetState createState() => _BaseWidgetState();
+  _BaseWidgetState createState() => _BaseWidgetState<T>();
 }
 
 class _BaseWidgetState<T extends BaseViewModel> extends State<BaseWidget<T>> {

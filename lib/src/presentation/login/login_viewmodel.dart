@@ -10,10 +10,13 @@ class LoginViewModel extends BaseViewModel {
 
   LoginViewModel({@required this.authRepository});
 
-  void init() async {}
+  Future init() async {
+    isLoading = true;
+    isLoading = false;
+  }
 
   Future<void> login(String email, String password) async {
-    isLoading = true;
+    _showLoadingDialog();
     final loginResponse = await authRepository.login(email, password);
     if (loginResponse.statusCode == 200) {
       await SharedPref.setUser(User.fromJson(loginResponse.data));
@@ -22,7 +25,7 @@ class LoginViewModel extends BaseViewModel {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(loginResponse.data['message'] ?? "")));
     } else if (loginResponse.statusCode == 422) {
-      String errors = '';
+      var errors = '';
       Map.from(loginResponse.data['errors']).forEach((key, value) {
         final s = value.toString().substring(1, value.toString().length - 1);
         errors += '$s';
@@ -30,6 +33,28 @@ class LoginViewModel extends BaseViewModel {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(errors ?? "")));
     }
-    isLoading = false;
+    Navigator.pop(context);
+  }
+
+  void _showLoadingDialog() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: Dialog(
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  children: const [
+                    CircularProgressIndicator(),
+                    SizedBox(width: 20),
+                    Text('Loading...')
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 }

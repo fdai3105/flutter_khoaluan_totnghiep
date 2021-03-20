@@ -31,6 +31,7 @@ dependencies:
   # commons
   pedantic: ^1.11.0
   flutter_svg: ^0.19.3
+  regexpattern: ^1.0.0
 
   # states
   provider: ^5.0.0

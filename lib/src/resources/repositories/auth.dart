@@ -18,6 +18,19 @@ class AuthRepository {
     }
   }
 
+  Future<Response> forgotPassword(String email) async {
+    try {
+      final params = FormData.fromMap({
+        'email': email,
+      });
+      final response =
+          await DioService().post(AppEndpoint.forgotPassword, data: params);
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
+
   Future<User> register(String name, String email, String phone,
       String password, int gender) async {
     try {
