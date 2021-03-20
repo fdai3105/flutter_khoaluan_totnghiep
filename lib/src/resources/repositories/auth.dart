@@ -5,21 +5,16 @@ import '../resources.dart';
 import '../models/models.dart';
 
 class AuthRepository {
-  Future<User> login(String email, String password) async {
+  Future<Response> login(String email, String password) async {
     try {
       final params = FormData.fromMap({
         'email': email,
         'password': password,
       });
       final response = await DioService().post(AppEndpoint.login, data: params);
-      if (response.statusCode == 200) {
-        return User.fromJson(response.data);
-      } else {
-        return null;
-      }
+      return response;
     } on DioError catch (e) {
-      print(e.response.data);
-      return null;
+      return e.response;
     }
   }
 
