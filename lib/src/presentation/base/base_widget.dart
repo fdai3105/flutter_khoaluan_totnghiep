@@ -39,6 +39,5 @@ class _BaseWidgetState<T extends BaseViewModel> extends State<BaseWidget<T>> {
         child: widget.child,
       ),
     );
-    return Container();
   }
 }

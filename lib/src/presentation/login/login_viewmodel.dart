@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/presentation/presentation.dart';
 import '../../resources/models/models.dart';
 import '../../utils/utils.dart';
 import '../base/base.dart';
@@ -16,7 +17,8 @@ class LoginViewModel extends BaseViewModel {
   }
 
   Future<void> login(String email, String password) async {
-    _showLoadingDialog();
+    final loadingDialog = DialogLoading.of(context)..show();
+
     final loginResponse = await authRepository.login(email, password);
     if (loginResponse.statusCode == 200) {
       await SharedPref.setUser(User.fromJson(loginResponse.data));
@@ -33,28 +35,7 @@ class LoginViewModel extends BaseViewModel {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(errors ?? "")));
     }
-    Navigator.pop(context);
-  }
 
-  void _showLoadingDialog() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return WillPopScope(
-            onWillPop: () async => false,
-            child: Dialog(
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  children: const [
-                    CircularProgressIndicator(),
-                    SizedBox(width: 20),
-                    Text('Loading...')
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
+    loadingDialog.hide();
   }
 }

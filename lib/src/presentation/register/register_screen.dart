@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
 import '../../resources/resources.dart';
 import '../presentation.dart';
 import '../widgets/widgets.dart';
@@ -7,19 +8,19 @@ import '../../configs/configs.dart';
 class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BaseWidget(
-      onViewModelReady: (vm) {
-        vm.init();
-      },
-      viewModel: RegisterViewModel(authRepository: AuthRepository()),
-      builder: (context, vm, child) {
-        return Scaffold(
-          body: SafeArea(
-            top: false,
-            child: _mobile(context, vm),
-          ),
-        );
-      },
+    return Scaffold(
+      body: SafeArea(
+        top: false,
+        child: BaseWidget<RegisterViewModel>(
+          onViewModelReady: (vm) {
+            vm.init();
+          },
+          viewModel: RegisterViewModel(authRepository: AuthRepository()),
+          builder: (context, vm, child) {
+            return _mobile(context, vm);
+          },
+        ),
+      ),
     );
   }
 
@@ -171,7 +172,7 @@ class RegisterScreen extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () => Navigator.pushNamed(context, Routes.login),
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
               ),

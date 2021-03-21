@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/resources/models/error.dart';
 
 import '../../resources/resources.dart';
 
@@ -9,13 +11,24 @@ class RegisterViewModel extends BaseViewModel {
 
   RegisterViewModel({@required this.authRepository});
 
-  void init() {}
+  void init() {
+    isLoading = false;
+  }
 
   Future register(String name, String email, String phone, String password,
       int gender) async {
-    isLoading = true;
-    final user = await authRepository.register(name, email, phone, password,gender);
-    print(user.toString());
-    isLoading = true;
+    final dialog = DialogLoading.of(context)..show();
+
+    final user =
+        await authRepository.register(name, email, phone, password, gender);
+    if (user.statusCode == 200) {
+      Navigator.pop(context);
+    } else if (user.statusCode == 422) {
+      final errors = Error.fromJson(user.data);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(errors.message ?? "")));
+    }
+    dialog.hide();
   }
 }
+

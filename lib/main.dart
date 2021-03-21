@@ -3,9 +3,9 @@ import 'src/utils/utils.dart';
 import 'src/utils/shared_pref.dart';
 import 'src/presentation/presentation.dart';
 
-void main() {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPref.getInstance();
+  await SharedPref.getInstance();
 
   runApp(MyApp());
 }
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: LoginScreen(),
+      home: HomeScreen(),
       routes: Routes.routes,
     );
   }
