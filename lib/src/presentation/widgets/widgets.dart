@@ -1,2 +1,3 @@
 export 'widget_input.dart';
 export 'dialog_loading.dart';
+export 'widget_list_product.dart';

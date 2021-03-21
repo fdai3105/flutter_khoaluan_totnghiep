@@ -32,39 +32,50 @@ class HomeScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _appbar(vm),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              Text(
-                'Best Furnitute\nin your home.',
-                style: TextStyle(
-                  color: AppColors.textDark.withOpacity(0.7),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                Text(
+                  'Best Furniture\nin your home.',
+                  style: TextStyle(
+                    color: AppColors.textDark.withOpacity(0.7),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              _search(context, vm),
-              const SizedBox(height: 20),
-              _ListHorizon(
-                product: vm.popular,
-                label: 'Popular',
-              ),
-              const SizedBox(height: 20),
-              _ListHorizon(
-                product: vm.newArrivals,
-                label: 'New Arrivals',
-                onTap: (item) {
-                  print(item.id);
-                },
-              ),
-              const SizedBox(height: 20),
-            ],
+                const SizedBox(height: 20),
+                _search(context, vm),
+                const SizedBox(height: 20),
+                WidgetListProduct(
+                  product: vm.popular,
+                  isVertical: false,
+                  label: 'Popular',
+                ),
+                const SizedBox(height: 20),
+                WidgetListProduct(
+                  product: vm.newArrivals,
+                  isVertical: false,
+                  label: 'New Arrivals',
+                  onTap: (item) {
+                    print(item.id);
+                  },
+                ),
+                const SizedBox(height: 20),
+                WidgetListProduct(
+                  product: vm.products,
+                  isVertical: true,
+                  label: 'All furniture',
+                  seeAll: () {},
+                ),
+                const SizedBox(height: 20)
+              ],
+            ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -140,202 +151,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _ListHorizon extends StatelessWidget {
-  final ProductPagination product;
-  final String label;
-  final Function seeAll;
-  final Function(Product) onTap;
-
-  const _ListHorizon({
-    Key key,
-    this.product,
-    this.label,
-    this.seeAll,
-    this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _title(),
-        if (product == null) _bodyShimmer(context) else _body(context),
-      ],
-    );
-  }
-
-  Widget _title() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          label ?? '',
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        GestureDetector(
-          onTap: () => seeAll,
-          child: const Text(
-            'See all',
-            style: TextStyle(
-              color: AppColors.hintDark,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget _imageItem(List<ProductImage> images) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(6),
-      ),
-      child: images.isEmpty
-          ? Image.asset(
-              'assets/images/placeholder.jpg',
-              width: 150,
-              height: 120,
-              fit: BoxFit.fill,
-            )
-          : Image.network(
-              AppEndpoint.domain + images.first.image,
-              width: 150,
-              height: 120,
-              fit: BoxFit.cover,
-            ),
-    );
-  }
-
-  Widget _body(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: 200,
-      child: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        itemCount: product.data.length,
-        itemBuilder: (context, index) {
-          final item = product.data[index];
-          return GestureDetector(
-            onTap: () => onTap(item),
-            child: Container(
-              width: 150,
-              margin: EdgeInsets.only(
-                left: index == 0 ? 0 : 10,
-                right: 10,
-                bottom: 10,
-                top: 10,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(6),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 8,
-                    offset: Offset(0, 0),
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _imageItem(item.images),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item.name ?? "",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: AppColors.textDark,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text('${item.price} vnd'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _bodyShimmer(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: 200,
-      child: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Container(
-            width: 150,
-            margin: EdgeInsets.only(
-              left: index == 0 ? 0 : 10,
-              right: 10,
-              bottom: 10,
-              top: 10,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(6),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 8,
-                  offset: Offset(0, 0),
-                ),
-              ],
-            ),
-            child: Shimmer.fromColors(
-              baseColor: Colors.grey[300],
-              highlightColor: Colors.grey[100],
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _imageItem([]),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                            color: Colors.grey,
-                            height: 10,
-                            width: double.infinity),
-                        const SizedBox(height: 4),
-                        Container(color: Colors.grey, height: 10),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
       ),
     );
   }
