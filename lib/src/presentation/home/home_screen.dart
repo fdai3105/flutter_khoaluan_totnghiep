@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 import '../../resources/resources.dart';
 import '../presentation.dart';
 import '../../configs/constants/constants.dart';
@@ -54,14 +53,19 @@ class HomeScreen extends StatelessWidget {
                   product: vm.popular,
                   isVertical: false,
                   label: 'Popular',
+                  seeAll: () {},
+                  onTap: (item) {
+                    print(item.name);
+                  },
                 ),
                 const SizedBox(height: 20),
                 WidgetListProduct(
                   product: vm.newArrivals,
                   isVertical: false,
                   label: 'New Arrivals',
+                  seeAll: () {},
                   onTap: (item) {
-                    print(item.id);
+                    print(item.name);
                   },
                 ),
                 const SizedBox(height: 20),
@@ -70,6 +74,9 @@ class HomeScreen extends StatelessWidget {
                   isVertical: true,
                   label: 'All furniture',
                   seeAll: () {},
+                  onTap: (item) {
+                    print(item.name);
+                  },
                 ),
                 const SizedBox(height: 20)
               ],

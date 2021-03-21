@@ -31,13 +31,9 @@ class WidgetListProduct extends StatelessWidget {
 
   Widget _body(BuildContext context) {
     if (isVertical) {
-      return product == null
-          ? _verticalShimmer(context)
-          : _vertical(context);
+      return product == null ? _verticalShimmer(context) : _vertical(context);
     } else {
-      return (product == null)
-          ? _horizonShimmer(context)
-          : _horizon(context);
+      return (product == null) ? _horizonShimmer(context) : _horizon(context);
     }
   }
 
@@ -199,39 +195,42 @@ class WidgetListProduct extends StatelessWidget {
           itemCount: product.data.length,
           itemBuilder: (context, index) {
             final item = product.data[index];
-            return Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(6),
-                boxShadow: AppStyles.shadow,
-              ),
-              child: Column(
-                children: [
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: _imageItem(item.images),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          item.name ?? '',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: AppColors.textDark,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 2),
-                        Text('${item.price} vnd'),
-                      ],
+            return GestureDetector(
+              onTap: () => onTap(item),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(6),
+                  boxShadow: AppStyles.shadow,
+                ),
+                child: Column(
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.tight,
+                      child: _imageItem(item.images),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            item.name ?? '',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: AppColors.textDark,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text('${item.price} vnd'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },

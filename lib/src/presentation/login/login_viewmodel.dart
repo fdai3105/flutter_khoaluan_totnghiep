@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/presentation.dart';
-import '../../resources/models/models.dart';
+import '../presentation.dart';
 import '../../utils/utils.dart';
-import '../base/base.dart';
-import '../../resources/repositories/auth.dart';
+import '../../resources/resources.dart';
 
 class LoginViewModel extends BaseViewModel {
   final AuthRepository authRepository;

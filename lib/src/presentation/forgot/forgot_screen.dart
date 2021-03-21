@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/auth.dart';
 import 'package:regexpattern/regexpattern.dart';
+import '../../resources/resources.dart';
 import '../../configs/configs.dart';
 import '../presentation.dart';
 
