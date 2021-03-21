@@ -32,7 +32,7 @@ class Meta {
         lastPage: json["last_page"],
         links: List<Link>.from(json["links"].map((x) => Link.fromJson(x))),
         path: json["path"],
-        perPage: int.parse(json["per_page"]),
+        perPage: json["per_page"],
         to: json["to"],
         total: json["total"],
       );

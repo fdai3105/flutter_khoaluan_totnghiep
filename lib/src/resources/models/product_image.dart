@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class Image {
-  Image({
+class ProductImage {
+  ProductImage({
     this.id,
     this.name,
     this.image,
@@ -19,13 +19,13 @@ class Image {
   final DateTime updatedAt;
   final int productId;
 
-  factory Image.fromRawJson(String str) => Image.fromJson(json.decode(str));
+  factory ProductImage.fromRawJson(String str) => ProductImage.fromJson(json.decode(str));
 
 
 
   String toRawJson() => json.encode(toJson());
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+  factory ProductImage.fromJson(Map<String, dynamic> json) => ProductImage(
         id: json["id"],
         name: json["name"],
         image: json["image"],

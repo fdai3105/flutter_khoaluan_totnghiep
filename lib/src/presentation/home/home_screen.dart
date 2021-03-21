@@ -1,11 +1,9 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/constants/constants.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/base/base.dart';
-import 'home.dart';
-import '../../resources/repositories/auth.dart';
+import 'package:shimmer/shimmer.dart';
+import '../../resources/resources.dart';
+import '../presentation.dart';
+import '../../configs/constants/constants.dart';
+import '../../configs/configs.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -16,6 +14,7 @@ class HomeScreen extends StatelessWidget {
         child: BaseWidget<HomeViewModel>(
           viewModel: HomeViewModel(
             authRepository: AuthRepository(),
+            productResponse: ProductResponse(),
           ),
           onViewModelReady: (vm) async {
             await vm.init();
@@ -50,7 +49,19 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 20),
               _search(context, vm),
               const SizedBox(height: 20),
-              _popularProduct(context, vm),
+              _ListHorizon(
+                product: vm.popular,
+                label: 'Popular',
+              ),
+              const SizedBox(height: 20),
+              _ListHorizon(
+                product: vm.newArrivals,
+                label: 'New Arrivals',
+                onTap: (item) {
+                  print(item.id);
+                },
+              ),
+              const SizedBox(height: 20),
             ],
           ),
         )
@@ -132,94 +143,200 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _popularProduct(BuildContext context, HomeViewModel vm) {
+class _ListHorizon extends StatelessWidget {
+  final ProductPagination product;
+  final String label;
+  final Function seeAll;
+  final Function(Product) onTap;
+
+  const _ListHorizon({
+    Key key,
+    this.product,
+    this.label,
+    this.seeAll,
+    this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Popular',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                'Sell all',
-                style: TextStyle(
-                  color: AppColors.hintDark,
-                ),
-              ),
-            )
-          ],
+        _title(),
+        if (product == null) _bodyShimmer(context) else _body(context),
+      ],
+    );
+  }
+
+  Widget _title() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label ?? '',
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        if (vm.popular == null)
-          const CircularProgressIndicator()
-        else
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 200,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-              itemCount: vm.popular.data.length,
-              itemBuilder: (context, index) {
-                final product = vm.popular.data[index];
-                return Container(
-                    margin: EdgeInsets.only(
-                      left: index == 0 ? 0 : 10,
-                      right: 10,
-                      bottom: 10,
-                      top: 10,
-                    ),
+        GestureDetector(
+          onTap: () => seeAll,
+          child: const Text(
+            'See all',
+            style: TextStyle(
+              color: AppColors.hintDark,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _imageItem(List<ProductImage> images) {
+    return ClipRRect(
+      borderRadius: const BorderRadius.vertical(
+        top: Radius.circular(6),
+      ),
+      child: images.isEmpty
+          ? Image.asset(
+              'assets/images/placeholder.jpg',
+              width: 150,
+              height: 120,
+              fit: BoxFit.fill,
+            )
+          : Image.network(
+              AppEndpoint.domain + images.first.image,
+              width: 150,
+              height: 120,
+              fit: BoxFit.cover,
+            ),
+    );
+  }
+
+  Widget _body(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: 200,
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: product.data.length,
+        itemBuilder: (context, index) {
+          final item = product.data[index];
+          return GestureDetector(
+            onTap: () => onTap(item),
+            child: Container(
+              width: 150,
+              margin: EdgeInsets.only(
+                left: index == 0 ? 0 : 10,
+                right: 10,
+                bottom: 10,
+                top: 10,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(6),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 8,
+                    offset: Offset(0, 0),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _imageItem(item.images),
+                  Padding(
                     padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 8,
-                          offset: Offset(0, 0),
-                        ),
-                      ],
-                    ),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (product.images.isEmpty)
-                          Image.asset(
-                            'assets/images/placeholder.jpg',
-                            height: 100,
-                            width: 100,
-                            fit: BoxFit.cover,
-                          )
-                        else
-                          Image.network(
-                            AppEndpoint.domain + product.images.first.image,
-                            height: 100,
-                            width: 100,
-                            fit: BoxFit.fitHeight,
-                          ),
                         Text(
-                          product.name ?? "",
+                          item.name ?? "",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             color: AppColors.textDark,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        Text('${product.price} vnd'),
+                        const SizedBox(height: 4),
+                        Text('${item.price} vnd'),
                       ],
-                    ));
-              },
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )
-      ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _bodyShimmer(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: 200,
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Container(
+            width: 150,
+            margin: EdgeInsets.only(
+              left: index == 0 ? 0 : 10,
+              right: 10,
+              bottom: 10,
+              top: 10,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(6),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 8,
+                  offset: Offset(0, 0),
+                ),
+              ],
+            ),
+            child: Shimmer.fromColors(
+              baseColor: Colors.grey[300],
+              highlightColor: Colors.grey[100],
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _imageItem([]),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            color: Colors.grey,
+                            height: 10,
+                            width: double.infinity),
+                        const SizedBox(height: 4),
+                        Container(color: Colors.grey, height: 10),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

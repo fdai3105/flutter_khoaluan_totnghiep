@@ -50,7 +50,7 @@ class Product {
   final String desc;
   final Brand brand;
   final Brand category;
-  final List<Image> images;
+  final List<ProductImage> images;
   final List<Attribute> attributes;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -66,7 +66,7 @@ class Product {
     desc: json["desc"],
     brand: Brand.fromJson(json["brand"]),
     category: Brand.fromJson(json["category"]),
-    images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+    images: List<ProductImage>.from(json["images"].map((x) => ProductImage.fromJson(x))),
     attributes: List<Attribute>.from(json["attributes"].map((x) => Attribute.fromJson(x))),
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),

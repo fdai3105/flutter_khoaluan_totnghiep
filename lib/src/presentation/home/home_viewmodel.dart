@@ -16,19 +16,25 @@ class HomeViewModel extends BaseViewModel {
 
   final _user = BehaviorSubject<User>();
   final _popular = BehaviorSubject<ProductPagination>();
+  final _newArrivals = BehaviorSubject<ProductPagination>();
 
   User get user => _user.value;
 
   ProductPagination get popular => _popular.value;
 
+  ProductPagination get newArrivals => _newArrivals.value;
+
   Future init() async {
     isLoading = true;
-    _user.add(SharedPref.getUser());
 
-    final popular = await ProductResponse().getPopular();
+    _user.add(SharedPref.getUser());
+    final popular = await productResponse.getPopular();
     if (popular.statusCode == 200) {
-      print(popular.data);
       _popular.add(ProductPagination.fromJson(popular.data));
+    }
+    final newArrivalsResponse = await productResponse.getNew();
+    if (newArrivalsResponse.statusCode == 200) {
+      _newArrivals.add(ProductPagination.fromJson(newArrivalsResponse.data));
     }
 
     isLoading = false;
@@ -38,6 +44,7 @@ class HomeViewModel extends BaseViewModel {
   Future dispose() {
     _user.close();
     _popular.close();
+    _newArrivals.close();
     return super.dispose();
   }
 }

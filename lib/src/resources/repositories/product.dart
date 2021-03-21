@@ -14,7 +14,7 @@ class ProductResponse {
 
   Future<Response> getPopular() async {
     try {
-      final products = DioService().get(AppEndpoint.getProducts);
+      final products = DioService().get(AppEndpoint.getPopularProducts);
       return products;
     } on DioError catch (e) {
       return e.response;
@@ -23,7 +23,7 @@ class ProductResponse {
 
   Future<Response> getNew() async {
     try {
-      final products = DioService().get(AppEndpoint.getProducts);
+      final products = DioService().get(AppEndpoint.getNewProducts);
       return products;
     } on DioError catch (e) {
       return e.response;
