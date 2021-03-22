@@ -33,6 +33,7 @@ class HomeScreen extends StatelessWidget {
         _appbar(vm),
         Expanded(
           child: SingleChildScrollView(
+            controller: vm.scroll,
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,6 +74,7 @@ class HomeScreen extends StatelessWidget {
                   product: vm.products,
                   isVertical: true,
                   label: 'All furniture',
+                  loadingMore: vm.loadingMore,
                   seeAll: () {},
                   onTap: (item) {
                     print(item.name);

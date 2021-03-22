@@ -3,12 +3,13 @@ import 'package:shimmer/shimmer.dart';
 import '../../configs/configs.dart';
 import '../../resources/resources.dart';
 
-class WidgetListProduct extends StatelessWidget {
+class WidgetListProduct extends StatefulWidget {
   final ProductPagination product;
   final String label;
   final Function seeAll;
   final Function(Product) onTap;
   final bool isVertical;
+  final bool loadingMore;
 
   const WidgetListProduct({
     Key key,
@@ -16,8 +17,18 @@ class WidgetListProduct extends StatelessWidget {
     this.label,
     this.seeAll,
     this.onTap,
-    this.isVertical = true,
+    this.isVertical = false,
+    this.loadingMore = false,
   }) : super(key: key);
+
+  @override
+  _WidgetListProductState createState() => _WidgetListProductState();
+}
+
+class _WidgetListProductState extends State<WidgetListProduct> {
+  static const double horizonWidth = 124;
+  static const double horizonHeight = 200;
+  static const double verticalRatio = 0.85;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +41,14 @@ class WidgetListProduct extends StatelessWidget {
   }
 
   Widget _body(BuildContext context) {
-    if (isVertical) {
-      return product == null ? _verticalShimmer(context) : _vertical(context);
+    if (widget.isVertical) {
+      return widget.product == null
+          ? _verticalShimmer(context)
+          : _vertical(context);
     } else {
-      return (product == null) ? _horizonShimmer(context) : _horizon(context);
+      return (widget.product == null)
+          ? _horizonShimmer(context)
+          : _horizon(context);
     }
   }
 
@@ -42,14 +57,14 @@ class WidgetListProduct extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          label ?? '',
+          widget.label ?? '',
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
         GestureDetector(
-          onTap: () => seeAll,
+          onTap: () => widget.seeAll,
           child: const Text(
             'See all',
             style: TextStyle(
@@ -63,22 +78,20 @@ class WidgetListProduct extends StatelessWidget {
   }
 
   Widget _horizon(BuildContext context) {
-    const height = 200.0;
-    const width = 150.0;
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      height: height,
+      height: horizonHeight,
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
-        itemCount: product.data.length,
+        itemCount: widget.product.data.length,
         itemBuilder: (context, index) {
-          final item = product.data[index];
+          final item = widget.product.data[index];
           return GestureDetector(
-            onTap: () => onTap(item),
+            onTap: () => widget.onTap(item),
             child: Container(
-              width: width,
+              width: horizonWidth,
               margin: EdgeInsets.only(
                 left: index == 0 ? 0 : 10,
                 right: 10,
@@ -88,19 +101,14 @@ class WidgetListProduct extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(6),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 8,
-                    offset: Offset(0, 0),
-                  ),
-                ],
+                boxShadow: AppStyles.shadow,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Flexible(child: _imageItem(item.images)),
+                  Flexible(
+                      child: _imageItem(item.images)),
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Column(
@@ -132,7 +140,7 @@ class WidgetListProduct extends StatelessWidget {
   Widget _horizonShimmer(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      height: 200,
+      height: horizonHeight,
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
@@ -140,7 +148,7 @@ class WidgetListProduct extends StatelessWidget {
         itemCount: 10,
         itemBuilder: (context, index) {
           return Container(
-            width: 140,
+            width: horizonWidth,
             margin: EdgeInsets.only(
               left: index == 0 ? 0 : 10,
               right: 10,
@@ -186,17 +194,18 @@ class WidgetListProduct extends StatelessWidget {
         const SizedBox(height: 10),
         GridView.builder(
           shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: verticalRatio,
             crossAxisCount: 2,
             mainAxisSpacing: 20,
             crossAxisSpacing: 20,
           ),
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: product.data.length,
+          itemCount: widget.product.data.length,
           itemBuilder: (context, index) {
-            final item = product.data[index];
+            final item = widget.product.data[index];
             return GestureDetector(
-              onTap: () => onTap(item),
+              onTap: () => widget.onTap(item),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -235,6 +244,7 @@ class WidgetListProduct extends StatelessWidget {
             );
           },
         ),
+        if (widget.loadingMore) const Center(child: CircularProgressIndicator())
       ],
     );
   }
@@ -306,10 +316,12 @@ class WidgetListProduct extends StatelessWidget {
               width: double.infinity,
               fit: BoxFit.cover,
             )
-          : Image.network(
-              AppEndpoint.domain + images.first.image,
+          : FadeInImage.assetNetwork(
+              height: double.infinity,
               width: double.infinity,
-              fit: BoxFit.contain,
+              fit: BoxFit.fill,
+              image: AppEndpoint.domain + images.first.image,
+              placeholder: 'assets/images/placeholder.jpg',
             ),
     );
   }

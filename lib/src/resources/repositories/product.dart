@@ -3,9 +3,13 @@ import '../resources.dart';
 import '../../configs/configs.dart';
 
 class ProductResponse {
-  Future<Response> getProducts() async {
+  Future<Response> getProducts(int page) async {
     try {
-      final products = DioService().get(AppEndpoint.getProducts);
+      final params = {
+        'page': page ?? 1,
+      };
+      final products =
+          DioService().get(AppEndpoint.getProducts, queryParameters: params);
       return products;
     } on DioError catch (e) {
       return e.response;

@@ -13,6 +13,17 @@ class ProductPagination {
   final Links links;
   final Meta meta;
 
+  ProductPagination copyWith({
+    List<Product> data,
+    Links links,
+    Meta meta,
+  }) =>
+      ProductPagination(
+        data: data ?? this.data,
+        links: links ?? this.links,
+        meta: meta ?? this.meta,
+      );
+
   factory ProductPagination.fromRawJson(String str) => ProductPagination.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
