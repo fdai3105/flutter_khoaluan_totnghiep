@@ -33,6 +33,7 @@ dependencies:
   regexpattern: ^1.0.0
   shimmer: ^1.1.2
   google_fonts: 1.1.2
+  persistent_bottom_nav_bar: 4.0.0
 
   # states
   provider: ^5.0.0

@@ -1,10 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../resources/resources.dart';
-import '../presentation.dart';
-import '../../configs/constants/constants.dart';
-import '../../configs/configs.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import '../../../resources/resources.dart';
+import '../../presentation.dart';
+import '../../../configs/constants/constants.dart';
+import '../../../configs/configs.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +34,7 @@ class HomeScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _appbar(vm),
+        _appbar(context, vm),
         Expanded(
           child: SingleChildScrollView(
             controller: vm.scroll,
@@ -101,7 +104,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _appbar(HomeViewModel vm) {
+  Widget _appbar(BuildContext context, HomeViewModel vm) {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
@@ -130,11 +133,16 @@ class HomeScreen extends StatelessWidget {
             ),
       actions: [
         IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.shopping_cart_outlined,
             color: AppColors.primary,
           ),
-          onPressed: () {},
+          onPressed: () {
+            pushNewScreen(
+              context,
+              screen: CartScreen(),
+            );
+          },
         )
       ],
     );
