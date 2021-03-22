@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../configs/configs.dart';
 import '../../resources/resources.dart';
 
-class WidgetListProduct extends StatefulWidget {
+class WidgetListProduct extends StatelessWidget {
   final ProductPagination product;
   final String label;
+  final EdgeInsets padding;
   final Function seeAll;
   final Function(Product) onTap;
   final bool isVertical;
@@ -15,20 +17,24 @@ class WidgetListProduct extends StatefulWidget {
     Key key,
     this.product,
     this.label,
+    this.padding = const EdgeInsets.all(0),
     this.seeAll,
     this.onTap,
     this.isVertical = false,
     this.loadingMore = false,
   }) : super(key: key);
 
-  @override
-  _WidgetListProductState createState() => _WidgetListProductState();
-}
-
-class _WidgetListProductState extends State<WidgetListProduct> {
   static const double horizonWidth = 124;
   static const double horizonHeight = 200;
   static const double verticalRatio = 0.85;
+
+  static final TextStyle nameStyle = GoogleFonts.inter(
+    color: AppColors.textDark,
+    fontWeight: FontWeight.w600,
+  );
+  static final TextStyle priceStyle = GoogleFonts.poppins(
+    color: AppColors.textDark,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -40,41 +46,40 @@ class _WidgetListProductState extends State<WidgetListProduct> {
     );
   }
 
-  Widget _body(BuildContext context) {
-    if (widget.isVertical) {
-      return widget.product == null
-          ? _verticalShimmer(context)
-          : _vertical(context);
-    } else {
-      return (widget.product == null)
-          ? _horizonShimmer(context)
-          : _horizon(context);
-    }
-  }
-
   Widget _title() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          widget.label ?? '',
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        GestureDetector(
-          onTap: () => widget.seeAll,
-          child: const Text(
-            'See all',
-            style: TextStyle(
-              color: AppColors.hintDark,
+    return Padding(
+      padding: padding,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label ?? '',
+            style: GoogleFonts.inter(
+              fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
           ),
-        )
-      ],
+          GestureDetector(
+            onTap: () => seeAll,
+            child: const Text(
+              'See all',
+              style: TextStyle(
+                color: AppColors.hintDark,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          )
+        ],
+      ),
     );
+  }
+
+  Widget _body(BuildContext context) {
+    if (isVertical) {
+      return product == null ? _verticalShimmer(context) : _vertical(context);
+    } else {
+      return (product == null) ? _horizonShimmer(context) : _horizon(context);
+    }
   }
 
   Widget _horizon(BuildContext context) {
@@ -83,13 +88,14 @@ class _WidgetListProductState extends State<WidgetListProduct> {
       height: horizonHeight,
       child: ListView.builder(
         shrinkWrap: true,
+        padding: padding,
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
-        itemCount: widget.product.data.length,
+        itemCount: product.data.length,
         itemBuilder: (context, index) {
-          final item = widget.product.data[index];
+          final item = product.data[index];
           return GestureDetector(
-            onTap: () => widget.onTap(item),
+            onTap: () => onTap(item),
             child: Container(
               width: horizonWidth,
               margin: EdgeInsets.only(
@@ -100,15 +106,14 @@ class _WidgetListProductState extends State<WidgetListProduct> {
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: AppStyles.radiusNormal,
                 boxShadow: AppStyles.shadow,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Flexible(
-                      child: _imageItem(item.images)),
+                  Flexible(child: _imageItem(item.images)),
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Column(
@@ -118,13 +123,10 @@ class _WidgetListProductState extends State<WidgetListProduct> {
                           item.name ?? "",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: AppColors.textDark,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: nameStyle,
                         ),
                         const SizedBox(height: 4),
-                        Text('${item.price} vnd'),
+                        Text('${item.price} vnd', style: priceStyle),
                       ],
                     ),
                   ),
@@ -143,6 +145,7 @@ class _WidgetListProductState extends State<WidgetListProduct> {
       height: horizonHeight,
       child: ListView.builder(
         shrinkWrap: true,
+        padding: padding,
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
         itemCount: 10,
@@ -157,7 +160,7 @@ class _WidgetListProductState extends State<WidgetListProduct> {
             ),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: AppStyles.radiusNormal,
               boxShadow: AppStyles.shadow,
             ),
             child: Shimmer.fromColors(
@@ -191,9 +194,9 @@ class _WidgetListProductState extends State<WidgetListProduct> {
   Widget _vertical(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 10),
         GridView.builder(
           shrinkWrap: true,
+          padding: padding.copyWith(top: 10),
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             childAspectRatio: verticalRatio,
@@ -201,15 +204,15 @@ class _WidgetListProductState extends State<WidgetListProduct> {
             mainAxisSpacing: 20,
             crossAxisSpacing: 20,
           ),
-          itemCount: widget.product.data.length,
+          itemCount: product.data.length,
           itemBuilder: (context, index) {
-            final item = widget.product.data[index];
+            final item = product.data[index];
             return GestureDetector(
-              onTap: () => widget.onTap(item),
+              onTap: () => onTap(item),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(6),
+                  borderRadius: AppStyles.radiusNormal,
                   boxShadow: AppStyles.shadow,
                 ),
                 child: Column(
@@ -228,13 +231,13 @@ class _WidgetListProductState extends State<WidgetListProduct> {
                             item.name ?? '',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: AppColors.textDark,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: nameStyle,
                           ),
                           const SizedBox(height: 2),
-                          Text('${item.price} vnd'),
+                          Text(
+                            '${item.price} vnd',
+                            style: priceStyle,
+                          ),
                         ],
                       ),
                     ),
@@ -244,7 +247,7 @@ class _WidgetListProductState extends State<WidgetListProduct> {
             );
           },
         ),
-        if (widget.loadingMore) const Center(child: CircularProgressIndicator())
+        if (loadingMore) const Center(child: CircularProgressIndicator())
       ],
     );
   }
@@ -255,6 +258,7 @@ class _WidgetListProductState extends State<WidgetListProduct> {
         const SizedBox(height: 10),
         GridView.builder(
           shrinkWrap: true,
+          padding: padding,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 20,
@@ -266,7 +270,7 @@ class _WidgetListProductState extends State<WidgetListProduct> {
             return Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: AppStyles.radiusNormal,
                 boxShadow: AppStyles.shadow,
               ),
               child: Shimmer.fromColors(
@@ -307,9 +311,7 @@ class _WidgetListProductState extends State<WidgetListProduct> {
 
   Widget _imageItem(List<ProductImage> images) {
     return ClipRRect(
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(6),
-      ),
+      borderRadius: BorderRadius.vertical(top: AppStyles.radiusNormal.topRight),
       child: images.isEmpty
           ? Image.asset(
               'assets/images/placeholder.jpg',

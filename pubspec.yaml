@@ -32,6 +32,7 @@ dependencies:
   pedantic: ^1.11.0
   regexpattern: ^1.0.0
   shimmer: ^1.1.2
+  google_fonts: 1.1.2
 
   # states
   provider: ^5.0.0

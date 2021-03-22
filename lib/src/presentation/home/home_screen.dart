@@ -27,6 +27,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _mobile(BuildContext context, HomeViewModel vm) {
+    const paddingBody = EdgeInsets.symmetric(horizontal: 10);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,26 +35,35 @@ class HomeScreen extends StatelessWidget {
         Expanded(
           child: SingleChildScrollView(
             controller: vm.scroll,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-                Text(
-                  'Best Furniture\nin your home.',
-                  style: TextStyle(
-                    color: AppColors.textDark.withOpacity(0.7),
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                Padding(
+                  padding: paddingBody,
+                  child: Text(
+                    'Best Furniture\nin your home.',
+                    style: TextStyle(
+                      color: AppColors.textDark.withOpacity(0.7),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
-                _search(context, vm),
+                WidgetInputSearch(
+                  hint: 'Search',
+                  padding: paddingBody,
+                  onSubmit: (value) {
+                    print(value);
+                  },
+                ),
                 const SizedBox(height: 20),
                 WidgetListProduct(
                   product: vm.popular,
                   isVertical: false,
                   label: 'Popular',
+                  padding: paddingBody,
                   seeAll: () {},
                   onTap: (item) {
                     print(item.name);
@@ -64,6 +74,7 @@ class HomeScreen extends StatelessWidget {
                   product: vm.newArrivals,
                   isVertical: false,
                   label: 'New Arrivals',
+                  padding: paddingBody,
                   seeAll: () {},
                   onTap: (item) {
                     print(item.name);
@@ -74,6 +85,7 @@ class HomeScreen extends StatelessWidget {
                   product: vm.products,
                   isVertical: true,
                   label: 'All furniture',
+                  padding: paddingBody,
                   loadingMore: vm.loadingMore,
                   seeAll: () {},
                   onTap: (item) {
@@ -116,51 +128,15 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-    );
-  }
-
-  Widget _search(BuildContext context, HomeViewModel vm) {
-    return IntrinsicHeight(
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Flexible(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: AppStyles.radiusNormal,
-              ),
-              child: TextField(
-                onChanged: (value) {},
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  hintStyle: TextStyle(
-                    color: Colors.grey.shade500,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  prefixIcon: const Icon(Icons.search_rounded),
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                ),
-              ),
-            ),
+      actions: [
+        IconButton(
+          icon: Icon(
+            Icons.shopping_cart_outlined,
+            color: AppColors.primary,
           ),
-          const SizedBox(width: 10),
-          Container(
-            height: double.infinity,
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade200,
-              borderRadius: AppStyles.radiusNormal,
-            ),
-            child: Icon(
-              Icons.search_rounded,
-              color: Colors.grey.shade500,
-            ),
-          ),
-        ],
-      ),
+          onPressed: () {},
+        )
+      ],
     );
   }
 }
