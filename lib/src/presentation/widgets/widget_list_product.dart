@@ -5,7 +5,7 @@ import '../../configs/configs.dart';
 import '../../resources/resources.dart';
 
 class WidgetListProduct extends StatelessWidget {
-  final ProductPagination product;
+  final ProductResource product;
   final String label;
   final EdgeInsets padding;
   final Function seeAll;
@@ -28,12 +28,28 @@ class WidgetListProduct extends StatelessWidget {
   static const double horizonHeight = 200;
   static const double verticalRatio = 0.85;
 
+  ///
   static final TextStyle nameStyle = GoogleFonts.inter(
     color: AppColors.textDark,
     fontWeight: FontWeight.w600,
   );
-  static final TextStyle priceStyle = GoogleFonts.poppins(
+
+  ///
+  static final TextStyle priceStyle = GoogleFonts.inter(
     color: AppColors.textDark,
+  );
+
+  ///
+  static final TextStyle titleStyle = GoogleFonts.inter(
+    fontSize: 18,
+    color: AppColors.textDark,
+    fontWeight: FontWeight.w600,
+  );
+
+  ///
+  static const TextStyle buttonTextStyle = TextStyle(
+    color: AppColors.hintDark,
+    fontWeight: FontWeight.w500,
   );
 
   @override
@@ -54,19 +70,13 @@ class WidgetListProduct extends StatelessWidget {
         children: [
           Text(
             label ?? '',
-            style: GoogleFonts.inter(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
+            style: titleStyle,
           ),
           GestureDetector(
             onTap: () => seeAll,
             child: const Text(
               'See all',
-              style: TextStyle(
-                color: AppColors.hintDark,
-                fontWeight: FontWeight.w500,
-              ),
+              style: buttonTextStyle,
             ),
           )
         ],

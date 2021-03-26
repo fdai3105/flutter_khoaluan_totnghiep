@@ -1,5 +1,32 @@
 import 'dart:convert';
 
+class BrandResource {
+  BrandResource({
+    this.data,
+  });
+
+  final List<Brand> data;
+
+  BrandResource copyWith({
+    List<Brand> data,
+  }) =>
+      BrandResource(
+        data: data ?? this.data,
+      );
+
+  factory BrandResource.fromRawJson(String str) => BrandResource.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory BrandResource.fromJson(Map<String, dynamic> json) => BrandResource(
+    data: List<Brand>.from(json["data"].map((x) => Brand.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+  };
+}
+
 class Brand {
   Brand({
     this.id,

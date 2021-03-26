@@ -5,5 +5,6 @@ export 'splash/splash.dart';
 export 'forgot/forget.dart';
 export 'cart/cart.dart';
 export 'dashboard/dashboard.dart';
+export 'category/category.dart';
 
 export 'widgets/widgets.dart';

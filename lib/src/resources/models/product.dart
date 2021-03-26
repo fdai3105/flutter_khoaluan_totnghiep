@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import '../resources.dart';
 
-class ProductPagination {
-  ProductPagination({
+class ProductResource {
+  ProductResource({
     this.data,
     this.links,
     this.meta,
@@ -13,22 +13,22 @@ class ProductPagination {
   final Links links;
   final Meta meta;
 
-  ProductPagination copyWith({
+  ProductResource copyWith({
     List<Product> data,
     Links links,
     Meta meta,
   }) =>
-      ProductPagination(
+      ProductResource(
         data: data ?? this.data,
         links: links ?? this.links,
         meta: meta ?? this.meta,
       );
 
-  factory ProductPagination.fromRawJson(String str) => ProductPagination.fromJson(json.decode(str));
+  factory ProductResource.fromRawJson(String str) => ProductResource.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory ProductPagination.fromJson(Map<String, dynamic> json) => ProductPagination(
+  factory ProductResource.fromJson(Map<String, dynamic> json) => ProductResource(
     data: List<Product>.from(json["data"].map((x) => Product.fromJson(x))),
     links: Links.fromJson(json["links"]),
     meta: Meta.fromJson(json["meta"]),

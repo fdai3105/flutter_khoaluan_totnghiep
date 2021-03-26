@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
+import '../../configs/configs.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../presentation.dart';
 
@@ -18,6 +19,12 @@ class DashboardScreen extends StatelessWidget {
       title: "Category",
       activeColorPrimary: AppColors.primary,
       inactiveColorPrimary: CupertinoColors.systemGrey,
+      routeAndNavigatorSettings: RouteAndNavigatorSettings(
+        initialRoute: '/',
+        routes: {
+          '/category': (_) => CategoryScreen(),
+        },
+      ),
     ),
     PersistentBottomNavBarItem(
       icon: const Icon(CupertinoIcons.person),
@@ -30,13 +37,14 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PersistentTabView(
-        context,
-        screens: _screens,
-        items: _items,
-        stateManagement: true,
-        popActionScreens: PopActionScreensType.all,
-        navBarStyle: NavBarStyle.style12,
+      body: SafeArea(
+        child: PersistentTabView(
+          context,
+          screens: _screens,
+          items: _items,
+          popActionScreens: PopActionScreensType.all,
+          navBarStyle: NavBarStyle.style12,
+        ),
       ),
     );
   }

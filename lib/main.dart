@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       home: DashboardScreen(),
-      initialRoute: '/',
       routes: Routes.routes,
     );
   }
