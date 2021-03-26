@@ -13,5 +13,11 @@ class AppEndpoint {
   static const String getProducts = 'product';
   static const String getNewProducts = 'new-product';
   static const String getPopularProducts = 'popular-product';
+  static const String getProductsInParentCategory = 'product-by-parent-category/';
+  static const String getProductsByCategory = 'product-by-category/';
+
+  ///
   static const String getCategories = 'category';
+  static const String getParentCategories = 'parent-category';
+  static const String getSubCategories = 'get-sub-category/';
 }

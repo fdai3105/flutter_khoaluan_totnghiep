@@ -12,6 +12,7 @@ class WidgetListProduct extends StatelessWidget {
   final Function(Product) onTap;
   final bool isVertical;
   final bool loadingMore;
+  final bool showSeeAll;
 
   const WidgetListProduct({
     Key key,
@@ -22,6 +23,7 @@ class WidgetListProduct extends StatelessWidget {
     this.onTap,
     this.isVertical = false,
     this.loadingMore = false,
+    this.showSeeAll = true,
   }) : super(key: key);
 
   static const double horizonWidth = 124;
@@ -56,7 +58,7 @@ class WidgetListProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _title(),
+        label == null && !showSeeAll  ? const SizedBox() :_title(),
         _body(context),
       ],
     );
@@ -72,13 +74,15 @@ class WidgetListProduct extends StatelessWidget {
             label ?? '',
             style: titleStyle,
           ),
-          GestureDetector(
-            onTap: () => seeAll,
-            child: const Text(
-              'See all',
-              style: buttonTextStyle,
-            ),
-          )
+          !showSeeAll
+              ? SizedBox()
+              : GestureDetector(
+                  onTap: () => seeAll,
+                  child: const Text(
+                    'See all',
+                    style: buttonTextStyle,
+                  ),
+                )
         ],
       ),
     );

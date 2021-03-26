@@ -6,5 +6,6 @@ export 'forgot/forget.dart';
 export 'cart/cart.dart';
 export 'dashboard/dashboard.dart';
 export 'category/category.dart';
+export 'sub-category/sub_category.dart';
 
 export 'widgets/widgets.dart';

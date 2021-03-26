@@ -19,7 +19,7 @@ class CategoryTabViewModel extends BaseViewModel {
   Future init() async {
     isLoading = true;
 
-    final categoryData = await categoryResponse.getCategories();
+    final categoryData = await categoryResponse.getParentCategories();
     if (categoryData.statusCode == 200) {
       categories = CategoryResource.fromJson(categoryData.data);
     }

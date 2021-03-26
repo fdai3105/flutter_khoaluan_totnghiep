@@ -49,7 +49,10 @@ class CategoryTab extends StatelessWidget {
                   onTap: () {
                     pushNewScreen(
                       context,
-                      screen: CategoryScreen(id: item.id),
+                      screen: CategoryScreen(
+                        id: item.id,
+                        parentName: item.name,
+                      ),
                     );
                   },
                   child: Column(

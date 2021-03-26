@@ -33,4 +33,24 @@ class ProductResponse {
       return e.response;
     }
   }
+
+  Future<Response> getProductsByParentCategory(int parentId) async {
+    try {
+      final products = await DioService()
+          .get('${AppEndpoint.getProductsInParentCategory}$parentId');
+      return products;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
+
+  Future<Response> getProductsByCategory(int categoryId) async {
+    try {
+      final products = await DioService()
+          .get('${AppEndpoint.getProductsByCategory}/$categoryId');
+      return products;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
 }
