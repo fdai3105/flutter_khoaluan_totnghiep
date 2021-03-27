@@ -1,11 +1,12 @@
 export 'base/base.dart';
-export 'login/login.dart';
-export 'register/register.dart';
+export 'auth/login/login.dart';
+export 'auth/register/register.dart';
 export 'splash/splash.dart';
-export 'forgot/forget.dart';
+export 'auth/forgot/forget.dart';
 export 'cart/cart.dart';
 export 'dashboard/dashboard.dart';
 export 'category/category.dart';
-export 'sub-category/sub_category.dart';
+export 'category/sub-category/sub_category.dart';
+export 'product/product.dart';
 
 export 'widgets/widgets.dart';

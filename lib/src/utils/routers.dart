@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/presentation/product/product.dart';
 import '../presentation/presentation.dart';
 
 class Routes {
@@ -10,6 +11,7 @@ class Routes {
   static const String forgot = '/forgot_screen';
   static const String cart = '/cart';
   static const String category = '/category';
+  static const String product = '/product';
 
   static final Map<String, WidgetBuilder> routes = {
     login: (_) => LoginScreen(),
@@ -17,6 +19,7 @@ class Routes {
     forgot: (_) => ForgotScreen(),
     cart: (_) => CartScreen(),
     home: (_) => HomeTab(),
-    category: (_) => CategoryScreen(),
+    category: (_) => const CategoryScreen(),
+    product: (_) => const ProductScreen(),
   };
 }

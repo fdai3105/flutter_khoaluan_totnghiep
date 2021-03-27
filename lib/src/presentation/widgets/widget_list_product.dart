@@ -5,11 +5,11 @@ import '../../configs/configs.dart';
 import '../../resources/resources.dart';
 
 class WidgetListProduct extends StatelessWidget {
-  final ProductResource product;
+  final Products product;
   final String label;
   final EdgeInsets padding;
   final Function seeAll;
-  final Function(Product) onTap;
+  final Function(ProductDatum) onTap;
   final bool isVertical;
   final bool loadingMore;
   final bool showSeeAll;

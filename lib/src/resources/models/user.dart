@@ -7,12 +7,12 @@ class User {
     this.expiresAt,
   });
 
-  final UserInfo user;
+  final UserDatum user;
   final String accessToken;
   final DateTime expiresAt;
 
   User copyWith({
-    UserInfo user,
+    UserDatum user,
     String accessToken,
     DateTime expiresAt,
   }) =>
@@ -28,7 +28,7 @@ class User {
   String toRawJson() => json.encode(toJson());
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        user: UserInfo.fromJson(json["user"]),
+        user: UserDatum.fromJson(json["user"]),
         accessToken: json["access_token"],
         expiresAt: DateTime.parse(json["expires_at"]),
       );
@@ -40,8 +40,8 @@ class User {
       };
 }
 
-class UserInfo {
-  UserInfo({
+class UserDatum {
+  UserDatum({
     this.id,
     this.name,
     this.email,
@@ -65,12 +65,12 @@ class UserInfo {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  factory UserInfo.fromRawJson(String str) =>
-      UserInfo.fromJson(json.decode(str));
+  factory UserDatum.fromRawJson(String str) =>
+      UserDatum.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory UserInfo.fromJson(Map<String, dynamic> json) => UserInfo(
+  factory UserDatum.fromJson(Map<String, dynamic> json) => UserDatum(
         id: json["id"],
         name: json["name"],
         email: json["email"],

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../resources/resources.dart';
-import '../presentation.dart';
+import '../../../resources/resources.dart';
+import '../../presentation.dart';
 
 class RegisterViewModel extends BaseViewModel {
   final AuthRepository authRepository;

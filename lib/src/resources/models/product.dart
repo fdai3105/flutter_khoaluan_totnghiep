@@ -2,34 +2,34 @@ import 'dart:convert';
 
 import '../resources.dart';
 
-class ProductResource {
-  ProductResource({
+class Products {
+  Products({
     this.data,
     this.links,
     this.meta,
   });
 
-  final List<Product> data;
+  final List<ProductDatum> data;
   final Links links;
   final Meta meta;
 
-  ProductResource copyWith({
-    List<Product> data,
+  Products copyWith({
+    List<ProductDatum> data,
     Links links,
     Meta meta,
   }) =>
-      ProductResource(
+      Products(
         data: data ?? this.data,
         links: links ?? this.links,
         meta: meta ?? this.meta,
       );
 
-  factory ProductResource.fromRawJson(String str) => ProductResource.fromJson(json.decode(str));
+  factory Products.fromRawJson(String str) => Products.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory ProductResource.fromJson(Map<String, dynamic> json) => ProductResource(
-    data: List<Product>.from(json["data"].map((x) => Product.fromJson(x))),
+  factory Products.fromJson(Map<String, dynamic> json) => Products(
+    data: List<ProductDatum>.from(json["data"].map((x) => ProductDatum.fromJson(x))),
     links: Links.fromJson(json["links"]),
     meta: Meta.fromJson(json["meta"]),
   );
@@ -43,6 +43,33 @@ class ProductResource {
 
 class Product {
   Product({
+    this.data,
+  });
+
+  final ProductDatum data;
+
+  Product copyWith({
+    ProductDatum data,
+  }) =>
+      Product(
+        data: data ?? this.data,
+      );
+
+  factory Product.fromRawJson(String str) => Product.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+    data: ProductDatum.fromJson(json["data"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "data": data.toJson(),
+  };
+}
+
+class ProductDatum {
+  ProductDatum({
     this.id,
     this.name,
     this.price,
@@ -59,24 +86,24 @@ class Product {
   final String name;
   final int price;
   final String desc;
-  final Brand brand;
-  final Brand category;
+  final BrandDatum brand;
+  final BrandDatum category;
   final List<ProductImage> images;
   final List<Attribute> attributes;
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  factory Product.fromRawJson(String str) => Product.fromJson(json.decode(str));
+  factory ProductDatum.fromRawJson(String str) => ProductDatum.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
+  factory ProductDatum.fromJson(Map<String, dynamic> json) => ProductDatum(
     id: json["id"],
     name: json["name"],
     price: json["price"],
     desc: json["desc"],
-    brand: Brand.fromJson(json["brand"]),
-    category: Brand.fromJson(json["category"]),
+    brand: BrandDatum.fromJson(json["brand"]),
+    category: BrandDatum.fromJson(json["category"]),
     images: List<ProductImage>.from(json["images"].map((x) => ProductImage.fromJson(x))),
     attributes: List<Attribute>.from(json["attributes"].map((x) => Attribute.fromJson(x))),
     createdAt: DateTime.parse(json["created_at"]),

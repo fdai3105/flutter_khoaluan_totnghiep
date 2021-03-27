@@ -1,28 +1,28 @@
 import 'dart:convert';
 
-class CategoryResource {
-  CategoryResource({
+class Categories {
+  Categories({
     this.data,
   });
 
-  final List<Category> data;
+  final List<CategoryDatum> data;
 
-  CategoryResource copyWith({
-    List<Category> data,
+  Categories copyWith({
+    List<CategoryDatum> data,
   }) =>
-      CategoryResource(
+      Categories(
         data: data ?? this.data,
       );
 
-  factory CategoryResource.fromRawJson(String str) =>
-      CategoryResource.fromJson(json.decode(str));
+  factory Categories.fromRawJson(String str) =>
+      Categories.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory CategoryResource.fromJson(Map<String, dynamic> json) =>
-      CategoryResource(
+  factory Categories.fromJson(Map<String, dynamic> json) =>
+      Categories(
         data:
-            List<Category>.from(json["data"].map((x) => Category.fromJson(x))),
+            List<CategoryDatum>.from(json["data"].map((x) => CategoryDatum.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -30,8 +30,8 @@ class CategoryResource {
       };
 }
 
-class Category {
-  Category({
+class CategoryDatum {
+  CategoryDatum({
     this.id,
     this.name,
     this.image,
@@ -47,12 +47,12 @@ class Category {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  factory Category.fromRawJson(String str) =>
-      Category.fromJson(json.decode(str));
+  factory CategoryDatum.fromRawJson(String str) =>
+      CategoryDatum.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Category.fromJson(Map<String, dynamic> json) => Category(
+  factory CategoryDatum.fromJson(Map<String, dynamic> json) => CategoryDatum(
         id: json["id"],
         name: json["name"],
         image: json["image"],

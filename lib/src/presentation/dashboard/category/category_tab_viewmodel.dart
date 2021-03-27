@@ -7,11 +7,11 @@ class CategoryTabViewModel extends BaseViewModel {
 
   CategoryTabViewModel({this.categoryResponse});
 
-  final _categories = BehaviorSubject<CategoryResource>();
+  final _categories = BehaviorSubject<Categories>();
 
-  CategoryResource get categories => _categories.value;
+  Categories get categories => _categories.value;
 
-  set categories(CategoryResource value) {
+  set categories(Categories value) {
     _categories.add(value);
     notifyListeners();
   }
@@ -21,7 +21,7 @@ class CategoryTabViewModel extends BaseViewModel {
 
     final categoryData = await categoryResponse.getParentCategories();
     if (categoryData.statusCode == 200) {
-      categories = CategoryResource.fromJson(categoryData.data);
+      categories = Categories.fromJson(categoryData.data);
     }
 
     isLoading = false;

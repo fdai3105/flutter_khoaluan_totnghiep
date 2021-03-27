@@ -15,9 +15,9 @@ class HomeViewModel extends BaseViewModel {
   });
 
   final _user = BehaviorSubject<User>();
-  final _popular = BehaviorSubject<ProductResource>();
-  final _newArrivals = BehaviorSubject<ProductResource>();
-  final _products = BehaviorSubject<ProductResource>();
+  final _popular = BehaviorSubject<Products>();
+  final _newArrivals = BehaviorSubject<Products>();
+  final _products = BehaviorSubject<Products>();
   final _scroll = BehaviorSubject<ScrollController>();
   final _loadingMore = BehaviorSubject<bool>();
 
@@ -30,23 +30,23 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  ProductResource get popular => _popular.value;
+  Products get popular => _popular.value;
 
-  set popular(ProductResource value) {
+  set popular(Products value) {
     _popular.add(value);
     notifyListeners();
   }
 
-  ProductResource get newArrivals => _newArrivals.value;
+  Products get newArrivals => _newArrivals.value;
 
-  set newArrivals(ProductResource value) {
+  set newArrivals(Products value) {
     _newArrivals.add(value);
     notifyListeners();
   }
 
-  ProductResource get products => _products.value;
+  Products get products => _products.value;
 
-  set products(ProductResource value) {
+  set products(Products value) {
     _products.add(value);
     notifyListeners();
   }
@@ -79,15 +79,15 @@ class HomeViewModel extends BaseViewModel {
     _user.add(SharedPref.getUser());
     final popularResponse = await productResponse.getPopular();
     if (popularResponse.statusCode == 200) {
-      popular = ProductResource.fromJson(popularResponse.data);
+      popular = Products.fromJson(popularResponse.data);
     }
     final newArrivalsResponse = await productResponse.getNew();
     if (newArrivalsResponse.statusCode == 200) {
-      newArrivals = ProductResource.fromJson(newArrivalsResponse.data);
+      newArrivals = Products.fromJson(newArrivalsResponse.data);
     }
     final productData = await productResponse.getProducts(_page);
     if (productData.statusCode == 200) {
-      products = ProductResource.fromJson(productData.data);
+      products = Products.fromJson(productData.data);
     }
 
     isLoading = false;
@@ -100,7 +100,7 @@ class HomeViewModel extends BaseViewModel {
       loadingMore = true;
       final productData = await productResponse.getProducts(_page);
       loadingMore = false;
-      final product = ProductResource.fromJson(productData.data);
+      final product = Products.fromJson(productData.data);
       products = products.copyWith(
           data: products.data..addAll(product.data),
           links: product.links,

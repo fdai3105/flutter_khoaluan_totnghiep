@@ -23,9 +23,7 @@ class WidgetAppbar extends StatelessWidget {
           color: Colors.grey.shade800,
         ),
       ),
-      iconTheme: IconThemeData(
-        color: Colors.grey,
-      ),
+      iconTheme: const IconThemeData(color: Colors.grey),
       leading: leading,
       actions: actions,
     );

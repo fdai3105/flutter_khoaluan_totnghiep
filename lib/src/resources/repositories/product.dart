@@ -3,6 +3,15 @@ import '../resources.dart';
 import '../../configs/configs.dart';
 
 class ProductResponse {
+  Future<Response> getProduct(int id) async {
+    try {
+      final products = DioService().get(AppEndpoint.getProduct + id.toString());
+      return products;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
+
   Future<Response> getProducts(int page) async {
     try {
       final params = {
@@ -37,7 +46,7 @@ class ProductResponse {
   Future<Response> getProductsByParentCategory(int parentId) async {
     try {
       final products = await DioService()
-          .get('${AppEndpoint.getProductsInParentCategory}$parentId');
+          .get(AppEndpoint.getProductsByParentCategory + parentId.toString());
       return products;
     } on DioError catch (e) {
       return e.response;
@@ -48,6 +57,26 @@ class ProductResponse {
     try {
       final products = await DioService()
           .get('${AppEndpoint.getProductsByCategory}/$categoryId');
+      return products;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
+
+  Future<Response> getCommentsByProduct(int productId) async {
+    try {
+      final products = await DioService()
+          .get(AppEndpoint.getCommentsByProduct + productId.toString());
+      return products;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
+
+  Future<Response> getRatingsByProduct(int productId) async {
+    try {
+      final products = await DioService()
+          .get(AppEndpoint.getRatingByProduct + productId.toString());
       return products;
     } on DioError catch (e) {
       return e.response;

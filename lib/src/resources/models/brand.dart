@@ -1,25 +1,25 @@
 import 'dart:convert';
 
-class BrandResource {
-  BrandResource({
+class Brands {
+  Brands({
     this.data,
   });
 
-  final List<Brand> data;
+  final List<BrandDatum> data;
 
-  BrandResource copyWith({
-    List<Brand> data,
+  Brands copyWith({
+    List<BrandDatum> data,
   }) =>
-      BrandResource(
+      Brands(
         data: data ?? this.data,
       );
 
-  factory BrandResource.fromRawJson(String str) => BrandResource.fromJson(json.decode(str));
+  factory Brands.fromRawJson(String str) => Brands.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory BrandResource.fromJson(Map<String, dynamic> json) => BrandResource(
-    data: List<Brand>.from(json["data"].map((x) => Brand.fromJson(x))),
+  factory Brands.fromJson(Map<String, dynamic> json) => Brands(
+    data: List<BrandDatum>.from(json["data"].map((x) => BrandDatum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -27,8 +27,8 @@ class BrandResource {
   };
 }
 
-class Brand {
-  Brand({
+class BrandDatum {
+  BrandDatum({
     this.id,
     this.name,
     this.image,
@@ -44,11 +44,11 @@ class Brand {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  factory Brand.fromRawJson(String str) => Brand.fromJson(json.decode(str));
+  factory BrandDatum.fromRawJson(String str) => BrandDatum.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Brand.fromJson(Map<String, dynamic> json) => Brand(
+  factory BrandDatum.fromJson(Map<String, dynamic> json) => BrandDatum(
     id: json["id"],
     name: json["name"],
     image: json["image"],

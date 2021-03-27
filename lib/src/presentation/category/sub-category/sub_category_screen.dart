@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import '../../resources/resources.dart';
-import '../presentation.dart';
+import '../../../resources/resources.dart';
+import '../../presentation.dart';
 
 class SubCategoryScreen extends StatelessWidget {
   final int id;
   final String parentName;
 
-  const SubCategoryScreen({Key key, this.id, this.parentName}) : super(key: key);
+  const SubCategoryScreen({Key key, this.id, this.parentName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _appBar(),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: BaseWidget<SubCategoryViewModel>(
@@ -28,9 +30,6 @@ class SubCategoryScreen extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    WidgetAppbar(
-                      title: parentName ?? "",
-                    ),
                     WidgetListProduct(
                       isVertical: true,
                       showSeeAll: false,
@@ -44,6 +43,20 @@ class SubCategoryScreen extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  Widget _appBar() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      title: Text(
+        parentName,
+        style: TextStyle(
+          color: Colors.grey.shade800,
+        ),
+      ),
+      iconTheme: const IconThemeData(color: Colors.grey),
     );
   }
 }

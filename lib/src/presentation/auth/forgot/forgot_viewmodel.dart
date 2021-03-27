@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../resources/repositories/auth.dart';
+import '../../../resources/repositories/auth.dart';
 
-import '../base/base.dart';
+import '../../base/base.dart';
 
 class ForgotViewModel extends BaseViewModel {
   final AuthRepository authRepository;

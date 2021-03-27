@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../utils/utils.dart';
-import '../../resources/resources.dart';
-import '../presentation.dart';
-import '../widgets/widgets.dart';
-import '../../configs/configs.dart';
+import '../../../utils/utils.dart';
+import '../../../resources/resources.dart';
+import '../../presentation.dart';
+import '../../widgets/widgets.dart';
+import '../../../configs/configs.dart';
 
 class RegisterScreen extends StatelessWidget {
   @override

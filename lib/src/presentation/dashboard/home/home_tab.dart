@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/presentation/product/product.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
@@ -102,7 +104,11 @@ class HomeTab extends StatelessWidget {
                   padding: AppStyles.paddingBody,
                   seeAll: () {},
                   onTap: (item) {
-                    print(item.name);
+                    pushNewScreen(
+                      context,
+                      screen: ProductScreen(id: item.id),
+                      withNavBar: false,
+                    );
                   },
                 ),
                 const SizedBox(height: 20),
@@ -113,7 +119,11 @@ class HomeTab extends StatelessWidget {
                   padding: AppStyles.paddingBody,
                   seeAll: () {},
                   onTap: (item) {
-                    print(item.name);
+                    pushNewScreen(
+                      context,
+                      screen: ProductScreen(id: item.id),
+                      withNavBar: false,
+                    );
                   },
                 ),
                 const SizedBox(height: 20),
@@ -125,7 +135,11 @@ class HomeTab extends StatelessWidget {
                   loadingMore: vm.loadingMore,
                   seeAll: () {},
                   onTap: (item) {
-                    print(item.name);
+                    pushNewScreen(
+                      context,
+                      screen: ProductScreen(id: item.id),
+                      withNavBar: false,
+                    );
                   },
                 ),
                 const SizedBox(height: 20)

@@ -1,17 +1,17 @@
 import 'package:rxdart/rxdart.dart';
-import '../presentation.dart';
-import '../../resources/resources.dart';
+import '../../presentation.dart';
+import '../../../resources/resources.dart';
 
 class SubCategoryViewModel extends BaseViewModel {
   final ProductResponse productResponse;
 
   SubCategoryViewModel({this.productResponse});
 
-  final _products = BehaviorSubject<ProductResource>();
+  final _products = BehaviorSubject<Products>();
 
-  ProductResource get products => _products.value;
+  Products get products => _products.value;
 
-  set products(ProductResource value) {
+  set products(Products value) {
     _products.add(value);
     notifyListeners();
   }
@@ -21,7 +21,7 @@ class SubCategoryViewModel extends BaseViewModel {
 
     final productsRepo = await productResponse.getProductsByCategory(id);
     if (productsRepo.statusCode == 200) {
-      products = ProductResource.fromJson(productsRepo.data);
+      products = Products.fromJson(productsRepo.data);
     }
 
     isLoading = false;

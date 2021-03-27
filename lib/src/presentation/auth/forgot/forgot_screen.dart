@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:regexpattern/regexpattern.dart';
-import '../../resources/resources.dart';
-import '../../configs/configs.dart';
-import '../presentation.dart';
+import '../../../resources/resources.dart';
+import '../../../configs/configs.dart';
+import '../../presentation.dart';
 
 class ForgotScreen extends StatelessWidget {
   @override

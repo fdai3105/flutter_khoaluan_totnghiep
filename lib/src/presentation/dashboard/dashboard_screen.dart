@@ -19,12 +19,6 @@ class DashboardScreen extends StatelessWidget {
       title: "Category",
       activeColorPrimary: AppColors.primary,
       inactiveColorPrimary: CupertinoColors.systemGrey,
-      routeAndNavigatorSettings: RouteAndNavigatorSettings(
-        initialRoute: '/',
-        routes: {
-          '/category': (_) => CategoryScreen(),
-        },
-      ),
     ),
     PersistentBottomNavBarItem(
       icon: const Icon(CupertinoIcons.person),

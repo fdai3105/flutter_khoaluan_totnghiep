@@ -8,19 +8,19 @@ class CategoryViewModel extends BaseViewModel {
 
   CategoryViewModel({this.categoryResponse, this.productResponse});
 
-  final _subCategory = BehaviorSubject<CategoryResource>();
-  final _products = BehaviorSubject<ProductResource>();
+  final _subCategory = BehaviorSubject<Categories>();
+  final _products = BehaviorSubject<Products>();
 
-  CategoryResource get subCategory => _subCategory.value;
+  Categories get subCategory => _subCategory.value;
 
-  set subCategory(CategoryResource value) {
+  set subCategory(Categories value) {
     _subCategory.add(value);
     notifyListeners();
   }
 
-  ProductResource get products => _products.value;
+  Products get products => _products.value;
 
-  set products(ProductResource value) {
+  set products(Products value) {
     _products.add(value);
     notifyListeners();
   }
@@ -30,11 +30,11 @@ class CategoryViewModel extends BaseViewModel {
 
     final subCate = await categoryResponse.getSubCategories(id);
     if (subCate.statusCode == 200) {
-      subCategory = CategoryResource.fromJson(subCate.data);
+      subCategory = Categories.fromJson(subCate.data);
     }
     final productsRepo = await productResponse.getProductsByParentCategory(id);
     if (productsRepo.statusCode == 200) {
-      products = ProductResource.fromJson(productsRepo.data);
+      products = Products.fromJson(productsRepo.data);
     }
 
     isLoading = false;

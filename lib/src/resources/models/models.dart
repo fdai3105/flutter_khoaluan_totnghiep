@@ -8,3 +8,5 @@ export 'meta.dart';
 export 'product.dart';
 export 'attribute.dart';
 export 'product_image.dart';
+export 'comment.dart';
+export 'rating.dart';

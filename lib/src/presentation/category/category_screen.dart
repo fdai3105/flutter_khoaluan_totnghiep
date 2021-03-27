@@ -12,6 +12,7 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _appBar(),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: BaseWidget<CategoryViewModel>(
@@ -30,9 +31,6 @@ class CategoryScreen extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    WidgetAppbar(
-                      title: parentName ?? "",
-                    ),
                     SizedBox(
                       height: 300,
                       width: MediaQuery.of(context).size.width,
@@ -94,6 +92,20 @@ class CategoryScreen extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  Widget _appBar() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      title: Text(
+        parentName,
+        style: TextStyle(
+          color: Colors.grey.shade800,
+        ),
+      ),
+      iconTheme: const IconThemeData(color: Colors.grey),
     );
   }
 }
