@@ -58,7 +58,7 @@ class WidgetListProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        label == null && !showSeeAll  ? const SizedBox() :_title(),
+        if (label == null && !showSeeAll) const SizedBox() else _title(),
         _body(context),
       ],
     );

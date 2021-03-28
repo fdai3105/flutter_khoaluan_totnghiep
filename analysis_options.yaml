@@ -3,18 +3,18 @@ include: package:pedantic/analysis_options.yaml
 analyzer:
   errors:
     prefer_single_quotes: ignore
-    avoid_print : ignore
-    lines_longer_than_80_chars : ignore
-    sort_constructors_first : ignore
-    directives_ordering : ignore
-    prefer_typing_uninitialized_variables : ignore
-    avoid_as : ignore
+    avoid_print: ignore
+    lines_longer_than_80_chars: ignore
+    sort_constructors_first: ignore
+    directives_ordering: ignore
+    prefer_typing_uninitialized_variables: ignore
+    avoid_as: ignore
 
 linter:
   rules:
     - always_declare_return_types
     - always_put_control_body_on_new_line
-    - always_put_required_named_parameters_first
+    # - always_put_required_named_parameters_first
     - always_require_non_null_named_parameters
     # - always_specify_types
     - annotate_overrides

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/product.dart';
+import '../../../configs/configs.dart';
+import '../../../resources/repositories/product.dart';
 import '../../base/base.dart';
 import 'comment.dart';
 
@@ -42,12 +42,16 @@ class CommentDialog extends StatelessWidget {
                 itemCount: vm.comments.data.length,
                 itemBuilder: (context, index) {
                   final item = vm.comments.data[index];
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(item.comment),
-                      Text(item.user.name),
-                    ],
+                  return Container(
+                    padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(item.comment),
+                        const SizedBox(height: 10),
+                        Text(item.user.name),
+                      ],
+                    ),
                   );
                 });
           },
