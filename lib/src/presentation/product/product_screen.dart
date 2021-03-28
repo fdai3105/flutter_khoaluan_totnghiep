@@ -32,80 +32,116 @@ class ProductScreen extends StatelessWidget {
             if (vm.isLoading) {
               return const Center(child: CircularProgressIndicator());
             } else {
-              return Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              return Stack(
                 children: [
-                  WidgetImageCarousel(images: vm.product.data.images),
-                  Padding(
-                    padding: AppStyles.paddingBody,
+                  SingleChildScrollView(
                     child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 20),
-                        Row(
+                        WidgetImageCarousel(images: vm.product.data.images),
+                        Column(
                           children: [
-                            Flexible(
-                              fit: FlexFit.tight,
+                            const SizedBox(height: 20),
+                            Padding(
+                              padding: AppStyles.paddingBody,
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    vm.product.data.name,
-                                    style: GoogleFonts.notoSans(
-                                      color: AppColors.textDark,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  Row(
+                                    children: [
+                                      Flexible(
+                                        fit: FlexFit.tight,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              vm.product.data.name,
+                                              style: GoogleFonts.notoSans(
+                                                color: AppColors.textDark,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              'bed frame, birch/Luroy, Queen',
+                                              style: GoogleFonts.inter(
+                                                color: AppColors.textDark,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Text(
+                                        vm.product.data.price.toString(),
+                                        style: GoogleFonts.inter(
+                                          color: AppColors.textDark,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    'bed frame, birch/Luroy, Queen',
-                                    style: GoogleFonts.inter(
-                                      color: AppColors.textDark,
-                                    ),
-                                  ),
+                                  Text(vm.product.data.desc),
                                 ],
                               ),
                             ),
-                            Text(
-                              vm.product.data.price.toString(),
-                              style: GoogleFonts.inter(
-                                color: AppColors.textDark,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                            const SizedBox(height: 20),
+                            ListTile(
+                              title: const Text('Comments'),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return CommentDialog(
+                                        productId: vm.product.data.id);
+                                  }),
+                                );
+                              },
+                              trailing:
+                                  const Icon(Icons.arrow_forward_ios_outlined),
+                            ),
+                            ListTile(
+                              title: const Text('Ratings'),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return RatingDialog(
+                                        productId: vm.product.data.id);
+                                  }),
+                                );
+                              },
+                              trailing:
+                                  const Icon(Icons.arrow_forward_ios_outlined),
+                            ),
+                            ExpansionTile(
+                              collapsedBackgroundColor: Colors.transparent,
+                              backgroundColor: Colors.transparent,
+                              title: Text(
+                                'Attributes',
+                                style: TextStyle(color: AppColors.textDark),
                               ),
+                              children: [
+                                Text('desc 1 : 10kg'),
+                                Text('desc 1 : 10kg'),
+                                Text('desc 1 : 10kg'),
+                              ],
                             ),
                           ],
                         ),
-                        const SizedBox(height: 20),
-                        Text(vm.product.data.desc),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return CommentDialog(productId: vm.product.data.id);
-                                }
-                              ),
-                            );
-                          },
-                          child: const Text('Comment'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) {
-                                    return RatingDialog(productId: vm.product.data.id);
-                                  }
-                              ),
-                            );
-                          },
-                          child: const Text('Ratings'),
-                        ),
                       ],
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.primary,
+                        shadowColor: Colors.transparent,
+                      ),
+                      child: const Text('Add to cart'),
                     ),
                   ),
                 ],
