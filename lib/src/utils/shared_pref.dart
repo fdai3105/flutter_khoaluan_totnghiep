@@ -58,6 +58,32 @@ class SharedPref {
     return carts;
   }
 
+  static Future decreaseCart(Cart cart) async {
+    final currentCarts = getCarts();
+    final findCart = currentCarts
+        .firstWhere((element) => element.product.id == cart.product.id);
+
+    if (findCart.quantity > 1) {
+      findCart.quantity -= 1;
+    }
+
+    await _pref.setStringList(
+      'pref_carts',
+      currentCarts.map((e) => e.toRawJson()).toList(),
+    );
+  }
+
+  static Future increaseCart(Cart cart) async {
+    final currentCarts = getCarts();
+    currentCarts.firstWhere((element) => element.product.id == cart.product.id)
+      .quantity += 1;
+
+    await _pref.setStringList(
+      'pref_carts',
+      currentCarts.map((e) => e.toRawJson()).toList(),
+    );
+  }
+
   static Future removeCarts() async {
     await _pref.remove('pref_carts');
   }
