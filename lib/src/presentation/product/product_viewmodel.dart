@@ -1,3 +1,5 @@
+import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
+
 import '../../resources/resources.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -26,6 +28,10 @@ class ProductViewModel extends BaseViewModel {
     }
 
     isLoading = false;
+  }
+
+  void addToCart(Cart cart) {
+    SharedPref.addCart(cart);
   }
 
   @override

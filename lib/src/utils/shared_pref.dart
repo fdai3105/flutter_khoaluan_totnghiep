@@ -28,4 +28,37 @@ class SharedPref {
     final user = getUser();
     return user.accessToken;
   }
+
+  /// cart
+  static Future addCart(Cart cart) async {
+    final currentCarts = getCarts();
+    final findCart = currentCarts
+        .firstWhere((element) => element.product.id == cart.product.id);
+
+    if (findCart != null) {
+      findCart.quantity += 1;
+    } else {
+      currentCarts.add(cart);
+    }
+
+    await _pref.setStringList(
+      'pref_carts',
+      currentCarts.map((e) => e.toRawJson()).toList(),
+    );
+  }
+
+  static List<Cart> getCarts() {
+    final carts = <Cart>[];
+    final cartsPref = _pref.getStringList('pref_carts');
+    if (cartsPref != null) {
+      for (final item in cartsPref) {
+        carts.add(Cart.fromRawJson(item));
+      }
+    }
+    return carts;
+  }
+
+  static Future removeCarts() async {
+    await _pref.remove('pref_carts');
+  }
 }

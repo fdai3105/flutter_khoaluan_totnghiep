@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../resources/resources.dart';
 import '../presentation.dart';
@@ -35,6 +36,7 @@ class CategoryScreen extends StatelessWidget {
                       height: 300,
                       width: MediaQuery.of(context).size.width,
                       child: GridView.builder(
+                        padding: AppStyles.paddingBody,
                         scrollDirection: Axis.horizontal,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
@@ -81,9 +83,16 @@ class CategoryScreen extends StatelessWidget {
                     ),
                     WidgetListProduct(
                       isVertical: true,
-                      product: vm.products,
                       showSeeAll: false,
-                      onTap: (item) {},
+                      padding: AppStyles.paddingBody,
+                      product: vm.products,
+                      onTap: (item) {
+                        pushNewScreen(
+                          context,
+                          screen: ProductScreen(id: item.id),
+                          withNavBar: false,
+                        );
+                      },
                     ),
                   ],
                 ),

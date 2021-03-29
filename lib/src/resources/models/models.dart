@@ -10,3 +10,4 @@ export 'attribute.dart';
 export 'product_image.dart';
 export 'comment.dart';
 export 'rating.dart';
+export 'cart.dart';

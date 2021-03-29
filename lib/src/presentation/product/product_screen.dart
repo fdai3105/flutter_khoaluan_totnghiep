@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../../configs/configs.dart';
 import '../../resources/resources.dart';
@@ -20,7 +21,7 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: _appBar(),
+      appBar: _appBar(context),
       body: SafeArea(
         child: BaseWidget<ProductViewModel>(
           viewModel: ProductViewModel(productResponse: ProductResponse()),
@@ -170,7 +171,10 @@ class ProductScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        vm.addToCart(
+                            Cart(quantity: 1, product: vm.product.data));
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.primary,
                         shadowColor: Colors.transparent,
@@ -187,7 +191,7 @@ class ProductScreen extends StatelessWidget {
     );
   }
 
-  Widget _appBar() {
+  Widget _appBar(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
@@ -199,7 +203,13 @@ class ProductScreen extends StatelessWidget {
       ),
       iconTheme: const IconThemeData(color: Colors.grey),
       actions: [
-        IconButton(icon: const Icon(Icons.share_outlined), onPressed: () {})
+        IconButton(icon: const Icon(Icons.shopping_cart_outlined), onPressed: () {
+          pushNewScreen(
+            context,
+            screen: CartScreen(),
+          );
+        }),
+        IconButton(icon: const Icon(Icons.share_outlined), onPressed: () {}),
       ],
     );
   }
