@@ -3,14 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/presentation.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/models/models.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/product.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
-import 'product.dart';
+import 'package:intl/intl.dart';
 
+import '../../configs/configs.dart';
+import '../../resources/resources.dart';
 import '../base/base.dart';
+import '../presentation.dart';
+import 'product.dart';
 
 class ProductScreen extends StatelessWidget {
   final int id;
@@ -42,10 +41,11 @@ class ProductScreen extends StatelessWidget {
                         WidgetImageCarousel(images: vm.product.data.images),
                         Column(
                           children: [
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 16),
                             Padding(
                               padding: AppStyles.paddingBody,
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     children: [
@@ -73,7 +73,7 @@ class ProductScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        vm.product.data.price.toString(),
+                                        '﹩${NumberFormat().format(vm.product.data.price)}',
                                         style: GoogleFonts.inter(
                                           color: AppColors.textDark,
                                           fontSize: 18,
@@ -82,13 +82,41 @@ class ProductScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
+                                  const SizedBox(height: 16),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      WidgetRatingBar(
+                                        stars: double.parse(vm
+                                            .product.data.ratingAveraged
+                                            .toString()),
+                                        size: 16,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Text(vm.product.data.ratingAveraged
+                                          .toString()),
+                                      Container(
+                                        width: 1,
+                                        height: 14,
+                                        color:
+                                            AppColors.textDark.withAlpha(140),
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                      ),
+                                      Text('Sold: ${vm.product.data.bought}'),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 16),
                                   Text(vm.product.data.desc),
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 16),
                             ListTile(
-                              title: const Text('Comments'),
+                              title: const Text(
+                                'Comments',
+                                style: TextStyle(fontSize: 14),
+                              ),
                               onTap: () {
                                 Navigator.push(
                                   context,
@@ -102,7 +130,10 @@ class ProductScreen extends StatelessWidget {
                                   const Icon(Icons.arrow_forward_ios_outlined),
                             ),
                             ListTile(
-                              title: const Text('Ratings'),
+                              title: Text(
+                                'Rating (${vm.product.data.rating} Ratings)',
+                                style: const TextStyle(fontSize: 14),
+                              ),
                               onTap: () {
                                 Navigator.push(
                                   context,
@@ -115,13 +146,16 @@ class ProductScreen extends StatelessWidget {
                               trailing:
                                   const Icon(Icons.arrow_forward_ios_outlined),
                             ),
-                            ExpansionTile(
+                            const ExpansionTile(
                               collapsedBackgroundColor: Colors.transparent,
                               backgroundColor: Colors.transparent,
                               title: Text(
                                 'Attributes',
-                                style: TextStyle(color: AppColors.textDark),
+                                style: TextStyle(fontSize: 14),
                               ),
+                              expandedAlignment: Alignment.topLeft,
+                              childrenPadding:
+                                  EdgeInsets.symmetric(horizontal: 20),
                               children: [
                                 Text('desc 1 : 10kg'),
                                 Text('desc 1 : 10kg'),
