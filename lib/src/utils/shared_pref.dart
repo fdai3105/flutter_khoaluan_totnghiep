@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import '../resources/resources.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,11 +34,11 @@ class SharedPref {
   /// cart
   static Future addCart(Cart cart) async {
     final currentCarts = getCarts();
-    final findCart = currentCarts
-        .firstWhere((element) => element.product.id == cart.product.id);
 
-    if (findCart != null) {
-      findCart.quantity += 1;
+    if (currentCarts.isNotEmpty) {
+      final findCart = currentCarts
+          .firstWhere((element) => element.product.id == cart.product.id);
+      findCart != null ? findCart.quantity += 1 : currentCarts.add(cart);
     } else {
       currentCarts.add(cart);
     }
@@ -75,8 +77,19 @@ class SharedPref {
 
   static Future increaseCart(Cart cart) async {
     final currentCarts = getCarts();
-    currentCarts.firstWhere((element) => element.product.id == cart.product.id)
-      .quantity += 1;
+    currentCarts
+        .firstWhere((element) => element.product.id == cart.product.id)
+        .quantity += 1;
+
+    await _pref.setStringList(
+      'pref_carts',
+      currentCarts.map((e) => e.toRawJson()).toList(),
+    );
+  }
+
+  static Future removeCart(Cart cart) async {
+    final currentCarts = getCarts()
+      ..removeWhere((element) => element.product.id == cart.product.id);
 
     await _pref.setStringList(
       'pref_carts',

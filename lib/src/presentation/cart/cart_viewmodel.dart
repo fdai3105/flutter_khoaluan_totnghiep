@@ -33,6 +33,11 @@ class CartViewModel extends BaseViewModel {
     init();
   }
 
+   void removeCart(Cart cart) {
+    SharedPref.removeCart(cart);
+    init();
+   }
+
   @override
   Future dispose() {
     _carts.close();

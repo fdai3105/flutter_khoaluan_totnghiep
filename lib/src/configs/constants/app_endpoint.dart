@@ -1,7 +1,7 @@
 class AppEndpoint {
   AppEndpoint._();
 
-  static const String domain = 'http://192.168.1.3:8000/';
+  static const String domain = 'http://192.168.77.135:8000/';
   static const String base = '$domain' 'api/';
 
   ///
