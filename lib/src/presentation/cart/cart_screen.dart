@@ -66,92 +66,103 @@ class CartScreen extends StatelessWidget {
             if (vm.carts.isEmpty) {
               return Center(child: Image.asset('assets/images/cart_empty.png'));
             }
-            return ListView.builder(
-              padding: AppStyles.paddingBody,
-              itemCount: vm.carts.length,
-              itemBuilder: (context, index) {
-                final cart = vm.carts[index];
-                return Container(
-                  height: 100,
-                  margin: const EdgeInsets.only(bottom: 10),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      ClipRRect(
-                        borderRadius: AppStyles.radiusNormal,
-                        child: cart.product.images.isEmpty
-                            ? Image.asset('assets/images/placeholder.jpg')
-                            : Image.network(cart.product.images.first.name),
-                      ),
-                      const SizedBox(width: 10),
-                      Flexible(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    padding: AppStyles.paddingBody,
+                    itemCount: vm.carts.length,
+                    itemBuilder: (context, index) {
+                      final cart = vm.carts[index];
+                      return Container(
+                        height: 100,
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  cart.product.name,
-                                  style: GoogleFonts.inter(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  NumberFormat().format(cart.product.price),
-                                  style: const TextStyle(
-                                    color: AppColors.hintDark,
-                                  ),
-                                ),
-                              ],
+                            ClipRRect(
+                              borderRadius: AppStyles.radiusNormal,
+                              child: cart.product.images.isEmpty
+                                  ? Image.asset('assets/images/placeholder.jpg')
+                                  : Image.network(cart.product.images.first.name),
                             ),
-                            Row(
-                              children: [
-                                _quantityButton(
-                                  icon: Icons.add_outlined,
-                                  onTap: () => vm.increase(cart),
-                                ),
-                                Container(
-                                  width: 40,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    cart.quantity.toString(),
-                                    style: const TextStyle(
-                                      color: AppColors.hintDark,
-                                    ),
+                            const SizedBox(width: 10),
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        cart.product.name,
+                                        style: GoogleFonts.inter(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      const SizedBox(height: 2),
+                                      Text(
+                                        NumberFormat().format(cart.product.price),
+                                        style: const TextStyle(
+                                          color: AppColors.hintDark,
+                                        ),
+                                      ),
+                                    ],
                                   ),
+                                  Row(
+                                    children: [
+                                      _quantityButton(
+                                        icon: Icons.add_outlined,
+                                        onTap: () => vm.increase(cart),
+                                      ),
+                                      Container(
+                                        width: 40,
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          cart.quantity.toString(),
+                                          style: const TextStyle(
+                                            color: AppColors.hintDark,
+                                          ),
+                                        ),
+                                      ),
+                                      _quantityButton(
+                                        icon: Icons.remove_outlined,
+                                        onTap: () => vm.decrease(cart),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => vm.removeCart(cart),
+                              child: Container(
+                                height: double.infinity,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.horizontal(
+                                        right: AppStyles.radiusNormal.topRight)),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 14),
+                                child: const Text(
+                                  'X',
+                                  style: TextStyle(color: Colors.white),
                                 ),
-                                _quantityButton(
-                                  icon: Icons.remove_outlined,
-                                  onTap: () => vm.decrease(cart),
-                                ),
-                              ],
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () => vm.removeCart(cart),
-                        child: Container(
-                          height: double.infinity,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.horizontal(
-                                  right: AppStyles.radiusNormal.topRight)),
-                          padding: const EdgeInsets.symmetric(horizontal: 14),
-                          child: const Text(
-                            'X',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
-                );
-              },
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Checkout'),
+                )
+              ],
             );
           },
         ),

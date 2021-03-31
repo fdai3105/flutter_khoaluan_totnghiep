@@ -15,8 +15,8 @@ class DioService extends DioForNative {
 
   RequestOptions _request(RequestOptions options) {
     options
-      ..connectTimeout = 10000
-      ..receiveTimeout = 10000
+      ..connectTimeout = 120*1000 // 2 minute
+      ..receiveTimeout = 120*1000 // 2 minute
       ..baseUrl = AppEndpoint.base
       ..headers = {'Accept': 'application/json'};
     return options;

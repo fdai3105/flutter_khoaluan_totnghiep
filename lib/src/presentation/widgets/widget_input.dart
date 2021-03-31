@@ -12,20 +12,22 @@ class WidgetInput extends StatelessWidget {
   final Icon prefixIcon;
   final Icon sufferIcon;
   final String value;
+  final bool readOnly;
 
-  const WidgetInput(
-      {Key key,
-      this.hint,
-      this.enableHint,
-      this.color,
-      this.focusColor,
-      this.borderRadius,
-      this.prefixIcon,
-      this.sufferIcon,
-      this.onChanged,
-      this.hintStyle,
-      this.value})
-      : super(key: key);
+  const WidgetInput({
+    Key key,
+    this.hint,
+    this.enableHint,
+    this.color,
+    this.focusColor,
+    this.borderRadius,
+    this.prefixIcon,
+    this.sufferIcon,
+    this.onChanged,
+    this.hintStyle,
+    this.value,
+    this.readOnly = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class WidgetInput extends StatelessWidget {
           prefixIcon: prefixIcon,
           suffixIcon: sufferIcon,
         ),
+        readOnly: readOnly,
         validator: (value) {
           if (value.isEmpty) {
             return 'This field is required';

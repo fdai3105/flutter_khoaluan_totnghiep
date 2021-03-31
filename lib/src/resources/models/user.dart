@@ -60,7 +60,7 @@ class UserDatum {
   final DateTime emailVerifiedAt;
   final String phone;
   final int gender;
-  final dynamic avatar;
+  final String avatar;
   final int level;
   final DateTime createdAt;
   final DateTime updatedAt;

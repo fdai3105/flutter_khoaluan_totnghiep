@@ -27,9 +27,7 @@ class CategoryTab extends StatelessWidget {
   Widget _mobile(BuildContext context, CategoryTabViewModel vm) {
     return Column(
       children: [
-        const WidgetAppbar(
-          title: 'Categories',
-        ),
+        _appBar(context),
         if (vm.isLoading)
           const Center(child: CircularProgressIndicator())
         else
@@ -74,6 +72,20 @@ class CategoryTab extends StatelessWidget {
             ),
           ),
       ],
+    );
+  }
+
+  Widget _appBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      title: Text(
+        'Categories',
+        style: TextStyle(
+          color: Colors.grey.shade800,
+        ),
+      ),
+      iconTheme: const IconThemeData(color: Colors.grey),
     );
   }
 }

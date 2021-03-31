@@ -31,45 +31,7 @@ class HomeTab extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        WidgetAppbar(
-          leading: vm.user == null
-              ? Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.transparent,
-                    child: ClipOval(
-                      child: Image.asset('assets/images/placeholder.jpg'),
-                    ),
-                  ),
-                )
-              : Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.transparent,
-                    child: ClipOval(
-                      child: Image.asset(
-                        vm.user.user.avatar ?? 'assets/images/placeholder.jpg',
-                      ),
-                    ),
-                  ),
-                ),
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.shopping_cart_outlined,
-                color: AppColors.primary,
-              ),
-              onPressed: () {
-                pushNewScreen(
-                  context,
-                  screen: CartScreen(),
-                );
-              },
-            )
-          ],
-        ),
+        _appBar(context, vm.user),
         Expanded(
           child: SingleChildScrollView(
             controller: vm.scroll,
@@ -147,6 +109,43 @@ class HomeTab extends StatelessWidget {
             ),
           ),
         ),
+      ],
+    );
+  }
+
+  Widget _appBar(BuildContext context, User user) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      iconTheme: const IconThemeData(color: Colors.grey),
+      leading: user == null
+          ? Padding(
+              padding: const EdgeInsets.all(8),
+              child: ClipOval(
+                child: Image.asset('assets/images/placeholder.jpg'),
+              ),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(8),
+              child: ClipOval(
+                child: Image.asset(
+                  user.user.avatar ?? 'assets/images/placeholder.jpg',
+                ),
+              ),
+            ),
+      actions: [
+        IconButton(
+          icon: const Icon(
+            Icons.shopping_cart_outlined,
+            color: AppColors.primary,
+          ),
+          onPressed: () {
+            pushNewScreen(
+              context,
+              screen: CartScreen(),
+            );
+          },
+        )
       ],
     );
   }
