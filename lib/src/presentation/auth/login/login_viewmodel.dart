@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../presentation.dart';
 import '../../../utils/utils.dart';
 import '../../../resources/resources.dart';
@@ -20,7 +21,8 @@ class LoginViewModel extends BaseViewModel {
     final loginResponse = await authRepository.login(email, password);
     if (loginResponse.statusCode == 200) {
       await SharedPref.setUser(User.fromJson(loginResponse.data));
-      await Navigator.pushNamed(context, Routes.home);
+      await pushNewScreen(context, screen: DashboardScreen());
+      loadingDialog.hide();
     } else if (loginResponse.statusCode == 401) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(loginResponse.data['message'] ?? "")));

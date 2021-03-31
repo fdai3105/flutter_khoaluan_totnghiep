@@ -14,6 +14,12 @@ class LoginScreen extends StatelessWidget {
     String password;
 
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: AppColors.textDark),
+      ),
       body: SafeArea(
         top: false,
         child: BaseWidget(
@@ -113,7 +119,9 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, Routes.register);
+                      },
                       style: ButtonStyle(
                         overlayColor:
                             MaterialStateProperty.all(Colors.transparent),

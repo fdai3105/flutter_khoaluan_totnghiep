@@ -1,3 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
 import '../../../utils/shared_pref.dart';
 import '../../../resources/resources.dart';
 import 'package:rxdart/rxdart.dart';
@@ -19,6 +24,11 @@ class UserTabViewModel extends BaseViewModel {
     user = SharedPref.getUser();
 
     isLoading = false;
+  }
+
+  Future logout() async {
+    await SharedPref.clear();
+    Phoenix.rebirth(context);
   }
 
   @override

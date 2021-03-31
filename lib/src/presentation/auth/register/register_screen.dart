@@ -172,7 +172,7 @@ class RegisterScreen extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () => Navigator.pushNamed(context, Routes.login),
+              onPressed: () => Navigator.pop(context),
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
               ),

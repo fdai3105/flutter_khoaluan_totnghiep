@@ -22,7 +22,6 @@ class User {
         expiresAt: expiresAt ?? this.expiresAt,
       );
 
-
   factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
@@ -87,12 +86,13 @@ class UserDatum {
         "id": id,
         "name": name,
         "email": email,
-        "email_verified_at": emailVerifiedAt.toIso8601String(),
+        "email_verified_at":
+            emailVerifiedAt == null ? '' : emailVerifiedAt.toIso8601String(),
         "phone": phone,
         "gender": gender,
         "avatar": avatar,
         "level": level,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
+        "created_at": createdAt == null ? '' : createdAt.toIso8601String(),
+        "updated_at": updatedAt == null ? '' : updatedAt.toIso8601String(),
       };
 }

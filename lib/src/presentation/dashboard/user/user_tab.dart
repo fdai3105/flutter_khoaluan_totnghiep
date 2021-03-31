@@ -8,23 +8,24 @@ class UserTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Column(
-        children: [
-          _appBar(context),
-          const SizedBox(height: 20),
-          BaseWidget<UserTabViewModel>(
-            viewModel: UserTabViewModel(),
-            onViewModelReady: (vm) async {
-              await vm.init();
-            },
-            builder: (context, vm, widget) {
-              return Material(
+      child: BaseWidget<UserTabViewModel>(
+        viewModel: UserTabViewModel(),
+        onViewModelReady: (vm) async {
+          await vm.init();
+        },
+        builder: (context, vm, widget) {
+          return Column(
+            children: [
+              _appBar(context),
+              const SizedBox(height: 20),
+              Material(
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
                     pushNewScreen(
                       context,
-                      screen: UserScreen(),
+                      screen: vm.user == null ? LoginScreen() : UserScreen(),
+                      withNavBar: false,
                     );
                   },
                   child: Container(
@@ -36,23 +37,32 @@ class UserTab extends StatelessWidget {
                     child: _user(context, vm),
                   ),
                 ),
-              );
-            },
-          ),
-          const SizedBox(height: 20),
-          const WidgetTile(
-            title: 'Purchase',
-          ),
-          const WidgetTile(
-            title: 'Feedback',
-          ),
-          const WidgetTile(
-            title: 'Customer Support',
-          ),
-          const WidgetTile(
-            title: 'About the app',
-          ),
-        ],
+              ),
+              const SizedBox(height: 20),
+              const WidgetTile(
+                title: 'Purchase',
+              ),
+              const WidgetTile(
+                title: 'Feedback',
+              ),
+              const WidgetTile(
+                title: 'Customer Support',
+              ),
+              const WidgetTile(
+                title: 'About the app',
+              ),
+              if (vm.user == null)
+                const SizedBox()
+              else
+                WidgetTile(
+                  title: 'Logout',
+                  onTap: () {
+                    vm.logout();
+                  },
+                ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -66,11 +76,17 @@ class UserTab extends StatelessWidget {
         ),
       );
     }
-    if (vm.user.accessToken == null) {
+    if (vm.user == null) {
       return Row(
         children: [
-          Image.asset('assets/images/placeholder.jpg'),
-          const Text('Login / register'),
+          ClipOval(child: Image.asset('assets/images/placeholder.jpg')),
+          const SizedBox(width: 10),
+          const Text(
+            'Login',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
         ],
       );
     }
@@ -81,7 +97,9 @@ class UserTab extends StatelessWidget {
             child: Image.asset('assets/images/placeholder.jpg'),
           )
         else
-          Image.asset('assets/images/placeholder.jpg'),
+          ClipOval(
+            child: Image.asset('assets/images/placeholder.jpg'),
+          ),
         const SizedBox(width: 10),
         Flexible(
           fit: FlexFit.tight,
@@ -96,9 +114,13 @@ class UserTab extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
+              const SizedBox(height: 2),
               const Text(
-                'Edit you profile',
-                style: TextStyle(color: AppColors.hintDark),
+                'edit you profile',
+                style: TextStyle(
+                  color: AppColors.hintDark,
+                  fontSize: 12,
+                ),
               ),
             ],
           ),

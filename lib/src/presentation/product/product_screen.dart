@@ -195,6 +195,7 @@ class ProductScreen extends StatelessWidget {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
+      centerTitle: true,
       title: Text(
         'Detail',
         style: TextStyle(
@@ -203,13 +204,18 @@ class ProductScreen extends StatelessWidget {
       ),
       iconTheme: const IconThemeData(color: Colors.grey),
       actions: [
-        IconButton(icon: const Icon(Icons.shopping_cart_outlined), onPressed: () {
-          pushNewScreen(
-            context,
-            screen: CartScreen(),
-          );
-        }),
-        IconButton(icon: const Icon(Icons.share_outlined), onPressed: () {}),
+        IconButton(
+            icon: const Icon(Icons.shopping_cart_outlined),
+            onPressed: () {
+              pushNewScreen(
+                context,
+                screen: CartScreen(),
+              );
+            }),
+        IconButton(
+          icon: const Icon(Icons.share_outlined),
+          onPressed: () {},
+        ),
       ],
     );
   }

@@ -18,6 +18,7 @@ class SharedPref {
 
   static User getUser() {
     final user = _pref.getString('pref_user');
+    if (user == null) return null;
     return User.fromRawJson(user);
   }
 
@@ -99,5 +100,9 @@ class SharedPref {
 
   static Future removeCarts() async {
     await _pref.remove('pref_carts');
+  }
+
+  static Future clear() async {
+    await _pref.clear();
   }
 }

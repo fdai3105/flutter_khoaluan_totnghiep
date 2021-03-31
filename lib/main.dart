@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
 import 'src/utils/utils.dart';
@@ -9,7 +10,7 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.getInstance();
 
-  runApp(MyApp());
+  runApp(Phoenix(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
