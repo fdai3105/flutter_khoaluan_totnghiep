@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
 import '../../configs/constants/app_endpoint.dart';
@@ -50,17 +52,20 @@ class AuthRepository {
     }
   }
 
-  Future<Response> editUser(UserDatum user) async {
+  Future<Response> editUser(UserDatum user, String token) async {
+    final params = FormData.fromMap(user.toJson());
     try {
-      final options = Options(
-        headers: {
-          'Authorization' : 'Bearer ${SharedPref.getToken()}',
-        },
+      final response = await DioService().post(
+        AppEndpoint.editUser,
+        options: RequestOptions(
+          headers: {HttpHeaders.authorizationHeader : 'Bearer $token'},
+        ),
+        data: params,
       );
-      final params = FormData.fromMap(user.toJson());
-      final response = await DioService().post(AppEndpoint.editUser,options: options, data: params);
       return response;
     } on DioError catch (e) {
+      print(e.response.headers.toString());
+      print(e.response.data);
       return e.response;
     }
   }

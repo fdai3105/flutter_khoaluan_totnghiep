@@ -16,9 +16,22 @@ class SharedPref {
     await _pref.setString('pref_user', user.toRawJson());
   }
 
+  static Future updatedUser(UserDatum user) async {
+    final newUser = getUser().copyWith(
+      user: getUser().user.copyWith(
+            name: user.name,
+            gender: user.gender,
+            avatar: user.avatar,
+          ),
+    );
+    await _pref.setString('pref_user', newUser.toRawJson());
+  }
+
   static User getUser() {
     final user = _pref.getString('pref_user');
-    if (user == null) return null;
+    if (user == null) {
+      return null;
+    }
     return User.fromRawJson(user);
   }
 
@@ -28,8 +41,7 @@ class SharedPref {
   }
 
   static String getToken() {
-    final user = getUser();
-    return user.accessToken;
+    return getUser().accessToken;
   }
 
   /// cart

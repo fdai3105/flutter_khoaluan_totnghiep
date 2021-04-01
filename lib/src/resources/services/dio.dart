@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
 import '../../configs/constants/app_endpoint.dart';
 
 class DioService extends DioForNative {
@@ -15,10 +18,9 @@ class DioService extends DioForNative {
 
   RequestOptions _request(RequestOptions options) {
     options
-      ..connectTimeout = 120*1000 // 2 minute
-      ..receiveTimeout = 120*1000 // 2 minute
-      ..baseUrl = AppEndpoint.base
-      ..headers = {'Accept': 'application/json'};
+      ..connectTimeout = 120 * 1000 // 2 minute
+      ..receiveTimeout = 120 * 1000 // 2 minute
+      ..baseUrl = AppEndpoint.base;
     return options;
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 import '../../utils/shared_pref.dart';
 
@@ -30,11 +31,10 @@ class UserViewModel extends BaseViewModel {
 
   Future submit(String name, int gender) async {
     final user = UserDatum(name: name, gender: gender);
-    final response = await authRepository.editUser(user);
+    final response = await authRepository.editUser(user, SharedPref.getToken());
     if (response.statusCode == 200) {
-      print(response.data);
-    } else {
-      print(response.data.toString());
+      await SharedPref.updatedUser(user);
+      Phoenix.rebirth(context);
     }
   }
 

@@ -32,20 +32,23 @@ class WidgetInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: Theme.of(context).copyWith(primaryColor: focusColor),
+      data: Theme.of(context)
+          .copyWith(primaryColor: focusColor ?? AppColors.hintDark),
       child: TextFormField(
         onChanged: onChanged,
         initialValue: value ?? '',
         decoration: InputDecoration(
           labelText: hint ?? '',
-          labelStyle: hintStyle,
+          labelStyle: hintStyle == null
+              ? hintStyle
+              : hintStyle.copyWith(color: AppColors.hintDark),
           enabledBorder: OutlineInputBorder(
             borderRadius: borderRadius ?? AppStyles.radiusNormal,
-            borderSide: BorderSide(color: color ?? Colors.black54),
+            borderSide: BorderSide(color: color ?? AppColors.hintDark),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: borderRadius ?? AppStyles.radiusNormal,
-            borderSide: BorderSide(color: focusColor ?? Colors.black45),
+            borderSide: BorderSide(color: focusColor ?? AppColors.hintDark),
           ),
           prefixIcon: prefixIcon,
           suffixIcon: sufferIcon,

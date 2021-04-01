@@ -44,9 +44,6 @@ class LoginScreen extends StatelessWidget {
                           WidgetInput(
                             onChanged: (value) => {email = value},
                             hint: 'Email',
-                            hintStyle:
-                                const TextStyle(fontWeight: FontWeight.w600),
-                            color: Colors.black26,
                             focusColor: Colors.black54,
                             prefixIcon: const Icon(Icons.email_outlined),
                           ),
@@ -54,9 +51,6 @@ class LoginScreen extends StatelessWidget {
                           WidgetInput(
                             onChanged: (value) => {password = value},
                             hint: 'Password',
-                            hintStyle:
-                                const TextStyle(fontWeight: FontWeight.w600),
-                            color: Colors.black26,
                             focusColor: Colors.black54,
                             prefixIcon: const Icon(Icons.lock_outline),
                           ),

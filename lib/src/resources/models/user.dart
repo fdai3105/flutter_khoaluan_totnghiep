@@ -37,6 +37,11 @@ class User {
         "access_token": accessToken,
         "expires_at": expiresAt.toIso8601String(),
       };
+
+  @override
+  String toString() {
+    return 'User{user: $user, accessToken: $accessToken, expiresAt: $expiresAt}';
+  }
 }
 
 class UserDatum {
@@ -63,6 +68,31 @@ class UserDatum {
   final int level;
   final DateTime createdAt;
   final DateTime updatedAt;
+
+  UserDatum copyWith({
+    int id,
+    String name,
+    String email,
+    DateTime emailVerifiedAt,
+    String phone,
+    int gender,
+    String avatar,
+    int level,
+    DateTime createdAt,
+    DateTime updatedAt,
+  }) =>
+      UserDatum(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        email: email ?? this.email,
+        emailVerifiedAt: emailVerifiedAt ?? this.emailVerifiedAt,
+        phone: phone ?? this.phone,
+        gender: gender ?? this.gender,
+        avatar: avatar ?? this.avatar,
+        level: level ?? this.level,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
 
   factory UserDatum.fromRawJson(String str) =>
       UserDatum.fromJson(json.decode(str));
@@ -95,4 +125,9 @@ class UserDatum {
         "created_at": createdAt == null ? '' : createdAt.toIso8601String(),
         "updated_at": updatedAt == null ? '' : updatedAt.toIso8601String(),
       };
+
+  @override
+  String toString() {
+    return 'UserDatum{id: $id, name: $name, email: $email, emailVerifiedAt: $emailVerifiedAt, phone: $phone, gender: $gender, avatar: $avatar, level: $level, createdAt: $createdAt, updatedAt: $updatedAt}';
+  }
 }
