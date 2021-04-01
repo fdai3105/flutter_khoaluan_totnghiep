@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../configs/configs.dart';
 import '../../resources/resources.dart';
+import '../presentation.dart';
 
 class WidgetListProduct extends StatelessWidget {
   final Products product;
@@ -74,15 +75,16 @@ class WidgetListProduct extends StatelessWidget {
             label ?? '',
             style: titleStyle,
           ),
-          !showSeeAll
-              ? SizedBox()
-              : GestureDetector(
-                  onTap: () => seeAll,
-                  child: const Text(
-                    'See all',
-                    style: buttonTextStyle,
-                  ),
-                )
+          if (!showSeeAll)
+            SizedBox()
+          else
+            GestureDetector(
+              onTap: () => seeAll,
+              child: const Text(
+                'See all',
+                style: buttonTextStyle,
+              ),
+            )
         ],
       ),
     );
@@ -105,8 +107,36 @@ class WidgetListProduct extends StatelessWidget {
         padding: padding,
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
-        itemCount: product.data.length,
+        itemCount: product.data.length + 1,
         itemBuilder: (context, index) {
+          if (index == product.data.length) {
+            return GestureDetector(
+              onTap: seeAll,
+              child: Container(
+                width: horizonWidth,
+                margin: EdgeInsets.only(
+                  left: index == 0 ? 0 : 10,
+                  right: 10,
+                  bottom: 10,
+                  top: 10,
+                ),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: AppStyles.radiusNormal,
+                    border: Border.all(color: AppColors.hintDark)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.arrow_forward_ios_outlined,
+                        color: AppColors.hintDark),
+                    SizedBox(height: 6),
+                    Text('See more'),
+                  ],
+                ),
+              ),
+            );
+          }
+
           final item = product.data[index];
           return GestureDetector(
             onTap: () => onTap(item),
@@ -326,19 +356,20 @@ class WidgetListProduct extends StatelessWidget {
   Widget _imageItem(List<ProductImage> images) {
     return ClipRRect(
       borderRadius: BorderRadius.vertical(top: AppStyles.radiusNormal.topRight),
-      child: images.isEmpty
-          ? Image.asset(
-              'assets/images/placeholder.jpg',
-              width: double.infinity,
-              fit: BoxFit.cover,
-            )
-          : FadeInImage.assetNetwork(
-              height: double.infinity,
-              width: double.infinity,
-              fit: BoxFit.fill,
-              image: AppEndpoint.domain + images.first.image,
-              placeholder: 'assets/images/placeholder.jpg',
-            ),
+      child: WidgetImage(image: images.isEmpty ? null : images.first.image),
+      // child: images.isEmpty
+      //     ? Image.asset(
+      //         'assets/images/placeholder.jpg',
+      //         width: double.infinity,
+      //         fit: BoxFit.cover,
+      //       )
+      //     : FadeInImage.assetNetwork(
+      //         height: double.infinity,
+      //         width: double.infinity,
+      //         fit: BoxFit.fill,
+      //         image: AppEndpoint.domain + images.first.image,
+      //         placeholder: 'assets/images/placeholder.jpg',
+      //       ),
     );
   }
 }

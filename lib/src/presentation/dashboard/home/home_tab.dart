@@ -33,79 +33,83 @@ class HomeTab extends StatelessWidget {
       children: [
         _appBar(context, vm.user),
         Expanded(
-          child: SingleChildScrollView(
-            controller: vm.scroll,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20),
-                Padding(
-                  padding: AppStyles.paddingBody,
-                  child: Text(
-                    'Best Furniture\nin your home.',
-                    style: TextStyle(
-                      color: AppColors.textDark,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+          child: GlowingOverscrollIndicator(
+            color: Colors.grey,
+            axisDirection: AxisDirection.down,
+            child: SingleChildScrollView(
+              controller: vm.scroll,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: AppStyles.paddingBody,
+                    child: Text(
+                      'Best Furniture\nin your home.',
+                      style: TextStyle(
+                        color: AppColors.textDark,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                WidgetInputSearch(
-                  hint: 'Search',
-                  padding: AppStyles.paddingBody,
-                  onSubmit: (value) {
-                    print(value);
-                  },
-                ),
-                const SizedBox(height: 20),
-                WidgetListProduct(
-                  product: vm.popular,
-                  isVertical: false,
-                  label: 'Popular',
-                  padding: AppStyles.paddingBody,
-                  seeAll: () {},
-                  onTap: (item) {
-                    pushNewScreen(
-                      context,
-                      screen: ProductScreen(id: item.id),
-                      withNavBar: false,
-                    );
-                  },
-                ),
-                const SizedBox(height: 20),
-                WidgetListProduct(
-                  product: vm.newArrivals,
-                  isVertical: false,
-                  label: 'New Arrivals',
-                  padding: AppStyles.paddingBody,
-                  seeAll: () {},
-                  onTap: (item) {
-                    pushNewScreen(
-                      context,
-                      screen: ProductScreen(id: item.id),
-                      withNavBar: false,
-                    );
-                  },
-                ),
-                const SizedBox(height: 20),
-                WidgetListProduct(
-                  product: vm.products,
-                  isVertical: true,
-                  label: 'All furniture',
-                  padding: AppStyles.paddingBody,
-                  loadingMore: vm.loadingMore,
-                  seeAll: () {},
-                  onTap: (item) {
-                    pushNewScreen(
-                      context,
-                      screen: ProductScreen(id: item.id),
-                      withNavBar: false,
-                    );
-                  },
-                ),
-                const SizedBox(height: 20)
-              ],
+                  const SizedBox(height: 20),
+                  WidgetInputSearch(
+                    hint: 'Search',
+                    padding: AppStyles.paddingBody,
+                    onSubmit: (value) {
+                      print(value);
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  WidgetListProduct(
+                    product: vm.popular,
+                    isVertical: false,
+                    label: 'Popular',
+                    padding: AppStyles.paddingBody,
+                    seeAll: () {},
+                    onTap: (item) {
+                      pushNewScreen(
+                        context,
+                        screen: ProductScreen(id: item.id),
+                        withNavBar: false,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  WidgetListProduct(
+                    product: vm.newArrivals,
+                    isVertical: false,
+                    label: 'New Arrivals',
+                    padding: AppStyles.paddingBody,
+                    seeAll: () {},
+                    onTap: (item) {
+                      pushNewScreen(
+                        context,
+                        screen: ProductScreen(id: item.id),
+                        withNavBar: false,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  WidgetListProduct(
+                    product: vm.products,
+                    isVertical: true,
+                    label: 'All furniture',
+                    padding: AppStyles.paddingBody,
+                    loadingMore: vm.loadingMore,
+                    seeAll: () {},
+                    onTap: (item) {
+                      pushNewScreen(
+                        context,
+                        screen: ProductScreen(id: item.id),
+                        withNavBar: false,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20)
+                ],
+              ),
             ),
           ),
         ),

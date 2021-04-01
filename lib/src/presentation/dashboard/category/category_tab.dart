@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../utils/utils.dart';
 import '../../../configs/configs.dart';
@@ -27,65 +29,54 @@ class CategoryTab extends StatelessWidget {
   Widget _mobile(BuildContext context, CategoryTabViewModel vm) {
     return Column(
       children: [
-        _appBar(context),
+        const WidgetAppBar(title: 'Categories', centerTitle: false),
         if (vm.isLoading)
           const Center(child: CircularProgressIndicator())
         else
           Expanded(
-            child: GridView.builder(
-              padding: AppStyles.paddingBody,
-              shrinkWrap: true,
-              itemCount: vm.categories.data.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-              ),
-              itemBuilder: (context, index) {
-                final item = vm.categories.data[index];
-                return GestureDetector(
-                  onTap: () {
-                    pushNewScreen(
-                      context,
-                      screen: CategoryScreen(
-                        id: item.id,
-                        parentName: item.name,
-                      ),
-                    );
-                  },
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        child: Image.network(
-                          'https://assets.weimgs.com/weimgs/rk/images/wcm/products/202110/0069/img47j.jpg',
-                          width: double.infinity,
-                          fit: BoxFit.cover,
+            child: GlowingOverscrollIndicator(
+              color: AppColors.primary,
+              axisDirection: AxisDirection.down,
+              child: GridView.builder(
+                padding: AppStyles.paddingBody,
+                shrinkWrap: true,
+                itemCount: vm.categories.data.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 1 / 0.7,
+                ),
+                itemBuilder: (context, index) {
+                  final item = vm.categories.data[index];
+                  return GestureDetector(
+                    onTap: () {
+                      pushNewScreen(
+                        context,
+                        screen: CategoryScreen(
+                          id: item.id,
+                          parentName: item.name,
                         ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(item.name ?? ''),
-                    ],
-                  ),
-                );
-              },
+                      );
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(child: WidgetImage(image: item.image)),
+                        const SizedBox(height: 4),
+                        Text(
+                          item.name ?? '',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
       ],
-    );
-  }
-
-  Widget _appBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      title: Text(
-        'Categories',
-        style: TextStyle(
-          color: Colors.grey.shade800,
-        ),
-      ),
-      iconTheme: const IconThemeData(color: Colors.grey),
     );
   }
 }

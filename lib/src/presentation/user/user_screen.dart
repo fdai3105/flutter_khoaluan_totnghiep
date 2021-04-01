@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/models/models.dart';
 import '../../resources/repositories/auth.dart';
 import '../../configs/configs.dart';
 import '../presentation.dart';
@@ -86,16 +85,19 @@ class UserScreen extends StatelessWidget {
         Positioned(
           bottom: 0,
           right: 0,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.8),
-              shape: BoxShape.circle,
-            ),
-            padding: const EdgeInsets.all(6),
-            child: const Icon(
-              Icons.edit_outlined,
-              color: Colors.white,
-              size: 16,
+          child: GestureDetector(
+            onTap: () {},
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.8),
+                shape: BoxShape.circle,
+              ),
+              padding: const EdgeInsets.all(6),
+              child: const Icon(
+                Icons.edit_outlined,
+                color: Colors.white,
+                size: 16,
+              ),
             ),
           ),
         ),
@@ -106,11 +108,13 @@ class UserScreen extends StatelessWidget {
 
 class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool centerTitle;
   final List<Widget> actions;
 
   const WidgetAppBar({
     Key key,
     this.title,
+    this.centerTitle = true,
     this.actions,
   }) : super(key: key);
 
@@ -119,18 +123,14 @@ class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
-      centerTitle: true,
+      centerTitle: centerTitle,
       title: Text(
-        'User',
+        title ?? '',
         style: TextStyle(
           color: Colors.grey.shade800,
         ),
       ),
       iconTheme: const IconThemeData(color: Colors.grey),
-      leading: IconButton(
-        icon: const Icon(Icons.close_outlined),
-        onPressed: () => Navigator.pop(context),
-      ),
       actions: actions,
     );
   }
