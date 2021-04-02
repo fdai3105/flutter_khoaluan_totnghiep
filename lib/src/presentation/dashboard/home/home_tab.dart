@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khoaluan_totnghiep_mobile/src/presentation/product/product.dart';
+import 'package:khoaluan_totnghiep_mobile/src/presentation/search/search.dart';
 import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../resources/resources.dart';
@@ -57,8 +58,14 @@ class HomeTab extends StatelessWidget {
                   WidgetInputSearch(
                     hint: 'Search',
                     padding: AppStyles.paddingBody,
-                    onSubmit: (value) {
-                      print(value);
+                    readOnly: true,
+                    onTap: () {
+                      pushNewScreen(
+                        context,
+                        screen: SearchScreen(),
+                        pageTransitionAnimation:
+                            PageTransitionAnimation.slideUp,
+                      );
                     },
                   ),
                   const SizedBox(height: 20),

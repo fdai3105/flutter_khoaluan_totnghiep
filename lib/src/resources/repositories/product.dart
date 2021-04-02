@@ -82,4 +82,23 @@ class ProductResponse {
       return e.response;
     }
   }
+
+  Future<Response> searchProduct(
+    String keyWord, {
+    String sortPrice,
+    String sortName,
+  }) async {
+    final params = {
+      'name': keyWord,
+      'sort-price': sortPrice,
+      'sort-name': sortName,
+    };
+    try {
+      final products = await DioService()
+          .get(AppEndpoint.searchProduct, queryParameters: params);
+      return products;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
 }

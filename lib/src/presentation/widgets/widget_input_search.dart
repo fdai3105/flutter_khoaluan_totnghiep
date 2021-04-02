@@ -4,13 +4,18 @@ import '../../configs/configs.dart';
 class WidgetInputSearch extends StatelessWidget {
   final String hint;
   final EdgeInsets padding;
+  final Function(String) onChanged;
   final Function(String) onSubmit;
+  final Function onTap;
+  final bool readOnly;
 
   const WidgetInputSearch({
     Key key,
     this.hint,
     this.padding,
+    this.onTap, this.onChanged,
     this.onSubmit,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
@@ -31,7 +36,11 @@ class WidgetInputSearch extends StatelessWidget {
                   borderRadius: AppStyles.radiusNormal,
                 ),
                 child: TextField(
-                  onChanged: (value) => {input = value},
+                  onTap: onTap,
+                  onChanged: (value) {
+                    onChanged(value);
+                    input = value;
+                  },
                   decoration: InputDecoration(
                     hintText: 'Search',
                     hintStyle: TextStyle(
@@ -42,6 +51,7 @@ class WidgetInputSearch extends StatelessWidget {
                     focusedBorder: InputBorder.none,
                   ),
                   onSubmitted: onSubmit,
+                  readOnly: readOnly,
                 ),
               ),
             ),
