@@ -12,6 +12,7 @@ class WidgetListProduct extends StatelessWidget {
   final Function seeAll;
   final Function(ProductDatum) onTap;
   final bool isVertical;
+  final bool verticalShrinkWrap;
   final bool loadingMore;
   final bool showSeeAll;
 
@@ -25,6 +26,7 @@ class WidgetListProduct extends StatelessWidget {
     this.isVertical = false,
     this.loadingMore = false,
     this.showSeeAll = true,
+    this.verticalShrinkWrap = true,
   }) : super(key: key);
 
   static const double horizonWidth = 124;
@@ -239,7 +241,7 @@ class WidgetListProduct extends StatelessWidget {
     return Column(
       children: [
         GridView.builder(
-          shrinkWrap: true,
+          shrinkWrap: verticalShrinkWrap,
           padding: padding.copyWith(top: 10),
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
