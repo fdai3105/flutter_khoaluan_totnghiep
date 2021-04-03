@@ -78,7 +78,7 @@ class WidgetListProduct extends StatelessWidget {
             style: titleStyle,
           ),
           if (!showSeeAll)
-            SizedBox()
+            const SizedBox()
           else
             GestureDetector(
               onTap: () => seeAll,

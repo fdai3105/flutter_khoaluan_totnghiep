@@ -35,7 +35,7 @@ class HomeTab extends StatelessWidget {
         _appBar(context, vm.user),
         Expanded(
           child: GlowingOverscrollIndicator(
-            color: Colors.grey,
+            color: Colors.white,
             axisDirection: AxisDirection.down,
             child: SingleChildScrollView(
               controller: vm.scroll,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../resources/repositories/auth.dart';
 import '../../configs/configs.dart';
 import '../presentation.dart';
@@ -60,7 +61,16 @@ class UserScreen extends StatelessWidget {
                         value: user.phone,
                         readOnly: true,
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
+                      ListTile(
+                        onTap: () =>
+                            pushNewScreen(context, screen: AddressScreen()),
+                        title: const Text('Address'),
+                        trailing: const Icon(
+                          Icons.arrow_forward_ios_outlined,
+                          size: 14,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -104,37 +114,4 @@ class UserScreen extends StatelessWidget {
       ],
     );
   }
-}
-
-class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
-  final bool centerTitle;
-  final List<Widget> actions;
-
-  const WidgetAppBar({
-    Key key,
-    this.title,
-    this.centerTitle = true,
-    this.actions,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      centerTitle: centerTitle,
-      title: Text(
-        title ?? '',
-        style: TextStyle(
-          color: Colors.grey.shade800,
-        ),
-      ),
-      iconTheme: const IconThemeData(color: Colors.grey),
-      actions: actions,
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

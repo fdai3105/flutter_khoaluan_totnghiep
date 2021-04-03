@@ -15,7 +15,8 @@ class AppEndpoint {
   static const String getProducts = 'product';
   static const String getNewProducts = 'new-product';
   static const String getPopularProducts = 'popular-product';
-  static const String getProductsByParentCategory = 'product-by-parent-category/';
+  static const String getProductsByParentCategory =
+      'product-by-parent-category/';
   static const String getProductsByCategory = 'product-by-category/';
   static const String searchProduct = 'search-product';
 
@@ -27,4 +28,8 @@ class AppEndpoint {
   ///
   static const String getRatingByProduct = 'rating-by-product/';
   static const String getCommentsByProduct = 'comment-by-product/';
+
+  ///
+  static const String checkout = '';
+  static const String getOrders = '';
 }
