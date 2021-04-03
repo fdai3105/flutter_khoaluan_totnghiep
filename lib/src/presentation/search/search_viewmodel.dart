@@ -8,7 +8,9 @@ class SearchViewModel extends BaseViewModel {
 
   SearchViewModel({this.productResponse});
 
+  final _keyWord = BehaviorSubject<String>();
   final _result = BehaviorSubject<Products>();
+  final _isSearching = BehaviorSubject<bool>();
 
   Products get result => _result.value;
 
@@ -17,22 +19,44 @@ class SearchViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  bool get isSearching => _isSearching.value;
+
+  set isSearching(bool value) {
+    _isSearching.add(value);
+    notifyListeners();
+  }
+
+  String get keyWord => _keyWord.value;
+
+  set keyWord(String value) {
+    _keyWord.add(value);
+    notifyListeners();
+  }
+
   Future init() async {
     isLoading = true;
-
+    isSearching = false;
     isLoading = false;
   }
 
   Future onSearching(String keyWord) async {
-    final resultRepo = await productResponse.searchProduct(keyWord);
-    if(resultRepo.statusCode == 200) {
-      result = Products.fromJson(resultRepo.data);
+    isLoading = true;
+    if (keyWord.isNotEmpty) {
+      final resultRepo = await productResponse.searchProduct(keyWord);
+      if (resultRepo.statusCode == 200) {
+        result = Products.fromJson(resultRepo.data);
+      }
+    } else {
+      result = null;
     }
+    isLoading = false;
   }
 
   @override
   Future dispose() {
+    _keyWord.close();
     _result.close();
+    _isSearching.close();
     return super.dispose();
   }
 }

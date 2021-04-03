@@ -8,14 +8,19 @@ class WidgetInputSearch extends StatelessWidget {
   final Function(String) onSubmit;
   final Function onTap;
   final bool readOnly;
+  final bool autoFocus;
+  final TextEditingController controller;
 
   const WidgetInputSearch({
     Key key,
     this.hint,
     this.padding,
-    this.onTap, this.onChanged,
+    this.onTap,
+    this.onChanged,
     this.onSubmit,
     this.readOnly = false,
+    this.autoFocus = false,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -35,12 +40,14 @@ class WidgetInputSearch extends StatelessWidget {
                   color: Colors.grey.shade100,
                   borderRadius: AppStyles.radiusNormal,
                 ),
-                child: TextField(
+                child: TextFormField(
+                  controller: controller,
                   onTap: onTap,
                   onChanged: (value) {
                     onChanged(value);
                     input = value;
                   },
+                  autofocus: autoFocus,
                   decoration: InputDecoration(
                     hintText: 'Search',
                     hintStyle: TextStyle(
@@ -50,7 +57,7 @@ class WidgetInputSearch extends StatelessWidget {
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
                   ),
-                  onSubmitted: onSubmit,
+                  onFieldSubmitted: onSubmit,
                   readOnly: readOnly,
                 ),
               ),
