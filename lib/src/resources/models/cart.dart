@@ -26,7 +26,7 @@ class Cart {
 
   Cart copyWith({
     int quantity,
-    ProductDatum product,
+    AddressDatum product,
   }) =>
       Cart(
         quantity: quantity ?? this.quantity,

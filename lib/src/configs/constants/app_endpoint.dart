@@ -11,6 +11,9 @@ class AppEndpoint {
   static const String editUser = 'user-edit';
 
   ///
+  static const String getAddress = 'address';
+
+  ///
   static const String getProduct = 'product/';
   static const String getProducts = 'product';
   static const String getNewProducts = 'new-product';
