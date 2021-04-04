@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../resources/models/models.dart';
-import '../../../../utils/routers.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import '../../../../resources/models/city.dart';
-import '../../../../resources/models/district.dart';
 import '../../../../resources/repositories/address.dart';
 import '../../../presentation.dart';
-import 'district/district_screen.dart';
-import 'ward/ward_screen.dart';
+import '../../../../utils/routers.dart';
 
 class AddAddressScreen extends StatelessWidget {
   @override
@@ -46,7 +41,9 @@ class AddAddressScreen extends StatelessWidget {
                 ),
                 ListTile(
                   onTap: () async {
-                    if (city == null) return;
+                    if (city == null) {
+                      return;
+                    }
                     district = await pushNewScreen(
                       context,
                       screen: DistrictScreen(cityID: city.code),
@@ -58,7 +55,9 @@ class AddAddressScreen extends StatelessWidget {
                 ),
                 ListTile(
                   onTap: () async {
-                    if (district == null) return;
+                    if (district == null) {
+                      return;
+                    }
                     ward = await pushNewScreen(
                       context,
                       screen: WardScreen(districtID: district.code),

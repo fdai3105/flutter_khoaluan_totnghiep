@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
-import '../../configs/constants/app_endpoint.dart';
+import '../../configs/configs.dart';
 
 class DioService extends DioForNative {
   DioService({BaseOptions options}) : super(options) {

@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/product/product.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/search/search.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import '../../../resources/resources.dart';
 import '../../presentation.dart';
+import '../../../resources/resources.dart';
 import '../../../configs/configs.dart';
 
 class HomeTab extends StatelessWidget {

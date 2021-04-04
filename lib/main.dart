@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
+import 'src/configs/configs.dart';
 import 'src/utils/utils.dart';
-import 'src/utils/shared_pref.dart';
 import 'src/presentation/presentation.dart';
 
 Future main() async {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/user/address/add_address/add_address_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import '../../../resources/repositories/address.dart';
+import '../../../resources/repositories/repositories.dart';
 import '../../presentation.dart';
 
 class AddressScreen extends StatelessWidget {

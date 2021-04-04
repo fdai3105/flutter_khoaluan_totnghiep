@@ -1,8 +1,6 @@
-import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
-
+import '../../utils/utils.dart';
 import '../../resources/resources.dart';
 import 'package:rxdart/rxdart.dart';
-
 import '../presentation.dart';
 
 class CartViewModel extends BaseViewModel {
@@ -33,10 +31,10 @@ class CartViewModel extends BaseViewModel {
     init();
   }
 
-   void removeCart(Cart cart) {
+  void removeCart(Cart cart) {
     SharedPref.removeCart(cart);
     init();
-   }
+  }
 
   @override
   Future dispose() {

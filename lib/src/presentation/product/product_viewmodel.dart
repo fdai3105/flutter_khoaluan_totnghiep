@@ -1,9 +1,7 @@
-import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
-
-import '../../resources/resources.dart';
 import 'package:rxdart/rxdart.dart';
-
+import '../../utils/utils.dart';
 import '../presentation.dart';
+import '../../resources/resources.dart';
 
 class ProductViewModel extends BaseViewModel {
   final ProductResponse productResponse;

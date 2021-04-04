@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/product/product.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/user/address/add_address/city/city_screen.dart';
 import '../presentation/presentation.dart';
 
 class Routes {

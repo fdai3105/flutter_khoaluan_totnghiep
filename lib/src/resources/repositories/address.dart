@@ -1,13 +1,8 @@
 import 'dart:async';
-import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import '../../configs/configs.dart';
-import '../models/district.dart';
-import '../models/district.dart';
-import '../models/district.dart';
-import '../models/district.dart';
 import '../resources.dart';
 
 class AddressRepository {
