@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../../../../resources/repositories/address.dart';
+import '../../../../presentation.dart';
 import '../../../../../resources/resources.dart';
 
 class CityScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: const WidgetAppBar(title: 'City'),
       body: SafeArea(
         child: FutureBuilder<List<City>>(
             future: AddressRepository().getCities(),

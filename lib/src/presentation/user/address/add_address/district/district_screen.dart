@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../resources/models/district.dart';
-import '../../../../../resources/repositories/address.dart';
+import '../../../../presentation.dart';
+import '../../../../../resources/resources.dart';
 
 class DistrictScreen extends StatelessWidget {
   final String cityID;
@@ -11,6 +10,8 @@ class DistrictScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: const WidgetAppBar(title: 'District'),
       body: SafeArea(
         child: FutureBuilder<List<District>>(
             future: AddressRepository().getDistricts(cityID),
@@ -24,7 +25,7 @@ class DistrictScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.pop(context, item);
                       },
-                      title: Text(item.name ?? ""),
+                      title: Text(item.nameWithType ?? ""),
                     );
                   },
                 );

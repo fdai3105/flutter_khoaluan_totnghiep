@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
 import '../../configs/configs.dart';
 import '../resources.dart';
 
@@ -34,6 +35,22 @@ class AddressRepository {
         data: params,
         options: RequestOptions(
           headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+        ),
+      );
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
+
+  Future<Response> deleteAddress(int id) async {
+    try {
+      final response = await DioService().delete(
+        AppEndpoint.getAddress + '/$id',
+        options: RequestOptions(
+          headers: {
+            HttpHeaders.authorizationHeader: 'Bearer ${SharedPref.getToken()}'
+          },
         ),
       );
       return response;

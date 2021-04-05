@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
+import 'package:khoaluan_totnghiep_mobile/src/resources/models/address.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../../resources/repositories/address.dart';
 import '../../../presentation.dart';
@@ -7,15 +9,12 @@ import '../../../../utils/routers.dart';
 class AddAddressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var city;
-    var district;
-    var ward;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: BaseWidget<AddressViewModel>(
-          viewModel: AddressViewModel(addressRepository: AddressRepository()),
+        child: BaseWidget<AddAddressViewModel>(
+          viewModel:
+              AddAddressViewModel(addressRepository: AddressRepository()),
           onViewModelReady: (vm) async {
             await vm.init();
           },
@@ -26,46 +25,50 @@ class AddAddressScreen extends StatelessWidget {
                   title: 'New address',
                   actions: [
                     IconButton(
-                      icon: const Icon(Icons.add_outlined),
-                      onPressed: () {},
+                      icon: const Icon(Icons.check_outlined),
+                      onPressed: () => vm.addAddress(),
                     )
                   ],
                 ),
                 ListTile(
-                  onTap: () async {
-                    city = await Navigator.pushNamed(context, Routes.city);
-                    vm.city = city.name;
-                  },
+                  onTap: () => vm.onCitySelected(),
+                  contentPadding: AppStyles.paddingBody,
                   title: const Text('City'),
-                  trailing: Text(vm.city ?? ''),
+                  trailing: vm.city == null
+                      ? const Text(
+                          'Set city',
+                          style: TextStyle(color: AppColors.hintDark),
+                        )
+                      : Text(vm.cityName),
                 ),
                 ListTile(
-                  onTap: () async {
-                    if (city == null) {
-                      return;
-                    }
-                    district = await pushNewScreen(
-                      context,
-                      screen: DistrictScreen(cityID: city.code),
-                    );
-                    vm.district = district.name;
-                  },
+                  onTap: () async => vm.onDistrictSelected(),
+                  contentPadding: AppStyles.paddingBody,
                   title: const Text('District'),
-                  trailing: Text(vm.district ?? ''),
+                  trailing: vm.districtName == null
+                      ? const Text(
+                          'Set district',
+                          style: TextStyle(color: AppColors.hintDark),
+                        )
+                      : Text(vm.districtName),
                 ),
                 ListTile(
-                  onTap: () async {
-                    if (district == null) {
-                      return;
-                    }
-                    ward = await pushNewScreen(
-                      context,
-                      screen: WardScreen(districtID: district.code),
-                    );
-                    vm.ward = ward.name;
-                  },
+                  onTap: () => vm.onWardSelected(),
+                  contentPadding: AppStyles.paddingBody,
                   title: const Text('Ward'),
-                  trailing: Text(vm.ward ?? ''),
+                  trailing: vm.wardName == null
+                      ? const Text(
+                          'Set ward',
+                          style: TextStyle(color: AppColors.hintDark),
+                        )
+                      : Text(vm.wardName),
+                ),
+                Padding(
+                  padding: AppStyles.paddingBody,
+                  child: TextFormField(
+                    onChanged: (value) => vm.address = value,
+                    decoration: const InputDecoration(hintText: 'Address'),
+                  ),
                 ),
               ],
             );

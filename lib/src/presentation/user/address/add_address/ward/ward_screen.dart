@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../resources/models/models.dart';
-import '../../../../../resources/repositories/address.dart';
+import '../../../../../resources/resources.dart';
+import '../../../../presentation.dart';
 
 class WardScreen extends StatelessWidget {
   final String districtID;
@@ -11,6 +10,8 @@ class WardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: const WidgetAppBar(title: 'Ward'),
       body: SafeArea(
         child: FutureBuilder<List<Ward>>(
             future: AddressRepository().getWards(districtID),
@@ -24,7 +25,7 @@ class WardScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.pop(context, item);
                       },
-                      title: Text(item.name ?? ""),
+                      title: Text(item.nameWithType ?? ""),
                     );
                   },
                 );
