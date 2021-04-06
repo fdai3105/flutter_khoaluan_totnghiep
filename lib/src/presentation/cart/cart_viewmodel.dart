@@ -1,9 +1,16 @@
+import 'package:flutter/cupertino.dart';
+import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/order.dart';
+
 import '../../utils/utils.dart';
 import '../../resources/resources.dart';
 import 'package:rxdart/rxdart.dart';
 import '../presentation.dart';
 
 class CartViewModel extends BaseViewModel {
+  final OrderRepository orderRepository;
+
+  CartViewModel({this.orderRepository});
+
   final _carts = BehaviorSubject<List<Cart>>();
 
   List<Cart> get carts => _carts.value;
@@ -34,6 +41,20 @@ class CartViewModel extends BaseViewModel {
   void removeCart(Cart cart) {
     SharedPref.removeCart(cart);
     init();
+  }
+
+  Future checkout(String note, int addressID) async {
+    if (SharedPref.getUser() == null) {
+      await Navigator.pushNamed(context, Routes.login);
+    } else {
+      final repo = await orderRepository.checkout(SharedPref.getCarts(), note, addressID);
+      if(repo.statusCode == 200) {
+        await SharedPref.removeCarts();
+        Navigator.pop(context);
+      } else {
+        print(repo.data);
+      }
+    }
   }
 
   @override

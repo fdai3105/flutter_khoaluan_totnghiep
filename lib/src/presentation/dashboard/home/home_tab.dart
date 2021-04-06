@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../../utils/routers.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../presentation.dart';
 import '../../../resources/resources.dart';
@@ -126,21 +127,7 @@ class HomeTab extends StatelessWidget {
       backgroundColor: Colors.white,
       elevation: 0,
       iconTheme: const IconThemeData(color: Colors.grey),
-      leading: user == null
-          ? Padding(
-              padding: const EdgeInsets.all(8),
-              child: ClipOval(
-                child: Image.asset('assets/images/placeholder.jpg'),
-              ),
-            )
-          : Padding(
-              padding: const EdgeInsets.all(8),
-              child: ClipOval(
-                child: Image.asset(
-                  user.user.avatar ?? 'assets/images/placeholder.jpg',
-                ),
-              ),
-            ),
+      leading: _avatar(context, user),
       actions: [
         IconButton(
           icon: const Icon(
@@ -155,6 +142,37 @@ class HomeTab extends StatelessWidget {
           },
         )
       ],
+    );
+  }
+
+  Widget _avatar(BuildContext context, User user) {
+    if (user != null) {
+      if (user.user.avatar != null) {
+        return GestureDetector(
+          onTap: () => pushNewScreen(
+            context,
+            screen: UserScreen(),
+            withNavBar: false,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: ClipOval(
+              child: Image.network(
+                AppEndpoint.domain + user.user.avatar,
+              ),
+            ),
+          ),
+        );
+      }
+    }
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, Routes.login),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: ClipOval(
+          child: Image.asset('assets/images/placeholder.jpg'),
+        ),
+      ),
     );
   }
 }

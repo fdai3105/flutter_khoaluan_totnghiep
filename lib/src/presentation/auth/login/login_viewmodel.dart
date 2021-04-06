@@ -20,9 +20,9 @@ class LoginViewModel extends BaseViewModel {
 
     final loginResponse = await authRepository.login(email, password);
     if (loginResponse.statusCode == 200) {
+      loadingDialog.hide();
       await SharedPref.setUser(User.fromJson(loginResponse.data));
       await pushNewScreen(context, screen: DashboardScreen());
-      loadingDialog.hide();
     } else if (loginResponse.statusCode == 401) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(loginResponse.data['message'] ?? "")));

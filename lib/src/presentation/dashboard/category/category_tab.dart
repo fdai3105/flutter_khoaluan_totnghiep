@@ -29,7 +29,7 @@ class CategoryTab extends StatelessWidget {
       children: [
         const WidgetAppBar(title: 'Categories', centerTitle: false),
         if (vm.isLoading)
-          const Center(child: CircularProgressIndicator())
+          const Expanded(child: Center(child: CircularProgressIndicator()))
         else
           Expanded(
             child: GlowingOverscrollIndicator(

@@ -1,7 +1,7 @@
 class AppEndpoint {
   AppEndpoint._();
 
-  static const String domain = 'http://192.168.1.3:8000/';
+  static const String domain = 'http://192.168.77.56:8000/';
   static const String base = '$domain' 'api/';
 
   ///
@@ -33,6 +33,6 @@ class AppEndpoint {
   static const String getCommentsByProduct = 'comment-by-product/';
 
   ///
-  static const String checkout = '';
+  static const String checkout = 'checkout';
   static const String getOrders = '';
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/order.dart';
 import '../../configs/configs.dart';
 import '../../utils/utils.dart';
 import '../../presentation/presentation.dart';
@@ -55,7 +56,7 @@ class CartScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: BaseWidget<CartViewModel>(
-          viewModel: CartViewModel(),
+          viewModel: CartViewModel(orderRepository: OrderRepository()),
           onViewModelReady: (vm) {
             vm.init();
           },
@@ -84,16 +85,19 @@ class CartScreen extends StatelessWidget {
                               borderRadius: AppStyles.radiusNormal,
                               child: cart.product.images.isEmpty
                                   ? Image.asset('assets/images/placeholder.jpg')
-                                  : Image.network(cart.product.images.first.name),
+                                  : Image.network(
+                                      cart.product.images.first.name),
                             ),
                             const SizedBox(width: 10),
                             Flexible(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         cart.product.name,
@@ -103,7 +107,8 @@ class CartScreen extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 2),
                                       Text(
-                                        NumberFormat().format(cart.product.price),
+                                        NumberFormat()
+                                            .format(cart.product.price),
                                         style: const TextStyle(
                                           color: AppColors.hintDark,
                                         ),
@@ -143,7 +148,8 @@ class CartScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     color: Colors.red,
                                     borderRadius: BorderRadius.horizontal(
-                                        right: AppStyles.radiusNormal.topRight)),
+                                        right:
+                                            AppStyles.radiusNormal.topRight)),
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 14),
                                 child: const Text(
@@ -159,7 +165,7 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => vm.checkout('note',1),
                   child: const Text('Checkout'),
                 )
               ],
