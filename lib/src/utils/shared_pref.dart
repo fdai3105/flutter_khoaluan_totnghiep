@@ -47,8 +47,9 @@ class SharedPref {
     final currentCarts = getCarts();
 
     if (currentCarts.isNotEmpty) {
-      final findCart = currentCarts
-          .firstWhere((element) => element.product.id == cart.product.id);
+      final findCart = currentCarts.firstWhere(
+          (element) => element.product.id == cart.product.id,
+          orElse: () => null);
       findCart != null ? findCart.quantity += 1 : currentCarts.add(cart);
     } else {
       currentCarts.add(cart);

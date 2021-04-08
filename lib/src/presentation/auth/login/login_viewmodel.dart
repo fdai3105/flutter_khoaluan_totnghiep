@@ -23,17 +23,9 @@ class LoginViewModel extends BaseViewModel {
       loadingDialog.hide();
       await SharedPref.setUser(User.fromJson(loginResponse.data));
       await pushNewScreen(context, screen: DashboardScreen());
-    } else if (loginResponse.statusCode == 401) {
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(loginResponse.data['message'] ?? "")));
-    } else if (loginResponse.statusCode == 422) {
-      var errors = '';
-      Map.from(loginResponse.data['errors']).forEach((key, value) {
-        final s = value.toString().substring(1, value.toString().length - 1);
-        errors += '$s';
-      });
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(errors ?? "")));
     }
 
     loadingDialog.hide();

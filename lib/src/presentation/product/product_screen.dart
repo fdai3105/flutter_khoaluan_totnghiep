@@ -232,7 +232,7 @@ class WidgetImageCarousel extends StatefulWidget {
 
 class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
   CarouselController _carouselController;
-  int _current;
+  int _current = 1;
 
   @override
   void initState() {
@@ -256,9 +256,9 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
             carouselController: _carouselController,
             items: widget.images.map((e) {
               return Image.network(
-                e.image,
+                AppEndpoint.domain + e.image,
                 width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               );
             }).toList(),
             options: CarouselOptions(
@@ -267,7 +267,7 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
                 viewportFraction: 1,
                 onPageChanged: (index, reason) {
                   setState(() {
-                    _current = index;
+                    _current = index + 1;
                   });
                 }),
           ),
@@ -282,7 +282,7 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
                 borderRadius: BorderRadius.circular(10)),
             child: widget.images.isEmpty
                 ? const Text('0/0')
-                : Text('${_current + 1}/${widget.images.length}'),
+                : Text('${_current}/${widget.images.length}'),
           ),
         ),
       ],

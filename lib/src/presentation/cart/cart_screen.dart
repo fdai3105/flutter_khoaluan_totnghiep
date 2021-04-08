@@ -7,48 +7,6 @@ import '../../utils/utils.dart';
 import '../../presentation/presentation.dart';
 
 class CartScreen extends StatelessWidget {
-  Widget _appBar(BuildContext context) {
-    return AppBar(
-      title: Text(
-        'Carts',
-        style: TextStyle(
-          color: Colors.grey.shade800,
-        ),
-      ),
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      iconTheme: const IconThemeData(color: Colors.grey),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.remove),
-          onPressed: () {
-            SharedPref.removeCarts();
-          },
-        )
-      ],
-    );
-  }
-
-  Widget _quantityButton({IconData icon, Function onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: AppColors.hintDark.withAlpha(60),
-          ),
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: Icon(
-          icon,
-          color: AppColors.hintDark,
-          size: 20,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +44,7 @@ class CartScreen extends StatelessWidget {
                               child: cart.product.images.isEmpty
                                   ? Image.asset('assets/images/placeholder.jpg')
                                   : Image.network(
-                                      cart.product.images.first.name),
+                                      AppEndpoint.domain + cart.product.images.first.image),
                             ),
                             const SizedBox(width: 10),
                             Flexible(
@@ -165,12 +123,54 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () => vm.checkout('note',1),
+                  onPressed: () => vm.checkout('note', 1),
                   child: const Text('Checkout'),
                 )
               ],
             );
           },
+        ),
+      ),
+    );
+  }
+
+  Widget _appBar(BuildContext context) {
+    return AppBar(
+      title: Text(
+        'Carts',
+        style: TextStyle(
+          color: Colors.grey.shade800,
+        ),
+      ),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      iconTheme: const IconThemeData(color: Colors.grey),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.remove),
+          onPressed: () {
+            SharedPref.removeCarts();
+          },
+        )
+      ],
+    );
+  }
+
+  Widget _quantityButton({IconData icon, Function onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: AppColors.hintDark.withAlpha(60),
+          ),
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Icon(
+          icon,
+          color: AppColors.hintDark,
+          size: 20,
         ),
       ),
     );
