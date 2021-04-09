@@ -9,21 +9,56 @@ import '../../presentation/presentation.dart';
 class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    CartViewModel _vm;
     return Scaffold(
-      appBar: _appBar(context),
+      appBar: WidgetAppBar(
+        title: 'Carts',
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.clear_outlined),
+            onPressed: () => _vm.clearCart(),
+          ),
+        ],
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: BaseWidget<CartViewModel>(
           viewModel: CartViewModel(orderRepository: OrderRepository()),
           onViewModelReady: (vm) {
-            vm.init();
+            _vm = vm..init();
           },
           builder: (context, vm, child) {
             if (vm.isLoading) {
               return const Center(child: CircularProgressIndicator());
             }
             if (vm.carts.isEmpty) {
-              return Center(child: Image.asset('assets/images/cart_empty.png'));
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/cart_empty.png',
+                      height: 240,
+                    ),
+                    const SizedBox(height: 40),
+                    const Text(
+                      'Your cart is empty',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    const Text(
+                      'Looks like you have \n havent made your choice yet...',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.hintDark,
+                      ),
+                    ),
+                  ],
+                ),
+              );
             }
             return Column(
               children: [
@@ -43,8 +78,8 @@ class CartScreen extends StatelessWidget {
                               borderRadius: AppStyles.radiusNormal,
                               child: cart.product.images.isEmpty
                                   ? Image.asset('assets/images/placeholder.jpg')
-                                  : Image.network(
-                                      AppEndpoint.domain + cart.product.images.first.image),
+                                  : Image.network(AppEndpoint.domain +
+                                      cart.product.images.first.image),
                             ),
                             const SizedBox(width: 10),
                             Flexible(
@@ -131,28 +166,6 @@ class CartScreen extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-
-  Widget _appBar(BuildContext context) {
-    return AppBar(
-      title: Text(
-        'Carts',
-        style: TextStyle(
-          color: Colors.grey.shade800,
-        ),
-      ),
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      iconTheme: const IconThemeData(color: Colors.grey),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.remove),
-          onPressed: () {
-            SharedPref.removeCarts();
-          },
-        )
-      ],
     );
   }
 

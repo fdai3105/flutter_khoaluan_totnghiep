@@ -4,7 +4,7 @@ class AppColors {
   AppColors._();
 
   ///
-  static const Color primary = Color.fromRGBO(0, 148, 115, 1);
+  static const Color primary = Color.fromRGBO(86, 89, 122, 1);
 
   /// for text
   static Color textDark = Colors.grey.shade800;

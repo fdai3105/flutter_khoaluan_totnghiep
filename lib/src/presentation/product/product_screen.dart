@@ -33,6 +33,7 @@ class ProductScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             } else {
               return Stack(
+                fit: StackFit.expand,
                 children: [
                   SingleChildScrollView(
                     child: Column(
@@ -170,16 +171,50 @@ class ProductScreen extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        vm.addToCart(
-                            Cart(quantity: 1, product: vm.product.data));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: AppColors.primary,
-                        shadowColor: Colors.transparent,
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 50,
+                              width: 50,
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: AppColors.primary, width: 2),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Icon(
+                                Icons.favorite_outline,
+                                color: AppColors.primary,
+                              ),
+                            ),
+                            const SizedBox(width: 20),
+                            Flexible(
+                              fit: FlexFit.tight,
+                              child: GestureDetector(
+                                onTap: () => vm.addToCart(1,vm.product.data),
+                                child: Container(
+                                  height: 50,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      'Add to cart',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      child: const Text('Add to cart'),
                     ),
                   ),
                 ],

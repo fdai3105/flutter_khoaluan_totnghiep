@@ -6,3 +6,5 @@ export 'widget_ratingbar.dart';
 export 'widget_tile.dart';
 export 'widget_image.dart';
 export 'widget_appbar.dart';
+export 'dialog_add_cart.dart';
+export 'dialog_confirm.dart';

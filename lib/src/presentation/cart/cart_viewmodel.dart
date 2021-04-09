@@ -39,16 +39,36 @@ class CartViewModel extends BaseViewModel {
   }
 
   void removeCart(Cart cart) {
-    SharedPref.removeCart(cart);
-    init();
+    DialogConfirm(
+      context: context,
+      title: 'Delete "${cart.product.name}" from cart?',
+      onConfirm: () {
+        SharedPref.removeCart(cart);
+        init();
+      },
+    ).show();
+  }
+
+  void clearCart() {
+    if(carts.isEmpty)
+      return;
+    DialogConfirm(
+      context: context,
+      title: 'Delete ${carts.length} items?',
+      onConfirm: () {
+        SharedPref.removeCarts();
+        init();
+      },
+    ).show();
   }
 
   Future checkout(String note, int addressID) async {
     if (SharedPref.getUser() == null) {
       await Navigator.pushNamed(context, Routes.login);
     } else {
-      final repo = await orderRepository.checkout(SharedPref.getCarts(), note, addressID);
-      if(repo.statusCode == 200) {
+      final repo = await orderRepository.checkout(
+          SharedPref.getCarts(), note, addressID);
+      if (repo.statusCode == 200) {
         await SharedPref.removeCarts();
         Navigator.pop(context);
       } else {

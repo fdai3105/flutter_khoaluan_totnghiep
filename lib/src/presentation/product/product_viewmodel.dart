@@ -24,12 +24,12 @@ class ProductViewModel extends BaseViewModel {
     if (pro.statusCode == 200) {
       product = Product.fromJson(pro.data);
     }
-
     isLoading = false;
   }
 
-  void addToCart(Cart cart) {
-    SharedPref.addCart(cart);
+  void addToCart(int quantity, ProductDatum product) {
+    SharedPref.addCart(Cart(quantity: quantity, product: product));
+    DialogAddCart(context: context).show();
   }
 
   @override
