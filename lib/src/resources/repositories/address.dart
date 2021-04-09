@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
+import '../../utils/shared_pref.dart';
 import '../../configs/configs.dart';
 import '../resources.dart';
 

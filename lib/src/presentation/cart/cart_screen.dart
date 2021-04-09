@@ -157,10 +157,24 @@ class CartScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () => vm.checkout('note', 1),
-                  child: const Text('Checkout'),
-                )
+                GestureDetector(
+                  onTap: () => vm.checkout('note', 1),
+                  child: Container(
+                    height: 50,
+                    margin: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Checkout',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             );
           },

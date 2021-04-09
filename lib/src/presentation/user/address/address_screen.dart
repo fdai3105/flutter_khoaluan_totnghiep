@@ -8,20 +8,6 @@ class AddressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // appBar: WidgetAppBar(
-      //   title: 'Address',
-      //   actions: [
-      //     IconButton(
-      //       icon: const Icon(Icons.add_outlined),
-      //       onPressed: () {
-      //         pushNewScreen(
-      //           context,
-      //           screen: AddAddressScreen(),
-      //         );
-      //       },
-      //     ),
-      //   ],
-      // ),
       body: SafeArea(
         child: BaseWidget<AddressViewModel>(
           viewModel: AddressViewModel(addressRepository: AddressRepository()),

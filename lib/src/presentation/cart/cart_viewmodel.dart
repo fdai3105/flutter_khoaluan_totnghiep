@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/order.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../../utils/utils.dart';
 import '../../resources/resources.dart';
@@ -50,8 +51,7 @@ class CartViewModel extends BaseViewModel {
   }
 
   void clearCart() {
-    if(carts.isEmpty)
-      return;
+    if (carts.isEmpty) return;
     DialogConfirm(
       context: context,
       title: 'Delete ${carts.length} items?',
@@ -62,18 +62,22 @@ class CartViewModel extends BaseViewModel {
     ).show();
   }
 
-  Future checkout(String note, int addressID) async {
+  void checkout(String note, int addressID) {
     if (SharedPref.getUser() == null) {
-      await Navigator.pushNamed(context, Routes.login);
+      Navigator.pushNamed(context, Routes.login);
     } else {
-      final repo = await orderRepository.checkout(
-          SharedPref.getCarts(), note, addressID);
-      if (repo.statusCode == 200) {
-        await SharedPref.removeCarts();
-        Navigator.pop(context);
-      } else {
-        print(repo.data);
-      }
+      pushNewScreen(
+        context,
+        screen: CheckoutScreen(carts: carts),
+      );
+      // final repo = await orderRepository.checkout(
+      //     SharedPref.getCarts(), note, addressID);
+      // if (repo.statusCode == 200) {
+      //   await SharedPref.removeCarts();
+      //   Navigator.pop(context);
+      // } else {
+      //   print(repo.data);
+      // }
     }
   }
 

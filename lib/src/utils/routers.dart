@@ -9,9 +9,11 @@ class Routes {
   static const String home = '/home_screen';
   static const String forgot = '/forgot_screen';
   static const String cart = '/cart';
+  static const String checkout = '/checkout';
   static const String category = '/category';
   static const String product = '/product';
 
+  static const String address = '/address';
   static const String city = '/city';
 
   static final Map<String, WidgetBuilder> routes = {
@@ -19,9 +21,11 @@ class Routes {
     register: (_) => RegisterScreen(),
     forgot: (_) => ForgotScreen(),
     cart: (_) => CartScreen(),
+    checkout: (_) => const CheckoutScreen(),
     home: (_) => HomeTab(),
     category: (_) => const CategoryScreen(),
     product: (_) => const ProductScreen(),
+    address: (_)=> AddressScreen(),
     city: (_) => CityScreen(),
   };
 }

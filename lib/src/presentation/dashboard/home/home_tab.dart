@@ -138,6 +138,7 @@ class HomeTab extends StatelessWidget {
             pushNewScreen(
               context,
               screen: CartScreen(),
+              withNavBar: false,
             );
           },
         )
