@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: AppColors.textDark),
+        iconTheme: IconThemeData(color: AppColors.dark),
       ),
       body: SafeArea(
         top: false,
@@ -93,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                             child: const Text(
                               'Forgot password?',
                               style: TextStyle(
-                                color: AppColors.hintDark,
+                                color: AppColors.dark45,
                               ),
                             ),
                           ),
@@ -108,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                     const Text(
                       "Don't have an account? ",
                       style: TextStyle(
-                        color: AppColors.hintDark,
+                        color: AppColors.dark45,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

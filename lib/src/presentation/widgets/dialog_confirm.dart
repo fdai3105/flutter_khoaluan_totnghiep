@@ -72,7 +72,7 @@ class DialogConfirm {
                 onPressed: hide,
                 child: Text(
                   'Cancel',
-                  style: TextStyle(color: AppColors.textDark),
+                  style: TextStyle(color: AppColors.dark),
                 ),
               ),
             ),

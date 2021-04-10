@@ -79,7 +79,7 @@ class DialogAddCart {
                 ),
                 child: Text(
                   'Continue shopping',
-                  style: TextStyle(color: AppColors.textDark),
+                  style: TextStyle(color: AppColors.dark),
                 ),
               ),
             ),

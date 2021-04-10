@@ -118,7 +118,7 @@ class UserTab extends StatelessWidget {
               const Text(
                 'edit you profile',
                 style: TextStyle(
-                  color: AppColors.hintDark,
+                  color: AppColors.dark45,
                   fontSize: 12,
                 ),
               ),

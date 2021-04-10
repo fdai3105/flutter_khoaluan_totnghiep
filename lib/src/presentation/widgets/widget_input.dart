@@ -33,7 +33,7 @@ class WidgetInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context)
-          .copyWith(primaryColor: focusColor ?? AppColors.hintDark),
+          .copyWith(primaryColor: focusColor ?? AppColors.dark45),
       child: TextFormField(
         onChanged: onChanged,
         initialValue: value ?? '',
@@ -41,14 +41,14 @@ class WidgetInput extends StatelessWidget {
           labelText: hint ?? '',
           labelStyle: hintStyle == null
               ? hintStyle
-              : hintStyle.copyWith(color: AppColors.hintDark),
+              : hintStyle.copyWith(color: AppColors.dark45),
           enabledBorder: OutlineInputBorder(
             borderRadius: borderRadius ?? AppStyles.radiusNormal,
-            borderSide: BorderSide(color: color ?? AppColors.hintDark),
+            borderSide: BorderSide(color: color ?? AppColors.dark45),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: borderRadius ?? AppStyles.radiusNormal,
-            borderSide: BorderSide(color: focusColor ?? AppColors.hintDark),
+            borderSide: BorderSide(color: focusColor ?? AppColors.dark45),
           ),
           prefixIcon: prefixIcon,
           suffixIcon: sufferIcon,

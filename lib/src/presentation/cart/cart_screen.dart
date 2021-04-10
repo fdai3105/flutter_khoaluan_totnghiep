@@ -53,7 +53,7 @@ class CartScreen extends StatelessWidget {
                       'Looks like you have \n havent made your choice yet...',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: AppColors.hintDark,
+                        color: AppColors.dark45,
                       ),
                     ),
                   ],
@@ -74,12 +74,20 @@ class CartScreen extends StatelessWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            ClipRRect(
-                              borderRadius: AppStyles.radiusNormal,
-                              child: cart.product.images.isEmpty
-                                  ? Image.asset('assets/images/placeholder.jpg')
-                                  : Image.network(AppEndpoint.domain +
-                                      cart.product.images.first.image),
+                            SizedBox(
+                              height: 100,
+                              width: 100,
+                              child: ClipRRect(
+                                borderRadius: AppStyles.radiusNormal,
+                                child: cart.product.images.isEmpty
+                                    ? Image.asset(
+                                        'assets/images/placeholder.jpg')
+                                    : Image.network(
+                                        AppEndpoint.domain +
+                                            cart.product.images.first.image,
+                                        fit: BoxFit.cover,
+                                      ),
+                              ),
                             ),
                             const SizedBox(width: 10),
                             Flexible(
@@ -103,7 +111,7 @@ class CartScreen extends StatelessWidget {
                                         NumberFormat()
                                             .format(cart.product.price),
                                         style: const TextStyle(
-                                          color: AppColors.hintDark,
+                                          color: AppColors.dark45,
                                         ),
                                       ),
                                     ],
@@ -120,7 +128,7 @@ class CartScreen extends StatelessWidget {
                                         child: Text(
                                           cart.quantity.toString(),
                                           style: const TextStyle(
-                                            color: AppColors.hintDark,
+                                            color: AppColors.dark45,
                                           ),
                                         ),
                                       ),
@@ -190,13 +198,13 @@ class CartScreen extends StatelessWidget {
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           border: Border.all(
-            color: AppColors.hintDark.withAlpha(60),
+            color: AppColors.dark45.withAlpha(60),
           ),
           borderRadius: BorderRadius.circular(6),
         ),
         child: Icon(
           icon,
-          color: AppColors.hintDark,
+          color: AppColors.dark45,
           size: 20,
         ),
       ),

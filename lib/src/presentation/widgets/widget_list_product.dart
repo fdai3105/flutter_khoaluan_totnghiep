@@ -35,25 +35,25 @@ class WidgetListProduct extends StatelessWidget {
 
   ///
   static final TextStyle nameStyle = GoogleFonts.inter(
-    color: AppColors.textDark,
+    color: AppColors.dark,
     fontWeight: FontWeight.w600,
   );
 
   ///
   static final TextStyle priceStyle = GoogleFonts.inter(
-    color: AppColors.textDark,
+    color: AppColors.dark,
   );
 
   ///
   static final TextStyle titleStyle = GoogleFonts.inter(
     fontSize: 18,
-    color: AppColors.textDark,
+    color: AppColors.dark,
     fontWeight: FontWeight.w600,
   );
 
   ///
   static const TextStyle buttonTextStyle = TextStyle(
-    color: AppColors.hintDark,
+    color: AppColors.dark45,
     fontWeight: FontWeight.w500,
   );
 
@@ -125,12 +125,12 @@ class WidgetListProduct extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: AppStyles.radiusNormal,
-                    border: Border.all(color: AppColors.hintDark)),
+                    border: Border.all(color: AppColors.dark45)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Icon(Icons.arrow_forward_ios_outlined,
-                        color: AppColors.hintDark),
+                        color: AppColors.dark45),
                     SizedBox(height: 6),
                     Text('See more'),
                   ],

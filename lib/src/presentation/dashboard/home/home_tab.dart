@@ -46,7 +46,7 @@ class HomeTab extends StatelessWidget {
                     child: Text(
                       'Best Furniture\nin your home.',
                       style: TextStyle(
-                        color: AppColors.textDark,
+                        color: AppColors.dark,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),

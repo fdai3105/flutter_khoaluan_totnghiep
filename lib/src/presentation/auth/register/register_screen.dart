@@ -166,7 +166,7 @@ class RegisterScreen extends StatelessWidget {
             const Text(
               "Already have an account? ",
               style: TextStyle(
-                color: AppColors.hintDark,
+                color: AppColors.dark45,
                 fontWeight: FontWeight.w600,
               ),
             ),

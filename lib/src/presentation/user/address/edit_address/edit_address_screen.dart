@@ -40,7 +40,7 @@ class EditAddressScreen extends StatelessWidget {
                       : vm.city == null
                           ? const Text(
                               'Set city',
-                              style: TextStyle(color: AppColors.hintDark),
+                              style: TextStyle(color: AppColors.dark45),
                             )
                           : Text(vm.cityName),
                 ),
@@ -53,7 +53,7 @@ class EditAddressScreen extends StatelessWidget {
                       : vm.districtName == null
                           ? const Text(
                               'Set district',
-                              style: TextStyle(color: AppColors.hintDark),
+                              style: TextStyle(color: AppColors.dark45),
                             )
                           : Text(vm.districtName),
                 ),
@@ -66,7 +66,7 @@ class EditAddressScreen extends StatelessWidget {
                       : vm.wardName == null
                           ? const Text(
                               'Set ward',
-                              style: TextStyle(color: AppColors.hintDark),
+                              style: TextStyle(color: AppColors.dark45),
                             )
                           : Text(vm.wardName),
                 ),

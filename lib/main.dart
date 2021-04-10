@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.interTextTheme(
           Theme.of(context).textTheme.apply(
-              bodyColor: AppColors.textDark, displayColor: AppColors.textDark),
+              bodyColor: AppColors.dark, displayColor: AppColors.dark),
         ),
       ),
       home: DashboardScreen(),

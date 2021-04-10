@@ -20,11 +20,11 @@ class RatingDialog extends StatelessWidget {
         elevation: 0,
         title: Text(
           'Ratings',
-          style: TextStyle(color: AppColors.textDark),
+          style: TextStyle(color: AppColors.dark),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.close_outlined, color: AppColors.textDark),
+          icon: Icon(Icons.close_outlined, color: AppColors.dark),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -72,7 +72,7 @@ class RatingDialog extends StatelessWidget {
                     unratedColor: Colors.grey.shade400,
                     itemBuilder: (context, index) {
                       return Icon(Icons.star_outlined,
-                          color: AppColors.textDark);
+                          color: AppColors.dark);
                     },
                     onRatingUpdate: (rating) {},
                   ),
@@ -82,7 +82,7 @@ class RatingDialog extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
-          const Divider(color: AppColors.hintDark, thickness: 0.8),
+          const Divider(color: AppColors.dark45, thickness: 0.8),
           WidgetRatingList(ratings: vm.ratings.data),
         ],
       ),
@@ -120,7 +120,7 @@ class WidgetRatingList extends StatelessWidget {
                   unratedColor: Colors.grey.shade400,
                   initialRating: item.rating.toDouble(),
                   itemBuilder: (context, index) {
-                    return Icon(Icons.star_outlined, color: AppColors.textDark);
+                    return Icon(Icons.star_outlined, color: AppColors.dark);
                   },
                   onRatingUpdate: (rating) {},
                 ),

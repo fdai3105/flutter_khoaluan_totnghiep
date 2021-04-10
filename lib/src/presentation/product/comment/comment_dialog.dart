@@ -45,16 +45,16 @@ class CommentDialog extends StatelessWidget {
       elevation: 0,
       title: Text(
         'Comments',
-        style: TextStyle(color: AppColors.textDark),
+        style: TextStyle(color: AppColors.dark),
       ),
       centerTitle: true,
       leading: IconButton(
-        icon: Icon(Icons.close_outlined, color: AppColors.textDark),
+        icon: Icon(Icons.close_outlined, color: AppColors.dark),
         onPressed: () => Navigator.pop(context),
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.add_comment_outlined, color: AppColors.textDark),
+          icon: Icon(Icons.add_comment_outlined, color: AppColors.dark),
           onPressed: () {
 
           },

@@ -22,7 +22,7 @@ class WidgetRatingBar extends StatelessWidget {
       initialRating: stars,
       unratedColor: Colors.grey.shade400,
       itemBuilder: (context, index) {
-        return Icon(Icons.star_outlined, color: AppColors.textDark);
+        return Icon(Icons.star_outlined, color: AppColors.dark);
       },
       onRatingUpdate: (value) {},
     );
