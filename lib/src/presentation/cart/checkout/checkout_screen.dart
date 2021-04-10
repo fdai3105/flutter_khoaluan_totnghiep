@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/cart/checkout/select_address/select_address.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/order.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import '../../../utils/utils.dart';
+import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
 
@@ -118,7 +115,7 @@ class CheckoutScreen extends StatelessWidget {
                         elevation: 0,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
-                      child: Text('Place order'),
+                      child: const Text('Place order'),
                     ),
                   ],
                 ),

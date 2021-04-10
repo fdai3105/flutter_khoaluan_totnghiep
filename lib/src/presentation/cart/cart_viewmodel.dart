@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/order.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-
-import '../../utils/utils.dart';
-import '../../resources/resources.dart';
 import 'package:rxdart/rxdart.dart';
+import '../../resources/resources.dart';
+import '../../utils/utils.dart';
 import '../presentation.dart';
 
 class CartViewModel extends BaseViewModel {
@@ -51,7 +49,9 @@ class CartViewModel extends BaseViewModel {
   }
 
   void clearCart() {
-    if (carts.isEmpty) return;
+    if (carts.isEmpty) {
+      return;
+    }
     DialogConfirm(
       context: context,
       title: 'Delete ${carts.length} items?',

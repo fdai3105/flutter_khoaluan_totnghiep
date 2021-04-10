@@ -298,7 +298,7 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
                 borderRadius: BorderRadius.circular(10)),
             child: widget.images.isEmpty
                 ? const Text('0/0')
-                : Text('${_current}/${widget.images.length}'),
+                : Text('$_current/${widget.images.length}'),
           ),
         ),
       ],

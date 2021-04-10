@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/order.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
-
-import '../../../resources/resources.dart';
-import '../../../utils/shared_pref.dart';
 import 'package:rxdart/rxdart.dart';
-
+import '../../../utils/utils.dart';
+import '../../../resources/resources.dart';
 import '../../presentation.dart';
 
 class CheckoutViewModel extends BaseViewModel {
@@ -70,7 +66,7 @@ class CheckoutViewModel extends BaseViewModel {
         SharedPref.getCarts(), note ?? "note", getSelectedAddress().id);
     if (repo.statusCode == 200) {
       await SharedPref.removeCarts();
-      await Navigator.pushReplacementNamed(context,Routes.orderSuccess);
+      await Navigator.pushReplacementNamed(context, Routes.orderSuccess);
     } else {
       print(repo.data);
     }

@@ -46,7 +46,7 @@ class AddressRepository {
   Future<Response> deleteAddress(int id) async {
     try {
       final response = await DioService().delete(
-        AppEndpoint.getAddress + '/$id',
+        '${AppEndpoint.getAddress}${'/$id'}',
         options: RequestOptions(
           headers: {
             HttpHeaders.authorizationHeader: 'Bearer ${SharedPref.getToken()}'

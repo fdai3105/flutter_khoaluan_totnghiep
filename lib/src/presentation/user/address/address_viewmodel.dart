@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-
+import 'package:rxdart/rxdart.dart';
 import '../../../resources/repositories/address.dart';
 import '../../../utils/shared_pref.dart';
-
 import '../../../resources/models/models.dart';
-import 'package:rxdart/rxdart.dart';
-
 import '../../base/base.dart';
 
 class AddressViewModel extends BaseViewModel {
@@ -14,7 +10,6 @@ class AddressViewModel extends BaseViewModel {
   AddressViewModel({this.addressRepository});
 
   final _address = BehaviorSubject<Address>();
-
 
   Address get address => _address.value;
 

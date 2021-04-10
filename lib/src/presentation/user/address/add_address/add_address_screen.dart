@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/models/address.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import '../../../../resources/repositories/address.dart';
+import '../../../../configs/configs.dart';
+import '../../../../resources/resources.dart';
 import '../../../presentation.dart';
-import '../../../../utils/routers.dart';
 
 class AddAddressScreen extends StatelessWidget {
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/order.dart';
+import '../../resources/resources.dart';
 import '../../configs/configs.dart';
 import '../../utils/utils.dart';
 import '../../presentation/presentation.dart';
@@ -175,7 +175,7 @@ class CartScreen extends StatelessWidget {
                       color: AppColors.primary,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child:  Center(
+                    child: Center(
                       child: Text(
                         '${Maths.calTotalCart(vm.carts)} Checkout',
                         style: const TextStyle(color: Colors.white),
