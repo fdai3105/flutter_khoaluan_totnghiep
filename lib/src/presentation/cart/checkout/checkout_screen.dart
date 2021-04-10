@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
 import 'package:khoaluan_totnghiep_mobile/src/presentation/cart/checkout/select_address/select_address.dart';
@@ -31,6 +32,10 @@ class CheckoutScreen extends StatelessWidget {
             return Column(
               children: [
                 _address(context, vm, vm.getSelectedAddress()),
+                const SizedBox(height: 10),
+                _list(),
+                const SizedBox(height: 10),
+                TextFormField(),
               ],
             );
           },
@@ -39,7 +44,8 @@ class CheckoutScreen extends StatelessWidget {
     );
   }
 
-  Widget _address(BuildContext context, CheckoutViewModel vm, AddressDatum address) {
+  Widget _address(
+      BuildContext context, CheckoutViewModel vm, AddressDatum address) {
     if (address == null) {
       return ListTile(
         onTap: () => Navigator.pushNamed(context, Routes.address),
@@ -84,6 +90,55 @@ class CheckoutScreen extends StatelessWidget {
           Icon(Icons.arrow_forward_ios_outlined, size: 14),
         ],
       ),
+    );
+  }
+
+  Widget _list() {
+    return ListView.builder(
+      shrinkWrap: true,
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      itemCount: carts.length,
+      itemBuilder: (context, index) {
+        final item = carts[index];
+
+        var image;
+        if (item.product.images.isEmpty) {
+          image = Image.asset(
+            'assets/images/placeholder.jpg',
+            height: 80,
+          );
+        } else {
+          image = FadeInImage.assetNetwork(
+            image: AppEndpoint.domain + item.product.images.first.image,
+            height: 80,
+            fit: BoxFit.cover,
+            placeholder: 'assets/images/placeholder.jpg',
+          );
+        }
+
+        return Row(
+          children: [
+            image,
+            const SizedBox(width: 10),
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(item.product.name),
+                  const SizedBox(height: 14),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(item.product.price.toString()),
+                      Text('x${item.quantity}'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
