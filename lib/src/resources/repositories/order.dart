@@ -9,7 +9,7 @@ class OrderRepository {
   Future<Response> checkout(
       List<Cart> carts, String note, int addressID) async {
     final params = FormData();
-    params.fields.add(MapEntry('note', note));
+    params.fields.add(MapEntry('note', note ?? ""));
     params.fields.add(MapEntry('address_id', addressID.toString()));
     for (var i = 0; i < carts.length; i++) {
       final item = carts[i];
@@ -29,6 +29,7 @@ class OrderRepository {
           }));
       return data;
     } on DioError catch (e) {
+      print(e.message);
       return e.response;
     }
   }

@@ -175,10 +175,10 @@ class CartScreen extends StatelessWidget {
                       color: AppColors.primary,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Center(
+                    child:  Center(
                       child: Text(
-                        'Checkout',
-                        style: TextStyle(color: Colors.white),
+                        '${Maths.calTotalCart(vm.carts)} Checkout',
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
                   ),

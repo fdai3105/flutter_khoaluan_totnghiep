@@ -70,14 +70,6 @@ class CartViewModel extends BaseViewModel {
         context,
         screen: CheckoutScreen(carts: carts),
       );
-      // final repo = await orderRepository.checkout(
-      //     SharedPref.getCarts(), note, addressID);
-      // if (repo.statusCode == 200) {
-      //   await SharedPref.removeCarts();
-      //   Navigator.pop(context);
-      // } else {
-      //   print(repo.data);
-      // }
     }
   }
 

@@ -1,16 +1,22 @@
-import 'package:khoaluan_totnghiep_mobile/src/resources/resources.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
+import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/order.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
+
+import '../../../resources/resources.dart';
+import '../../../utils/shared_pref.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../presentation.dart';
 
 class CheckoutViewModel extends BaseViewModel {
+  final OrderRepository orderRepository;
   final AddressRepository addressRepository;
 
-  CheckoutViewModel({this.addressRepository});
+  CheckoutViewModel({this.orderRepository, this.addressRepository});
 
   final _address = BehaviorSubject<Address>();
   final _selectedAddress = BehaviorSubject<int>();
+  final _note = BehaviorSubject<String>();
 
   Address get address => _address.value;
 
@@ -23,6 +29,13 @@ class CheckoutViewModel extends BaseViewModel {
 
   set selectedAddress(int value) {
     _selectedAddress.add(value);
+    notifyListeners();
+  }
+
+  String get note => _note.value;
+
+  set note(String value) {
+    _note.add(value);
     notifyListeners();
   }
 
@@ -42,13 +55,26 @@ class CheckoutViewModel extends BaseViewModel {
   }
 
   AddressDatum getSelectedAddress() {
-    if(address.data.isEmpty) {
+    if (address.data.isEmpty) {
       return null;
     }
     if (address.data.length == 1 || selectedAddress == null) {
       return address.data.first;
     }
     return address.data.firstWhere((element) => element.id == selectedAddress);
+  }
+
+  Future checkout() async {
+    final dlLoading = DialogLoading.of(context)..show();
+    final repo = await orderRepository.checkout(
+        SharedPref.getCarts(), note ?? "note", getSelectedAddress().id);
+    if (repo.statusCode == 200) {
+      await SharedPref.removeCarts();
+      await Navigator.pushReplacementNamed(context,Routes.orderSuccess);
+    } else {
+      print(repo.data);
+    }
+    dlLoading.hide();
   }
 
   @override

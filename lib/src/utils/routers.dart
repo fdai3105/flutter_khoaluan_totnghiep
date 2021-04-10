@@ -8,8 +8,11 @@ class Routes {
   static const String register = '/register_screen';
   static const String home = '/home_screen';
   static const String forgot = '/forgot_screen';
+
   static const String cart = '/cart';
   static const String checkout = '/checkout';
+  static const String orderSuccess = 'order-success';
+
   static const String category = '/category';
   static const String product = '/product';
 
@@ -22,10 +25,11 @@ class Routes {
     forgot: (_) => ForgotScreen(),
     cart: (_) => CartScreen(),
     checkout: (_) => const CheckoutScreen(),
-    home: (_) => HomeTab(),
+    orderSuccess: (_) => OrderSuccessScreen(),
+    home: (_) => DashboardScreen(),
     category: (_) => const CategoryScreen(),
     product: (_) => const ProductScreen(),
-    address: (_)=> AddressScreen(),
+    address: (_) => AddressScreen(),
     city: (_) => CityScreen(),
   };
 }

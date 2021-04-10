@@ -359,19 +359,6 @@ class WidgetListProduct extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.vertical(top: AppStyles.radiusNormal.topRight),
       child: WidgetImage(image: images.isEmpty ? null : images.first.image),
-      // child: images.isEmpty
-      //     ? Image.asset(
-      //         'assets/images/placeholder.jpg',
-      //         width: double.infinity,
-      //         fit: BoxFit.cover,
-      //       )
-      //     : FadeInImage.assetNetwork(
-      //         height: double.infinity,
-      //         width: double.infinity,
-      //         fit: BoxFit.fill,
-      //         image: AppEndpoint.domain + images.first.image,
-      //         placeholder: 'assets/images/placeholder.jpg',
-      //       ),
     );
   }
 }

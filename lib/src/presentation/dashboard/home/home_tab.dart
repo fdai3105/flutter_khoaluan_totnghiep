@@ -123,11 +123,52 @@ class HomeTab extends StatelessWidget {
   }
 
   Widget _appBar(BuildContext context, User user) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      iconTheme: const IconThemeData(color: Colors.grey),
-      leading: _avatar(context, user),
+    var avatar;
+
+    if (user == null) {
+      avatar = GestureDetector(
+        onTap: () => Navigator.pushNamed(context, Routes.login),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: ClipOval(
+            child: Image.asset('assets/images/place_user.png'),
+          ),
+        ),
+      );
+    } else {
+      if (user.user.avatar != null) {
+        avatar = GestureDetector(
+          onTap: () => pushNewScreen(
+            context,
+            screen: UserScreen(),
+            withNavBar: false,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: ClipOval(
+              child: Image.network(
+                AppEndpoint.domain + user.user.avatar,
+              ),
+            ),
+          ),
+        );
+      } else {
+        avatar = GestureDetector(
+          onTap: () => Navigator.pushNamed(context, Routes.login),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: ClipOval(
+              child: Image.asset(
+                'assets/images/place_user.png',
+              ),
+            ),
+          ),
+        );
+      }
+    }
+
+    return WidgetAppBar(
+      leading: avatar,
       actions: [
         IconButton(
           icon: const Icon(
@@ -143,37 +184,6 @@ class HomeTab extends StatelessWidget {
           },
         )
       ],
-    );
-  }
-
-  Widget _avatar(BuildContext context, User user) {
-    if (user != null) {
-      if (user.user.avatar != null) {
-        return GestureDetector(
-          onTap: () => pushNewScreen(
-            context,
-            screen: UserScreen(),
-            withNavBar: false,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: ClipOval(
-              child: Image.network(
-                AppEndpoint.domain + user.user.avatar,
-              ),
-            ),
-          ),
-        );
-      }
-    }
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, Routes.login),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: ClipOval(
-          child: Image.asset('assets/images/placeholder.jpg'),
-        ),
-      ),
     );
   }
 }
