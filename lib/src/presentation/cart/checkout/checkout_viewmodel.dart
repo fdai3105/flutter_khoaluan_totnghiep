@@ -51,9 +51,9 @@ class CheckoutViewModel extends BaseViewModel {
   }
 
   AddressDatum getSelectedAddress() {
-    if (address.data.isEmpty) {
-      return null;
-    }
+    if (address == null) return null;
+    if (address.data.isEmpty) return null;
+
     if (address.data.length == 1 || selectedAddress == null) {
       return address.data.first;
     }
@@ -61,6 +61,11 @@ class CheckoutViewModel extends BaseViewModel {
   }
 
   Future checkout() async {
+    if(getSelectedAddress() == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please select your address')));
+      return;
+    }
     final dlLoading = DialogLoading.of(context)..show();
     final repo = await orderRepository.checkout(
         SharedPref.getCarts(), note ?? "note", getSelectedAddress().id);

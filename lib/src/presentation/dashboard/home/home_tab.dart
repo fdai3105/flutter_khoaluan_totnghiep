@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../utils/routers.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../presentation.dart';
 import '../../../resources/resources.dart';
@@ -123,48 +122,36 @@ class HomeTab extends StatelessWidget {
   }
 
   Widget _appBar(BuildContext context, User user) {
-    var avatar;
+    var avatar = GestureDetector(
+      onTap: () => pushNewScreen(
+        context,
+        screen: LoginScreen(),
+        withNavBar: false,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: ClipOval(
+          child: Image.asset('assets/images/place_user.png'),
+        ),
+      ),
+    );
 
-    if (user == null) {
+    if (user != null) {
       avatar = GestureDetector(
-        onTap: () => Navigator.pushNamed(context, Routes.login),
+        onTap: () => pushNewScreen(
+          context,
+          screen: UserScreen(),
+          withNavBar: false,
+        ),
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: ClipOval(
-            child: Image.asset('assets/images/place_user.png'),
+            child: user.user.avatar == null
+                ? Image.asset('assets/images/place_user.png')
+                : Image.network(AppEndpoint.domain + user.user.avatar),
           ),
         ),
       );
-    } else {
-      if (user.user.avatar != null) {
-        avatar = GestureDetector(
-          onTap: () => pushNewScreen(
-            context,
-            screen: UserScreen(),
-            withNavBar: false,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: ClipOval(
-              child: Image.network(
-                AppEndpoint.domain + user.user.avatar,
-              ),
-            ),
-          ),
-        );
-      } else {
-        avatar = GestureDetector(
-          onTap: () => Navigator.pushNamed(context, Routes.login),
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: ClipOval(
-              child: Image.asset(
-                'assets/images/place_user.png',
-              ),
-            ),
-          ),
-        );
-      }
     }
 
     return WidgetAppBar(

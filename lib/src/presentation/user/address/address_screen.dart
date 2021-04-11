@@ -44,6 +44,9 @@ class AddressScreen extends StatelessWidget {
     if (vm.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
+    if(vm.address == null) {
+      return const Text('Nothing in here');
+    }
     return Expanded(
       child: RefreshIndicator(
         onRefresh: () async {

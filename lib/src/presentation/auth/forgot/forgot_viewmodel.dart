@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/presentation.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
+import '../../presentation.dart';
 import '../../../resources/repositories/auth.dart';
-
 import '../../base/base.dart';
 
 class ForgotViewModel extends BaseViewModel {
