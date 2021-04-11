@@ -8,6 +8,7 @@ class AppEndpoint {
   static const String register = 'register';
   static const String login = 'login';
   static const String forgotPassword = 'password/email';
+  static const String sendVerifyMail = 'resend-email';
   static const String editUser = 'user-edit';
 
   ///

@@ -66,10 +66,14 @@ class CartViewModel extends BaseViewModel {
     if (SharedPref.getUser() == null) {
       Navigator.pushNamed(context, Routes.login);
     } else {
-      pushNewScreen(
-        context,
-        screen: CheckoutScreen(carts: carts),
-      );
+      if (SharedPref.getUser().user.emailVerifiedAt == null) {
+        Navigator.pushNamed(context, Routes.resendMail);
+      } else {
+        pushNewScreen(
+          context,
+          screen: CheckoutScreen(carts: carts),
+        );
+      }
     }
   }
 

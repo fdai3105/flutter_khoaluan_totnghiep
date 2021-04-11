@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
 import '../../configs/configs.dart';
 import '../resources.dart';
 
@@ -30,6 +31,22 @@ class AuthRepository {
     }
   }
 
+  Future<Response> sendVerifyMail() async {
+    try {
+      final response = await DioService().post(
+        AppEndpoint.sendVerifyMail,
+        options: RequestOptions(
+          headers: {
+            HttpHeaders.authorizationHeader: 'Bearer ${SharedPref.getToken()}'
+          },
+        ),
+      );
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
+
   Future<Response> register(String name, String email, String phone,
       String password, int gender) async {
     try {
@@ -54,7 +71,7 @@ class AuthRepository {
       final response = await DioService().post(
         AppEndpoint.editUser,
         options: RequestOptions(
-          headers: {HttpHeaders.authorizationHeader : 'Bearer $token'},
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
         ),
         data: params,
       );

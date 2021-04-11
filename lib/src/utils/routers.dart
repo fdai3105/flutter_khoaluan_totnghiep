@@ -8,6 +8,7 @@ class Routes {
   static const String register = '/register_screen';
   static const String home = '/home_screen';
   static const String forgot = '/forgot_screen';
+  static const String resendMail = '/resend_mail_screen';
 
   static const String cart = '/cart';
   static const String checkout = '/checkout';
@@ -23,6 +24,7 @@ class Routes {
     login: (_) => LoginScreen(),
     register: (_) => RegisterScreen(),
     forgot: (_) => ForgotScreen(),
+    resendMail: (_) => ResendMailScreen(),
     cart: (_) => CartScreen(),
     checkout: (_) => const CheckoutScreen(),
     orderSuccess: (_) => OrderSuccessScreen(),

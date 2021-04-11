@@ -3,6 +3,7 @@ export 'auth/login/login.dart';
 export 'auth/register/register.dart';
 export 'splash/splash.dart';
 export 'auth/forgot/forget.dart';
+export 'auth/resend_mail/resend_mail.dart';
 export 'cart/cart.dart';
 export 'dashboard/dashboard.dart';
 export 'category/category.dart';
