@@ -32,7 +32,6 @@ class AuthRepository {
 
   Future<Response> register(String name, String email, String phone,
       String password, int gender) async {
-    // todo
     try {
       final params = FormData.fromMap({
         'name': name,
@@ -43,7 +42,7 @@ class AuthRepository {
       });
       final response =
           await DioService().post(AppEndpoint.register, data: params);
-      return response.data;
+      return response;
     } on DioError catch (e) {
       return e.response;
     }

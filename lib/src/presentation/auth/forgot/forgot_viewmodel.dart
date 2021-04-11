@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/presentation/presentation.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
 import '../../../resources/repositories/auth.dart';
 
 import '../../base/base.dart';
@@ -13,10 +15,14 @@ class ForgotViewModel extends BaseViewModel {
   }
 
   Future forgotPassword(String email) async {
+    final dialog = DialogLoading.of(context)..show();
     final response = await authRepository.forgotPassword(email);
+    dialog.hide();
+
     if (response.statusCode == 200) {
       _showDialog();
     } else if (response.statusCode == 422) {
+      print(response.data);
       var s = '';
       Map.from(response.data['errors']).forEach((key, value) {
         s += '$value \n';
@@ -37,9 +43,7 @@ class ForgotViewModel extends BaseViewModel {
             ),
             actions: [
               TextButton(
-                onPressed: () {
-                  Navigator.popUntil(context, (route) => route.isFirst);
-                },
+                onPressed: () => Navigator.pop(context),
                 child: const Text('Ok'),
               ),
             ],

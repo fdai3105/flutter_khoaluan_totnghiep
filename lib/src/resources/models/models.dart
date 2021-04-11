@@ -1,7 +1,6 @@
 export 'user.dart';
 export 'brand.dart';
 export 'category.dart';
-export 'error.dart';
 export 'link.dart';
 export 'links.dart';
 export 'meta.dart';
