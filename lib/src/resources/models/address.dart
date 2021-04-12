@@ -19,17 +19,20 @@ class Address {
   String toRawJson() => json.encode(toJson());
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
-    data: List<AddressDatum>.from(json["data"].map((x) => AddressDatum.fromJson(x))),
-  );
+        data: List<AddressDatum>.from(
+            json["data"].map((x) => AddressDatum.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "data": List<dynamic>.from(data.map((x) => x.toJson())),
-  };
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+      };
 }
 
 class AddressDatum {
   AddressDatum({
     this.id,
+    this.name,
+    this.phone,
     this.city,
     this.district,
     this.ward,
@@ -39,15 +42,20 @@ class AddressDatum {
   });
 
   final int id;
+  final String name;
+  final String phone;
   final String city;
   final String district;
   final String ward;
   final String address;
+
   final DateTime createdAt;
   final DateTime updatedAt;
 
   AddressDatum copyWith({
     int id,
+    String name,
+    String phone,
     String city,
     String district,
     String ward,
@@ -57,6 +65,8 @@ class AddressDatum {
   }) =>
       AddressDatum(
         id: id ?? this.id,
+        name: name ?? this.name,
+        phone: phone ?? this.phone,
         city: city ?? this.city,
         district: district ?? this.district,
         ward: ward ?? this.ward,
@@ -65,27 +75,32 @@ class AddressDatum {
         updatedAt: updatedAt ?? this.updatedAt,
       );
 
-  factory AddressDatum.fromRawJson(String str) => AddressDatum.fromJson(json.decode(str));
+  factory AddressDatum.fromRawJson(String str) =>
+      AddressDatum.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
   factory AddressDatum.fromJson(Map<String, dynamic> json) => AddressDatum(
-    id: json["id"],
-    city: json["city"],
-    district: json["district"],
-    ward: json["ward"],
-    address: json["address"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
-  );
+        id: json["id"],
+        name: json["name"],
+        phone: json["phone"],
+        city: json["city"],
+        district: json["district"],
+        ward: json["ward"],
+        address: json["address"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "city": city,
-    "district": district,
-    "ward": ward,
-    "address": address,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
-  };
+        "id": id,
+        "name": name,
+        "phone": phone,
+        "city": city,
+        "district": district,
+        "ward": ward,
+        "address": address,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
 }

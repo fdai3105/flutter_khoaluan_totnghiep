@@ -33,16 +33,12 @@ class AuthRepository {
 
   Future<Response> sendVerifyMail() async {
     try {
-      final response = await DioService().post(
+      final response = await DioService(withToken: true).post(
         AppEndpoint.sendVerifyMail,
-        options: RequestOptions(
-          headers: {
-            HttpHeaders.authorizationHeader: 'Bearer ${SharedPref.getToken()}'
-          },
-        ),
       );
       return response;
     } on DioError catch (e) {
+      print(e.response.data);
       return e.response;
     }
   }
@@ -68,11 +64,8 @@ class AuthRepository {
   Future<Response> editUser(UserDatum user, String token) async {
     final params = FormData.fromMap(user.toJson());
     try {
-      final response = await DioService().post(
+      final response = await DioService(withToken: true).post(
         AppEndpoint.editUser,
-        options: RequestOptions(
-          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
-        ),
         data: params,
       );
       return response;

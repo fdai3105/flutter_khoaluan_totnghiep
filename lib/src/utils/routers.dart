@@ -4,9 +4,9 @@ import '../presentation/presentation.dart';
 class Routes {
   Routes._();
 
+  static const String home = '/';
   static const String login = '/login_screen';
   static const String register = '/register_screen';
-  static const String home = '/home_screen';
   static const String forgot = '/forgot_screen';
   static const String resendMail = '/resend_mail_screen';
 

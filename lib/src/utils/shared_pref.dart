@@ -33,6 +33,11 @@ class SharedPref {
     return User.fromRawJson(user);
   }
 
+  static bool isVerifyEmail() {
+    if (getUser() == null) return false;
+    return getUser().user.emailVerifiedAt != null;
+  }
+
   static Future setToken(String token) async {
     final newUser = getUser()..copyWith(accessToken: token);
     await setUser(newUser);

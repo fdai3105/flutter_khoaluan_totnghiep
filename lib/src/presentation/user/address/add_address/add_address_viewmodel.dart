@@ -15,6 +15,8 @@ class AddAddressViewModel extends BaseViewModel {
   final _district = BehaviorSubject<District>();
   final _ward = BehaviorSubject<Ward>();
   final _address = BehaviorSubject<String>();
+  final _name = BehaviorSubject<String>();
+  final _phone = BehaviorSubject<String>();
 
   City get city => _city.value;
 
@@ -65,6 +67,20 @@ class AddAddressViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  String get name => _name.value;
+
+  set name(String value) {
+    _name.add(value);
+    notifyListeners();
+  }
+
+  String get phone => _phone.value;
+
+  set phone(String value) {
+    _phone.add(value);
+    notifyListeners();
+  }
+
   Future init() async {
     isLoading = true;
 
@@ -103,11 +119,19 @@ class AddAddressViewModel extends BaseViewModel {
   }
 
   Future addAddress() async {
-    if (city == null || district == null || ward == null || address == null) {
-
+    if (name == null ||
+        phone == null ||
+        city == null ||
+        district == null ||
+        ward == null ||
+        address == null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Please check your input')));
       return;
     }
     final data = AddressDatum(
+      name: name,
+      phone: phone,
       city: cityName,
       district: districtName,
       ward: wardName,
@@ -127,6 +151,9 @@ class AddAddressViewModel extends BaseViewModel {
     _city.close();
     _district.close();
     _ward.close();
+    _address.close();
+    _name.close();
+    _phone.close();
     return super.dispose();
   }
 }

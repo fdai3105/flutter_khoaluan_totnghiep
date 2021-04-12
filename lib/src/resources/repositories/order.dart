@@ -1,6 +1,4 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
-import '../../utils/utils.dart';
 import '../../configs/configs.dart';
 import '../resources.dart';
 
@@ -21,11 +19,10 @@ class OrderRepository {
         );
     }
     try {
-      final data = await DioService().post(AppEndpoint.checkout,
-          data: params,
-          options: Options(headers: {
-            HttpHeaders.authorizationHeader: 'Bearer ${SharedPref.getToken()}'
-          }));
+      final data = await DioService(withToken: true).post(
+        AppEndpoint.checkout,
+        data: params,
+      );
       return data;
     } on DioError catch (e) {
       print(e.message);

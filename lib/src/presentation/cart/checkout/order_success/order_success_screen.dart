@@ -50,7 +50,7 @@ class OrderSuccessScreen extends StatelessWidget {
               SizedBox(
                 width: 200,
                 child: OutlinedButton(
-                  onPressed: () => Navigator.pushReplacementNamed(context, Routes.home),
+                  onPressed: () => Navigator.popUntil(context, ModalRoute.withName('/')),
                   style: OutlinedButton.styleFrom(
                     primary: AppColors.primary,
                     padding: const EdgeInsets.symmetric(vertical: 16),

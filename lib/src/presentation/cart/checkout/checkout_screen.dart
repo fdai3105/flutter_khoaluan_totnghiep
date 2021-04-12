@@ -131,7 +131,8 @@ class CheckoutScreen extends StatelessWidget {
       BuildContext context, CheckoutViewModel vm, AddressDatum address) {
     if (address == null) {
       return ListTile(
-        onTap: () => Navigator.pushNamed(context, Routes.address),
+        onTap: () => Navigator.pushNamed(context, Routes.address)
+            .then((value) => vm.init()),
         title: const Text('Please add your address'),
         trailing: const Icon(Icons.arrow_forward_ios_outlined, size: 14),
       );
@@ -141,9 +142,8 @@ class CheckoutScreen extends StatelessWidget {
         final id = await pushNewScreen(
           context,
           screen: SelectAddressScreen(selected: vm.selectedAddress),
-        );
+        ).then((value) => vm.init());
         vm.selectedAddress = id;
-        await vm.init();
       },
       title: Row(
         children: const [

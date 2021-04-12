@@ -74,7 +74,7 @@ class ResendMailScreen extends StatelessWidget {
       Navigator.pop(context);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Some thing error, please try again')));
+          const SnackBar(content: Text('Something error, please try again')));
     }
   }
 }

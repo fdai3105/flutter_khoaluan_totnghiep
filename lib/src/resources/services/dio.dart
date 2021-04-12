@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
 import '../../configs/configs.dart';
 
 class DioService extends DioForNative {
-  DioService({BaseOptions options}) : super(options) {
+  final bool withToken;
+
+  DioService({BaseOptions options, this.withToken = false}) : super(options) {
     interceptors.add(
       InterceptorsWrapper(
         onRequest: _request,
@@ -18,7 +21,10 @@ class DioService extends DioForNative {
       ..connectTimeout = 120 * 1000 // 2 minute
       ..receiveTimeout = 120 * 1000 // 2 minute
       ..baseUrl = AppEndpoint.base
-      ..headers = {'Accept': 'application/json'};
+      ..headers = {
+        'accept': 'application/json',
+        'authorization': !withToken ? '' : 'Bearer ${SharedPref.getToken()}',
+      };
     return options;
   }
 
