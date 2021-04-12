@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/base/base.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/order/order.dart';
+import '../base/base.dart';
+import 'order.dart';
+import '../../resources/repositories/order.dart';
 import '../widgets/widgets.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -13,15 +14,26 @@ class OrderScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: BaseWidget<OrderViewModel>(
-          viewModel: OrderViewModel(),
+          viewModel: OrderViewModel(repository: OrderRepository()),
           onViewModelReady: (vm) => vm.init(),
           builder: (context, vm, widget) {
             if (vm.isLoading) {
               return const Center(child: CircularProgressIndicator());
             } else {
               return ListView.builder(
-                // itemCount: ,
-                itemBuilder: (context, index) {},
+                itemCount: vm.orders.data.length,
+                itemBuilder: (context, index) {
+                  final item = vm.orders.data[index];
+                  return ListTile(
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('#' + item.id.toString()),
+                        Text(item.total.toString()),
+                      ],
+                    ),
+                  );
+                },
               );
             }
           },

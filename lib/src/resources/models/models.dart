@@ -14,3 +14,5 @@ export 'address.dart';
 export 'city.dart';
 export 'district.dart';
 export 'ward.dart';
+export 'order.dart';
+export 'order_detail.dart';

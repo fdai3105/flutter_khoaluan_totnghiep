@@ -32,7 +32,17 @@ class OrderRepository {
 
   Future<Response> getOrders() async {
     try {
-      final data = await DioService().get(AppEndpoint.getParentCategories);
+      final data = await DioService(withToken: true).get(AppEndpoint.getOrders);
+      return data;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
+
+  Future<Response> getOrderDetail(int id) async {
+    try {
+      final data =
+          await DioService(withToken: true).get(AppEndpoint.getOrderDetail);
       return data;
     } on DioError catch (e) {
       return e.response;

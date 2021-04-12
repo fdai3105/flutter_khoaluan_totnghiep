@@ -35,5 +35,6 @@ class AppEndpoint {
 
   ///
   static const String checkout = 'checkout';
-  static const String getOrders = '';
+  static const String getOrders = 'orders';
+  static const String getOrderDetail = 'order/';
 }
