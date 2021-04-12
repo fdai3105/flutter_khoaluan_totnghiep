@@ -3,15 +3,15 @@ import '../../../resources/resources.dart';
 import '../../presentation.dart';
 
 class CategoryTabViewModel extends BaseViewModel {
-  final CategoryResponse categoryResponse;
+  final CategoryResponse response;
 
-  CategoryTabViewModel({this.categoryResponse});
+  CategoryTabViewModel({this.response});
 
-  final _categories = BehaviorSubject<Categories>();
+  final _categories = BehaviorSubject<Category>();
 
-  Categories get categories => _categories.value;
+  Category get categories => _categories.value;
 
-  set categories(Categories value) {
+  set categories(Category value) {
     _categories.add(value);
     notifyListeners();
   }
@@ -19,9 +19,9 @@ class CategoryTabViewModel extends BaseViewModel {
   Future init() async {
     isLoading = true;
 
-    final categoryData = await categoryResponse.getParentCategories();
+    final categoryData = await response.getParentCategories();
     if (categoryData.statusCode == 200) {
-      categories = Categories.fromJson(categoryData.data);
+      categories = Category.fromJson(categoryData.data);
     }
 
     isLoading = false;

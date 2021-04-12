@@ -8,4 +8,8 @@ class AppColors {
 
   static Color dark = Colors.grey.shade800;
   static const Color dark45 = Colors.black45;
+
+  //
+  static Color shimmerBase = Colors.grey.shade300;
+  static Color shimmerHighlight = Colors.grey.shade300;
 }

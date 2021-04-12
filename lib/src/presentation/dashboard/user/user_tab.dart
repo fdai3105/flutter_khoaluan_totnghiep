@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../configs/configs.dart';
 import '../../presentation.dart';
@@ -39,6 +40,11 @@ class UserTab extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+              if (vm.user != null && vm.user.user.emailVerifiedAt == null)
+                WidgetTile(
+                  title: 'Please verify your email',
+                  onTap: () => Navigator.pushNamed(context, Routes.resendMail),
+                ),
               const WidgetTile(
                 title: 'Purchase',
               ),
@@ -51,9 +57,7 @@ class UserTab extends StatelessWidget {
               const WidgetTile(
                 title: 'About the app',
               ),
-              if (vm.user == null)
-                const SizedBox()
-              else
+              if (vm.user != null)
                 WidgetTile(
                   title: 'Logout',
                   onTap: () {

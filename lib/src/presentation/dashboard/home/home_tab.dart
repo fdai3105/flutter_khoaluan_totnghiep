@@ -19,13 +19,13 @@ class HomeTab extends StatelessWidget {
           await vm.init();
         },
         builder: (context, vm, child) {
-          return _mobile(context, vm);
+          return _body(context, vm);
         },
       ),
     );
   }
 
-  Widget _mobile(BuildContext context, HomeViewModel vm) {
+  Widget _body(BuildContext context, HomeViewModel vm) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -65,6 +65,8 @@ class HomeTab extends StatelessWidget {
                       );
                     },
                   ),
+                  const SizedBox(height: 20),
+                  const WidgetListHotCategory(),
                   const SizedBox(height: 20),
                   WidgetListProduct(
                     product: vm.popular,
@@ -135,7 +137,6 @@ class HomeTab extends StatelessWidget {
         ),
       ),
     );
-
     if (user != null) {
       avatar = GestureDetector(
         onTap: () => pushNewScreen(
@@ -153,7 +154,6 @@ class HomeTab extends StatelessWidget {
         ),
       );
     }
-
     return WidgetAppBar(
       leading: avatar,
       actions: [

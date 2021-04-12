@@ -16,10 +16,9 @@ class LoginViewModel extends BaseViewModel {
   }
 
   Future<void> login(String email, String password) async {
-    final loadingDialog = DialogLoading.of(context)..show();
-
+    final dlLoading = DialogLoading.of(context)..show();
     final loginResponse = await authRepository.login(email, password);
-    loadingDialog.hide();
+    dlLoading.hide();
     if (loginResponse.statusCode == 200) {
       await SharedPref.setUser(User.fromJson(loginResponse.data));
       await pushNewScreen(context, screen: DashboardScreen());
@@ -28,6 +27,13 @@ class LoginViewModel extends BaseViewModel {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(loginResponse.data['message'] ?? "")));
+    }
+    try {
+
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Some thing error, please try again')));
+      print(e.toString());
     }
   }
 }

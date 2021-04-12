@@ -8,3 +8,5 @@ export 'widget_image.dart';
 export 'widget_appbar.dart';
 export 'dialog_add_cart.dart';
 export 'dialog_confirm.dart';
+export 'widget_list_category.dart';
+export 'widget_list_hot_category.dart';

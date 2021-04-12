@@ -1,26 +1,26 @@
 import 'dart:convert';
 
-class Categories {
-  Categories({
+class Category {
+  Category({
     this.data,
   });
 
   final List<CategoryDatum> data;
 
-  Categories copyWith({
+  Category copyWith({
     List<CategoryDatum> data,
   }) =>
-      Categories(
+      Category(
         data: data ?? this.data,
       );
 
-  factory Categories.fromRawJson(String str) =>
-      Categories.fromJson(json.decode(str));
+  factory Category.fromRawJson(String str) =>
+      Category.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Categories.fromJson(Map<String, dynamic> json) =>
-      Categories(
+  factory Category.fromJson(Map<String, dynamic> json) =>
+      Category(
         data:
             List<CategoryDatum>.from(json["data"].map((x) => CategoryDatum.fromJson(x))),
       );
