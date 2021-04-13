@@ -29,6 +29,7 @@ class OrderScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('#' + item.id.toString()),
+                        Text(item.item.toString() + ' items'),
                         Text(item.total.toString()),
                       ],
                     ),

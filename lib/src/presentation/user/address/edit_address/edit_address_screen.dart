@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../../configs/configs.dart';
 import '../../../../resources/resources.dart';
@@ -70,17 +71,17 @@ class EditAddressScreen extends StatelessWidget {
                             )
                           : Text(vm.wardName),
                 ),
-                Padding(
-                  padding: AppStyles.paddingBody,
-                  child: TextFormField(
-                    onChanged: (value) => vm.address = value,
-                    initialValue: address.address ?? '',
-                    decoration: const InputDecoration(hintText: 'Address'),
-                  ),
+                WidgetTextField(
+                  onChanged: (value) => vm.address = value,
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () => vm.deleteAddress(address.id),
+                  style: ElevatedButton.styleFrom(
+                    primary: AppColors.primary,
+                    elevation: 0,
+                    shadowColor: Colors.transparent,
+                  ),
                   child: const Text('Remove address'),
                 ),
               ],

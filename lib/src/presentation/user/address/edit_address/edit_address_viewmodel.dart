@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../../resources/resources.dart';
@@ -121,11 +123,15 @@ class EditAddressViewModel extends BaseViewModel {
   }
 
   Future deleteAddress(int id) async {
+    final dl = DialogLoading.of(context)..show();
     final repo = await addressRepository.deleteAddress(id);
-    if(repo.statusCode == 200) {
+    dl.hide();
+
+    if (repo.statusCode == 200) {
       Navigator.pop(context);
+    } else {
+      Get.rawSnackbar(message: 'Something error, please try again.isBlank');
     }
-    print(repo.data);
   }
 
   @override

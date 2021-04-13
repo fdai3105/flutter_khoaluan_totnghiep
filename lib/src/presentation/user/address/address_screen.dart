@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../resources/repositories/repositories.dart';
 import '../../presentation.dart';
@@ -31,7 +32,7 @@ class AddressScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                _body(context, vm),
+                Expanded(child: _body(context, vm)),
               ],
             );
           },
@@ -44,37 +45,59 @@ class AddressScreen extends StatelessWidget {
     if (vm.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
-    if(vm.address == null) {
-      return const Text('Nothing in here');
+    if (vm.address == null) {
+      return const Text('Nothing in here, please add your address');
     }
-    return Expanded(
-      child: RefreshIndicator(
-        onRefresh: () async {
-          await vm.init();
+    return RefreshIndicator(
+      onRefresh: () async {
+        await vm.init();
+      },
+      child: ListView.builder(
+        padding: AppStyles.paddingBody,
+        itemCount: vm.address.data.length,
+        itemBuilder: (context, index) {
+          final item = vm.address.data[index];
+          return GestureDetector(
+            onTap: () => pushNewScreen(
+              context,
+              screen: EditAddressScreen(address: item),
+            ).then((value) => vm.init()),
+            behavior: HitTestBehavior.translucent,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.asset('assets/icons/address.png', height: 30),
+                const SizedBox(width: 8),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          item.name,
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          item.phone,
+                          style: const TextStyle(color: AppColors.dark45),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      item.address,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      '${item.city}, ${item.district}, ${item.ward}',
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
         },
-        child: ListView.builder(
-          itemCount: vm.address.data.length,
-          itemBuilder: (context, index) {
-            final item = vm.address.data[index];
-            return ListTile(
-              onTap: () {
-                pushNewScreen(
-                  context,
-                  screen: EditAddressScreen(address: item),
-                ).then((value) => vm.init());
-              },
-              title: Text(item.address),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(item.ward),
-                  Text(item.district),
-                  Text(item.city),
-                ],
-              ),
-            );
-          },
-        ),
       ),
     );
   }

@@ -62,45 +62,24 @@ class WidgetListProduct extends StatelessWidget {
     return Column(
       children: [
         if (label == null && !showSeeAll) const SizedBox() else _title(),
-        _body(context),
+        if (isVertical) _vertical(context) else _horizon(context),
       ],
     );
   }
 
-  Widget _title() {
-    return Padding(
-      padding: padding,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label ?? '',
-            style: titleStyle,
-          ),
-          if (!showSeeAll)
-            const SizedBox()
-          else
-            GestureDetector(
-              onTap: () => seeAll,
-              child: const Text(
-                'See all',
-                style: buttonTextStyle,
-              ),
-            )
-        ],
-      ),
-    );
-  }
-
-  Widget _body(BuildContext context) {
-    if (isVertical) {
-      return product == null ? _verticalShimmer(context) : _vertical(context);
+  /// horizon list
+  Widget _horizon(BuildContext context) {
+    if (product == null) {
+      return _horizonShimmer(context);
     } else {
-      return (product == null) ? _horizonShimmer(context) : _horizon(context);
+      if (product.data.isEmpty) {
+        return _empty(context);
+      }
+      return _horizonList(context);
     }
   }
 
-  Widget _horizon(BuildContext context) {
+  Widget _horizonList(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: horizonHeight,
@@ -237,7 +216,19 @@ class WidgetListProduct extends StatelessWidget {
     );
   }
 
+  /// vertical list
   Widget _vertical(BuildContext context) {
+    if (product == null) {
+      return _verticalShimmer(context);
+    } else {
+      if (product.data.isEmpty) {
+        return _empty(context);
+      }
+      return _verticalList(context);
+    }
+  }
+
+  Widget _verticalList(BuildContext context) {
     return Column(
       children: [
         GridView.builder(
@@ -355,10 +346,43 @@ class WidgetListProduct extends StatelessWidget {
     );
   }
 
+  ///
+  Widget _title() {
+    return Padding(
+      padding: padding,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label ?? '',
+            style: titleStyle,
+          ),
+          if (!showSeeAll)
+            const SizedBox()
+          else
+            GestureDetector(
+              onTap: () => seeAll,
+              child: const Text(
+                'See all',
+                style: buttonTextStyle,
+              ),
+            )
+        ],
+      ),
+    );
+  }
+
   Widget _imageItem(List<ProductImage> images) {
     return ClipRRect(
       borderRadius: BorderRadius.vertical(top: AppStyles.radiusNormal.topRight),
       child: WidgetImage(image: images.isEmpty ? null : images.first.image),
+    );
+  }
+
+  Widget _empty(BuildContext context) {
+    return const SizedBox(
+      height: horizonHeight,
+      child: Center(child: Text('Nothing to show')),
     );
   }
 }

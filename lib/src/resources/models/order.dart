@@ -21,12 +21,13 @@ class Order {
   String toRawJson() => json.encode(toJson());
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
-    data: List<OrderDatum>.from(json["data"].map((x) => OrderDatum.fromJson(x))),
-  );
+        data: List<OrderDatum>.from(
+            json["data"].map((x) => OrderDatum.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "data": List<dynamic>.from(data.map((x) => x.toJson())),
-  };
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+      };
 }
 
 class OrderDatum {
@@ -35,6 +36,7 @@ class OrderDatum {
     this.status,
     this.total,
     this.note,
+    this.item,
     this.address,
     this.createdAt,
     this.updatedAt,
@@ -44,6 +46,7 @@ class OrderDatum {
   final String status;
   final int total;
   final String note;
+  final int item;
   final AddressDatum address;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -53,6 +56,7 @@ class OrderDatum {
     String status,
     int total,
     String note,
+    int item,
     AddressDatum address,
     DateTime createdAt,
     DateTime updatedAt,
@@ -62,32 +66,36 @@ class OrderDatum {
         status: status ?? this.status,
         total: total ?? this.total,
         note: note ?? this.note,
+        item: item ?? this.item,
         address: address ?? this.address,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
       );
 
-  factory OrderDatum.fromRawJson(String str) => OrderDatum.fromJson(json.decode(str));
+  factory OrderDatum.fromRawJson(String str) =>
+      OrderDatum.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
   factory OrderDatum.fromJson(Map<String, dynamic> json) => OrderDatum(
-    id: json["id"],
-    status: json["status"],
-    total: json["total"],
-    note: json["note"],
-    address: AddressDatum.fromJson(json["address"]),
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
-  );
+        id: json["id"],
+        status: json["status"],
+        total: json["total"],
+        note: json["note"],
+        item: json["item"],
+        address: AddressDatum.fromJson(json["address"]),
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "status": status,
-    "total": total,
-    "note": note,
-    "address": address.toJson(),
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
-  };
+        "id": id,
+        "status": status,
+        "total": total,
+        "note": note,
+        "item": item,
+        "address": address.toJson(),
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
 }

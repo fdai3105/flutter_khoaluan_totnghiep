@@ -10,3 +10,4 @@ export 'dialog_add_cart.dart';
 export 'dialog_confirm.dart';
 export 'widget_list_category.dart';
 export 'widget_list_hot_category.dart';
+export 'widget_text_field.dart';
