@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../resources/repositories/auth.dart';
 import '../../configs/configs.dart';
 import '../presentation.dart';
@@ -62,15 +61,6 @@ class UserScreen extends StatelessWidget {
                         readOnly: true,
                       ),
                       const SizedBox(height: 10),
-                      ListTile(
-                        onTap: () =>
-                            pushNewScreen(context, screen: AddressScreen()),
-                        title: const Text('Address'),
-                        trailing: const Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          size: 14,
-                        ),
-                      ),
                     ],
                   ),
                 ),

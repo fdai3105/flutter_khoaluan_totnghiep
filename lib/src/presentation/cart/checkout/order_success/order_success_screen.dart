@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
 import '../../../../configs/configs.dart';
-import '../../../../utils/utils.dart';
 
 class OrderSuccessScreen extends StatelessWidget {
   @override
@@ -50,7 +50,8 @@ class OrderSuccessScreen extends StatelessWidget {
               SizedBox(
                 width: 200,
                 child: OutlinedButton(
-                  onPressed: () => Navigator.popUntil(context, ModalRoute.withName('/')),
+                  onPressed: () => Navigator.popUntil(
+                      context, ModalRoute.withName(Routes.home)),
                   style: OutlinedButton.styleFrom(
                     primary: AppColors.primary,
                     padding: const EdgeInsets.symmetric(vertical: 16),

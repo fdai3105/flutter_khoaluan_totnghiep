@@ -138,12 +138,15 @@ class CheckoutScreen extends StatelessWidget {
       );
     }
     return ListTile(
-      onTap: () async {
-        final id = await pushNewScreen(
+      onTap: () {
+        pushNewScreen(
           context,
           screen: SelectAddressScreen(selected: vm.selectedAddress),
-        ).then((value) => vm.init());
-        vm.selectedAddress = id;
+        ).then((value) {
+          vm
+            ..selectedAddress = value
+            ..init();
+        });
       },
       title: Row(
         children: const [

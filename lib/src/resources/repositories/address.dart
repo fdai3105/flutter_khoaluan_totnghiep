@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:dio/dio.dart';
-import '../../utils/shared_pref.dart';
 import '../../configs/configs.dart';
 import '../resources.dart';
 

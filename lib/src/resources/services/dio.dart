@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
+import '../../utils/utils.dart';
 import '../../configs/configs.dart';
 
 class DioService extends DioForNative {

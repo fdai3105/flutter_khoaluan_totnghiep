@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/order.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/resources.dart';
+import '../../resources/resources.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../presentation.dart';

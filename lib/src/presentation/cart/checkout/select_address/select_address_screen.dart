@@ -43,19 +43,21 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
         child: FutureBuilder(
           future: AddressRepository().getAddress(SharedPref.getToken()),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final data = Address.fromJson(snapshot.data.data);
-              return ListView.builder(
-                itemCount: data.data.length,
-                itemBuilder: (context, index) {
-                  final item = data.data[index];
-                  return _item(context, item);
-                },
-              );
-            } else if (!snapshot.hasData) {
-              return const Center(child: Text('Empty'));
-            } else {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
+            } else {
+              if (snapshot.hasData) {
+                final data = Address.fromJson(snapshot.data.data);
+                return ListView.builder(
+                  itemCount: data.data.length,
+                  itemBuilder: (context, index) {
+                    final item = data.data[index];
+                    return _item(context, item);
+                  },
+                );
+              } else {
+                return const Center(child: Text('Empty'));
+              }
             }
           },
         ),

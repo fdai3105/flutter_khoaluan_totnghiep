@@ -10,6 +10,7 @@ class AppEndpoint {
   static const String forgotPassword = 'password/email';
   static const String sendVerifyMail = 'resend-email';
   static const String editUser = 'user-edit';
+  static const String hasVerifyEmail = 'has-verified-email';
 
   ///
   static const String getAddress = 'address';

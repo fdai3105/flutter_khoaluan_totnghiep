@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../base/base.dart';
 import 'order.dart';
 import '../../resources/repositories/order.dart';
@@ -28,9 +29,16 @@ class OrderScreen extends StatelessWidget {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('#' + item.id.toString()),
-                        Text(item.item.toString() + ' items'),
+                        Text('#${item.id}'),
+                        Text('${item.item} items'),
                         Text(item.total.toString()),
+                        Text(item.status),
+                        Row(
+                          children: [
+                            const Text('Order time: '),
+                            Text( DateFormat('dd-MM-yyyy').add_jm().format(item.createdAt)),
+                          ],
+                        ),
                       ],
                     ),
                   );

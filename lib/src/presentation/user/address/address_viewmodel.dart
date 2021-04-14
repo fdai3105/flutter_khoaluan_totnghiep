@@ -1,8 +1,10 @@
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../resources/repositories/address.dart';
 import '../../../utils/shared_pref.dart';
-import '../../../resources/models/models.dart';
+import '../../../resources/resources.dart';
 import '../../base/base.dart';
+import '../../presentation.dart';
 
 class AddressViewModel extends BaseViewModel {
   final AddressRepository addressRepository;
@@ -28,6 +30,17 @@ class AddressViewModel extends BaseViewModel {
     }
 
     isLoading = false;
+  }
+
+  Future toAddAddress() async {
+    final dl = DialogLoading.of(context)..show();
+    final isVerifiedEmail = await AuthRepository.hasVerifiedEmail();
+    dl.hide();
+
+    await pushNewScreen(
+      context,
+      screen: isVerifiedEmail ? AddAddressScreen() : ResendMailScreen(),
+    ).then((value) => init());
   }
 
   @override

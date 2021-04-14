@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../../resources/resources.dart';
@@ -130,7 +128,9 @@ class EditAddressViewModel extends BaseViewModel {
     if (repo.statusCode == 200) {
       Navigator.pop(context);
     } else {
-      Get.rawSnackbar(message: 'Something error, please try again.isBlank');
+      print(repo.data);
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Something error, please try again')));
     }
   }
 

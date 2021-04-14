@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
+import '../../../configs/configs.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../resources/repositories/repositories.dart';
 import '../../presentation.dart';
@@ -23,12 +23,7 @@ class AddressScreen extends StatelessWidget {
                   actions: [
                     IconButton(
                       icon: const Icon(Icons.add_outlined),
-                      onPressed: () {
-                        pushNewScreen(
-                          context,
-                          screen: AddAddressScreen(),
-                        ).then((value) => vm.init());
-                      },
+                      onPressed: () => vm.toAddAddress(),
                     ),
                   ],
                 ),
@@ -45,8 +40,10 @@ class AddressScreen extends StatelessWidget {
     if (vm.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
-    if (vm.address == null) {
-      return const Text('Nothing in here, please add your address');
+    if (vm.address.data.isEmpty) {
+      return const Center(
+        child: Text('Nothing in here, please add your address'),
+      );
     }
     return RefreshIndicator(
       onRefresh: () async {

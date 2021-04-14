@@ -1,4 +1,5 @@
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../utils/utils.dart';
 import '../../../resources/resources.dart';
@@ -20,6 +21,16 @@ class UserTabViewModel extends BaseViewModel {
     user = SharedPref.getUser();
 
     isLoading = false;
+  }
+
+  Future toOrderScreen() async {
+    final isVerifiedEmail = await AuthRepository.hasVerifiedEmail();
+
+    await pushNewScreen(
+      context,
+      screen: isVerifiedEmail ? OrderScreen() : ResendMailScreen(),
+      withNavBar: false,
+    );
   }
 
   Future logout() async {

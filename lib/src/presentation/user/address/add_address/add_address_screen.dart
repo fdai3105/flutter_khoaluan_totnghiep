@@ -60,26 +60,20 @@ class AddAddressScreen extends StatelessWidget {
                         )
                       : Text(vm.wardName),
                 ),
-                Padding(
-                  padding: AppStyles.paddingBody,
-                  child: TextFormField(
-                    onChanged: (value) => vm.address = value,
-                    decoration: const InputDecoration(hintText: 'Address'),
-                  ),
+                const SizedBox(height: 10),
+                WidgetTextField(
+                  onChanged: (value) => vm.address = value,
+                  hint: 'Address',
                 ),
-                Padding(
-                  padding: AppStyles.paddingBody,
-                  child: TextFormField(
-                    onChanged: (value) => vm.name = value,
-                    decoration: const InputDecoration(hintText: 'Name'),
-                  ),
+                const SizedBox(height: 10),
+                WidgetTextField(
+                  onChanged: (value) => vm.name = value,
+                  hint: 'Name',
                 ),
-                Padding(
-                  padding: AppStyles.paddingBody,
-                  child: TextFormField(
-                    onChanged: (value) => vm.phone = value,
-                    decoration: const InputDecoration(hintText: 'Phone'),
-                  ),
+                const SizedBox(height: 10),
+                WidgetTextField(
+                  onChanged: (value) => vm.phone = value,
+                  hint: 'Phone',
                 ),
               ],
             );

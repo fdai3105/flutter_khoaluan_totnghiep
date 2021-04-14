@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:shimmer/shimmer.dart';
-import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
 

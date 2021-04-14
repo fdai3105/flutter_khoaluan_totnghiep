@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'src/configs/configs.dart';
 import 'src/utils/utils.dart';
@@ -16,7 +15,7 @@ Future main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -26,6 +25,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: DashboardScreen(),
+      initialRoute: Routes.home,
       routes: Routes.routes,
     );
   }
