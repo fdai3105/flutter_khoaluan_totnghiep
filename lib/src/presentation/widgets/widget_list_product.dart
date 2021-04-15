@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/formats.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../utils/utils.dart';
 import '../../configs/configs.dart';
 import '../../resources/resources.dart';
 import '../presentation.dart';

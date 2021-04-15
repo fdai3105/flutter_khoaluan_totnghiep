@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/formats.dart';
+import '../../../configs/configs.dart';
+import '../../../utils/utils.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
 
@@ -62,6 +60,7 @@ class OrderDetailScreen extends StatelessWidget {
             ],
           ),
         ),
+        const Divider(),
         const SizedBox(height: 10),
         ListView.builder(
           padding: AppStyles.paddingBody,
@@ -69,54 +68,57 @@ class OrderDetailScreen extends StatelessWidget {
           itemCount: order.orderDetail.length,
           itemBuilder: (context, index) {
             final item = order.orderDetail[index];
-            return Row(
-              children: [
-                Column(
-                  children: [
-                    SizedBox(
-                      height: 60,
-                      width: 60,
-                      child: ClipRRect(
-                        borderRadius: AppStyles.radiusNormal,
-                        child: item.product.images.isEmpty
-                            ? Image.asset('assets/images/placeholder.jpg')
-                            : Image.network(
-                                AppEndpoint.domain +
-                                    item.product.images.first.image,
-                                fit: BoxFit.cover,
-                              ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            return Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                children: [
+                  Column(
                     children: [
-                      Text(
-                        item.product.name,
-                        style: const TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            Formats.money(item.product.price),
-                            style: const TextStyle(color: AppColors.dark45),
-                          ),
-                          Text(
-                            'x${item.quantity}',
-                            style: const TextStyle(color: AppColors.dark45),
-                          ),
-                        ],
+                      SizedBox(
+                        height: 60,
+                        width: 60,
+                        child: ClipRRect(
+                          borderRadius: AppStyles.radiusNormal,
+                          child: item.product.images.isEmpty
+                              ? Image.asset('assets/images/placeholder.jpg')
+                              : Image.network(
+                                  AppEndpoint.domain +
+                                      item.product.images.first.image,
+                                  fit: BoxFit.cover,
+                                ),
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          item.product.name,
+                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              Formats.money(item.product.price),
+                              style: const TextStyle(color: AppColors.dark45),
+                            ),
+                            Text(
+                              'x${item.quantity}',
+                              style: const TextStyle(color: AppColors.dark45),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             );
           },
         ),

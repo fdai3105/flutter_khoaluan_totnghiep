@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/routers.dart';
+import '../../../../utils/utils.dart';
 import '../../../../configs/configs.dart';
 
 class OrderSuccessScreen extends StatelessWidget {

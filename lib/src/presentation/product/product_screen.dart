@@ -3,10 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/formats.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
+import '../../utils/utils.dart';
 import '../../configs/configs.dart';
 import '../../resources/resources.dart';
 import '../base/base.dart';

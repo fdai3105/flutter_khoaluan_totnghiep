@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/constants/constants.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import '../../configs/configs.dart';
 import '../../utils/formats.dart';
 import '../presentation.dart';
 import '../../resources/resources.dart';
