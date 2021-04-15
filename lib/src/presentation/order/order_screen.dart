@@ -12,10 +12,10 @@ class OrderScreen extends StatelessWidget {
       length: 5,
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar:  WidgetAppBar(
+        appBar: WidgetAppBar(
           title: 'My order',
           bottom: TabBar(
-            tabs:  const [
+            tabs: const [
               Tab(text: 'All'),
               Tab(text: 'Pending'),
               Tab(text: 'To Receive'),
@@ -54,7 +54,7 @@ class OrderScreen extends StatelessWidget {
   }
 
   Widget _listView(BuildContext context, Order order) {
-    if(order.data.isEmpty) {
+    if (order.data.isEmpty) {
       return const Center(child: Text('No orders yet'));
     }
     return ListView.builder(
@@ -64,7 +64,7 @@ class OrderScreen extends StatelessWidget {
         return ListTile(
           onTap: () => pushNewScreen(
             context,
-            screen: OrderDetailScreen(id: item.id),
+            screen: OrderDetailScreen(order: item),
           ),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
