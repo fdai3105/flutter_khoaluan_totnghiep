@@ -24,7 +24,9 @@ class UserTabViewModel extends BaseViewModel {
   }
 
   Future toOrderScreen() async {
+    final dl = DialogLoading.of(context)..show();
     final isVerifiedEmail = await AuthRepository.hasVerifiedEmail();
+    dl.hide();
 
     await pushNewScreen(
       context,

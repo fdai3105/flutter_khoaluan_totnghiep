@@ -9,17 +9,21 @@ class DialogLoading {
 
   DialogLoading._create(this._context);
 
+
+  BuildContext _builderContext;
+
   void show() {
     showDialog(
         context: _context,
         barrierDismissible: false,
         builder: (context) {
+          _builderContext = context;
           return _loading();
         });
   }
 
   void hide() {
-    Navigator.pop(_context);
+    Navigator.pop(_builderContext);
   }
 
   Widget _loading() {

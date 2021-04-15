@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/formats.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../configs/configs.dart';
 import '../../resources/resources.dart';
@@ -151,7 +152,7 @@ class WidgetListProduct extends StatelessWidget {
                           style: nameStyle,
                         ),
                         const SizedBox(height: 4),
-                        Text('${item.price} vnd', style: priceStyle),
+                        Text(Formats.money(item.price), style: priceStyle),
                       ],
                     ),
                   ),
@@ -271,10 +272,7 @@ class WidgetListProduct extends StatelessWidget {
                             style: nameStyle,
                           ),
                           const SizedBox(height: 2),
-                          Text(
-                            '${item.price} vnd',
-                            style: priceStyle,
-                          ),
+                          Text(Formats.money(item.price), style: priceStyle),
                         ],
                       ),
                     ),

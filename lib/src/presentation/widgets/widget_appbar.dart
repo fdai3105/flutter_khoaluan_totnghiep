@@ -5,6 +5,7 @@ class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget leading;
   final bool centerTitle;
   final List<Widget> actions;
+  final PreferredSizeWidget bottom;
 
   const WidgetAppBar({
     Key key,
@@ -12,6 +13,7 @@ class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leading,
     this.centerTitle = true,
     this.actions,
+    this.bottom,
   }) : super(key: key);
 
   @override
@@ -29,9 +31,12 @@ class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       iconTheme: const IconThemeData(color: Colors.grey),
       actions: actions,
+      bottom: bottom,
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize =>
+      Size.fromHeight(
+          kToolbarHeight + (bottom?.preferredSize?.height ?? 0));
 }

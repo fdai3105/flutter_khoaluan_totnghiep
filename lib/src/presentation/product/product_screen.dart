@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/formats.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../../configs/configs.dart';
@@ -90,7 +91,7 @@ class ProductScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          '﹩${NumberFormat().format(vm.product.data.price)}',
+                                          Formats.money(vm.product.data.price),
                                           style: GoogleFonts.inter(
                                             color: AppColors.dark,
                                             fontSize: 18,
