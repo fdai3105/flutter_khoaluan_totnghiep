@@ -39,6 +39,7 @@ dependencies:
   timeago: ^3.0.2
   intl: ^0.17.0
   flutter_phoenix: ^1.0.0
+  percent_indicator: ^3.0.1
 
   # states
   provider: ^5.0.0

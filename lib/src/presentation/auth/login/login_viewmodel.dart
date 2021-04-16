@@ -16,6 +16,12 @@ class LoginViewModel extends BaseViewModel {
   }
 
   Future<void> login(String email, String password) async {
+    if (email == null || password == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please check your input')));
+      return;
+    }
+
     final dlLoading = DialogLoading.of(context)..show();
     final loginResponse = await authRepository.login(email, password);
     dlLoading.hide();
@@ -27,13 +33,6 @@ class LoginViewModel extends BaseViewModel {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(loginResponse.data['message'] ?? "")));
-    }
-    try {
-
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Some thing error, please try again')));
-      print(e.toString());
     }
   }
 }

@@ -13,6 +13,8 @@ class WidgetInput extends StatelessWidget {
   final Icon sufferIcon;
   final String value;
   final bool readOnly;
+  final TextInputType type;
+  final bool isPassword;
 
   const WidgetInput({
     Key key,
@@ -27,6 +29,8 @@ class WidgetInput extends StatelessWidget {
     this.hintStyle,
     this.value,
     this.readOnly = false,
+    this.type,
+    this.isPassword = false,
   }) : super(key: key);
 
   @override
@@ -37,6 +41,7 @@ class WidgetInput extends StatelessWidget {
       child: TextFormField(
         onChanged: onChanged,
         initialValue: value ?? '',
+        keyboardType: type,
         decoration: InputDecoration(
           labelText: hint ?? '',
           labelStyle: hintStyle == null
@@ -54,12 +59,7 @@ class WidgetInput extends StatelessWidget {
           suffixIcon: sufferIcon,
         ),
         readOnly: readOnly,
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'This field is required';
-          }
-          return null;
-        },
+        obscureText: isPassword,
       ),
     );
   }

@@ -62,18 +62,18 @@ class CartViewModel extends BaseViewModel {
     ).show();
   }
 
-  void checkout(String note, int addressID) {
+  Future checkout() async {
+    final dl = DialogLoading.of(context)..show();
+    final isVerified = await AuthRepository.hasVerifiedEmail();
+    dl.hide();
+
     if (SharedPref.getUser() == null) {
-      Navigator.pushNamed(context, Routes.login);
+      await Navigator.pushNamed(context, Routes.login);
     } else {
-      if (SharedPref.getUser().user.emailVerifiedAt == null) {
-        Navigator.pushNamed(context, Routes.resendMail);
-      } else {
-        pushNewScreen(
-          context,
-          screen: CheckoutScreen(carts: carts),
-        );
-      }
+      await pushNewScreen(
+        context,
+        screen: isVerified ? CheckoutScreen(carts: carts) : ResendMailScreen(),
+      );
     }
   }
 

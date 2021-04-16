@@ -13,10 +13,10 @@ class WidgetListHotCategory extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: [
           _item('assets/icons/bed.png', 'Bed'),
-          _item('assets/icons/cabinet.png', 'Cabinet'),
-          _item('assets/icons/cabinet_tivi.png', 'Tivi'),
-          _item('assets/icons/chair.png', 'Chair'),
-          _item('assets/icons/wardrobe.png', 'Wardrobe'),
+          _item('assets/icons/closet.png', 'Cabinet'),
+          _item('assets/icons/television.png', 'Tivi'),
+          _item('assets/icons/sofa.png', 'Chair'),
+          _item('assets/icons/cupboard.png', 'Wardrobe'),
         ],
       ),
     );
@@ -32,8 +32,11 @@ class WidgetListHotCategory extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Image.asset(
-            image,
+          Padding(
+            padding: const EdgeInsets.all(4),
+            child: Image.asset(
+              image,
+            ),
           ),
           const SizedBox(width: 6),
           Text(

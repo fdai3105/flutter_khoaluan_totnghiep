@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/utils.dart';
 import '../../base/base.dart';
@@ -9,7 +10,6 @@ import '../../../configs/configs.dart';
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     String email;
     String password;
 
@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
       ),
       body: SafeArea(
         top: false,
-        child: BaseWidget(
+        child: BaseWidget<LoginViewModel>(
           viewModel: LoginViewModel(authRepository: AuthRepository()),
           onViewModelReady: (vm) {
             vm.init();
@@ -33,72 +33,57 @@ class LoginScreen extends StatelessWidget {
                 Flexible(
                   flex: 1,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: Form(
-                      key: _formKey,
-                      child: Flex(
-                        direction: Axis.vertical,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          WidgetInput(
-                            onChanged: (value) => {email = value},
-                            hint: 'Email',
-                            focusColor: Colors.black54,
-                            prefixIcon: const Icon(Icons.email_outlined),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 20),
+                        const Text(
+                          'Welcome back',
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const SizedBox(height: 20),
-                          WidgetInput(
-                            onChanged: (value) => {password = value},
-                            hint: 'Password',
-                            focusColor: Colors.black54,
-                            prefixIcon: const Icon(Icons.lock_outline),
-                          ),
-                          const SizedBox(height: 20),
-                          Align(
-                            alignment: Alignment.center,
-                            child: TextButton(
-                              onPressed: () {
-                                if (_formKey.currentState.validate()) {
-                                  vm.login(email, password);
-                                }
-                              },
-                              style: TextButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 14,
-                                ),
-                                backgroundColor: AppColors.primary,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: AppStyles.radiusNormal,
-                                ),
-                              ),
-                              child: const SizedBox(
-                                width: double.infinity,
-                                child: Text(
-                                  'Login',
-                                  style: TextStyle(color: Colors.white),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
+                        ),
+                        const SizedBox(height: 4),
+                        const Text(
+                          'Log in to your account',
+                        ),
+                        const SizedBox(height: 20),
+                        WidgetInput(
+                          onChanged: (value) => {email = value},
+                          hint: 'Email',
+                          focusColor: Colors.black54,
+                          type: TextInputType.emailAddress,
+                        ),
+                        const SizedBox(height: 20),
+                        WidgetInput(
+                          onChanged: (value) => {password = value},
+                          hint: 'Password',
+                          focusColor: Colors.black54,
+                          isPassword: true,
+                        ),
+                        const SizedBox(height: 20),
+                        WidgetButton(
+                          onTap: () => vm.login(email, password),
+                          text: 'Login',
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, Routes.forgot);
+                          },
+                          style: ButtonStyle(
+                              overlayColor: MaterialStateProperty.all(
+                                  Colors.transparent)),
+                          child: const Text(
+                            'Forgot password?',
+                            style: TextStyle(
+                              color: AppColors.dark45,
                             ),
                           ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, Routes.forgot);
-                            },
-                            style: ButtonStyle(
-                                overlayColor: MaterialStateProperty.all(
-                                    Colors.transparent)),
-                            child: const Text(
-                              'Forgot password?',
-                              style: TextStyle(
-                                color: AppColors.dark45,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

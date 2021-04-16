@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../configs/configs.dart';
 import '../../presentation.dart';
@@ -40,14 +41,22 @@ class UserTab extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               WidgetTile(
-                onTap: () => vm.toOrderScreen(),
+                onTap: () => pushNewScreen(
+                  context,
+                  screen: SharedPref.getUser() == null
+                      ? LoginScreen()
+                      : OrderScreen(),
+                  withNavBar: false,
+                ),
                 title: 'My orders',
               ),
               WidgetTile(
                 title: 'Address',
                 onTap: () => pushNewScreen(
                   context,
-                  screen: AddressScreen(),
+                  screen: SharedPref.getUser() == null
+                      ? LoginScreen()
+                      : AddressScreen(),
                   withNavBar: false,
                 ),
               ),

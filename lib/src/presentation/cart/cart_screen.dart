@@ -166,7 +166,7 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => vm.checkout('note', 1),
+                  onTap: () => vm.checkout(),
                   child: Container(
                     height: 50,
                     margin: const EdgeInsets.all(10),
