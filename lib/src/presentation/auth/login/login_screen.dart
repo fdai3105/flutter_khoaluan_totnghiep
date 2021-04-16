@@ -54,15 +54,11 @@ class LoginScreen extends StatelessWidget {
                         WidgetInput(
                           onChanged: (value) => {email = value},
                           hint: 'Email',
-                          focusColor: Colors.black54,
-                          type: TextInputType.emailAddress,
                         ),
                         const SizedBox(height: 20),
                         WidgetInput(
                           onChanged: (value) => {password = value},
                           hint: 'Password',
-                          focusColor: Colors.black54,
-                          isPassword: true,
                         ),
                         const SizedBox(height: 20),
                         WidgetButton(

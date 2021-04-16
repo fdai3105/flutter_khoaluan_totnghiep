@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
 import 'package:rxdart/rxdart.dart';
+import '../../../utils/utils.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
 

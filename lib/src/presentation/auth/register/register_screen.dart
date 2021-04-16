@@ -89,14 +89,14 @@ class RegisterScreen extends StatelessWidget {
         const SizedBox(height: 30),
         Row(
           children: [
-            WidgetTextField2(
+            WidgetInput(
               onChanged: (value) {
                 vm.name = value;
               },
               hint: 'First name',
             ),
             const SizedBox(width: 20),
-            WidgetTextField2(
+            WidgetInput(
               onChanged: (value) {
                 vm.name += value;
               },
@@ -128,7 +128,7 @@ class RegisterScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 30),
-        WidgetTextField2(onChanged: (value) => vm.email = value, hint: 'Email'),
+        WidgetInput(onChanged: (value) => vm.email = value, hint: 'Email'),
       ],
     );
   }
@@ -153,7 +153,7 @@ class RegisterScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 30),
-        WidgetTextField2(
+        WidgetInput(
             onChanged: (value) => vm.phone = value, hint: 'Mobile number'),
       ],
     );
@@ -219,10 +219,10 @@ class RegisterScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 30),
-        WidgetTextField2(
+        WidgetInput(
             onChanged: (value) => vm.password = value, hint: 'Password'),
         const SizedBox(height: 10),
-        WidgetTextField2(
+        WidgetInput(
             onChanged: (value) => vm.passwordConfirm = value,
             hint: 'Confirm Password'),
       ],
@@ -254,44 +254,3 @@ class RegisterScreen extends StatelessWidget {
   }
 }
 
-class WidgetTextField2 extends StatelessWidget {
-  final String hint;
-  final Function(String) onChanged;
-
-  const WidgetTextField2({
-    Key key,
-    this.hint,
-    this.onChanged,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Flexible(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.grey.shade100,
-          borderRadius: AppStyles.radiusNormal,
-        ),
-        child: TextFormField(
-          onChanged: onChanged,
-          decoration: InputDecoration(
-            hintText: hint ?? '',
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 14,
-              horizontal: 14,
-            ),
-            isDense: true,
-            enabledBorder: InputBorder.none,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: AppStyles.radiusNormal,
-              borderSide: const BorderSide(
-                color: AppColors.primary,
-                width: 2,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
