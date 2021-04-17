@@ -35,33 +35,35 @@ class UserScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                Padding(
-                  padding: AppStyles.paddingBody,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 20),
-                      _avatar(context),
-                      const SizedBox(height: 30),
-                      WidgetInput(
-                        hint: 'Name',
-                        value: user.name,
-                        onChanged: (value) => name = value,
-                      ),
-                      const SizedBox(height: 20),
-                      WidgetInput(
-                        hint: 'Email',
-                        value: user.email,
-                        readOnly: true,
-                      ),
-                      const SizedBox(height: 20),
-                      WidgetInput(
-                        hint: 'Phone number',
-                        value: user.phone,
-                        readOnly: true,
-                      ),
-                      const SizedBox(height: 10),
-                    ],
+                Expanded(
+                  child: Padding(
+                    padding: AppStyles.paddingBody,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 20),
+                        _avatar(context),
+                        const SizedBox(height: 30),
+                        WidgetInput(
+                          hint: 'Name',
+                          value: user.name,
+                          onChanged: (value) => name = value,
+                        ),
+                        const SizedBox(height: 20),
+                        WidgetInput(
+                          hint: 'Email',
+                          value: user.email,
+                          readOnly: true,
+                        ),
+                        const SizedBox(height: 20),
+                        WidgetInput(
+                          hint: 'Phone number',
+                          value: user.phone,
+                          readOnly: true,
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                    ),
                   ),
                 ),
               ],

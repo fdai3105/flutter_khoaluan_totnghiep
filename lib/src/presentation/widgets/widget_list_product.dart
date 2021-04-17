@@ -239,7 +239,7 @@ class WidgetListProduct extends StatelessWidget {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             childAspectRatio: verticalRatio,
             crossAxisCount: 2,
-            mainAxisSpacing: 20,
+            mainAxisSpacing: 10,
             crossAxisSpacing: 20,
           ),
           itemCount: product.data.length,
@@ -248,6 +248,7 @@ class WidgetListProduct extends StatelessWidget {
             return GestureDetector(
               onTap: () => onTap(item),
               child: Container(
+                margin: EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: AppStyles.radiusNormal,

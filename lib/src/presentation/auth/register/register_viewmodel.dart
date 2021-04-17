@@ -87,7 +87,7 @@ class RegisterViewModel extends BaseViewModel {
 
   double percent() {
     var percent = 0.0;
-    final t = 1 / RegisterScreen().bodies(context, this).length;
+    final t = 1 / RegisterScreen().bodies(context,  this).length;
     percent = t * pageIndex;
     return percent + t;
   }

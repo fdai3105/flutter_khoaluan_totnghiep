@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
@@ -30,24 +31,19 @@ class SubCategoryScreen extends StatelessWidget {
               if(vm.products.data.isEmpty) {
                 return const Center(child: Text('Empty :('));
               }
-              return SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    WidgetListProduct(
-                      isVertical: true,
-                      showSeeAll: false,
-                      product: vm.products,
-                      onTap: (item) {
-                        pushNewScreen(
-                          context,
-                          screen: ProductScreen(id: item.id),
-                          withNavBar: false,
-                        );
-                      },
-                    ),
-                  ],
-                ),
+              return WidgetListProduct(
+                verticalShrinkWrap: true,
+                isVertical: true,
+                showSeeAll: false,
+                padding: AppStyles.paddingBody,
+                product: vm.products,
+                onTap: (item) {
+                  pushNewScreen(
+                    context,
+                    screen: ProductScreen(id: item.id),
+                    withNavBar: false,
+                  );
+                },
               );
             }
           },

@@ -10,32 +10,31 @@ class ForgotScreen extends StatelessWidget {
     String email;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Find Your Account'),
-        backgroundColor: AppColors.primary,
-      ),
+      backgroundColor: Colors.white,
+      appBar: const WidgetAppBar(title: 'Find your account'),
       body: SafeArea(
         child: BaseWidget<ForgotViewModel>(
           viewModel: ForgotViewModel(authRepository: AuthRepository()),
           onViewModelReady: (vm) {},
           builder: (context, vm, child) {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 20),
                   const Text(
                     'Enter Your Email',
                     style: TextStyle(fontSize: 16),
                   ),
-                  const SizedBox(height: 10),
-                  TextFormField(
+                  const SizedBox(height: 20),
+                  WidgetInput(
                     onChanged: (value) => email = value,
-                    decoration: const InputDecoration(hintText: 'Email'),
+                    hint: 'Email',
                   ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {
+                  const SizedBox(height: 20),
+                  WidgetButton(
+                    onTap: () {
                       if (email != null) {
                         final exp = RegExp(RegexPattern.email);
                         if (exp.hasMatch(email)) {
@@ -43,16 +42,7 @@ class ForgotScreen extends StatelessWidget {
                         }
                       }
                     },
-                    style: ElevatedButton.styleFrom(
-                      primary: AppColors.primary,
-                    ),
-                    child: const SizedBox(
-                      width: double.infinity,
-                      child: Text(
-                        'Find Your Account',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                    text: 'Find Your Account',
                   ),
                 ],
               ),
