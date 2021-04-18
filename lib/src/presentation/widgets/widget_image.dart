@@ -20,6 +20,7 @@ class WidgetImage extends StatelessWidget {
     } else {
       return FadeInImage.assetNetwork(
         image: AppEndpoint.domain + image,
+        height: 106,
         width: double.infinity,
         fit: BoxFit.cover,
         placeholder: 'assets/images/placeholder.jpg',
