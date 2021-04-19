@@ -73,7 +73,10 @@ class HomeTab extends StatelessWidget {
                     isVertical: false,
                     label: 'Hot sale 🔥',
                     padding: AppStyles.paddingBody,
-                    seeAll: () {},
+                    seeAll: () => pushNewScreen(
+                      context,
+                      screen: SaleProductScreen(),
+                    ),
                     onTap: (item) {
                       pushNewScreen(
                         context,

@@ -93,7 +93,7 @@ class HomeViewModel extends BaseViewModel {
     if (newArrivalsResponse.statusCode == 200) {
       newArrivals = Products.fromJson(newArrivalsResponse.data);
     }
-    final saleResponse = await productResponse.getSale();
+    final saleResponse = await productResponse.getSale(1);
     if (saleResponse.statusCode == 200) {
       sale = Products.fromJson(saleResponse.data);
     }

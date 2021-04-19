@@ -43,9 +43,12 @@ class ProductResponse {
     }
   }
 
-  Future<Response> getSale() async {
+  Future<Response> getSale(int page) async {
+    final params = {
+      'page': page ?? 1,
+    };
     try {
-      final products = DioService().get(AppEndpoint.getSaleProducts);
+      final products = DioService().get(AppEndpoint.getSaleProducts,queryParameters: params);
       return products;
     } on DioError catch (e) {
       return e.response;

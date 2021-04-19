@@ -274,7 +274,7 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
               return Image.network(
                 AppEndpoint.domain + e.image,
                 width: double.infinity,
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.fitHeight,
               );
             }).toList(),
             options: CarouselOptions(

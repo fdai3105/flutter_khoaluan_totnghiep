@@ -12,5 +12,5 @@ export 'product/product.dart';
 export 'user/user.dart';
 export 'search/search.dart';
 export 'order/order.dart';
-
+export 'product_sale/sale.dart';
 export 'widgets/widgets.dart';

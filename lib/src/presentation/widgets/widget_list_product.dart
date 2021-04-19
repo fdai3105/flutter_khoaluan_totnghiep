@@ -19,7 +19,7 @@ class WidgetListProduct extends StatelessWidget {
 
   const WidgetListProduct({
     Key key,
-    this.product,
+    @required this.product,
     this.label,
     this.padding = const EdgeInsets.all(0),
     this.seeAll,
@@ -166,28 +166,6 @@ class WidgetListProduct extends StatelessWidget {
     );
   }
 
-  Widget _money(int discount, int price) {
-    if (discount == 0) {
-      return Text(Formats.money(price));
-    } else {
-      final p = price * ((100 - discount) / 100);
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text(Formats.money(p),style: priceStyle),
-          const SizedBox(width: 4),
-          Text(
-            Formats.money(price),
-            style: priceStyle.copyWith(
-              fontSize: 10,
-              decoration: TextDecoration.lineThrough,
-            ),
-          ),
-        ],
-      );
-    }
-  }
-
   Widget _horizonShimmer(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
@@ -296,7 +274,7 @@ class WidgetListProduct extends StatelessWidget {
                             style: nameStyle,
                           ),
                           const SizedBox(height: 2),
-                          Text(Formats.money(item.price), style: priceStyle),
+                          _money(item.discount, item.price),
                         ],
                       ),
                     ),
@@ -383,7 +361,7 @@ class WidgetListProduct extends StatelessWidget {
             const SizedBox()
           else
             GestureDetector(
-              onTap: () => seeAll,
+              onTap: seeAll,
               child: const Text(
                 'See all',
                 style: buttonTextStyle,
@@ -399,6 +377,34 @@ class WidgetListProduct extends StatelessWidget {
       borderRadius: BorderRadius.vertical(top: AppStyles.radiusNormal.topRight),
       child: WidgetImage(image: images.isEmpty ? null : images.first.image),
     );
+  }
+
+  Widget _money(int discount, int price) {
+    if (discount == 0) {
+      return Align(
+        alignment: Alignment.centerRight,
+        child: Text(
+          Formats.money(price),
+          style: priceStyle,
+        ),
+      );
+    } else {
+      final p = price * ((100 - discount) / 100);
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(Formats.money(p), style: priceStyle),
+          const SizedBox(width: 4),
+          Text(
+            Formats.money(price),
+            style: priceStyle.copyWith(
+              fontSize: 10,
+              decoration: TextDecoration.lineThrough,
+            ),
+          ),
+        ],
+      );
+    }
   }
 
   Widget _empty(BuildContext context) {
