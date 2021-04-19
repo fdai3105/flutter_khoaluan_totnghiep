@@ -152,7 +152,11 @@ class WidgetListProduct extends StatelessWidget {
                           style: nameStyle,
                         ),
                         const SizedBox(height: 4),
-                        Text(Formats.money(item.price), style: priceStyle),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(Formats.money(item.price),
+                              style: priceStyle),
+                        ),
                       ],
                     ),
                   ),
@@ -248,7 +252,7 @@ class WidgetListProduct extends StatelessWidget {
             return GestureDetector(
               onTap: () => onTap(item),
               child: Container(
-                margin: EdgeInsets.only(bottom: 10),
+                margin: const EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: AppStyles.radiusNormal,

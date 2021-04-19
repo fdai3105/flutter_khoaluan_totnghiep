@@ -59,7 +59,7 @@ class WidgetListCategory extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Flexible(child: WidgetImage(image: category.image)),
+          SizedBox(height: 106,child: WidgetImage(image: category.image)),
           const SizedBox(height: 4),
           Text(
             category.name ?? '',

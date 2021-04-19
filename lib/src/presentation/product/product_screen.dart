@@ -273,8 +273,8 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
             items: widget.images.map((e) {
               return Image.network(
                 AppEndpoint.domain + e.image,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.contain,
+                width: double.infinity,
+                fit: BoxFit.fitWidth,
               );
             }).toList(),
             options: CarouselOptions(

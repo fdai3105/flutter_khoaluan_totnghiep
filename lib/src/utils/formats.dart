@@ -8,6 +8,6 @@ class Formats {
 
   static String money(int value) {
     if (value == null) return '';
-    return NumberFormat().format(value);
+    return '${NumberFormat().format(value)}\$';
   }
 }
