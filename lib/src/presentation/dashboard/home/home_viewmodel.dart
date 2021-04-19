@@ -85,11 +85,11 @@ class HomeViewModel extends BaseViewModel {
       });
     loadingMore = false;
     _user.add(SharedPref.getUser());
-    final popularResponse = await productResponse.getPopular();
+    final popularResponse = await productResponse.getPopular(1);
     if (popularResponse.statusCode == 200) {
       popular = Products.fromJson(popularResponse.data);
     }
-    final newArrivalsResponse = await productResponse.getNew();
+    final newArrivalsResponse = await productResponse.getNew(1);
     if (newArrivalsResponse.statusCode == 200) {
       newArrivals = Products.fromJson(newArrivalsResponse.data);
     }

@@ -25,18 +25,26 @@ class ProductResponse {
     }
   }
 
-  Future<Response> getPopular() async {
+  Future<Response> getPopular(int page) async {
     try {
-      final products = DioService().get(AppEndpoint.getPopularProducts);
+      final params = {
+        'page': page ?? 1,
+      };
+      final products = DioService()
+          .get(AppEndpoint.getPopularProducts, queryParameters: params);
       return products;
     } on DioError catch (e) {
       return e.response;
     }
   }
 
-  Future<Response> getNew() async {
+  Future<Response> getNew(int page) async {
     try {
-      final products = DioService().get(AppEndpoint.getNewProducts);
+      final params = {
+        'page': page ?? 1,
+      };
+      final products =
+          DioService().get(AppEndpoint.getNewProducts, queryParameters: params);
       return products;
     } on DioError catch (e) {
       return e.response;
@@ -48,7 +56,8 @@ class ProductResponse {
       'page': page ?? 1,
     };
     try {
-      final products = DioService().get(AppEndpoint.getSaleProducts,queryParameters: params);
+      final products = DioService()
+          .get(AppEndpoint.getSaleProducts, queryParameters: params);
       return products;
     } on DioError catch (e) {
       return e.response;

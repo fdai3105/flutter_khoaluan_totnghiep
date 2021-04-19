@@ -91,7 +91,10 @@ class HomeTab extends StatelessWidget {
                     isVertical: false,
                     label: 'Popular',
                     padding: AppStyles.paddingBody,
-                    seeAll: () {},
+                    seeAll: () => pushNewScreen(
+                      context,
+                      screen: PopularProductsScreen(),
+                    ),
                     onTap: (item) {
                       pushNewScreen(
                         context,
@@ -106,7 +109,10 @@ class HomeTab extends StatelessWidget {
                     isVertical: false,
                     label: 'New Arrivals',
                     padding: AppStyles.paddingBody,
-                    seeAll: () {},
+                    seeAll: () => pushNewScreen(
+                      context,
+                      screen: NewProductsScreen(),
+                    ),
                     onTap: (item) {
                       pushNewScreen(
                         context,
