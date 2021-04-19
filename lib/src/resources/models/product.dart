@@ -78,6 +78,7 @@ class ProductDatum {
   final int stock;
   final int bought;
   final int warranty;
+  final int discount;
   final int rating;
   final double ratingAveraged;
   final BrandDatum brand;
@@ -95,6 +96,7 @@ class ProductDatum {
     this.stock,
     this.bought,
     this.warranty,
+    this.discount,
     this.rating,
     this.ratingAveraged,
     this.brand,
@@ -118,6 +120,7 @@ class ProductDatum {
         stock: json["stock"],
         bought: json["bought"],
         warranty: json["warranty"],
+        discount: json["discount"],
         rating: json["rating"],
         ratingAveraged: json["rating_averaged"] is int
             ? double.parse(json["rating_averaged"].toString())
@@ -140,6 +143,7 @@ class ProductDatum {
         "stock": stock,
         "bought": bought,
         "warranty": warranty,
+        "discount": discount,
         "rating": rating,
         "rating_averaged": ratingAveraged,
         "brand": brand.toJson(),

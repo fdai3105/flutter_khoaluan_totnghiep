@@ -20,6 +20,7 @@ class AppEndpoint {
   static const String getProducts = 'product';
   static const String getNewProducts = 'new-product';
   static const String getPopularProducts = 'popular-product';
+  static const String getSaleProducts = 'sale-product';
   static const String getProductsByParentCategory =
       'product-by-parent-category/';
   static const String getProductsByCategory = 'product-by-category/';

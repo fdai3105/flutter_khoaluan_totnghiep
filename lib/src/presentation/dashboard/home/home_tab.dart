@@ -69,6 +69,21 @@ class HomeTab extends StatelessWidget {
                   const WidgetListHotCategory(),
                   const SizedBox(height: 20),
                   WidgetListProduct(
+                    product: vm.sale,
+                    isVertical: false,
+                    label: 'Hot sale 🔥',
+                    padding: AppStyles.paddingBody,
+                    seeAll: () {},
+                    onTap: (item) {
+                      pushNewScreen(
+                        context,
+                        screen: ProductScreen(id: item.id),
+                        withNavBar: false,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  WidgetListProduct(
                     product: vm.popular,
                     isVertical: false,
                     label: 'Popular',

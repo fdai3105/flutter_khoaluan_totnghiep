@@ -43,6 +43,15 @@ class ProductResponse {
     }
   }
 
+  Future<Response> getSale() async {
+    try {
+      final products = DioService().get(AppEndpoint.getSaleProducts);
+      return products;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
+
   Future<Response> getProductsByParentCategory(int parentId) async {
     try {
       final products = await DioService()

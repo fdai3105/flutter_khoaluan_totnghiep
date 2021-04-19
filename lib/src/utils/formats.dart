@@ -6,8 +6,8 @@ class Formats {
     return DateFormat('dd-MM-yyyy').add_jm().format(dateTime);
   }
 
-  static String money(int value) {
+  static String money(num value) {
     if (value == null) return '';
-    return '${NumberFormat().format(value)}\$';
+    return '\$${NumberFormat().format(value)}';
   }
 }

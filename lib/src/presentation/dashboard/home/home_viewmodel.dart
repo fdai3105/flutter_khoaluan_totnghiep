@@ -17,6 +17,7 @@ class HomeViewModel extends BaseViewModel {
   final _user = BehaviorSubject<User>();
   final _popular = BehaviorSubject<Products>();
   final _newArrivals = BehaviorSubject<Products>();
+  final _sale = BehaviorSubject<Products>();
   final _products = BehaviorSubject<Products>();
   final _scroll = BehaviorSubject<ScrollController>();
   final _loadingMore = BehaviorSubject<bool>();
@@ -65,6 +66,13 @@ class HomeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  Products get sale => _sale.value;
+
+  set sale(Products value) {
+    _sale.add(value);
+    notifyListeners();
+  }
+
   Future init() async {
     isLoading = true;
 
@@ -84,6 +92,10 @@ class HomeViewModel extends BaseViewModel {
     final newArrivalsResponse = await productResponse.getNew();
     if (newArrivalsResponse.statusCode == 200) {
       newArrivals = Products.fromJson(newArrivalsResponse.data);
+    }
+    final saleResponse = await productResponse.getSale();
+    if (saleResponse.statusCode == 200) {
+      sale = Products.fromJson(saleResponse.data);
     }
     final productData = await productResponse.getProducts(_page);
     if (productData.statusCode == 200) {
@@ -113,6 +125,7 @@ class HomeViewModel extends BaseViewModel {
     _user.close();
     _popular.close();
     _newArrivals.close();
+    _sale.close();
     _products.close();
     return super.dispose();
   }

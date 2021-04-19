@@ -43,6 +43,7 @@ class WidgetListProduct extends StatelessWidget {
   ///
   static final TextStyle priceStyle = GoogleFonts.inter(
     color: AppColors.dark,
+    fontWeight: FontWeight.w600,
   );
 
   ///
@@ -152,11 +153,7 @@ class WidgetListProduct extends StatelessWidget {
                           style: nameStyle,
                         ),
                         const SizedBox(height: 4),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(Formats.money(item.price),
-                              style: priceStyle),
-                        ),
+                        _money(item.discount, item.price),
                       ],
                     ),
                   ),
@@ -167,6 +164,28 @@ class WidgetListProduct extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Widget _money(int discount, int price) {
+    if (discount == 0) {
+      return Text(Formats.money(price));
+    } else {
+      final p = price * ((100 - discount) / 100);
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(Formats.money(p),style: priceStyle),
+          const SizedBox(width: 4),
+          Text(
+            Formats.money(price),
+            style: priceStyle.copyWith(
+              fontSize: 10,
+              decoration: TextDecoration.lineThrough,
+            ),
+          ),
+        ],
+      );
+    }
   }
 
   Widget _horizonShimmer(BuildContext context) {
