@@ -29,60 +29,64 @@ class SubCategoryScreen extends StatelessWidget {
             await vm.init(id);
           },
           builder: (context, vm, widget) {
-            if (vm.isLoading) {
-              return WidgetLoading();
-            } else {
-              if (vm.products.data.isEmpty) {
-                return const Center(child: Text('Nothing to show'));
-              }
-              return NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) {
-                  return <Widget>[
-                    SliverAppBar(
-                      expandedHeight: 200,
-                      pinned: true,
-                      backgroundColor: Colors.white,
-                      elevation: 0,
-                      iconTheme: IconThemeData(color: AppColors.dark),
-                      title: Text(
-                        name,
-                        style: TextStyle(color: AppColors.dark),
-                      ),
-                      flexibleSpace: FlexibleSpaceBar(
-                        background: Image.network(
-                          AppEndpoint.domain + image,
-                          fit: BoxFit.cover,
-                        ),
+            return NestedScrollView(
+              headerSliverBuilder: (context, innerBoxIsScrolled) {
+                return <Widget>[
+                  SliverAppBar(
+                    expandedHeight: 200,
+                    pinned: true,
+                    backgroundColor: Colors.white,
+                    elevation: 0,
+                    iconTheme: IconThemeData(color: AppColors.dark),
+                    title: Text(
+                      name,
+                      style: TextStyle(color: AppColors.dark),
+                    ),
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: Image.network(
+                        AppEndpoint.domain + image,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ];
-                },
-                body: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20),
-                      WidgetListProduct(
-                        axis: Axis.vertical,
-                        showSeeAll: false,
-                        padding: AppStyles.paddingBody,
-                        product: vm.products,
-                        onTap: (item) {
-                          pushNewScreen(
-                            context,
-                            screen: ProductScreen(id: item.id),
-                            withNavBar: false,
-                          );
-                        },
-                      ),
-                    ],
                   ),
-                ),
-              );
-            }
+                ];
+              },
+              body: _body(context, vm),
+            );
           },
         ),
       ),
     );
+  }
+
+  Widget _body(BuildContext context, SubCategoryViewModel vm) {
+    if (vm.isLoading) {
+      return WidgetLoading();
+    } else {
+      if (vm.products.data.isEmpty) {
+        return const Center(child: Text('Nothing to show'));
+      }
+      return SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            WidgetListProduct(
+              axis: Axis.vertical,
+              showSeeAll: false,
+              padding: AppStyles.paddingBody,
+              product: vm.products,
+              onTap: (item) {
+                pushNewScreen(
+                  context,
+                  screen: ProductScreen(id: item.id),
+                  withNavBar: false,
+                );
+              },
+            ),
+          ],
+        ),
+      );
+    }
   }
 }
