@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
@@ -57,7 +56,7 @@ class RatingDialog extends StatelessWidget {
             children: [
               Text(
                 vm.sumRating.toString(),
-                style: GoogleFonts.inter(
+                style: const TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
                 ),
@@ -71,8 +70,7 @@ class RatingDialog extends StatelessWidget {
                     initialRating: vm.sumRating,
                     unratedColor: Colors.grey.shade400,
                     itemBuilder: (context, index) {
-                      return Icon(Icons.star_outlined,
-                          color: AppColors.dark);
+                      return Icon(Icons.star_outlined, color: AppColors.dark);
                     },
                     onRatingUpdate: (rating) {},
                   ),
@@ -128,7 +126,7 @@ class WidgetRatingList extends StatelessWidget {
                   children: [
                     Text(
                       item.user.name,
-                      style: GoogleFonts.inter(fontWeight: FontWeight.w600),
+                      style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     const Text(' · '),
                     Text(timeago.format(item.createdAt)),

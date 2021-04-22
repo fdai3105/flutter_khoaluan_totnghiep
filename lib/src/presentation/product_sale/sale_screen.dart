@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/product.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import '../../configs/configs.dart';
+import '../../resources/resources.dart';
 import '../presentation.dart';
 
 class SaleProductScreen extends StatelessWidget {
@@ -17,7 +17,6 @@ class SaleProductScreen extends StatelessWidget {
             vm.init();
           },
           builder: (context, vm, widget) {
-            print(vm.products);
             return SingleChildScrollView(
               controller: vm.scroll,
               child: WidgetListProduct(
@@ -28,7 +27,7 @@ class SaleProductScreen extends StatelessWidget {
                 ),
                 product: vm.products,
                 showSeeAll: false,
-                isVertical: true,
+                axis: Axis.vertical,
                 loadingMore: vm.loadingMore,
                 padding: AppStyles.paddingBody,
               ),

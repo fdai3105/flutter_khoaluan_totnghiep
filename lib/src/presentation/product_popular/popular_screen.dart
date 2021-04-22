@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/product_popular/popular.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/product.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import '../../resources/resources.dart';
+import '../../configs/configs.dart';
 import '../presentation.dart';
 
 class PopularProductsScreen extends StatelessWidget {
@@ -28,7 +27,7 @@ class PopularProductsScreen extends StatelessWidget {
                 ),
                 product: vm.products,
                 loadingMore: vm.loadingMore,
-                isVertical: true,
+                axis: Axis.vertical,
                 showSeeAll: false,
                 padding: AppStyles.paddingBody,
               ),

@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/models/models.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/product.dart';
 import 'package:rxdart/rxdart.dart';
-
-import '../base/base.dart';
+import '../../resources/resources.dart';
+import '../presentation.dart';
 
 class PopularViewModel extends BaseViewModel {
   final ProductResponse response;

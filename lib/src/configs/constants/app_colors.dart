@@ -11,5 +11,5 @@ class AppColors {
 
   //
   static Color shimmerBase = Colors.grey.shade300;
-  static Color shimmerHighlight = Colors.grey.shade300;
+  static Color shimmerHighlight = Colors.grey.shade100;
 }

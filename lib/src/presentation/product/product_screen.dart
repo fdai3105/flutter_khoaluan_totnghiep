@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../../utils/utils.dart';
@@ -39,13 +38,13 @@ class ProductScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: BaseWidget<ProductViewModel>(
-          viewModel: ProductViewModel(productResponse: ProductResponse()),
+          viewModel: ProductViewModel(response: ProductResponse()),
           onViewModelReady: (vm) async {
             await vm.init(id);
           },
           builder: (context, vm, widget) {
             if (vm.isLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return WidgetLoading();
             } else {
               return Column(
                 children: [
@@ -74,7 +73,7 @@ class ProductScreen extends StatelessWidget {
                                             children: [
                                               Text(
                                                 vm.product.data.name,
-                                                style: GoogleFonts.notoSans(
+                                                style: TextStyle(
                                                   color: AppColors.dark,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
@@ -82,7 +81,7 @@ class ProductScreen extends StatelessWidget {
                                               ),
                                               Text(
                                                 'bed frame, birch/Luroy, Queen',
-                                                style: GoogleFonts.inter(
+                                                style: TextStyle(
                                                   color: AppColors.dark,
                                                 ),
                                               ),
@@ -91,7 +90,7 @@ class ProductScreen extends StatelessWidget {
                                         ),
                                         Text(
                                           Formats.money(vm.product.data.price),
-                                          style: GoogleFonts.inter(
+                                          style: TextStyle(
                                             color: AppColors.dark,
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
@@ -104,9 +103,7 @@ class ProductScreen extends StatelessWidget {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         WidgetRatingBar(
-                                          stars: double.parse(vm
-                                              .product.data.ratingAveraged
-                                              .toString()),
+                                          stars: vm.product.data.ratingAveraged,
                                           size: 16,
                                         ),
                                         const SizedBox(width: 6),
@@ -115,8 +112,7 @@ class ProductScreen extends StatelessWidget {
                                         Container(
                                           width: 1,
                                           height: 14,
-                                          color:
-                                              AppColors.dark.withAlpha(140),
+                                          color: AppColors.dark.withAlpha(140),
                                           margin: const EdgeInsets.symmetric(
                                               horizontal: 16),
                                         ),
@@ -124,69 +120,43 @@ class ProductScreen extends StatelessWidget {
                                       ],
                                     ),
                                     const SizedBox(height: 16),
-                                    Text(vm.product.data.desc),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              ListTile(
-                                title: const Text(
-                                  'Comments',
-                                  style: TextStyle(fontSize: 14),
-                                ),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) {
-                                      return CommentDialog(
-                                          productId: vm.product.data.id);
-                                    }),
-                                  );
-                                },
-                                trailing:
-                                    const Icon(Icons.arrow_forward_ios_outlined),
+                              WidgetExpansion(
+                                title: 'Details',
+                                children: [Text(vm.product.data.desc)],
                               ),
-                              ListTile(
-                                title: Text(
-                                  'Rating (${vm.product.data.rating} Ratings)',
-                                  style: const TextStyle(fontSize: 14),
-                                ),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) {
-                                      return RatingDialog(
-                                          productId: vm.product.data.id);
-                                    }),
-                                  );
-                                },
-                                trailing:
-                                    const Icon(Icons.arrow_forward_ios_outlined),
+                              WidgetTile(
+                                title: 'Comments',
+                                onTap: () => pushNewScreen(context,
+                                    screen: CommentDialog(
+                                        productId: vm.product.data.id)),
                               ),
-                              const ExpansionTile(
-                                collapsedBackgroundColor: Colors.transparent,
-                                backgroundColor: Colors.transparent,
-                                title: Text(
-                                  'Attributes',
-                                  style: TextStyle(fontSize: 14),
-                                ),
-                                expandedAlignment: Alignment.topLeft,
-                                childrenPadding:
-                                    EdgeInsets.symmetric(horizontal: 20),
-                                children: [
-                                  Text('desc 1 : 10kg'),
-                                  Text('desc 1 : 10kg'),
-                                  Text('desc 1 : 10kg'),
-                                ],
+                              WidgetTile(
+                                title:
+                                    'Rating (${vm.product.data.rating} Ratings)',
+                                onTap: () => pushNewScreen(context,
+                                    screen: RatingDialog(
+                                        productId: vm.product.data.id)),
                               ),
                             ],
+                          ),
+                          const SizedBox(height: 20),
+                          WidgetListProduct(
+                            product: vm.similarProducts,
+                            label: 'More like this',
+                            padding: AppStyles.paddingBody,
+                            showSeeAll: false,
                           ),
                         ],
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                     child: Row(
                       children: [
                         Container(
@@ -194,8 +164,8 @@ class ProductScreen extends StatelessWidget {
                           width: 50,
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            border: Border.all(
-                                color: AppColors.primary, width: 2),
+                            border:
+                                Border.all(color: AppColors.primary, width: 2),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Icon(
@@ -207,7 +177,7 @@ class ProductScreen extends StatelessWidget {
                         Flexible(
                           fit: FlexFit.tight,
                           child: GestureDetector(
-                            onTap: () => vm.addToCart(1,vm.product.data),
+                            onTap: () => vm.addToCart(1, vm.product.data),
                             child: Container(
                               height: 50,
                               padding: const EdgeInsets.all(10),

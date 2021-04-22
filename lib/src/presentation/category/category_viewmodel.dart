@@ -41,9 +41,11 @@ class CategoryViewModel extends BaseViewModel {
   }
 
   @override
-  Future dispose() {
-    _subCategory.close();
-    _products.close();
+  Future dispose() async {
+    await _subCategory.drain();
+    await _subCategory.close();
+    await _products.drain();
+    await _products.close();
     return super.dispose();
   }
 }

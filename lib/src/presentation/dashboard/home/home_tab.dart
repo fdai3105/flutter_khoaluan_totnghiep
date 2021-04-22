@@ -70,7 +70,7 @@ class HomeTab extends StatelessWidget {
                   const SizedBox(height: 20),
                   WidgetListProduct(
                     product: vm.sale,
-                    isVertical: false,
+                    axis: Axis.horizontal,
                     label: 'Hot sale 🔥',
                     padding: AppStyles.paddingBody,
                     seeAll: () => pushNewScreen(
@@ -88,7 +88,7 @@ class HomeTab extends StatelessWidget {
                   const SizedBox(height: 20),
                   WidgetListProduct(
                     product: vm.popular,
-                    isVertical: false,
+                    axis: Axis.horizontal,
                     label: 'Popular',
                     padding: AppStyles.paddingBody,
                     seeAll: () => pushNewScreen(
@@ -106,7 +106,7 @@ class HomeTab extends StatelessWidget {
                   const SizedBox(height: 20),
                   WidgetListProduct(
                     product: vm.newArrivals,
-                    isVertical: false,
+                    axis: Axis.vertical,
                     label: 'New Arrivals',
                     padding: AppStyles.paddingBody,
                     seeAll: () => pushNewScreen(
@@ -124,7 +124,7 @@ class HomeTab extends StatelessWidget {
                   const SizedBox(height: 20),
                   WidgetListProduct(
                     product: vm.products,
-                    isVertical: true,
+                    axis: Axis.vertical,
                     label: 'All furniture',
                     padding: AppStyles.paddingBody,
                     loadingMore: vm.loadingMore,

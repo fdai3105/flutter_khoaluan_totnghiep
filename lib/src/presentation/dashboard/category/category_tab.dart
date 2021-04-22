@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
 
@@ -26,7 +27,20 @@ class CategoryTab extends StatelessWidget {
     return Column(
       children: [
         const WidgetAppBar(title: 'Categories', centerTitle: false),
-        WidgetListCategory(category: vm.categories, isLoading: vm.isLoading),
+        Expanded(
+          child: WidgetListCategory(
+            onTap: (item) => pushNewScreen(
+              context,
+              screen: CategoryScreen(
+                id: item.id,
+                parentName: item.name,
+                parentImage: item.image,
+              ),
+            ),
+            category: vm.categories,
+            isLoading: vm.isLoading,
+          ),
+        ),
       ],
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../../resources/models/comment.dart';
 import '../../../configs/configs.dart';
@@ -91,7 +90,7 @@ class WidgetCommentList extends StatelessWidget {
                   children: [
                     Text(
                       item.user.name,
-                      style: GoogleFonts.inter(fontWeight: FontWeight.w600),
+                      style: const  TextStyle(fontWeight: FontWeight.w600),
                     ),
                     const Text(' · '),
                     Text(timeago.format(item.createdAt)),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../utils/utils.dart';
 import '../../configs/configs.dart';
@@ -12,7 +11,7 @@ class WidgetListProduct extends StatelessWidget {
   final EdgeInsets padding;
   final Function seeAll;
   final Function(ProductDatum) onTap;
-  final bool isVertical;
+  final Axis axis;
   final bool verticalShrinkWrap;
   final bool loadingMore;
   final bool showSeeAll;
@@ -24,7 +23,7 @@ class WidgetListProduct extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.seeAll,
     this.onTap,
-    this.isVertical = false,
+    this.axis = Axis.horizontal,
     this.loadingMore = false,
     this.showSeeAll = true,
     this.verticalShrinkWrap = true,
@@ -35,20 +34,20 @@ class WidgetListProduct extends StatelessWidget {
   static const double verticalRatio = 0.85;
 
   ///
-  static final TextStyle nameStyle = GoogleFonts.inter(
+  static final TextStyle nameStyle = TextStyle(
     color: AppColors.dark,
     fontWeight: FontWeight.w600,
   );
 
   ///
-  static final TextStyle priceStyle = GoogleFonts.inter(
+  static final TextStyle priceStyle = TextStyle(
     color: AppColors.dark,
     fontWeight: FontWeight.w600,
   );
 
   ///
-  static final TextStyle titleStyle = GoogleFonts.inter(
-    fontSize: 18,
+  static final TextStyle titleStyle = TextStyle(
+    fontSize: 16,
     color: AppColors.dark,
     fontWeight: FontWeight.w600,
   );
@@ -64,7 +63,7 @@ class WidgetListProduct extends StatelessWidget {
     return Column(
       children: [
         if (label == null && !showSeeAll) const SizedBox() else _title(),
-        if (isVertical) _vertical(context) else _horizon(context),
+        if (axis == Axis.vertical) _vertical(context) else _horizon(context),
       ],
     );
   }

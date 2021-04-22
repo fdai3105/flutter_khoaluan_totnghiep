@@ -85,7 +85,7 @@ class SearchScreen extends StatelessWidget {
           )
         : WidgetListProduct(
             showSeeAll: false,
-            isVertical: true,
+            axis: Axis.vertical,
             product: vm.result,
             padding: AppStyles.paddingBody,
           );

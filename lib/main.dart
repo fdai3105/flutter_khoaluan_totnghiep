@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'src/configs/configs.dart';
 import 'src/utils/utils.dart';
 import 'src/presentation/presentation.dart';
 
@@ -18,12 +16,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        textTheme: GoogleFonts.interTextTheme(
-          Theme.of(context).textTheme.apply(
-              bodyColor: AppColors.dark, displayColor: AppColors.dark),
-        ),
-      ),
       home: DashboardScreen(),
       initialRoute: Routes.home,
       routes: Routes.routes,

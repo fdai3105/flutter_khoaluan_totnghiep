@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class WidgetTile extends StatelessWidget {
   final String title;
@@ -10,7 +9,7 @@ class WidgetTile extends StatelessWidget {
     Key key,
     this.title = '',
     this.onTap,
-    this.icon = Icons.arrow_forward_ios_outlined,
+    this.icon = Icons.chevron_right,
   }) : super(key: key);
 
   @override
@@ -19,13 +18,10 @@ class WidgetTile extends StatelessWidget {
       onTap: onTap,
       title: Text(
         title ?? '',
-        style: GoogleFonts.inter(
-          fontSize: 14,
-        ),
+        style: const TextStyle(fontSize: 14),
       ),
       trailing: Icon(
         icon,
-        size: 14,
       ),
     );
   }

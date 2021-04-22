@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/base/base.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/models/models.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/product.dart';
 import 'package:rxdart/rxdart.dart';
+import '../presentation.dart';
+import '../../resources/resources.dart';
 
 class SaleViewModel extends BaseViewModel {
   final ProductResponse response;

@@ -84,20 +84,20 @@ class ProductResponse {
     }
   }
 
-  Future<Response> getCommentsByProduct(int productId) async {
+  Future<Response> getCommentsByProduct(int productID) async {
     try {
       final products = await DioService()
-          .get(AppEndpoint.getCommentsByProduct + productId.toString());
+          .get(AppEndpoint.getCommentsByProduct + productID.toString());
       return products;
     } on DioError catch (e) {
       return e.response;
     }
   }
 
-  Future<Response> getRatingsByProduct(int productId) async {
+  Future<Response> getRatingsByProduct(int productID) async {
     try {
       final products = await DioService()
-          .get(AppEndpoint.getRatingByProduct + productId.toString());
+          .get(AppEndpoint.getRatingByProduct + productID.toString());
       return products;
     } on DioError catch (e) {
       return e.response;
@@ -117,6 +117,16 @@ class ProductResponse {
     try {
       final products = await DioService()
           .get(AppEndpoint.searchProduct, queryParameters: params);
+      return products;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
+
+  Future<Response> getSimilarProducts(int productID) async {
+    try {
+      final products = await DioService()
+          .get(AppEndpoint.getSimilarProducts + productID.toString());
       return products;
     } on DioError catch (e) {
       return e.response;

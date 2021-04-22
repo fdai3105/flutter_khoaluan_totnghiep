@@ -4,11 +4,12 @@ import '../presentation.dart';
 import '../../resources/resources.dart';
 
 class ProductViewModel extends BaseViewModel {
-  final ProductResponse productResponse;
+  final ProductResponse response;
 
-  ProductViewModel({this.productResponse});
+  ProductViewModel({this.response});
 
   final _product = BehaviorSubject<Product>();
+  final _similarProducts = BehaviorSubject<Products>();
 
   Product get product => _product.value;
 
@@ -17,13 +18,25 @@ class ProductViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  Products get similarProducts => _similarProducts.value;
+
+  set similarProducts(Products value) {
+    _similarProducts.add(value);
+    notifyListeners();
+  }
+
   Future init(int id) async {
     isLoading = true;
 
-    final pro = await productResponse.getProduct(id);
-    if (pro.statusCode == 200) {
-      product = Product.fromJson(pro.data);
+    final productResponse = await response.getProduct(id);
+    if (productResponse.statusCode == 200) {
+      product = Product.fromJson(productResponse.data);
     }
+    final similarResponse= await response.getSimilarProducts(id);
+    if(similarResponse.statusCode == 200) {
+      similarProducts = Products.fromJson(similarResponse.data);
+    }
+
     isLoading = false;
   }
 
@@ -33,8 +46,11 @@ class ProductViewModel extends BaseViewModel {
   }
 
   @override
-  Future dispose() {
-    _product.close();
+  Future dispose() async {
+    await _product.drain();
+    await _product.close();
+    await _similarProducts.drain();
+    await _similarProducts.close();
     return super.dispose();
   }
 }

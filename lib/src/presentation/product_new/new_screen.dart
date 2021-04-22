@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/presentation.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/product_new/new.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/repositories/product.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import '../presentation.dart';
+import '../../resources/resources.dart';
+import '../../configs/configs.dart';
 
 class NewProductsScreen extends StatelessWidget {
   @override
@@ -29,7 +28,7 @@ class NewProductsScreen extends StatelessWidget {
                 product: vm.products,
                 loadingMore: vm.loadingMore,
                 showSeeAll: false,
-                isVertical: true,
+                axis: Axis.vertical,
                 padding: AppStyles.paddingBody,
               ),
             );

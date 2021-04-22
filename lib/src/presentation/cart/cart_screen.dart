@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../../resources/resources.dart';
 import '../../configs/configs.dart';
@@ -102,9 +101,10 @@ class CartScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         cart.product.name,
-                                        style: GoogleFonts.inter(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600),
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                       const SizedBox(height: 2),
                                       Text(

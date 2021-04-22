@@ -32,7 +32,6 @@ dependencies:
   pedantic: ^1.11.0
   regexpattern: ^1.0.0
   shimmer: ^1.1.2
-  google_fonts: 1.1.2
   persistent_bottom_nav_bar: 4.0.0
   carousel_slider: ^3.0.0
   flutter_rating_bar: ^4.0.0

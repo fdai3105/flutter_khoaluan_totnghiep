@@ -1,7 +1,7 @@
 class AppEndpoint {
   AppEndpoint._();
 
-  static const String domain = 'http://192.168.1.6:8000/';
+  static const String domain = 'http://878b2d247c93.ngrok.io/';
   static const String base = '$domain' 'api/';
 
   ///
@@ -25,6 +25,7 @@ class AppEndpoint {
       'product-by-parent-category/';
   static const String getProductsByCategory = 'product-by-category/';
   static const String searchProduct = 'search-product';
+  static const String getSimilarProducts = 'similar-product/';
 
   ///
   static const String getCategories = 'category';

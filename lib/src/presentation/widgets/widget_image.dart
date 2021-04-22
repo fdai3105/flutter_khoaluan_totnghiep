@@ -3,10 +3,12 @@ import '../../configs/configs.dart';
 
 class WidgetImage extends StatelessWidget {
   final String image;
+  final BoxFit fit;
 
   const WidgetImage({
     Key key,
     this.image,
+    this.fit = BoxFit.contain,
   }) : super(key: key);
 
   @override
@@ -21,7 +23,7 @@ class WidgetImage extends StatelessWidget {
       return FadeInImage.assetNetwork(
         image: AppEndpoint.domain + image,
         width: double.infinity,
-        fit: BoxFit.contain,
+        fit: fit,
         placeholder: 'assets/images/placeholder.jpg',
       );
     }
