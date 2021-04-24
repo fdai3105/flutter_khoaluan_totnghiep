@@ -13,7 +13,8 @@ class Routes {
   static const String cart = '/cart';
   static const String checkout = '/checkout';
   static const String selectAddress = '/select-address';
-  static const String orderSuccess = 'order-success';
+  static const String orderSuccess = '/order-success';
+  static const String orders = '/orders';
 
   static const String category = '/category';
   static const String product = '/product';
@@ -28,8 +29,9 @@ class Routes {
     resendMail: (_) => ResendMailScreen(),
     cart: (_) => CartScreen(),
     checkout: (_) => const CheckoutScreen(),
-    selectAddress : (_) => const SelectAddressScreen(),
+    selectAddress: (_) => const SelectAddressScreen(),
     orderSuccess: (_) => OrderSuccessScreen(),
+    orders: (_) => OrderScreen(),
     home: (_) => DashboardScreen(),
     category: (_) => const CategoryScreen(),
     product: (_) => const ProductScreen(),

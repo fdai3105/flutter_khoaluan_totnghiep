@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import '../../resources/resources.dart';
 import 'package:rxdart/rxdart.dart';
@@ -44,14 +45,17 @@ class OrderViewModel extends BaseViewModel {
     final orderRepo = await repository.getOrders();
     if (orderRepo.statusCode == 200) {
       orders = Order.fromJson(orderRepo.data);
+    } else {
+      Navigator.pop(context);
     }
 
     isLoading = false;
   }
 
   @override
-  Future dispose() {
-    _orders.close();
+  Future dispose()  async{
+    await _orders.drain();
+    await _orders.close();
     return super.dispose();
   }
 }

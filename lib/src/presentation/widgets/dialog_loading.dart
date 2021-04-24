@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../configs/configs.dart';
 
 class DialogLoading {
   BuildContext _context;
@@ -8,7 +9,6 @@ class DialogLoading {
   }
 
   DialogLoading._create(this._context);
-
 
   BuildContext _builderContext;
 
@@ -35,7 +35,9 @@ class DialogLoading {
         padding: const EdgeInsets.all(20),
         child: Row(
           children: const [
-            CircularProgressIndicator(),
+            CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+            ),
             SizedBox(width: 20),
             Text('Loading...'),
           ],

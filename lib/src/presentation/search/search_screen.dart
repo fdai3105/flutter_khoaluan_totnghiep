@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../configs/configs.dart';
 import '../../resources/repositories/product.dart';
 import '../presentation.dart';
@@ -84,9 +85,13 @@ class SearchScreen extends StatelessWidget {
             },
           )
         : WidgetListProduct(
+            product: vm.result,
+            onTap: (item) => pushNewScreen(
+              context,
+              screen: ProductScreen(id: item.id),
+            ),
             showSeeAll: false,
             axis: Axis.vertical,
-            product: vm.result,
             padding: AppStyles.paddingBody,
           );
   }

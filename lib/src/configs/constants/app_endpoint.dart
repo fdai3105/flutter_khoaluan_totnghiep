@@ -1,7 +1,7 @@
 class AppEndpoint {
   AppEndpoint._();
 
-  static const String domain = 'http://878b2d247c93.ngrok.io/';
+  static const String domain = 'http://e9ee0e95d854.ngrok.io/';
   static const String base = '$domain' 'api/';
 
   ///

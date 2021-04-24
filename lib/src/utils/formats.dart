@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 
 class Formats {
   static String dateTime(DateTime dateTime) {
-    if (dateTime == null) return null;
+    if (dateTime == null) return '';
     return DateFormat('dd-MM-yyyy').add_jm().format(dateTime);
   }
 

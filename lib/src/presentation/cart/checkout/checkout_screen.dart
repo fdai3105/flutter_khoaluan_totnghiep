@@ -29,7 +29,7 @@ class CheckoutScreen extends StatelessWidget {
           },
           builder: (context, vm, widget) {
             if (vm.isLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return WidgetLoading();
             }
             return Column(
               children: [
@@ -63,17 +63,19 @@ class CheckoutScreen extends StatelessWidget {
                             const Divider(color: AppColors.dark45),
                             ListTile(
                               title: const Text('Merchandise subtotal()'),
-                              trailing:
-                                  Text(Maths.calTotalCart(carts).toString()),
+                              trailing: Text(
+                                Formats.money(Maths.calTotalCart(carts)),
+                              ),
                             ),
-                            const ListTile(
-                              title: Text('Shipping fee'),
-                              trailing: Text('22.600'),
+                            ListTile(
+                              title: const Text('Shipping fee'),
+                              trailing: Text(Formats.money(0)),
                             ),
                             ListTile(
                               title: const Text('Order amount'),
-                              trailing:
-                                  Text(Maths.calTotalCart(carts).toString()),
+                              trailing: Text(
+                                Formats.money(Maths.calTotalCart(carts)),
+                              ),
                             ),
                           ],
                         ),
@@ -91,7 +93,7 @@ class CheckoutScreen extends StatelessWidget {
                         children: [
                           const Text('Total Payment'),
                           Text(
-                            Maths.calTotalCart(carts).toString(),
+                            Formats.money(Maths.calTotalCart(carts)),
                             style: const TextStyle(
                               color: AppColors.primary,
                               fontSize: 16,
@@ -184,9 +186,9 @@ class CheckoutScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Divider(color: AppColors.dark45),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Text('Products'),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text('Items (${carts.length.toString()})'),
         ),
         const SizedBox(height: 4),
         ListView.builder(
@@ -225,11 +227,11 @@ class CheckoutScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(item.product.name),
-                        const SizedBox(height: 14),
+                        const SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(item.product.price.toString()),
+                            Text(Formats.money(item.product.price)),
                             Text('x${item.quantity}'),
                           ],
                         ),

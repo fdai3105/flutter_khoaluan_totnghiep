@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../resources/resources.dart';
 import '../../configs/configs.dart';
 import '../../utils/utils.dart';
@@ -15,7 +15,10 @@ class CartScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.clear_outlined),
-            onPressed: () => _vm.clearCart(),
+            onPressed: () {
+              pushNewScreen(context, screen: OrderSuccessScreen());
+              _vm.clearCart();
+            },
           ),
         ],
       ),
@@ -28,7 +31,7 @@ class CartScreen extends StatelessWidget {
           },
           builder: (context, vm, child) {
             if (vm.isLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return WidgetLoading();
             }
             if (vm.carts.isEmpty) {
               return Center(
@@ -108,8 +111,7 @@ class CartScreen extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 2),
                                       Text(
-                                        NumberFormat()
-                                            .format(cart.product.price),
+                                        Formats.money(cart.product.price),
                                         style: const TextStyle(
                                           color: AppColors.dark45,
                                         ),
@@ -165,23 +167,66 @@ class CartScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => vm.checkout(),
-                  child: Container(
-                    height: 50,
-                    margin: const EdgeInsets.all(10),
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        '${Maths.calTotalCart(vm.carts)} Checkout',
-                        style: const TextStyle(color: Colors.white),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Text('Total: '),
+                              Text(
+                                Formats.money(Maths.calTotalCart(vm.carts)),
+                                style: const TextStyle(
+                                  color: AppColors.primary,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Text('Items: '),
+                              Text(
+                                vm.carts.length.toString(),
+                                style: const TextStyle(
+                                  color: AppColors.primary,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                  ),
+                    const SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () => vm.checkout(),
+                      child: Container(
+                        height: 50,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 40,
+                        ),
+                        decoration: const BoxDecoration(
+                          color: AppColors.primary,
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Check out',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             );

@@ -19,10 +19,10 @@ class WidgetListProduct extends StatelessWidget {
   const WidgetListProduct({
     Key key,
     @required this.product,
+    @required this.onTap,
     this.label,
     this.padding = const EdgeInsets.all(0),
     this.seeAll,
-    this.onTap,
     this.axis = Axis.horizontal,
     this.loadingMore = false,
     this.showSeeAll = true,
@@ -89,7 +89,7 @@ class WidgetListProduct extends StatelessWidget {
         padding: padding,
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
-        itemCount: product.data.length + 1,
+        itemCount: showSeeAll ? product.data.length + 1 : product.data.length,
         itemBuilder: (context, index) {
           if (index == product.data.length) {
             return GestureDetector(

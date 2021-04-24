@@ -145,6 +145,10 @@ class ProductScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           WidgetListProduct(
+                            onTap: (item) => pushNewScreen(
+                              context,
+                              screen: ProductScreen(id: item.id),
+                            ),
                             product: vm.similarProducts,
                             label: 'More like this',
                             padding: AppStyles.paddingBody,

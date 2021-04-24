@@ -35,6 +35,7 @@ class OrderRepository {
       final data = await DioService(withToken: true).get(AppEndpoint.getOrders);
       return data;
     } on DioError catch (e) {
+      print(e.response);
       return e.response;
     }
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../configs/configs.dart';
 import '../../../../utils/shared_pref.dart';
 import '../../../../utils/routers.dart';
 import '../../../../resources/resources.dart';
@@ -44,7 +45,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
           future: AddressRepository().getAddress(SharedPref.getToken()),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return WidgetLoading();
             } else {
               if (snapshot.hasData) {
                 final data = Address.fromJson(snapshot.data.data);
@@ -73,13 +74,31 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
         });
         Navigator.pop(context, address.id);
       },
-      title: const Text('name + phone'),
+      title: Row(
+        children: [
+          Text(address.name),
+          const SizedBox(width: 10),
+          Text(
+            address.phone,
+            style: const TextStyle(color: AppColors.dark45),
+          ),
+        ],
+      ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(address.address),
-          Text(address.ward),
-          Text('${address.district}, ${address.city}'),
+          Text(
+            address.address,
+            style: TextStyle(color: AppColors.dark),
+          ),
+          Text(
+            address.ward,
+            style: TextStyle(color: AppColors.dark),
+          ),
+          Text(
+            '${address.district}, ${address.city}',
+            style: TextStyle(color: AppColors.dark),
+          ),
         ],
       ),
       leading: Radio(

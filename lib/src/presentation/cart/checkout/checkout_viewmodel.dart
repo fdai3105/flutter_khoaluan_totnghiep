@@ -61,7 +61,7 @@ class CheckoutViewModel extends BaseViewModel {
   }
 
   Future checkout() async {
-    if(getSelectedAddress() == null) {
+    if (getSelectedAddress() == null) {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Please select your address')));
       return;
@@ -79,9 +79,11 @@ class CheckoutViewModel extends BaseViewModel {
   }
 
   @override
-  Future dispose() {
-    _address.close();
-    _selectedAddress.close();
+  Future dispose() async {
+    await _address.drain();
+    await _address.close();
+    await _address.drain();
+    await _selectedAddress.close();
     return super.dispose();
   }
 }
