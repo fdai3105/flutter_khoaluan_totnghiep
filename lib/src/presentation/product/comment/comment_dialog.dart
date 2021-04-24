@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../presentation.dart';
 import '../../../resources/resources.dart';
@@ -78,7 +78,9 @@ class CommentDialog extends StatelessWidget {
       itemBuilder: (context, index) {
         final item = comments[index];
         return InkWell(
-          onLongPress: () => _modal(context, vm, item),
+          onLongPress: () => item.user.id == SharedPref.getUser().user.id
+              ? _modal(context, vm, item)
+              : {},
           child: Padding(
             padding: AppStyles.paddingBody,
             child: Column(
