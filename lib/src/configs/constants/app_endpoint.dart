@@ -27,6 +27,8 @@ class AppEndpoint {
   static const String searchProduct = 'search-product';
   static const String getSimilarProducts = 'similar-product/';
 
+  static const String comment = 'comment';
+
   ///
   static const String getCategories = 'category';
   static const String getParentCategories = 'parent-category';

@@ -132,4 +132,18 @@ class ProductResponse {
       return e.response;
     }
   }
+
+  Future<Response> addComment(int productID, String comment) async {
+    final params = FormData.fromMap({
+      'product_id': productID,
+      'comment': comment,
+    });
+    try {
+      final products =
+          await DioService(withToken: true).post(AppEndpoint.comment, data: params);
+      return products;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
 }

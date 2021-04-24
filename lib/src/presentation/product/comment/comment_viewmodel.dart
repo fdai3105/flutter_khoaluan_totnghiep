@@ -18,13 +18,25 @@ class CommentViewModel extends BaseViewModel {
 
   Future init(int id) async {
     isLoading = true;
+    await fetchComments(id);
+    isLoading = false;
+  }
 
+  Future fetchComments(int id) async {
     final com = await productResponse.getCommentsByProduct(id);
     if (com.statusCode == 200) {
       comments = Comments.fromJson(com.data);
     }
+  }
 
-    isLoading = false;
+  Future addComment(int productID, String comment) async {
+    final addCommentResponse =
+        await productResponse.addComment(productID, comment);
+    if (addCommentResponse.statusCode == 200) {
+      await fetchComments(productID);
+    } else {
+      print(addCommentResponse.data);
+    }
   }
 
   @override

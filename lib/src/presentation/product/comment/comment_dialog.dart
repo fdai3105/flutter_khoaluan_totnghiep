@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/presentation/presentation.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../../resources/models/comment.dart';
 import '../../../configs/configs.dart';
@@ -15,7 +16,7 @@ class CommentDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: _appBar(context),
+      appBar: const WidgetAppBar(title: 'Comments'),
       body: SafeArea(
         child: BaseWidget<CommentViewModel>(
           viewModel: CommentViewModel(
@@ -25,12 +26,11 @@ class CommentDialog extends StatelessWidget {
             await vm.init(productId);
           },
           builder: (context, vm, widget) {
-            if (vm.isLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return SingleChildScrollView(
-              padding: AppStyles.paddingBody,
-              child: WidgetCommentList(comments: vm.comments.data),
+            return Column(
+              children: [
+                Expanded(child: _body(vm)),
+                _field(vm),
+              ],
             );
           },
         ),
@@ -38,70 +38,72 @@ class CommentDialog extends StatelessWidget {
     );
   }
 
-  Widget _appBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      title: Text(
-        'Comments',
-        style: TextStyle(color: AppColors.dark),
-      ),
-      centerTitle: true,
-      leading: IconButton(
-        icon: Icon(Icons.close_outlined, color: AppColors.dark),
-        onPressed: () => Navigator.pop(context),
-      ),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.add_comment_outlined, color: AppColors.dark),
-          onPressed: () {
+  Widget _body(CommentViewModel vm) {
+    if (vm.isLoading) {
+      return WidgetLoading();
+    }
+    if (vm.comments.data.isEmpty) {
+      return const Center(child: Text('No comment yet'));
+    }
+    return SingleChildScrollView(
+      padding: AppStyles.paddingBody,
+      child: _listComments(vm.comments.data),
+    );
+  }
 
-          },
-        )
+  Widget _field(CommentViewModel vm) {
+    var comment ='';
+    return Row(
+      children: [
+        Expanded(
+          child: WidgetTextField(
+            onChanged: (value) => {comment = value},
+            hint: 'Write a comment',
+          ),
+        ),
+        IconButton(
+          icon: const Icon(Icons.send,color: AppColors.primary),
+          onPressed: () => vm.addComment(productId, comment),
+        ),
       ],
     );
   }
-}
 
-class WidgetCommentList extends StatelessWidget {
-  final List<CommentDatum> comments;
-
-  const WidgetCommentList({
-    Key key,
-    @required this.comments,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _listComments(List<CommentDatum> comments) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: comments.length,
       itemBuilder: (context, index) {
         final item = comments[index];
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      item.user.name,
-                      style: const  TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    const Text(' · '),
-                    Text(timeago.format(item.createdAt)),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 15),
-            Text(item.comment),
-            const SizedBox(height: 30),
-          ],
+        return GestureDetector(
+          onLongPress: () {
+
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        item.user.name,
+                        style: const TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                      const Text(' · '),
+                      Text(timeago.format(item.createdAt)),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 15),
+              Text(item.comment),
+              const SizedBox(height: 30),
+            ],
+          ),
         );
       },
     );
