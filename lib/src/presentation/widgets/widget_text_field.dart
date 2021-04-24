@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../configs/configs.dart';
 
 class WidgetTextField extends StatelessWidget {
+  final TextEditingController controller;
   final Function(String) onChanged;
   final String hint;
   final String initialValue;
@@ -9,7 +10,8 @@ class WidgetTextField extends StatelessWidget {
 
   const WidgetTextField({
     Key key,
-    @required this.onChanged,
+    this.controller,
+   this.onChanged,
     this.hint,
     this.initialValue,
     this.margin,
@@ -25,6 +27,7 @@ class WidgetTextField extends StatelessWidget {
         borderRadius: AppStyles.radiusNormal,
       ),
       child: TextFormField(
+        controller: controller,
         onChanged: onChanged,
         initialValue: initialValue,
         decoration: InputDecoration(

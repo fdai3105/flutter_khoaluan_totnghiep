@@ -84,16 +84,6 @@ class ProductResponse {
     }
   }
 
-  Future<Response> getCommentsByProduct(int productID) async {
-    try {
-      final products = await DioService()
-          .get(AppEndpoint.getCommentsByProduct + productID.toString());
-      return products;
-    } on DioError catch (e) {
-      return e.response;
-    }
-  }
-
   Future<Response> getRatingsByProduct(int productID) async {
     try {
       final products = await DioService()
@@ -127,20 +117,6 @@ class ProductResponse {
     try {
       final products = await DioService()
           .get(AppEndpoint.getSimilarProducts + productID.toString());
-      return products;
-    } on DioError catch (e) {
-      return e.response;
-    }
-  }
-
-  Future<Response> addComment(int productID, String comment) async {
-    final params = FormData.fromMap({
-      'product_id': productID,
-      'comment': comment,
-    });
-    try {
-      final products =
-          await DioService(withToken: true).post(AppEndpoint.comment, data: params);
       return products;
     } on DioError catch (e) {
       return e.response;
