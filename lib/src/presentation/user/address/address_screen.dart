@@ -38,7 +38,7 @@ class AddressScreen extends StatelessWidget {
 
   Widget _body(BuildContext context, AddressViewModel vm) {
     if (vm.isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return WidgetLoading();
     }
     if (vm.address.data.isEmpty) {
       return const Center(
@@ -54,43 +54,26 @@ class AddressScreen extends StatelessWidget {
         itemCount: vm.address.data.length,
         itemBuilder: (context, index) {
           final item = vm.address.data[index];
-          return GestureDetector(
-            onTap: () => pushNewScreen(
-              context,
-              screen: EditAddressScreen(address: item),
-            ).then((value) => vm.init()),
-            behavior: HitTestBehavior.translucent,
-            child: Row(
+          return ListTile(
+            title: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(text: item.name),
+                  const WidgetSpan(child: SizedBox(width: 10)),
+                  TextSpan(text: item.phone),
+                ],
+                style: TextStyle(
+                  color: AppColors.dark,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset('assets/icons/address.png', height: 30),
-                const SizedBox(width: 8),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          item.name,
-                          style: const TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          item.phone,
-                          style: const TextStyle(color: AppColors.dark45),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      item.address,
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                    Text(
-                      '${item.city}, ${item.district}, ${item.ward}',
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
+                Text(item.address),
+                Text('${item.city}, ${item.district}, ${item.ward}'),
               ],
             ),
           );

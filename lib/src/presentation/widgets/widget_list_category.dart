@@ -46,7 +46,7 @@ class WidgetListCategory extends StatelessWidget {
           crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          childAspectRatio: 1 / 0.75,
+          childAspectRatio: 1 / 0.8,
         ),
         itemBuilder: (context, index) {
           return _item(context, category.data[index]);

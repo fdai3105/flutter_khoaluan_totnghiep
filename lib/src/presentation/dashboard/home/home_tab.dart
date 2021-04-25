@@ -106,7 +106,7 @@ class HomeTab extends StatelessWidget {
                   const SizedBox(height: 20),
                   WidgetListProduct(
                     product: vm.newArrivals,
-                    axis: Axis.vertical,
+                    axis: Axis.horizontal,
                     label: 'New Arrivals',
                     padding: AppStyles.paddingBody,
                     seeAll: () => pushNewScreen(

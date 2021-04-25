@@ -116,4 +116,30 @@ class SharedPref {
   static Future clear() async {
     await _pref.clear();
   }
+
+  /// favorite item
+  static List<ProductDatum> getFavorites() {
+    final products = <ProductDatum>[];
+    final productsPref = _pref.getStringList('pref_favorites');
+    if (productsPref != null) {
+      for (final item in productsPref) {
+        products.add(ProductDatum.fromRawJson(item));
+      }
+    }
+    return products;
+  }
+
+  static Future addToFavorite(ProductDatum product) async {
+    final current = getFavorites();
+
+    if (getFavorites().where((element) => element.id == product.id).isEmpty) {
+      current.add(product);
+    } else {
+      current.removeWhere((element) => element.id == product.id);
+    }
+    await _pref.setStringList(
+      'pref_favorites',
+      current.map((e) => e.toRawJson()).toList(),
+    );
+  }
 }

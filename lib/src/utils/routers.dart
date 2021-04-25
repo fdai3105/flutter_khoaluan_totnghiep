@@ -14,7 +14,8 @@ class Routes {
   static const String checkout = '/checkout';
   static const String selectAddress = '/select-address';
   static const String orderSuccess = '/order-success';
-  static const String orders = '/orders';
+  static const String order = '/order';
+  static const String favorite = '/favorite';
 
   static const String category = '/category';
   static const String product = '/product';
@@ -31,7 +32,8 @@ class Routes {
     checkout: (_) => const CheckoutScreen(),
     selectAddress: (_) => const SelectAddressScreen(),
     orderSuccess: (_) => OrderSuccessScreen(),
-    orders: (_) => OrderScreen(),
+    order: (_) => OrderScreen(),
+    favorite:(_) => FavoriteScreen(),
     home: (_) => DashboardScreen(),
     category: (_) => const CategoryScreen(),
     product: (_) => const ProductScreen(),

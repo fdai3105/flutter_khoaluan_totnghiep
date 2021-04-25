@@ -17,7 +17,7 @@ class UserTab extends StatelessWidget {
         builder: (context, vm, widget) {
           return Column(
             children: [
-              _appBar(context),
+              const WidgetAppBar(title: 'User', centerTitle: false),
               const SizedBox(height: 20),
               Material(
                 color: Colors.transparent,
@@ -40,6 +40,14 @@ class UserTab extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+              WidgetTile(
+                onTap: () => pushNewScreen(
+                  context,
+                  screen: FavoriteScreen(),
+                  withNavBar: false,
+                ),
+                title: 'My favorites',
+              ),
               WidgetTile(
                 onTap: () => pushNewScreen(
                   context,
@@ -143,20 +151,6 @@ class UserTab extends StatelessWidget {
         ),
         const Icon(Icons.arrow_forward_ios_outlined, size: 14),
       ],
-    );
-  }
-
-  Widget _appBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      title: Text(
-        'User',
-        style: TextStyle(
-          color: Colors.grey.shade800,
-        ),
-      ),
-      iconTheme: const IconThemeData(color: Colors.grey),
     );
   }
 }

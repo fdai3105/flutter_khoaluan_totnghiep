@@ -10,6 +10,7 @@ class ProductViewModel extends BaseViewModel {
 
   final _product = BehaviorSubject<Product>();
   final _similarProducts = BehaviorSubject<Products>();
+  final _isFavorite = BehaviorSubject<bool>();
 
   Product get product => _product.value;
 
@@ -25,6 +26,13 @@ class ProductViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  bool get isFavorite => _isFavorite.value;
+
+  set isFavorite(bool value) {
+    _isFavorite.add(value);
+    notifyListeners();
+  }
+
   Future init(int id) async {
     isLoading = true;
 
@@ -32,10 +40,11 @@ class ProductViewModel extends BaseViewModel {
     if (productResponse.statusCode == 200) {
       product = Product.fromJson(productResponse.data);
     }
-    final similarResponse= await response.getSimilarProducts(id);
-    if(similarResponse.statusCode == 200) {
+    final similarResponse = await response.getSimilarProducts(id);
+    if (similarResponse.statusCode == 200) {
       similarProducts = Products.fromJson(similarResponse.data);
     }
+    checkFavorite();
 
     isLoading = false;
   }
@@ -45,12 +54,27 @@ class ProductViewModel extends BaseViewModel {
     DialogAddCart(context: context).show();
   }
 
+  void checkFavorite() {
+    if (SharedPref.getFavorites()
+            .where((element) => element.id == product.data.id).isEmpty) {
+      isFavorite = false;
+    } else {
+      isFavorite = true;
+    }
+  }
+
+  void favorite() {
+    SharedPref.addToFavorite(product.data);
+    checkFavorite();
+  }
+
   @override
   Future dispose() async {
     await _product.drain();
     await _product.close();
     await _similarProducts.drain();
     await _similarProducts.close();
+
     return super.dispose();
   }
 }

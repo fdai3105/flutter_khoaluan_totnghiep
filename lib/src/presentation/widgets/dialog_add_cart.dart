@@ -43,9 +43,10 @@ class DialogAddCart {
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
+            Text(
               'Added to cart success',
               style: TextStyle(
+                color: AppColors.dark,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),

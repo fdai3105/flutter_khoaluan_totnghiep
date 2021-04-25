@@ -36,7 +36,7 @@ class OrderSuccessScreen extends StatelessWidget {
                 width: 200,
                 child: ElevatedButton(
                   onPressed: () =>
-                      Navigator.pushReplacementNamed(context, Routes.orders),
+                      Navigator.pushReplacementNamed(context, Routes.order),
                   style: ElevatedButton.styleFrom(
                     primary: AppColors.primary,
                     padding: const EdgeInsets.symmetric(vertical: 16),

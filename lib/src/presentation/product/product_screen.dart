@@ -163,18 +163,28 @@ class ProductScreen extends StatelessWidget {
                         horizontal: 20, vertical: 10),
                     child: Row(
                       children: [
-                        Container(
-                          height: 50,
-                          width: 50,
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            border:
-                                Border.all(color: AppColors.primary, width: 2),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Icon(
-                            Icons.favorite_outline,
-                            color: AppColors.primary,
+                        GestureDetector(
+                          onTap: () => vm.favorite(),
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: vm.isFavorite
+                                  ? AppColors.primary
+                                  : Colors.white,
+                              border: Border.all(
+                                color: AppColors.primary,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Icon(
+                              Icons.favorite_outline,
+                              color: vm.isFavorite
+                                  ? Colors.white
+                                  : AppColors.primary,
+                            ),
                           ),
                         ),
                         const SizedBox(width: 20),
