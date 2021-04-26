@@ -278,7 +278,7 @@ class OrderDatum {
   });
 
   final int id;
-  final Status status;
+  final OrderStatus status;
   final int total;
   final String note;
   final int item;
@@ -289,7 +289,7 @@ class OrderDatum {
 
   OrderDatum copyWith({
     int id,
-    Status status,
+    OrderStatus status,
     int total,
     String note,
     int item,
@@ -341,18 +341,16 @@ class OrderDatum {
       };
 }
 
-enum Status {
+enum OrderStatus {
   pending,
-  toReceive,
   completed,
   cancelled,
 }
 
 final statusValues = EnumValues({
-  "Pending": Status.pending,
-  "To Receive": Status.toReceive,
-  "Completed": Status.completed,
-  "cancelled": Status.cancelled,
+  "Pending": OrderStatus.pending,
+  "Completed": OrderStatus.completed,
+  "Cancelled": OrderStatus.cancelled,
 });
 
 class EnumValues<T> {

@@ -19,7 +19,7 @@ class OrderDetailScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: BaseWidget<OrderDetailViewModel>(
-          viewModel: OrderDetailViewModel(),
+          viewModel: OrderDetailViewModel(repository: OrderRepository()),
           onViewModelReady: (vm) {
             vm.init();
           },
@@ -27,7 +27,7 @@ class OrderDetailScreen extends StatelessWidget {
             if (vm.isLoading) {
               return const Center(child: CircularProgressIndicator());
             } else {
-              return _body(context);
+              return _body(context, vm);
             }
           },
         ),
@@ -35,148 +35,209 @@ class OrderDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _body(BuildContext context) {
+  Widget _body(BuildContext context, OrderDetailViewModel vm) {
     return Column(
       children: [
-        ListTile(
-          title: const Text('Delivery Address'),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        Expanded(
+          child: Column(
             children: [
-              const SizedBox(height: 4),
-              Row(
-                children: [
-                  Text(order.address.name),
-                  const SizedBox(width: 4),
-                  Text(order.address.phone),
-                ],
-              ),
-              Text(
-                '${order.address.address}, '
-                '${order.address.ward}, '
-                '${order.address.district}, '
-                '${order.address.city}',
-              ),
-            ],
-          ),
-        ),
-        const Divider(),
-        const SizedBox(height: 10),
-        ListView.builder(
-          padding: AppStyles.paddingBody,
-          shrinkWrap: true,
-          itemCount: order.orderDetail.length,
-          itemBuilder: (context, index) {
-            final item = order.orderDetail[index];
-            return Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              child: Row(
-                children: [
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: 60,
-                        width: 60,
-                        child: ClipRRect(
-                          borderRadius: AppStyles.radiusNormal,
-                          child: item.product.images.isEmpty
-                              ? Image.asset('assets/images/placeholder.jpg')
-                              : Image.network(
-                                  AppEndpoint.domain +
-                                      item.product.images.first.image,
-                                  fit: BoxFit.cover,
-                                ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              _header(order.status),
+              const SizedBox(height: 10),
+              ListTile(
+                title: const Text('Delivery Address'),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 4),
+                    Row(
                       children: [
-                        Text(
-                          item.product.name,
-                          style: const TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Text(order.address.name),
+                        const SizedBox(width: 4),
+                        Text(order.address.phone),
+                      ],
+                    ),
+                    Text(
+                      '${order.address.address}, '
+                      '${order.address.ward}, '
+                      '${order.address.district}, '
+                      '${order.address.city}',
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(),
+              const SizedBox(height: 10),
+              ListView.builder(
+                padding: AppStyles.paddingBody,
+                shrinkWrap: true,
+                itemCount: order.orderDetail.length,
+                itemBuilder: (context, index) {
+                  final item = order.orderDetail[index];
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: Row(
+                      children: [
+                        Column(
                           children: [
-                            Text(
-                              Formats.money(item.product.price),
-                              style: const TextStyle(color: AppColors.dark45),
-                            ),
-                            Text(
-                              'x${item.quantity}',
-                              style: const TextStyle(color: AppColors.dark45),
+                            SizedBox(
+                              height: 60,
+                              width: 60,
+                              child: ClipRRect(
+                                borderRadius: AppStyles.radiusNormal,
+                                child: item.product.images.isEmpty
+                                    ? Image.asset(
+                                        'assets/images/placeholder.jpg')
+                                    : Image.network(
+                                        AppEndpoint.domain +
+                                            item.product.images.first.image,
+                                        fit: BoxFit.cover,
+                                      ),
+                              ),
                             ),
                           ],
                         ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                item.product.name,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    Formats.money(item.product.price),
+                                    style: const TextStyle(
+                                        color: AppColors.dark45),
+                                  ),
+                                  Text(
+                                    'x${item.quantity}',
+                                    style: const TextStyle(
+                                        color: AppColors.dark45),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 10),
-        const Divider(),
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Order No. ${order.id}',
-                style: const TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                'Placed on ${Formats.dateTime(order.createdAt)}',
-                style: const TextStyle(color: AppColors.dark45),
-              ),
-            ],
-          ),
-        ),
-        const Divider(),
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Subtotal ()'),
-                  Text(Formats.money(order.total)),
-                ],
-              ),
-              const SizedBox(height: 6),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Shipping Fee'),
-                  Text(Formats.money(0)),
-                ],
+                  );
+                },
               ),
               const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Total (VAT Incl.)',
-                      style: TextStyle(fontSize: 16)),
-                  Text(Formats.money(order.total),
-                      style: const TextStyle(fontSize: 16)),
-                ],
+              const Divider(),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Order No. ${order.id}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Placed on ${Formats.dateTime(order.createdAt)}',
+                      style: const TextStyle(color: AppColors.dark45),
+                    ),
+                  ],
+                ),
               ),
+              const Divider(),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Subtotal ()'),
+                        Text(Formats.money(order.total)),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Shipping Fee'),
+                        Text(Formats.money(0)),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Total (VAT Incl.)',
+                            style: TextStyle(fontSize: 16)),
+                        Text(Formats.money(order.total),
+                            style: const TextStyle(fontSize: 16)),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(),
             ],
           ),
         ),
-        const Divider(),
+        if (vm.isCanCancel(order))
+          WidgetButton(
+            onTap: () => vm.cancelOrder(order.id),
+            text: 'Cancel',
+            color: Colors.red,
+          )
+        else
+          const SizedBox()
       ],
+    );
+  }
+
+  Widget _header(OrderStatus status) {
+    var bgColor;
+    var text;
+
+    switch (status) {
+      case OrderStatus.pending:
+        bgColor = Colors.yellow;
+        text = 'Pending';
+        break;
+      case OrderStatus.completed:
+        bgColor = Colors.green;
+        text = 'Completed';
+        break;
+      case OrderStatus.cancelled:
+        bgColor = Colors.red;
+        text = 'Cancelled';
+        break;
+    }
+
+    return Container(
+      height: 80,
+      width: double.infinity,
+      color: bgColor,
+      padding: const EdgeInsets.only(right: 20),
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: Text(
+          text,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
     );
   }
 }

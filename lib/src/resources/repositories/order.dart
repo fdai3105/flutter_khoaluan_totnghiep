@@ -49,4 +49,15 @@ class OrderRepository {
       return e.response;
     }
   }
+
+  Future<Response> cancelOrder(int id) async {
+    final param = FormData.fromMap({'id': id});
+    try {
+      final data = await DioService(withToken: true)
+          .post(AppEndpoint.cancelOrder, data: param);
+      return data;
+    } on DioError catch (e) {
+      return e.response;
+    }
+  }
 }

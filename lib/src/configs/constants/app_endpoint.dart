@@ -1,8 +1,8 @@
 class AppEndpoint {
   AppEndpoint._();
 
-  static const String domain = 'https://67b36fab7c43.ngrok.io/';
-  static const String base = '$domain''api/';
+  static const String domain = 'https://d4ddb47743dc.ngrok.io/';
+  static const String base = '$domain' 'api/';
 
   ///
   static const String register = 'register';
@@ -42,4 +42,5 @@ class AppEndpoint {
   static const String checkout = 'checkout';
   static const String getOrders = 'orders';
   static const String getOrderDetail = 'order/';
+  static const String cancelOrder = 'order/cancel';
 }

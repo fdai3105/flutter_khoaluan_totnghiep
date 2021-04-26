@@ -21,22 +21,17 @@ class OrderViewModel extends BaseViewModel {
 
   Order get pendingOrders => orders.copyWith(
       data: orders.data
-          .where((element) => element.status == Status.pending)
-          .toList());
-
-  Order get toReceiveOrders => orders.copyWith(
-      data: orders.data
-          .where((element) => element.status == Status.toReceive)
+          .where((element) => element.status == OrderStatus.pending)
           .toList());
 
   Order get completedOrders => orders.copyWith(
       data: orders.data
-          .where((element) => element.status == Status.completed)
+          .where((element) => element.status == OrderStatus.completed)
           .toList());
 
   Order get cancelledOrders => orders.copyWith(
       data: orders.data
-          .where((element) => element.status == Status.cancelled)
+          .where((element) => element.status == OrderStatus.cancelled)
           .toList());
 
   Future init() async {

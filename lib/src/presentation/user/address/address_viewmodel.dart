@@ -44,8 +44,9 @@ class AddressViewModel extends BaseViewModel {
   }
 
   @override
-  Future dispose() {
-    _address.close();
+  Future dispose() async {
+    await _address.drain();
+    await _address.close();
     return super.dispose();
   }
 }
