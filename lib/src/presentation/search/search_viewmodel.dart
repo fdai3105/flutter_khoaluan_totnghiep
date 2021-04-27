@@ -6,7 +6,12 @@ import '../presentation.dart';
 class SearchViewModel extends BaseViewModel {
   final ProductResponse productResponse;
 
-  SearchViewModel({this.productResponse});
+  SearchViewModel({this.productResponse}) {
+    _keyWord.debounceTime(const Duration(milliseconds: 500)).listen((event) async {
+      print(event);
+      await _onSearching(event);
+    });
+  }
 
   final _keyWord = BehaviorSubject<String>();
   final _result = BehaviorSubject<Products>();
@@ -39,7 +44,7 @@ class SearchViewModel extends BaseViewModel {
     isLoading = false;
   }
 
-  Future onSearching(String keyWord) async {
+  Future _onSearching(String keyWord) async {
     isLoading = true;
     if (keyWord.isNotEmpty) {
       final resultRepo = await productResponse.searchProduct(keyWord);

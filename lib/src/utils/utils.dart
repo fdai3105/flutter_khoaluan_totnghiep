@@ -2,7 +2,6 @@ export 'routers.dart';
 export 'shared_pref.dart';
 export 'maths.dart';
 export 'formats.dart';
-
 import 'package:flutter/material.dart';
 import '../resources/resources.dart';
 
@@ -13,7 +12,7 @@ void snackBar(BuildContext context, String message) {
 
 MaterialColor statusColor(OrderStatus status) {
   MaterialColor color;
-  switch(status) {
+  switch (status) {
     case OrderStatus.pending:
       color = Colors.yellow;
       break;
@@ -22,6 +21,9 @@ MaterialColor statusColor(OrderStatus status) {
       break;
     case OrderStatus.cancelled:
       color = Colors.red;
+      break;
+    case OrderStatus.shipping:
+      color = Colors.teal;
       break;
   }
   return color;

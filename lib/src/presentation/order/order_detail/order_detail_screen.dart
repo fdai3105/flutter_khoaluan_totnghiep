@@ -204,28 +204,11 @@ class OrderDetailScreen extends StatelessWidget {
   }
 
   Widget _header(OrderStatus status) {
-    var bgColor;
     var text;
-
-    switch (status) {
-      case OrderStatus.pending:
-        bgColor = Colors.yellow;
-        text = 'Pending';
-        break;
-      case OrderStatus.completed:
-        bgColor = Colors.green;
-        text = 'Completed';
-        break;
-      case OrderStatus.cancelled:
-        bgColor = Colors.red;
-        text = 'Cancelled';
-        break;
-    }
-
     return Container(
       height: 80,
       width: double.infinity,
-      color: bgColor,
+      color: statusColor(status),
       padding: const EdgeInsets.only(right: 20),
       child: Align(
         alignment: Alignment.centerRight,

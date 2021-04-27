@@ -343,12 +343,14 @@ class OrderDatum {
 
 enum OrderStatus {
   pending,
+  shipping,
   completed,
   cancelled,
 }
 
 final statusValues = EnumValues({
   "Pending": OrderStatus.pending,
+  "Shipping": OrderStatus.shipping,
   "Completed": OrderStatus.completed,
   "Cancelled": OrderStatus.cancelled,
 });

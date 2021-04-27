@@ -15,10 +15,7 @@ class CartScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.clear_outlined),
-            onPressed: () {
-              pushNewScreen(context, screen: OrderSuccessScreen());
-              _vm.clearCart();
-            },
+            onPressed: () => _vm.clearCart(),
           ),
         ],
       ),

@@ -21,13 +21,14 @@ class SearchScreen extends StatelessWidget {
           builder: (context, vm, widget) {
             return Column(
               children: [
+                const SizedBox(height: 10),
                 WidgetInputSearch(
                   controller: controller,
                   padding: AppStyles.paddingBody,
                   autoFocus: true,
                   onChanged: (value) {
                     vm
-                      ..onSearching(value)
+                      ..keyWord = value
                       ..isSearching = true;
                   },
                   onSubmit: (value) {
@@ -35,10 +36,9 @@ class SearchScreen extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 10),
-                if (vm.isLoading)
-                  const Center(child: CircularProgressIndicator())
-                else
-                  _body(context, vm),
+                Expanded(
+                  child: vm.isLoading ? WidgetLoading() : _body(context, vm),
+                ),
               ],
             );
           },
@@ -48,10 +48,8 @@ class SearchScreen extends StatelessWidget {
   }
 
   Widget _body(BuildContext context, SearchViewModel vm) {
-    return Expanded(
-      child: SingleChildScrollView(
-        child: _result(context, vm),
-      ),
+    return SingleChildScrollView(
+      child: _result(context, vm),
     );
   }
 
@@ -76,7 +74,6 @@ class SearchScreen extends StatelessWidget {
                         baseOffset: item.name.length,
                         extentOffset: item.name.length);
                   vm
-                    ..onSearching(item.name)
                     ..keyWord = item.name
                     ..isSearching = false;
                 },

@@ -24,6 +24,11 @@ class OrderViewModel extends BaseViewModel {
           .where((element) => element.status == OrderStatus.pending)
           .toList());
 
+  Order get shippingOrders => orders.copyWith(
+      data: orders.data
+          .where((element) => element.status == OrderStatus.shipping)
+          .toList());
+
   Order get completedOrders => orders.copyWith(
       data: orders.data
           .where((element) => element.status == OrderStatus.completed)
@@ -48,7 +53,7 @@ class OrderViewModel extends BaseViewModel {
   }
 
   @override
-  Future dispose()  async{
+  Future dispose() async {
     await _orders.drain();
     await _orders.close();
     return super.dispose();
