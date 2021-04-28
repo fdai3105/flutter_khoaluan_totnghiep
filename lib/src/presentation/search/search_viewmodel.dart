@@ -1,14 +1,14 @@
-import '../../resources/resources.dart';
 import 'package:rxdart/rxdart.dart';
-
+import '../../resources/resources.dart';
 import '../presentation.dart';
 
 class SearchViewModel extends BaseViewModel {
   final ProductResponse productResponse;
 
   SearchViewModel({this.productResponse}) {
-    _keyWord.debounceTime(const Duration(milliseconds: 500)).listen((event) async {
-      print(event);
+    _keyWord
+        .debounceTime(const Duration(milliseconds: 500))
+        .listen((event) async {
       await _onSearching(event);
     });
   }
