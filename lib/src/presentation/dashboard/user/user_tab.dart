@@ -18,7 +18,7 @@ class UserTab extends StatelessWidget {
           return Column(
             children: [
               const WidgetAppBar(title: 'User', centerTitle: false),
-              const SizedBox(height: 20),
+              const SizedBox(height: 14),
               Material(
                 color: Colors.transparent,
                 child: InkWell(
@@ -30,7 +30,6 @@ class UserTab extends StatelessWidget {
                     );
                   },
                   child: Container(
-                    height: 80,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 14,
                       vertical: 10,
@@ -39,7 +38,7 @@ class UserTab extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 14),
               WidgetTile(
                 onTap: () => pushNewScreen(
                   context,
@@ -92,6 +91,19 @@ class UserTab extends StatelessWidget {
   }
 
   Widget _user(BuildContext context, UserTabViewModel vm) {
+    var avatar;
+    if (vm.user.user.avatar == null) {
+      avatar = Image.asset(
+        'assets/images/placeholder.jpg',
+        fit: BoxFit.cover,
+      );
+    } else {
+      avatar = Image.network(
+        AppEndpoint.domain + vm.user.user.avatar,
+        fit: BoxFit.cover,
+      );
+    }
+
     if (vm.isLoading) {
       return const Center(
         child: Padding(
@@ -107,23 +119,22 @@ class UserTab extends StatelessWidget {
           const SizedBox(width: 10),
           const Text(
             'Login',
-            style: TextStyle(
-              fontSize: 16,
-            ),
+            style: TextStyle(fontSize: 16),
           ),
         ],
       );
     }
     return Row(
       children: [
-        if (vm.user.user.avatar == null)
-          ClipOval(
-            child: Image.asset('assets/images/placeholder.jpg'),
-          )
-        else
-          ClipOval(
-            child: Image.asset('assets/images/placeholder.jpg'),
+        Container(
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.grey.shade300, width: 2),
           ),
+          child: ClipOval(child: avatar),
+        ),
         const SizedBox(width: 10),
         Flexible(
           fit: FlexFit.tight,

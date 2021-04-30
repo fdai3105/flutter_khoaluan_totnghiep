@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import '../../configs/configs.dart';
 import '../resources.dart';
@@ -59,8 +61,11 @@ class AuthRepository {
     }
   }
 
-  Future<Response> editUser(UserDatum user, String token) async {
-    final params = FormData.fromMap(user.toJson());
+  Future<Response> editUser(UserDatum user, File avatar) async {
+    final params = FormData.fromMap(
+      user.toJson()
+        ..addAll({'avatar': await MultipartFile.fromFile(avatar?.path)}),
+    );
     try {
       final response = await DioService(withToken: true).post(
         AppEndpoint.editUser,

@@ -16,7 +16,7 @@ class DioService extends DioForNative {
     );
   }
 
-  RequestOptions _request(RequestOptions options) {
+  void _request(RequestOptions options, RequestInterceptorHandler handler) {
     options
       ..connectTimeout = 120 * 1000 // 2 minute
       ..receiveTimeout = 120 * 1000 // 2 minute
@@ -25,14 +25,14 @@ class DioService extends DioForNative {
         'accept': 'application/json',
         'authorization': !withToken ? '' : 'Bearer ${SharedPref.getToken()}',
       };
-    return options;
+    handler.next(options);
   }
 
-  Response _response(Response response) {
-    return response;
+  void _response(Response response, ResponseInterceptorHandler handler) {
+    handler.next(response);
   }
 
-  DioError _error(DioError error) {
-    return error;
+  void _error(DioError error, ErrorInterceptorHandler handler) {
+    handler.next(error);
   }
 }
