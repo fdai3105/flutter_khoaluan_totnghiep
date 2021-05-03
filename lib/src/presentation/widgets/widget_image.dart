@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../configs/configs.dart';
 
@@ -20,11 +21,27 @@ class WidgetImage extends StatelessWidget {
         fit: BoxFit.cover,
       );
     } else {
-      return FadeInImage.assetNetwork(
-        image: AppEndpoint.domain + image,
-        width: double.infinity,
+      return CachedNetworkImage(
+        imageUrl: AppEndpoint.domain + image,
         fit: fit,
-        placeholder: 'assets/images/placeholder.jpg',
+        progressIndicatorBuilder: (context, url, progress) {
+          return Center(
+            child: CircularProgressIndicator(
+              value: progress.progress,
+              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+            ),
+          );
+        },
+        // placeholder: (context, url) {
+        //   return Center(child: const CircularProgressIndicator());
+        // },
+        errorWidget: (context, url, error) {
+          return Image.asset(
+            'assets/images/placeholder.jpg',
+            width: double.infinity,
+            fit: BoxFit.cover,
+          );
+        },
       );
     }
   }
