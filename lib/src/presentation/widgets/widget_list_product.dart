@@ -283,7 +283,7 @@ class WidgetListProduct extends StatelessWidget {
             );
           },
         ),
-        if (loadingMore) const Center(child: CircularProgressIndicator())
+        if (loadingMore) WidgetLoading()
       ],
     );
   }

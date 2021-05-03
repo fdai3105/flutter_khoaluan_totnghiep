@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../resources/repositories/comment.dart';
 import 'package:rxdart/rxdart.dart';
@@ -77,7 +78,7 @@ class CommentViewModel extends BaseViewModel {
     final rs = await response.editComment(editingSelect, controller.text);
     if (rs.statusCode == 200) {
       await fetchComments(productID);
-      editingSelect == null;
+      editingSelect = null;
       isEditing = false;
       controller.text = '';
     } else {

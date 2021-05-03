@@ -22,7 +22,7 @@ class SaleProductScreen extends StatelessWidget {
               child: WidgetListProduct(
                 onTap: (item) => pushNewScreen(
                   context,
-                  screen: ProductScreen(id: item.id),
+                  screen: ProductScreen(id: item.id, name: item.name),
                   withNavBar: false,
                 ),
                 product: vm.products,

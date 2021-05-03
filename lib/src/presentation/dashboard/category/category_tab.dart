@@ -27,7 +27,8 @@ class CategoryTab extends StatelessWidget {
     return Column(
       children: [
         const WidgetAppBar(title: 'Categories', centerTitle: false),
-        Expanded(
+        WidgetIndicator(
+          onRefresh: () => vm.init(),
           child: WidgetListCategory(
             onTap: (item) => pushNewScreen(
               context,

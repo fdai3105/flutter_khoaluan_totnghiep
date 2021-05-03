@@ -14,3 +14,4 @@ export 'widget_text_field.dart';
 export 'widget_button.dart';
 export 'widget_loading.dart';
 export 'widget_expansion.dart';
+export 'widget_indicator.dart';

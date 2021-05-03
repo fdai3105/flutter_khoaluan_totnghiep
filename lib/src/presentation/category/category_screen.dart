@@ -10,8 +10,12 @@ class CategoryScreen extends StatelessWidget {
   final String parentName;
   final String parentImage;
 
-  const CategoryScreen({Key key, this.id, this.parentName, this.parentImage})
-      : super(key: key);
+  const CategoryScreen({
+    Key key,
+    this.id,
+    this.parentName,
+    this.parentImage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,66 +40,68 @@ class CategoryScreen extends StatelessWidget {
   }
 
   Widget _body(BuildContext context, CategoryViewModel vm) {
-    if (vm.isLoading) {
-      return WidgetLoading();
-    } else {
-      return NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              expandedHeight: 200,
-              pinned: true,
-              backgroundColor: Colors.white,
-              elevation: 0,
-              iconTheme: IconThemeData(color: AppColors.dark),
-              title: Text(
-                parentName,
-                style: TextStyle(color: AppColors.dark),
+    return NestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
+        return <Widget>[
+          SliverAppBar(
+            expandedHeight: 200,
+            pinned: true,
+            backgroundColor: Colors.white,
+            elevation: 0,
+            iconTheme: IconThemeData(color: AppColors.dark),
+            title: Text(
+              parentName,
+              style: TextStyle(color: AppColors.dark),
+            ),
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.network(
+                AppEndpoint.domain + parentImage,
+                fit: BoxFit.cover,
               ),
-              flexibleSpace: FlexibleSpaceBar(
-                background: Image.network(
-                  AppEndpoint.domain + parentImage,
-                  fit: BoxFit.cover,
+            ),
+          ),
+        ];
+      },
+      body: vm.isLoading
+          ? WidgetLoading()
+          : WidgetIndicator(
+              expanded: false,
+              onRefresh: () => vm.init(id),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 20),
+                    WidgetListCategory(
+                      onTap: (item) => pushNewScreen(
+                        context,
+                        screen: SubCategoryScreen(
+                          id: item.id,
+                          name: item.name,
+                          image: item.image,
+                        ),
+                      ),
+                      category: vm.subCategory,
+                      axis: Axis.horizontal,
+                    ),
+                    const SizedBox(height: 20),
+                    WidgetListProduct(
+                      axis: Axis.vertical,
+                      showSeeAll: false,
+                      padding: AppStyles.paddingBody,
+                      product: vm.products,
+                      onTap: (item) {
+                        pushNewScreen(
+                          context,
+                          screen: ProductScreen(id: item.id,name: item.name),
+                          withNavBar: false,
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),
-          ];
-        },
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              WidgetListCategory(
-                onTap: (item) => pushNewScreen(
-                  context,
-                  screen: SubCategoryScreen(
-                    id: item.id,
-                    name: item.name,
-                    image: item.image,
-                  ),
-                ),
-                category: vm.subCategory,
-                axis: Axis.horizontal,
-              ),
-              const SizedBox(height: 20),
-              WidgetListProduct(
-                axis: Axis.vertical,
-                showSeeAll: false,
-                padding: AppStyles.paddingBody,
-                product: vm.products,
-                onTap: (item) {
-                  pushNewScreen(
-                    context,
-                    screen: ProductScreen(id: item.id),
-                    withNavBar: false,
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      );
-    }
+    );
   }
 }

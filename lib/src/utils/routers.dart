@@ -33,10 +33,10 @@ class Routes {
     selectAddress: (_) => const SelectAddressScreen(),
     orderSuccess: (_) => OrderSuccessScreen(),
     order: (_) => OrderScreen(),
-    favorite:(_) => FavoriteScreen(),
+    favorite: (_) => FavoriteScreen(),
     home: (_) => DashboardScreen(),
     category: (_) => const CategoryScreen(),
-    product: (_) => const ProductScreen(),
+    product: (_) => const ProductScreen(id: null, name: null),
     address: (_) => AddressScreen(),
     city: (_) => CityScreen(),
   };

@@ -22,7 +22,7 @@ class HomeViewModel extends BaseViewModel {
   final _scroll = BehaviorSubject<ScrollController>();
   final _loadingMore = BehaviorSubject<bool>();
 
-  int _page = 1;
+  int _page;
 
   User get user => _user.value;
 
@@ -76,6 +76,7 @@ class HomeViewModel extends BaseViewModel {
   Future init() async {
     isLoading = true;
 
+    _page = 1;
     scroll = ScrollController()
       ..addListener(() {
         if (scroll.offset >= scroll.position.maxScrollExtent &&

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../presentation.dart';
 import '../../../resources/resources.dart';
 import '../../../configs/configs.dart';
+import '../../../utils/shared_pref.dart';
 
 class CommentDialog extends StatelessWidget {
   final int productId;
@@ -128,9 +128,10 @@ class CommentDialog extends StatelessWidget {
             ListTile(
               onTap: () {
                 Navigator.pop(context);
-                vm.isEditing = true;
-                vm.editingSelect = comment.id;
-                vm.controller.text = comment.comment;
+                vm
+                  ..isEditing = true
+                  ..editingSelect = comment.id
+                  ..controller.text = comment.comment;
               },
               leading: const Icon(Icons.edit_rounded),
               title: const Text('Edit'),

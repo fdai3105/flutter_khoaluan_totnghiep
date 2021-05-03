@@ -66,25 +66,29 @@ class SubCategoryScreen extends StatelessWidget {
       if (vm.products.data.isEmpty) {
         return const Center(child: Text('Nothing to show'));
       }
-      return SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
-            WidgetListProduct(
-              axis: Axis.vertical,
-              showSeeAll: false,
-              padding: AppStyles.paddingBody,
-              product: vm.products,
-              onTap: (item) {
-                pushNewScreen(
-                  context,
-                  screen: ProductScreen(id: item.id),
-                  withNavBar: false,
-                );
-              },
-            ),
-          ],
+      return WidgetIndicator(
+        expanded: false,
+        onRefresh: () => vm.init(id),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              WidgetListProduct(
+                axis: Axis.vertical,
+                showSeeAll: false,
+                padding: AppStyles.paddingBody,
+                product: vm.products,
+                onTap: (item) {
+                  pushNewScreen(
+                    context,
+                    screen: ProductScreen(id: item.id, name: item.name),
+                    withNavBar: false,
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       );
     }

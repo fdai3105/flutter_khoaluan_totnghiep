@@ -1,7 +1,7 @@
-import 'package:khoaluan_totnghiep_mobile/src/utils/shared_pref.dart';
 import 'package:rxdart/rxdart.dart';
+import '../../utils/utils.dart';
 import '../../resources/resources.dart';
-import '../base/base.dart';
+import '../presentation.dart';
 
 class FavoriteViewModel extends BaseViewModel {
   final _favorites = BehaviorSubject<List<ProductDatum>>();

@@ -120,7 +120,7 @@ class SearchScreen extends StatelessWidget {
               product: vm.result,
               onTap: (item) => pushNewScreen(
                 context,
-                screen: ProductScreen(id: item.id),
+                screen: ProductScreen(id: item.id, name: item.name),
               ),
               showSeeAll: false,
               axis: Axis.vertical,

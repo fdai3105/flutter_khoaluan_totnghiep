@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../configs/configs.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../resources/repositories/repositories.dart';
 import '../../presentation.dart';
 
@@ -45,10 +44,9 @@ class AddressScreen extends StatelessWidget {
         child: Text('Nothing in here, please add your address'),
       );
     }
-    return RefreshIndicator(
-      onRefresh: () async {
-        await vm.init();
-      },
+    return WidgetIndicator(
+      expanded: false,
+      onRefresh: () => vm.init(),
       child: ListView.builder(
         padding: AppStyles.paddingBody,
         itemCount: vm.address.data.length,

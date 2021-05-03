@@ -13,14 +13,21 @@ import 'product.dart';
 
 class ProductScreen extends StatelessWidget {
   final int id;
+  final String name;
 
-  const ProductScreen({Key key, this.id}) : super(key: key);
+  const ProductScreen({
+    Key key,
+    @required this.id,
+    @required this.name,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: WidgetAppBar(
+        title: name,
+        centerTitle: false,
         actions: [
           IconButton(
               icon: const Icon(Icons.shopping_cart_outlined),
@@ -48,7 +55,8 @@ class ProductScreen extends StatelessWidget {
             } else {
               return Column(
                 children: [
-                  Expanded(
+                  WidgetIndicator(
+                    onRefresh: () => vm.init(id),
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
@@ -147,7 +155,7 @@ class ProductScreen extends StatelessWidget {
                           WidgetListProduct(
                             onTap: (item) => pushNewScreen(
                               context,
-                              screen: ProductScreen(id: item.id),
+                              screen: ProductScreen(id: item.id,name: item.name),
                             ),
                             product: vm.similarProducts,
                             label: 'More like this',
@@ -257,14 +265,12 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
             items: widget.images.map((e) {
               return Image.network(
                 AppEndpoint.domain + e.image,
-                width: double.infinity,
-                fit: BoxFit.fitHeight,
               );
             }).toList(),
             options: CarouselOptions(
                 autoPlay: true,
-                height: 300,
                 viewportFraction: 1,
+                height: 420,
                 onPageChanged: (index, reason) {
                   setState(() {
                     _current = index + 1;
@@ -278,7 +284,7 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             margin: const EdgeInsets.only(bottom: 10, right: 10),
             decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.7),
+                color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(10)),
             child: widget.images.isEmpty
                 ? const Text('0/0')
