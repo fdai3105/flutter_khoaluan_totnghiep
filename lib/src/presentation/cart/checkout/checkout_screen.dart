@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -207,12 +208,13 @@ class CheckoutScreen extends StatelessWidget {
                 width: 80,
               );
             } else {
-              image = FadeInImage.assetNetwork(
-                image: AppEndpoint.domain + item.product.images.first.image,
+              image = CachedNetworkImage(
+                imageUrl: AppEndpoint.domain + item.product.images.first.image,
                 height: 80,
                 width: 80,
                 fit: BoxFit.cover,
-                placeholder: 'assets/images/placeholder.jpg',
+                placeholder: (context, url) =>
+                    Image.asset('assets/images/placeholder.jpg'),
               );
             }
 

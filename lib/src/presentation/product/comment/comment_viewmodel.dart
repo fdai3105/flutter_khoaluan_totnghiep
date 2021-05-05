@@ -81,8 +81,6 @@ class CommentViewModel extends BaseViewModel {
       editingSelect = null;
       isEditing = false;
       controller.text = '';
-    } else {
-      print(rs.data);
     }
   }
 

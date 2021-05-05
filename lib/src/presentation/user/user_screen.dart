@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../resources/repositories/auth.dart';
@@ -79,13 +80,18 @@ class UserScreen extends StatelessWidget {
 
   Widget _avatar(BuildContext context, UserViewModel vm) {
     var image;
-    print(vm.user.user);
     if (vm.user.user.avatar != null) {
-      image = Image.network(
-        AppEndpoint.domain + vm.user.user.avatar,
+      image = CachedNetworkImage(
+        imageUrl: AppEndpoint.domain + vm.user.user.avatar,
         height: 100,
         width: 100,
         fit: BoxFit.cover,
+        placeholder: (context, url) {
+          return Image.asset('assets/images/placeholder.jpg');
+        },
+        errorWidget: (context, url, err) {
+          return Image.asset('assets/images/placeholder.jpg');
+        },
       );
     } else {
       image = Image.asset(
@@ -107,7 +113,7 @@ class UserScreen extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         final pickedFile =
-            await ImagePicker().getImage(source: ImageSource.camera);
+            await ImagePicker().getImage(source: ImageSource.gallery);
         if (pickedFile != null) {
           vm.avatar = File(pickedFile.path);
         }

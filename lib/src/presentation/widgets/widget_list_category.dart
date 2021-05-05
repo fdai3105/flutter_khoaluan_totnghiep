@@ -44,7 +44,6 @@ class WidgetListCategory extends StatelessWidget {
         itemCount: category.data.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           childAspectRatio: 1 / 0.8,
         ),
@@ -57,7 +56,7 @@ class WidgetListCategory extends StatelessWidget {
 
   Widget _horizontal(BuildContext context) {
     return SizedBox(
-      height: 290,
+      height: 260,
       width: double.infinity,
       child: GridView.builder(
         shrinkWrap: true,
@@ -66,7 +65,7 @@ class WidgetListCategory extends StatelessWidget {
         padding: AppStyles.paddingBody,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 2 / 3,
+          childAspectRatio: 2 / 2.2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
         ),
@@ -79,7 +78,7 @@ class WidgetListCategory extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 116,
+                  height: 100,
                   child: WidgetImage(
                     image: item.image,
                     fit: BoxFit.cover,

@@ -64,7 +64,11 @@ class AuthRepository {
   Future<Response> editUser(UserDatum user, File avatar) async {
     final params = FormData.fromMap(
       user.toJson()
-        ..addAll({'avatar': await MultipartFile.fromFile(avatar?.path)}),
+        ..addAll({
+          'avatar': avatar == null
+              ? ''
+              : await MultipartFile.fromFile(avatar?.path)
+        }),
     );
     try {
       final response = await DioService(withToken: true).post(

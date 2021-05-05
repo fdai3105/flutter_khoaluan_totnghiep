@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import '../../configs/configs.dart';
 
 class WidgetLoading extends StatelessWidget {
+  final double progress;
+
+  const WidgetLoading({Key key, this.progress}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return  Center(
       child: CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+        valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+        value: progress,
       ),
     );
   }

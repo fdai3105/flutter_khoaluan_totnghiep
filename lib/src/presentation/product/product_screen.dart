@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -155,7 +156,8 @@ class ProductScreen extends StatelessWidget {
                           WidgetListProduct(
                             onTap: (item) => pushNewScreen(
                               context,
-                              screen: ProductScreen(id: item.id,name: item.name),
+                              screen:
+                                  ProductScreen(id: item.id, name: item.name),
                             ),
                             product: vm.similarProducts,
                             label: 'More like this',
@@ -263,8 +265,22 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
           CarouselSlider(
             carouselController: _carouselController,
             items: widget.images.map((e) {
-              return Image.network(
-                AppEndpoint.domain + e.image,
+              return CachedNetworkImage(
+                imageUrl: AppEndpoint.domain + e.image,
+                progressIndicatorBuilder: (context, url, progress) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value: progress.progress,
+                      valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                    ),
+                  );
+                },
+                errorWidget: (context, url, error) {
+                  return Image.asset(
+                    'assets/images/placeholder.jpg',
+                    fit: BoxFit.cover,
+                  );
+                },
               );
             }).toList(),
             options: CarouselOptions(
@@ -282,7 +298,7 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
           right: 0,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            margin: const EdgeInsets.only(bottom: 10, right: 10),
+            margin: const EdgeInsets.only(bottom: 20, right: 10),
             decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(10)),

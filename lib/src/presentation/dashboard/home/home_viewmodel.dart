@@ -121,13 +121,22 @@ class HomeViewModel extends BaseViewModel {
     }
   }
 
+  int countCart() {
+    return SharedPref.getCarts()?.length ?? 0;
+  }
+
   @override
-  Future dispose() {
-    _user.close();
-    _popular.close();
-    _newArrivals.close();
-    _sale.close();
-    _products.close();
+  Future dispose() async {
+    await _user.drain();
+    await _user.close();
+    await _popular.drain();
+    await _popular.close();
+    await _newArrivals.drain();
+    await _newArrivals.close();
+    await _sale.drain();
+    await _sale.close();
+    await _products.drain();
+    await _products.close();
     return super.dispose();
   }
 }

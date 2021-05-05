@@ -1,6 +1,9 @@
+import 'package:badges/badges.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../presentation.dart';
 import '../../../resources/resources.dart';
 import '../../../configs/configs.dart';
@@ -29,7 +32,7 @@ class HomeTab extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _appBar(context, vm.user),
+        _appBar(context, vm),
         WidgetIndicator(
           onRefresh: () => vm.init(),
           child: SingleChildScrollView(
@@ -143,52 +146,39 @@ class HomeTab extends StatelessWidget {
     );
   }
 
-  Widget _appBar(BuildContext context, User user) {
-    var avatar = GestureDetector(
-      onTap: () => pushNewScreen(
-        context,
-        screen: LoginScreen(),
-        withNavBar: false,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: ClipOval(
-          child: Image.asset('assets/images/place_user.png'),
-        ),
-      ),
-    );
-    if (user != null) {
-      avatar = GestureDetector(
+  Widget _appBar(BuildContext context, HomeViewModel vm) {
+    return WidgetAppBar(
+      leading: GestureDetector(
         onTap: () => pushNewScreen(
           context,
-          screen: UserScreen(),
+          screen: vm.user == null ? LoginScreen() : UserScreen(),
           withNavBar: false,
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: ClipOval(
-            child: user.user.avatar == null
-                ? Image.asset('assets/images/place_user.png')
-                : Image.network(AppEndpoint.domain + user.user.avatar),
-          ),
-        ),
-      );
-    }
-    return WidgetAppBar(
-      leading: avatar,
+        child: WidgetAvatar(image: vm.user?.user?.avatar),
+      ),
       actions: [
-        IconButton(
-          icon: const Icon(
-            Icons.shopping_cart_outlined,
-            color: AppColors.primary,
+        Badge(
+          position: BadgePosition.topEnd(top: 4, end: 4),
+          padding: const EdgeInsets.all(6),
+          badgeContent: Text(
+            vm.countCart().toString(),
+            style: const TextStyle(
+              color: Colors.white,
+            ),
           ),
-          onPressed: () {
-            pushNewScreen(
-              context,
-              screen: CartScreen(),
-              withNavBar: false,
-            );
-          },
+          child: IconButton(
+            icon: const Icon(
+              Icons.shopping_cart_outlined,
+              color: AppColors.primary,
+            ),
+            onPressed: () {
+              pushNewScreen(
+                context,
+                screen: CartScreen(),
+                withNavBar: false,
+              );
+            },
+          ),
         )
       ],
     );

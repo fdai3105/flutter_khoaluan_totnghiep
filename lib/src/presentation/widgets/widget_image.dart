@@ -38,7 +38,6 @@ class WidgetImage extends StatelessWidget {
         errorWidget: (context, url, error) {
           return Image.asset(
             'assets/images/placeholder.jpg',
-            width: double.infinity,
             fit: BoxFit.cover,
           );
         },

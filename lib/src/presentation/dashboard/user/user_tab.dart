@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../utils/utils.dart';
@@ -91,31 +92,16 @@ class UserTab extends StatelessWidget {
   }
 
   Widget _user(BuildContext context, UserTabViewModel vm) {
-    var avatar;
-    if (vm.user.user.avatar == null) {
-      avatar = Image.asset(
-        'assets/images/placeholder.jpg',
-        fit: BoxFit.cover,
-      );
-    } else {
-      avatar = Image.network(
-        AppEndpoint.domain + vm.user.user.avatar,
-        fit: BoxFit.cover,
-      );
-    }
-
-    if (vm.isLoading) {
-      return const Center(
-        child: Padding(
-          padding: EdgeInsets.all(18),
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
     if (vm.user == null) {
       return Row(
         children: [
-          ClipOval(child: Image.asset('assets/images/placeholder.jpg')),
+          Container(
+            height: 60,
+            width: 60,
+            child: ClipOval(
+              child: Image.asset('assets/images/placeholder.jpg'),
+            ),
+          ),
           const SizedBox(width: 10),
           const Text(
             'Login',
@@ -123,45 +109,41 @@ class UserTab extends StatelessWidget {
           ),
         ],
       );
+    } else {
+      return Row(
+        children: [
+          WidgetAvatar(
+            size: 60,
+            image: vm.user.user.avatar,
+          ),
+          const SizedBox(width: 10),
+          Flexible(
+            fit: FlexFit.tight,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Hi, ${vm.user.user.name}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                const Text(
+                  'edit you profile',
+                  style: TextStyle(
+                    color: AppColors.dark45,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Icon(Icons.arrow_forward_ios_outlined, size: 14),
+        ],
+      );
     }
-    return Row(
-      children: [
-        Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: Colors.grey.shade300, width: 2),
-          ),
-          child: ClipOval(child: avatar),
-        ),
-        const SizedBox(width: 10),
-        Flexible(
-          fit: FlexFit.tight,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Hi, ${vm.user.user.name}',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 2),
-              const Text(
-                'edit you profile',
-                style: TextStyle(
-                  color: AppColors.dark45,
-                  fontSize: 12,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const Icon(Icons.arrow_forward_ios_outlined, size: 14),
-      ],
-    );
   }
 }

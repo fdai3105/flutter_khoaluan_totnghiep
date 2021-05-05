@@ -40,12 +40,16 @@ class UserViewModel extends BaseViewModel {
   }
 
   Future submit(String name, int gender) async {
+    final loading = DialogLoading.of(context)..show();
+
     final user = UserDatum(name: name, gender: gender);
     final response = await authRepository.editUser(user, avatar);
     if (response.statusCode == 200) {
       await SharedPref.updatedUser(UserDatum.fromJson(response.data['data']));
       Phoenix.rebirth(context);
     }
+
+    loading.hide();
   }
 
   @override

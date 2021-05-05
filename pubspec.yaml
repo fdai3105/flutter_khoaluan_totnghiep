@@ -42,6 +42,7 @@ dependencies:
   url_launcher: ^6.0.3
   image_picker: ^0.7.4
   cached_network_image: ^3.0.0
+  badges: ^1.2.0
 
   # states
   provider: ^5.0.0

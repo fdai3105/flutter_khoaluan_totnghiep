@@ -141,8 +141,6 @@ class AddAddressViewModel extends BaseViewModel {
         await addressRepository.addAddress(data, SharedPref.getToken());
     if (result.statusCode == 200) {
       Navigator.pop(context);
-    } else {
-      print(result.data);
     }
   }
 
