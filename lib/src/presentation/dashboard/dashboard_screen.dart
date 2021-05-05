@@ -12,7 +12,7 @@ class DashboardScreen extends StatelessWidget {
       icon: const Icon(Icons.home_outlined),
       title: "Home",
       activeColorPrimary: AppColors.primary,
-      inactiveColorPrimary: CupertinoColors.systemGrey,
+      inactiveColorPrimary: Colors.grey,
       routeAndNavigatorSettings: RouteAndNavigatorSettings(
         initialRoute: '/',
         routes: Routes.routes,
@@ -42,12 +42,15 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       body: SafeArea(
         child: PersistentTabView(
           context,
           screens: _screens,
           items: _items,
+          backgroundColor: theme.backgroundColor,
           popActionScreens: PopActionScreensType.all,
           navBarStyle: NavBarStyle.style12,
         ),

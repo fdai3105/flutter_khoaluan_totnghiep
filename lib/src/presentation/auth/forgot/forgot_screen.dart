@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
 import 'package:regexpattern/regexpattern.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
@@ -6,10 +7,12 @@ import '../../presentation.dart';
 class ForgotScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     String email;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.backgroundColor,
       appBar: const WidgetAppBar(title: 'Find your account'),
       body: SafeArea(
         child: BaseWidget<ForgotViewModel>(
@@ -39,6 +42,8 @@ class ForgotScreen extends StatelessWidget {
                         if (exp.hasMatch(email)) {
                           vm.forgotPassword(email);
                         }
+                      } else {
+                        snackBar(context, 'Please enter your email');
                       }
                     },
                     text: 'Find Your Account',

@@ -16,6 +16,8 @@ class WidgetInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Flexible(
       child: Container(
         decoration: BoxDecoration(
@@ -26,8 +28,10 @@ class WidgetInput extends StatelessWidget {
           onChanged: onChanged,
           initialValue: value ?? '',
           readOnly: readOnly,
+          style: theme.textTheme.subtitle2,
           decoration: InputDecoration(
             hintText: hint ?? '',
+            hintStyle: TextStyle(color: theme.hintColor),
             contentPadding: const EdgeInsets.symmetric(
               vertical: 14,
               horizontal: 14,

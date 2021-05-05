@@ -7,6 +7,8 @@ import '../../presentation.dart';
 class ResendMailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: const WidgetAppBar(

@@ -13,13 +13,10 @@ class LoginScreen extends StatelessWidget {
     String email;
     String password;
 
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: AppColors.dark),
-      ),
+      backgroundColor: theme.backgroundColor,
+      appBar: const WidgetAppBar(),
       body: SafeArea(
         top: false,
         child: BaseWidget<LoginViewModel>(
@@ -70,12 +67,13 @@ class LoginScreen extends StatelessWidget {
                             Navigator.pushNamed(context, Routes.forgot);
                           },
                           style: ButtonStyle(
-                              overlayColor: MaterialStateProperty.all(
-                                  Colors.transparent)),
-                          child: const Text(
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                          ),
+                          child: Text(
                             'Forgot password?',
-                            style: TextStyle(
-                              color: AppColors.dark45,
+                            style: theme.textTheme.subtitle1.copyWith(
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
@@ -86,10 +84,9 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       "Don't have an account? ",
-                      style: TextStyle(
-                        color: AppColors.dark45,
+                      style: theme.textTheme.subtitle1.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),

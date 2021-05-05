@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
 import 'src/utils/utils.dart';
 import 'src/presentation/presentation.dart';
 
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
       home: DashboardScreen(),
       initialRoute: Routes.home,
       routes: Routes.routes,
+      themeMode: ThemeMode.dark,
+      theme: AppStyles.lightMode(),
+      darkTheme: AppStyles.darkMode(context),
     );
   }
 }

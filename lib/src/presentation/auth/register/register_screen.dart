@@ -10,8 +10,10 @@ import '../../../configs/configs.dart';
 class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: const WidgetAppBar(title: 'Register'),
       body: SafeArea(
         child: BaseWidget<RegisterViewModel>(
@@ -36,6 +38,7 @@ class RegisterScreen extends StatelessWidget {
                   Expanded(
                     child: PageView(
                       controller: vm.pageController,
+                      physics: const NeverScrollableScrollPhysics(),
                       onPageChanged: (index) => vm.pageIndex = index,
                       children: bodies( context, vm),
                     ),
@@ -67,23 +70,20 @@ class RegisterScreen extends StatelessWidget {
   }
 
   Widget _namedBody(BuildContext context, RegisterViewModel vm) {
+    final theme =Theme.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 60),
-        const Text(
+         Text(
           'What\'t your name?',
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
+          style: theme.textTheme.bodyText1
         ),
         const SizedBox(height: 10),
-        const Text(
+        Text(
           'Enter the name you use in real life.',
-          style: TextStyle(
-            color: AppColors.dark45,
-          ),
+          style: theme.textTheme.subtitle1,
         ),
         const SizedBox(height: 30),
         Row(

@@ -11,8 +11,10 @@ import '../../../configs/configs.dart';
 class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
-      color: Colors.white,
+      color: theme.backgroundColor,
       child: BaseWidget<HomeViewModel>(
         viewModel: HomeViewModel(
           authRepository: AuthRepository(),
@@ -29,6 +31,8 @@ class HomeTab extends StatelessWidget {
   }
 
   Widget _body(BuildContext context, HomeViewModel vm) {
+    final theme = Theme.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -45,11 +49,12 @@ class HomeTab extends StatelessWidget {
                   padding: AppStyles.paddingBody,
                   child: Text(
                     'Best Furniture\nin your home.',
-                    style: TextStyle(
+                    /*style: TextStyle(
                       color: AppColors.dark,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                    ),
+                    ),*/
+                    style: theme.textTheme.headline6,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -126,6 +131,7 @@ class HomeTab extends StatelessWidget {
                   product: vm.products,
                   axis: Axis.vertical,
                   label: 'All furniture',
+                  showSeeAll: false,
                   padding: AppStyles.paddingBody,
                   loadingMore: vm.loadingMore,
                   seeAll: () {},

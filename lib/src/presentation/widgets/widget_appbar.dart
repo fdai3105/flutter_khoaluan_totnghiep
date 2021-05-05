@@ -18,18 +18,18 @@ class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.backgroundColor,
       elevation: 0,
       leading: leading,
       centerTitle: centerTitle,
       title: Text(
         title ?? '',
-        style: TextStyle(
-          color: Colors.grey.shade800,
-        ),
+        style: theme.textTheme.headline6,
       ),
-      iconTheme: const IconThemeData(color: Colors.grey),
+      iconTheme: theme.iconTheme,
       actions: actions,
       bottom: bottom,
     );
@@ -37,6 +37,5 @@ class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize =>
-      Size.fromHeight(
-          kToolbarHeight + (bottom?.preferredSize?.height ?? 0));
+      Size.fromHeight(kToolbarHeight + (bottom?.preferredSize?.height ?? 0));
 }

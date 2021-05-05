@@ -33,36 +33,11 @@ class WidgetListProduct extends StatelessWidget {
   static const double horizonHeight = 200;
   static const double verticalRatio = 0.85;
 
-  ///
-  static final TextStyle nameStyle = TextStyle(
-    color: AppColors.dark,
-    fontWeight: FontWeight.w600,
-  );
-
-  ///
-  static final TextStyle priceStyle = TextStyle(
-    color: AppColors.dark,
-    fontWeight: FontWeight.w600,
-  );
-
-  ///
-  static final TextStyle titleStyle = TextStyle(
-    fontSize: 16,
-    color: AppColors.dark,
-    fontWeight: FontWeight.w600,
-  );
-
-  ///
-  static const TextStyle buttonTextStyle = TextStyle(
-    color: AppColors.dark45,
-    fontWeight: FontWeight.w500,
-  );
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (label == null && !showSeeAll) const SizedBox() else _title(),
+        if (label == null && !showSeeAll) const SizedBox() else _title(context),
         if (axis == Axis.vertical) _vertical(context) else _horizon(context),
       ],
     );
@@ -70,7 +45,7 @@ class WidgetListProduct extends StatelessWidget {
 
   /// horizon list
   Widget _horizon(BuildContext context) {
-    if (product == null) {
+    if (true) {
       return _horizonShimmer(context);
     } else {
       if (product.data.isEmpty) {
@@ -81,6 +56,8 @@ class WidgetListProduct extends StatelessWidget {
   }
 
   Widget _horizonList(BuildContext context) {
+    final theme = Theme.of(context);
+
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: horizonHeight,
@@ -103,7 +80,7 @@ class WidgetListProduct extends StatelessWidget {
                   top: 10,
                 ),
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).backgroundColor,
                     borderRadius: AppStyles.radiusNormal,
                     border: Border.all(color: AppColors.dark45)),
                 child: Column(
@@ -131,7 +108,7 @@ class WidgetListProduct extends StatelessWidget {
                 top: 10,
               ),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: theme.cardColor,
                 borderRadius: AppStyles.radiusNormal,
                 boxShadow: AppStyles.shadow,
               ),
@@ -149,10 +126,11 @@ class WidgetListProduct extends StatelessWidget {
                           item.name ?? "",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: nameStyle,
+                          style: /*nameStyle*/ theme.textTheme.bodyText2,
                         ),
                         const SizedBox(height: 4),
-                        _money(item.discount, item.price),
+                        _money(item.discount, item.price,
+                            theme.textTheme.bodyText2),
                       ],
                     ),
                   ),
@@ -166,6 +144,8 @@ class WidgetListProduct extends StatelessWidget {
   }
 
   Widget _horizonShimmer(BuildContext context) {
+    final theme = Theme.of(context);
+
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: horizonHeight,
@@ -185,13 +165,13 @@ class WidgetListProduct extends StatelessWidget {
               top: 10,
             ),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).cardColor,
               borderRadius: AppStyles.radiusNormal,
               boxShadow: AppStyles.shadow,
             ),
             child: Shimmer.fromColors(
-              baseColor: Colors.grey[300],
-              highlightColor: Colors.grey[100],
+              baseColor: theme.cardColor,
+              highlightColor: Colors.grey.shade700,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,9 +182,9 @@ class WidgetListProduct extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(color: Colors.grey, height: 6),
+                        Container(color: Colors.white, height: 6),
                         const SizedBox(height: 4),
-                        Container(color: Colors.grey, height: 6),
+                        Container(color: Colors.white, height: 6),
                       ],
                     ),
                   ),
@@ -230,6 +210,8 @@ class WidgetListProduct extends StatelessWidget {
   }
 
   Widget _verticalList(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Column(
       children: [
         GridView.builder(
@@ -250,7 +232,7 @@ class WidgetListProduct extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: theme.cardColor,
                   borderRadius: AppStyles.radiusNormal,
                   boxShadow: AppStyles.shadow,
                 ),
@@ -258,8 +240,8 @@ class WidgetListProduct extends StatelessWidget {
                   children: [
                     Flexible(
                       flex: 1,
-                      fit: FlexFit.tight,
-                      child: _imageItem(item.images),
+                      fit: FlexFit.loose,
+                      child: SizedBox(width: double.infinity,child: _imageItem(item.images)),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10),
@@ -270,10 +252,9 @@ class WidgetListProduct extends StatelessWidget {
                             item.name ?? '',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: nameStyle,
+                            style: theme.textTheme.bodyText1,
                           ),
-                          const SizedBox(height: 2),
-                          _money(item.discount, item.price),
+                          _money(item.discount, item.price, theme.textTheme.bodyText1),
                         ],
                       ),
                     ),
@@ -283,7 +264,7 @@ class WidgetListProduct extends StatelessWidget {
             );
           },
         ),
-        if (loadingMore) WidgetLoading()
+        if (loadingMore) const WidgetLoading()
       ],
     );
   }
@@ -346,7 +327,7 @@ class WidgetListProduct extends StatelessWidget {
   }
 
   ///
-  Widget _title() {
+  Widget _title(BuildContext context) {
     return Padding(
       padding: padding,
       child: Row(
@@ -354,16 +335,16 @@ class WidgetListProduct extends StatelessWidget {
         children: [
           Text(
             label ?? '',
-            style: titleStyle,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
           if (!showSeeAll)
             const SizedBox()
           else
             GestureDetector(
               onTap: seeAll,
-              child: const Text(
+              child: Text(
                 'See all',
-                style: buttonTextStyle,
+                style: Theme.of(context).textTheme.subtitle1,
               ),
             )
         ],
@@ -374,17 +355,17 @@ class WidgetListProduct extends StatelessWidget {
   Widget _imageItem(List<ProductImage> images) {
     return ClipRRect(
       borderRadius: BorderRadius.vertical(top: AppStyles.radiusNormal.topRight),
-      child: WidgetImage(image: images.isEmpty ? null : images.first.image),
+      child: WidgetImage(image: images.isEmpty ? null : images.first.image,fit: BoxFit.cover),
     );
   }
 
-  Widget _money(int discount, int price) {
+  Widget _money(int discount, int price, TextStyle style) {
     if (discount == 0) {
       return Align(
         alignment: Alignment.centerRight,
         child: Text(
           Formats.money(price),
-          style: priceStyle,
+          style: /*priceStyle*/ style,
         ),
       );
     } else {
@@ -392,11 +373,11 @@ class WidgetListProduct extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text(Formats.money(p), style: priceStyle),
+          Text(Formats.money(p), style: /*priceStyle*/ style),
           const SizedBox(width: 4),
           Text(
             Formats.money(price),
-            style: priceStyle.copyWith(
+            style: style.copyWith(
               fontSize: 10,
               decoration: TextDecoration.lineThrough,
             ),
