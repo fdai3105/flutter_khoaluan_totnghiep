@@ -1,13 +1,19 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import '../../../presentation.dart';
+
+// Package imports:
+import 'package:get/get.dart';
+
+// Project imports:
 import '../../../../resources/resources.dart';
+import '../../../presentation.dart';
 
 class CityScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: const WidgetAppBar(title: 'City'),
+      appBar: WidgetAppBar(title: 'city'.tr),
       body: SafeArea(
         child: FutureBuilder<List<City>>(
             future: AddressRepository().getCities(),

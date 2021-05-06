@@ -1,9 +1,15 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
-import '../../resources/resources.dart';
+
+// Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:get/get.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
-import '../../utils/utils.dart';
 import '../../presentation/presentation.dart';
+import '../../resources/resources.dart';
+import '../../utils/utils.dart';
 
 class CartScreen extends StatelessWidget {
   @override
@@ -158,6 +164,7 @@ class CartScreen extends StatelessWidget {
                     },
                   ),
                 ),
+                const Divider(color: AppColors.dark45, height: 0),
                 Container(
                   color: theme.cardColor,
                   child: Row(
@@ -168,7 +175,7 @@ class CartScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                const Text('Total: '),
+                                Text('${'total'.tr}: '),
                                 Text(
                                   Formats.money(Maths.calTotalCart(vm.carts)),
                                   style: const TextStyle(
@@ -182,7 +189,7 @@ class CartScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                const Text('Items: '),
+                                Text('${'items'.tr}: '),
                                 Text(
                                   vm.carts.length.toString(),
                                   style: const TextStyle(
@@ -207,10 +214,10 @@ class CartScreen extends StatelessWidget {
                           decoration: const BoxDecoration(
                             color: AppColors.primary,
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              'Check out',
-                              style: TextStyle(
+                              'check_out'.tr,
+                              style:const  TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,

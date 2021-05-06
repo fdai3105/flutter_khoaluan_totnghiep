@@ -1,10 +1,15 @@
-import 'src/utils/shared_pref.dart';
+// Package imports:
+import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'src/presentation/base/base.dart';
+// Project imports:
+import 'src/configs/configs.dart';
+import 'src/presentation/presentation.dart';
+import 'src/utils/utils.dart';
 
 class MainViewModel extends BaseViewModel {
   final _darkMode = BehaviorSubject<bool>();
+  final _language = BehaviorSubject<Language>();
 
   bool get darkMode => _darkMode.value;
 
@@ -14,11 +19,28 @@ class MainViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  Language get language => _language.value;
+
+  set language(Language value) {
+    _language.add(value);
+    SharedPref.setLanguage(language);
+    Get.updateLocale(AppTranslations.getLocale(language));
+    notifyListeners();
+  }
+
   Future init() async {
     isLoading = true;
 
     darkMode = SharedPref.isDarkMode();
+    language = SharedPref.getLanguage();
 
     isLoading = false;
+  }
+
+  @override
+  Future dispose() {
+    _darkMode.close();
+    _language.close();
+    return super.dispose();
   }
 }

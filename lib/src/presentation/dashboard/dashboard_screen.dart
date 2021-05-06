@@ -1,8 +1,13 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import '../../utils/routers.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
+import '../../utils/routers.dart';
 import '../presentation.dart';
 
 class DashboardScreen extends StatelessWidget {

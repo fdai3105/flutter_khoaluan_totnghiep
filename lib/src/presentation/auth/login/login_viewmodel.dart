@@ -1,9 +1,14 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import '../../presentation.dart';
-import '../../../utils/utils.dart';
+
+// Project imports:
 import '../../../resources/resources.dart';
+import '../../../utils/utils.dart';
+import '../../presentation.dart';
 
 class LoginViewModel extends BaseViewModel {
   final AuthRepository authRepository;

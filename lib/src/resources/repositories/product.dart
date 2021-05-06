@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:dio/dio.dart';
-import '../resources.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
+import '../resources.dart';
 
 class ProductResponse {
   Future<Response> getProduct(int id) async {

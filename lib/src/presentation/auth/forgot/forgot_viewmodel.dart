@@ -1,7 +1,13 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import '../../presentation.dart';
+
+// Package imports:
+import 'package:get/get.dart';
+
+// Project imports:
 import '../../../resources/repositories/auth.dart';
 import '../../base/base.dart';
+import '../../presentation.dart';
 
 class ForgotViewModel extends BaseViewModel {
   final AuthRepository authRepository;
@@ -35,9 +41,9 @@ class ForgotViewModel extends BaseViewModel {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Reset your password'),
-            content: const Text(
-              'We have sent a password recover link to your email',
+            title:  Text('reset_password'.tr),
+            content:  Text(
+              'reset_password_desc'.tr,
             ),
             actions: [
               TextButton(

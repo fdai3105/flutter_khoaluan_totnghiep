@@ -1,7 +1,10 @@
+// Package imports:
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:rxdart/rxdart.dart';
-import '../../../utils/utils.dart';
+
+// Project imports:
 import '../../../resources/resources.dart';
+import '../../../utils/utils.dart';
 import '../../presentation.dart';
 
 class UserTabViewModel extends BaseViewModel {

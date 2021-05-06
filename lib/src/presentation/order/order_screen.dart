@@ -1,10 +1,16 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import '../../utils/utils.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
-import '../../utils/formats.dart';
-import '../presentation.dart';
 import '../../resources/resources.dart';
+import '../../utils/formats.dart';
+import '../../utils/utils.dart';
+import '../presentation.dart';
 
 class OrderScreen extends StatelessWidget {
   @override
@@ -15,15 +21,15 @@ class OrderScreen extends StatelessWidget {
       length: 5,
       child: Scaffold(
         backgroundColor: theme.backgroundColor,
-        appBar:  WidgetAppBar(
-          title: 'My order',
+        appBar: WidgetAppBar(
+          title: 'order'.tr,
           bottom: TabBar(
             tabs: [
-              Tab(text: 'All'),
-              Tab(text: 'Pending'),
-              Tab(text: 'Shipping'),
-              Tab(text: 'Completed'),
-              Tab(text: 'Cancelled'),
+              Tab(text: 'all'.tr),
+              Tab(text: 'pending'.tr),
+              Tab(text: 'shipping'.tr),
+              Tab(text: 'completed'.tr),
+              Tab(text: 'cancelled'.tr),
             ],
             isScrollable: true,
             labelColor: theme.textTheme.bodyText1.color,
@@ -57,7 +63,7 @@ class OrderScreen extends StatelessWidget {
 
   Widget _page(BuildContext context, Order order) {
     if (order.data.isEmpty) {
-      return const Center(child: Text('No orders yet'));
+      return Center(child: Text('nothing_to_show'.tr));
     }
     return ListView.separated(
       padding: const EdgeInsets.only(top: 10),
@@ -85,11 +91,12 @@ class OrderScreen extends StatelessWidget {
                   style: const TextStyle(color: Colors.white),
                 ),
               ),
-              Text('${item.item} items'),
-              Text('Total: ${Formats.money(item.total)}'),
+              const SizedBox(height: 4),
+              Text('${item.item} ${'items'.tr}'),
+              Text('${'total'.tr}: ${Formats.money(item.total)}'),
               Row(
                 children: [
-                  const Text('Order time: '),
+                  Text('${'order_time'.tr}: '),
                   Text(Formats.dateTime(item.createdAt)),
                 ],
               ),

@@ -1,8 +1,14 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
-import '../../../utils/utils.dart';
+
+// Project imports:
 import '../../../resources/resources.dart';
+import '../../../utils/utils.dart';
 import '../../presentation.dart';
 
 class RegisterViewModel extends BaseViewModel {
@@ -96,7 +102,7 @@ class RegisterViewModel extends BaseViewModel {
     switch (pageIndex) {
       case 0:
         if (name == null) {
-          snackBar(context, 'Please enter your first and last name');
+          snackBar(context, 'register_first_last_name_empty'.tr);
           return;
         }
         break;
@@ -109,6 +115,7 @@ class RegisterViewModel extends BaseViewModel {
       case 2:
         if (phone == null) {
           snackBar(context, 'Please enter a valid mobile number');
+          return;
         }
         break;
       case 3:

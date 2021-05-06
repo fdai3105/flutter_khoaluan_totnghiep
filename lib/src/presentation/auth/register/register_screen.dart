@@ -1,20 +1,24 @@
+// Flutter imports:
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+// Project imports:
+import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
 import '../../widgets/widgets.dart';
-import '../../../configs/configs.dart';
 
 class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: const WidgetAppBar(title: 'Register'),
+      appBar:  WidgetAppBar(title: 'register'.tr),
       body: SafeArea(
         child: BaseWidget<RegisterViewModel>(
           onViewModelReady: (vm) {
@@ -40,13 +44,14 @@ class RegisterScreen extends StatelessWidget {
                       controller: vm.pageController,
                       physics: const NeverScrollableScrollPhysics(),
                       onPageChanged: (index) => vm.pageIndex = index,
-                      children: bodies( context, vm),
+                      children: bodies(context, vm),
                     ),
                   ),
                   WidgetButton(
                     onTap: () => vm.nextPage(),
-                    text:
-                        vm.pageIndex + 1 == bodies(context,vm).length ? 'Finish' : 'Next',
+                    text: vm.pageIndex + 1 == bodies(context, vm).length
+                        ? 'finish'.tr
+                        : 'next'.tr,
                   ),
                   const SizedBox(height: 20),
                 ],
@@ -70,36 +75,37 @@ class RegisterScreen extends StatelessWidget {
   }
 
   Widget _namedBody(BuildContext context, RegisterViewModel vm) {
-    final theme =Theme.of(context);
+    final theme = Theme.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 60),
-         Text(
-          'What\'t your name?',
-          style: theme.textTheme.bodyText1
-        ),
+        Text('register_name_title'.tr, style: theme.textTheme.bodyText1),
         const SizedBox(height: 10),
         Text(
-          'Enter the name you use in real life.',
+          'register_name_desc'.tr,
           style: theme.textTheme.subtitle1,
         ),
         const SizedBox(height: 30),
         Row(
           children: [
-            WidgetInput(
-              onChanged: (value) {
-                vm.name = value;
-              },
-              hint: 'First name',
+            Flexible(
+              child: WidgetInput(
+                onChanged: (value) {
+                  vm.name = value;
+                },
+                hint: 'register_first_name'.tr,
+              ),
             ),
             const SizedBox(width: 20),
-            WidgetInput(
-              onChanged: (value) {
-                vm.name += value;
-              },
-              hint: 'Last name',
+            Flexible(
+              child: WidgetInput(
+                onChanged: (value) {
+                  vm.name += value;
+                },
+                hint: 'register_last_name'.tr,
+              ),
             ),
           ],
         ),
@@ -112,22 +118,22 @@ class RegisterScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 60),
-        const Text(
-          'What\'t your email address?',
-          style: TextStyle(
+        Text(
+          'register_email_title'.tr,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),
         ),
         const SizedBox(height: 10),
-        const Text(
-          'Adding an email helps you keep your account secure, contacts and more.',
-          style: TextStyle(
+        Text(
+          'register_email_desc'.tr,
+          style: const TextStyle(
             color: AppColors.dark45,
           ),
         ),
         const SizedBox(height: 30),
-        WidgetInput(onChanged: (value) => vm.email = value, hint: 'Email'),
+        WidgetInput(onChanged: (value) => vm.email = value, hint: 'email'.tr),
       ],
     );
   }
@@ -137,23 +143,23 @@ class RegisterScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 60),
-        const Text(
-          'Enter your mobile number',
-          style: TextStyle(
+        Text(
+          'register_phone_title'.tr,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),
         ),
         const SizedBox(height: 10),
-        const Text(
-          'Enter the mobile number where you can be reached.',
-          style: TextStyle(
+        Text(
+          'register_phone_desc'.tr,
+          style: const TextStyle(
             color: AppColors.dark45,
           ),
         ),
         const SizedBox(height: 30),
         WidgetInput(
-            onChanged: (value) => vm.phone = value, hint: 'Mobile number'),
+            onChanged: (value) => vm.phone = value, hint: 'register_phone'.tr),
       ],
     );
   }
@@ -163,9 +169,9 @@ class RegisterScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 60),
-        const Text(
-          'What\'s your gender?',
-          style: TextStyle(
+        Text(
+          'register_gender_title'.tr,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),
@@ -178,7 +184,7 @@ class RegisterScreen extends StatelessWidget {
             onChanged: (value) => vm.gender = value,
             activeColor: AppColors.primary,
           ),
-          title: const Text('Male'),
+          title: Text('register_gender_male'.tr),
         ),
         const SizedBox(height: 10),
         ListTile(
@@ -188,7 +194,7 @@ class RegisterScreen extends StatelessWidget {
             onChanged: (value) => vm.gender = value,
             activeColor: AppColors.primary,
           ),
-          title: const Text('Female'),
+          title: Text('register_gender_female'.tr),
         ),
         const SizedBox(height: 10),
         ListTile(
@@ -198,7 +204,7 @@ class RegisterScreen extends StatelessWidget {
             onChanged: (value) => vm.gender = value,
             activeColor: AppColors.primary,
           ),
-          title: const Text('Other'),
+          title: Text('register_gender_other'.tr),
         ),
       ],
     );
@@ -209,27 +215,28 @@ class RegisterScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 60),
-        const Text(
-          'Choose a Password',
-          style: TextStyle(
+        Text(
+          'register_password_title'.tr,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),
         ),
         const SizedBox(height: 10),
-        const Text(
-          'Create a password with at least 6 characters. It should be something others couldn\'t guess',
-          style: TextStyle(
+        Text(
+          'register_password_desc'.tr,
+          style: const TextStyle(
             color: AppColors.dark45,
           ),
         ),
         const SizedBox(height: 30),
         WidgetInput(
-            onChanged: (value) => vm.password = value, hint: 'Password'),
+            onChanged: (value) => vm.password = value, hint: 'password'.tr),
         const SizedBox(height: 10),
         WidgetInput(
-            onChanged: (value) => vm.passwordConfirm = value,
-            hint: 'Confirm Password'),
+          onChanged: (value) => vm.passwordConfirm = value,
+          hint: 'confirm_password'.tr,
+        ),
       ],
     );
   }
@@ -239,9 +246,9 @@ class RegisterScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 60),
-        const Text(
-          'Finish Signing Up',
-          style: TextStyle(
+        Text(
+          'register_finish_title'.tr,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),
@@ -250,12 +257,9 @@ class RegisterScreen extends StatelessWidget {
         RichText(
           text: TextSpan(
             children: [
-              const TextSpan(
-                text: 'By tapping Finish, you agree to receive emails,'
-                    ' promotions and general messages from us. In addition, you also agree to our ',
-              ),
+              TextSpan(text: 'register_finish_desc'.tr),
               TextSpan(
-                text: 'Terms & Conditions',
+                text: 'register_finish_desc1'.tr,
                 style: const TextStyle(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w600,
@@ -267,11 +271,9 @@ class RegisterScreen extends StatelessWidget {
                     );
                   },
               ),
-              const TextSpan(
-                text: ' and ',
-              ),
+              TextSpan(text: 'register_finish_desc2'.tr),
               TextSpan(
-                text: 'Privacy Policy',
+                text: 'register_finish_desc3'.tr,
                 style: const TextStyle(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w600,

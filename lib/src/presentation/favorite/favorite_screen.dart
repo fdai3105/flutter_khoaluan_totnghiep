@@ -1,6 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import '../../utils/utils.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
 import '../../resources/resources.dart';
 import '../presentation.dart';
@@ -12,7 +17,7 @@ class FavoriteScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: theme.backgroundColor,
-      appBar: const WidgetAppBar(title: 'My Favorites'),
+      appBar: WidgetAppBar(title: 'favorite'.tr),
       body: SafeArea(
         child: BaseWidget<FavoriteViewModel>(
           viewModel: FavoriteViewModel(),
@@ -22,24 +27,8 @@ class FavoriteScreen extends StatelessWidget {
               return const WidgetLoading();
             }
             if (vm.favorites.isEmpty) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Nothing to show'),
-                      const SizedBox(height: 20),
-                      WidgetButton(
-                        text: 'Continue shopping',
-                        onTap: () => Navigator.pushReplacementNamed(
-                          context,
-                          Routes.home,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              return Center(
+                child: Text('nothing_to_show'.tr),
               );
             }
 

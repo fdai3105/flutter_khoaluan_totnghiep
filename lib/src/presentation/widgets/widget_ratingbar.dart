@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
 
 class WidgetRatingBar extends StatelessWidget {
@@ -22,7 +27,7 @@ class WidgetRatingBar extends StatelessWidget {
       initialRating: stars,
       unratedColor: Colors.grey.shade400,
       itemBuilder: (context, index) {
-        return Icon(Icons.star_outlined, color: AppColors.dark);
+        return const Icon(Icons.star_outlined, color: AppColors.dark);
       },
       onRatingUpdate: (value) {},
     );

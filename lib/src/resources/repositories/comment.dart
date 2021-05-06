@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:dio/dio.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
 import '../resources.dart';
 

@@ -1,7 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import '../../resources/resources.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
+import '../../resources/resources.dart';
 import '../presentation.dart';
 
 class PopularProductsScreen extends StatelessWidget {

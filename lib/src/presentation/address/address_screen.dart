@@ -1,5 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
 import '../../resources/resources.dart';
 import '../presentation.dart';
@@ -19,7 +25,7 @@ class AddressScreen extends StatelessWidget {
             return Column(
               children: [
                 WidgetAppBar(
-                  title: 'Address',
+                  title: 'address'.tr,
                   actions: [
                     IconButton(
                       icon: const Icon(Icons.add_outlined),

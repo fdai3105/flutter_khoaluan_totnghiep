@@ -1,6 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import '../../../presentation.dart';
+
+// Package imports:
+import 'package:get/get.dart';
+
+// Project imports:
 import '../../../../resources/resources.dart';
+import '../../../presentation.dart';
 
 class DistrictScreen extends StatelessWidget {
   final String cityID;
@@ -11,7 +17,7 @@ class DistrictScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: const WidgetAppBar(title: 'District'),
+      appBar: WidgetAppBar(title: 'district'.tr),
       body: SafeArea(
         child: FutureBuilder<List<District>>(
             future: AddressRepository().getDistricts(cityID),

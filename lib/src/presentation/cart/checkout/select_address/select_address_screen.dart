@@ -1,8 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import '../../../../configs/configs.dart';
-import '../../../../utils/shared_pref.dart';
-import '../../../../utils/routers.dart';
+
+// Project imports:
 import '../../../../resources/resources.dart';
+import '../../../../utils/routers.dart';
+import '../../../../utils/shared_pref.dart';
 import '../../../presentation.dart';
 
 class SelectAddressScreen extends StatefulWidget {
@@ -46,7 +48,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
           future: AddressRepository().getAddress(SharedPref.getToken()),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return WidgetLoading();
+              return const WidgetLoading();
             } else {
               if (snapshot.hasData) {
                 final data = Address.fromJson(snapshot.data.data);
@@ -68,6 +70,8 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
   }
 
   Widget _item(BuildContext context, AddressDatum address) {
+    final theme = Theme.of(context);
+
     return ListTile(
       onTap: () {
         setState(() {
@@ -77,11 +81,14 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
       },
       title: Row(
         children: [
-          Text(address.name),
+          Text(
+            address.name,
+            style: theme.textTheme.bodyText1,
+          ),
           const SizedBox(width: 10),
           Text(
             address.phone,
-            style: const TextStyle(color: AppColors.dark45),
+            style: theme.textTheme.bodyText1,
           ),
         ],
       ),
@@ -90,15 +97,15 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
         children: [
           Text(
             address.address,
-            style: TextStyle(color: AppColors.dark),
+            style: theme.textTheme.subtitle1,
           ),
           Text(
             address.ward,
-            style: TextStyle(color: AppColors.dark),
+            style: theme.textTheme.subtitle1,
           ),
           Text(
             '${address.district}, ${address.city}',
-            style: TextStyle(color: AppColors.dark),
+            style: theme.textTheme.subtitle1,
           ),
         ],
       ),

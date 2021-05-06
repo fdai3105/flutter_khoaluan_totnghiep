@@ -19,3 +19,4 @@ export 'widgets/widgets.dart';
 export 'favorite/favorite.dart';
 export 'address/address.dart';
 export 'setting/setting.dart';
+export 'about/about.dart';

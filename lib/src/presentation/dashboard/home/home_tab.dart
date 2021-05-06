@@ -1,12 +1,16 @@
-import 'package:badges/badges.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:badges/badges.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:shimmer/shimmer.dart';
-import '../../presentation.dart';
-import '../../../resources/resources.dart';
+
+// Project imports:
 import '../../../configs/configs.dart';
+import '../../../resources/resources.dart';
+import '../../presentation.dart';
 
 class HomeTab extends StatelessWidget {
   @override
@@ -31,8 +35,6 @@ class HomeTab extends StatelessWidget {
   }
 
   Widget _body(BuildContext context, HomeViewModel vm) {
-    final theme = Theme.of(context);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -47,14 +49,9 @@ class HomeTab extends StatelessWidget {
                 const SizedBox(height: 20),
                 Padding(
                   padding: AppStyles.paddingBody,
-                  child: Text(
-                    'Best Furniture\nin your home.',
-                    /*style: TextStyle(
-                      color: AppColors.dark,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),*/
-                    style: theme.textTheme.headline6,
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    height: 50,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -94,7 +91,7 @@ class HomeTab extends StatelessWidget {
                 WidgetListProduct(
                   product: vm.popular,
                   axis: Axis.horizontal,
-                  label: 'Popular',
+                  label: 'popular'.tr,
                   padding: AppStyles.paddingBody,
                   seeAll: () => pushNewScreen(
                     context,
@@ -112,7 +109,7 @@ class HomeTab extends StatelessWidget {
                 WidgetListProduct(
                   product: vm.newArrivals,
                   axis: Axis.horizontal,
-                  label: 'New Arrivals',
+                  label: 'new_arrivals'.tr,
                   padding: AppStyles.paddingBody,
                   seeAll: () => pushNewScreen(
                     context,
@@ -130,11 +127,10 @@ class HomeTab extends StatelessWidget {
                 WidgetListProduct(
                   product: vm.products,
                   axis: Axis.vertical,
-                  label: 'All furniture',
+                  label: 'all_furniture'.tr,
                   showSeeAll: false,
                   padding: AppStyles.paddingBody,
                   loadingMore: vm.loadingMore,
-                  seeAll: () {},
                   onTap: (item) {
                     pushNewScreen(
                       context,

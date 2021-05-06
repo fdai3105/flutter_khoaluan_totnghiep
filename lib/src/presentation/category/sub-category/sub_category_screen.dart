@@ -1,6 +1,11 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
+// Project imports:
 import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
@@ -64,7 +69,7 @@ class SubCategoryScreen extends StatelessWidget {
 
   Widget _body(BuildContext context, SubCategoryViewModel vm) {
     if (vm.isLoading) {
-      return WidgetLoading();
+      return const WidgetLoading();
     } else {
       if (vm.products.data.isEmpty) {
         return const Center(child: Text('Nothing to show'));

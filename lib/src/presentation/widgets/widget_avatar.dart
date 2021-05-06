@@ -1,8 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/presentation/presentation.dart';
-import 'package:shimmer/shimmer.dart';
+
+// Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
+import '../presentation.dart';
 
 class WidgetAvatar extends StatelessWidget {
   final String image;

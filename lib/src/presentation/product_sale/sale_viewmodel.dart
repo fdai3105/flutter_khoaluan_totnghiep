@@ -1,7 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:rxdart/rxdart.dart';
-import '../presentation.dart';
+
+// Project imports:
 import '../../resources/resources.dart';
+import '../presentation.dart';
 
 class SaleViewModel extends BaseViewModel {
   final ProductResponse response;

@@ -1,9 +1,14 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../resources/repositories/comment.dart';
+// Package imports:
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:rxdart/rxdart.dart';
+
+// Project imports:
 import '../../../resources/resources.dart';
+import '../../../utils/utils.dart';
 import '../../presentation.dart';
 
 class CommentViewModel extends BaseViewModel {
@@ -64,7 +69,10 @@ class CommentViewModel extends BaseViewModel {
 
   Future addComment(int productID) async {
     if (controller.text.isEmpty) return;
-
+    if (SharedPref.getUser() == null) {
+      await pushNewScreen(context, screen: LoginScreen());
+      return;
+    }
     final rs = await response.addComment(productID, controller.text);
     controller.text = '';
     if (rs.statusCode == 200) {

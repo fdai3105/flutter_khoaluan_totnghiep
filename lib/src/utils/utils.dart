@@ -2,7 +2,11 @@ export 'routers.dart';
 export 'shared_pref.dart';
 export 'maths.dart';
 export 'formats.dart';
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import '../resources/resources.dart';
 
 void snackBar(BuildContext context, String message) {
@@ -10,11 +14,11 @@ void snackBar(BuildContext context, String message) {
       .showSnackBar(SnackBar(content: Text(message ?? "")));
 }
 
-MaterialColor statusColor(OrderStatus status) {
-  MaterialColor color;
+Color statusColor(OrderStatus status) {
+  Color color;
   switch (status) {
     case OrderStatus.pending:
-      color = Colors.yellow;
+      color = const Color.fromRGBO(255, 153, 0, 1);
       break;
     case OrderStatus.completed:
       color = Colors.green;

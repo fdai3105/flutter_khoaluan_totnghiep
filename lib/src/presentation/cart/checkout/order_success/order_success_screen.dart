@@ -1,6 +1,9 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import '../../../../utils/utils.dart';
+
+// Project imports:
 import '../../../../configs/configs.dart';
+import '../../../../utils/utils.dart';
 
 class OrderSuccessScreen extends StatelessWidget {
   @override

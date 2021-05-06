@@ -1,7 +1,10 @@
+// Package imports:
 import 'package:rxdart/rxdart.dart';
+
+// Project imports:
+import '../../resources/resources.dart';
 import '../../utils/utils.dart';
 import '../presentation.dart';
-import '../../resources/resources.dart';
 
 class ProductViewModel extends BaseViewModel {
   final ProductResponse response;

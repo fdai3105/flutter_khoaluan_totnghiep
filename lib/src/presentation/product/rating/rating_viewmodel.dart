@@ -1,6 +1,9 @@
+// Package imports:
+import 'package:rxdart/rxdart.dart';
+
+// Project imports:
 import '../../../resources/repositories/product.dart';
 import '../../../resources/resources.dart';
-import 'package:rxdart/rxdart.dart';
 import '../../presentation.dart';
 
 class RatingViewModel extends BaseViewModel {

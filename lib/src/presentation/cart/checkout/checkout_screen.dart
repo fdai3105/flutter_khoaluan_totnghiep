@@ -1,10 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import '../../../utils/utils.dart';
+
+// Project imports:
 import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
+import '../../../utils/utils.dart';
 import '../../presentation.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -18,9 +24,7 @@ class CheckoutScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: theme.backgroundColor,
-      appBar: const WidgetAppBar(
-        title: 'Checkout',
-      ),
+      appBar: WidgetAppBar(title: 'checkout'.tr),
       body: SafeArea(
         child: BaseWidget<CheckoutViewModel>(
           viewModel: CheckoutViewModel(
@@ -54,19 +58,33 @@ class CheckoutScreen extends StatelessWidget {
                           children: [
                             const Divider(color: AppColors.dark45),
                             ListTile(
-                              title: const Text('Merchandise subtotal()'),
+                              title: Text(
+                                'subtotal'.tr,
+                                style: theme.textTheme.bodyText1,
+                              ),
                               trailing: Text(
                                 Formats.money(Maths.calTotalCart(carts)),
+                                style: theme.textTheme.bodyText2,
                               ),
                             ),
                             ListTile(
-                              title: const Text('Shipping fee'),
-                              trailing: Text(Formats.money(0)),
+                              title: Text(
+                                'shipping_fee'.tr,
+                                style: theme.textTheme.bodyText1,
+                              ),
+                              trailing: Text(
+                                Formats.money(0),
+                                style: theme.textTheme.bodyText2,
+                              ),
                             ),
                             ListTile(
-                              title: const Text('Order amount'),
+                              title: Text(
+                                'total'.tr,
+                                style: theme.textTheme.bodyText1,
+                              ),
                               trailing: Text(
                                 Formats.money(Maths.calTotalCart(carts)),
+                                style: theme.textTheme.bodyText2,
                               ),
                             ),
                           ],
@@ -85,7 +103,7 @@ class CheckoutScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            const Text('Total Payment'),
+                            Text('total'.tr),
                             Text(
                               Formats.money(Maths.calTotalCart(carts)),
                               style: const TextStyle(
@@ -111,7 +129,7 @@ class CheckoutScreen extends StatelessWidget {
                           elevation: 0,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
-                        child: const Text('Place order'),
+                        child: Text('place_order'.tr),
                       ),
                     ],
                   ),
@@ -126,6 +144,8 @@ class CheckoutScreen extends StatelessWidget {
 
   Widget _address(
       BuildContext context, CheckoutViewModel vm, AddressDatum address) {
+    final theme = Theme.of(context);
+
     if (address == null) {
       return ListTile(
         onTap: () => Navigator.pushNamed(context, Routes.address)
@@ -146,10 +166,10 @@ class CheckoutScreen extends StatelessWidget {
         });
       },
       title: Row(
-        children: const [
-          Icon(Icons.delivery_dining),
-          SizedBox(width: 6),
-          Text('Delivery Address'),
+        children: [
+          const Icon(Icons.delivery_dining),
+          const SizedBox(width: 6),
+          Text('delivery_address'.tr, style: theme.textTheme.bodyText1),
         ],
       ),
       subtitle: Row(
@@ -160,9 +180,10 @@ class CheckoutScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 4),
-              Text(address.address),
-              Text(address.ward),
-              Text('${address.district}, ${address.city}'),
+              Text(
+                '${address.address}\n${address.ward}\n${'${address.district}, ${address.city}'}',
+                style: theme.textTheme.subtitle1,
+              ),
             ],
           ),
         ],
@@ -183,7 +204,7 @@ class CheckoutScreen extends StatelessWidget {
         const Divider(color: AppColors.dark45),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Text('Items (${carts.length.toString()})'),
+          child: Text('${'items'.tr} (${carts.length.toString()})'),
         ),
         const SizedBox(height: 10),
         ListView.builder(

@@ -1,10 +1,16 @@
+// Dart imports:
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../resources/repositories/auth.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
+import '../../resources/repositories/auth.dart';
 import '../presentation.dart';
 
 class UserScreen extends StatelessWidget {

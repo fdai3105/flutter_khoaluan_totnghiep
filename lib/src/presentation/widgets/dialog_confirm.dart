@@ -1,6 +1,9 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../configs/configs.dart';
+
+// Package imports:
+import 'package:get/get.dart';
 
 class DialogConfirm {
   final BuildContext context;
@@ -25,7 +28,10 @@ class DialogConfirm {
   void hide() => Navigator.pop(context);
 
   Widget _body() {
+    final theme = Theme.of(context);
+
     return Dialog(
+      backgroundColor: theme.backgroundColor,
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -41,10 +47,7 @@ class DialogConfirm {
             Text(
               title ?? '',
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: theme.textTheme.headline6,
             ),
             const SizedBox(height: 10),
             SizedBox(
@@ -58,22 +61,14 @@ class DialogConfirm {
                   backgroundColor: Colors.red,
                   elevation: 0,
                 ),
-                child: const Text(
-                  'Delete',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
+                child: Text('delete'.tr),
               ),
             ),
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
                 onPressed: hide,
-                child: Text(
-                  'Cancel',
-                  style: TextStyle(color: AppColors.dark),
-                ),
+                child: Text('cancel'.tr),
               ),
             ),
           ],

@@ -1,7 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:rxdart/rxdart.dart';
-import '../../../utils/utils.dart';
+
+// Project imports:
 import '../../../resources/resources.dart';
+import '../../../utils/utils.dart';
 import '../../presentation.dart';
 
 class CheckoutViewModel extends BaseViewModel {

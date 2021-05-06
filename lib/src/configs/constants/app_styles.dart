@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import '../configs.dart';
 
 class AppStyles {
@@ -10,7 +13,7 @@ class AppStyles {
 
   static final List<BoxShadow> shadow = [
     const BoxShadow(
-      color: Colors.black12,
+      color: Colors.black26,
       blurRadius: 10,
       offset: Offset(0, 0),
     )
@@ -46,7 +49,7 @@ class AppStyles {
       backgroundColor: AppColors.lightModeBg,
       cardColor: AppColors.lightModeCard,
       primaryColor: AppColors.lightModeShimmerHighlight,
-      iconTheme: const IconThemeData(),
+      iconTheme: const IconThemeData(color: AppColors.tertiary),
       textTheme:  const TextTheme(
         headline6: TextStyle(color: AppColors.lightModeText),
         bodyText1: TextStyle(color: AppColors.lightModeText, fontSize: 16),

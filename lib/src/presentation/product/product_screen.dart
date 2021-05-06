@@ -1,13 +1,18 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+
+// Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-import '../../utils/utils.dart';
+// Project imports:
 import '../../configs/configs.dart';
 import '../../resources/resources.dart';
+import '../../utils/utils.dart';
 import '../base/base.dart';
 import '../presentation.dart';
 import 'product.dart';
@@ -119,7 +124,7 @@ class ProductScreen extends StatelessWidget {
                                           margin: const EdgeInsets.symmetric(
                                               horizontal: 16),
                                         ),
-                                        Text('Sold: ${vm.product.data.bought}'),
+                                        Text('${'sold'.tr}: ${vm.product.data.bought}'),
                                       ],
                                     ),
                                     const SizedBox(height: 16),
@@ -128,18 +133,18 @@ class ProductScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 16),
                               WidgetExpansion(
-                                title: 'Details',
+                                title: 'detail'.tr,
                                 children: [Text(vm.product.data.desc)],
                               ),
                               WidgetTile(
-                                title: 'Comments',
+                                title: 'comment'.tr,
                                 onTap: () => pushNewScreen(context,
                                     screen: CommentDialog(
                                         productId: vm.product.data.id)),
                               ),
                               WidgetTile(
                                 title:
-                                    'Rating (${vm.product.data.rating} Ratings)',
+                                    '${'rating'.tr} ${'(${vm.product.data.rating} ${'rating'.tr})'}',
                                 onTap: () => pushNewScreen(context,
                                     screen: RatingDialog(
                                         productId: vm.product.data.id)),
@@ -154,7 +159,7 @@ class ProductScreen extends StatelessWidget {
                                   ProductScreen(id: item.id, name: item.name),
                             ),
                             product: vm.similarProducts,
-                            label: 'More like this',
+                            label: 'more_like_this'.tr,
                             padding: AppStyles.paddingBody,
                             showSeeAll: false,
                           ),
@@ -194,22 +199,9 @@ class ProductScreen extends StatelessWidget {
                         const SizedBox(width: 20),
                         Flexible(
                           fit: FlexFit.tight,
-                          child: GestureDetector(
+                          child: WidgetButton(
                             onTap: () => vm.addToCart(1, vm.product.data),
-                            child: Container(
-                              height: 50,
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: AppColors.primary,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'Add to cart',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
+                            text: 'add_to_cart'.tr,
                           ),
                         ),
                       ],
@@ -299,7 +291,13 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
                 borderRadius: BorderRadius.circular(10)),
             child: widget.images.isEmpty
                 ? const Text('0/0')
-                : Text('$_current/${widget.images.length}'),
+                : Text(
+                    '$_current/${widget.images.length}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle1
+                        .copyWith(color: Colors.white),
+                  ),
           ),
         ),
       ],

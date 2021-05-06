@@ -1,9 +1,13 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/resources.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
+
+// Package imports:
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:rxdart/rxdart.dart';
 
+// Project imports:
+import '../../../resources/resources.dart';
+import '../../../utils/utils.dart';
 import '../../presentation.dart';
 
 class EditAddressViewModel extends BaseViewModel {

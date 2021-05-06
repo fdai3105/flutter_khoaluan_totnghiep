@@ -1,4 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:get/get.dart';
+
+// Project imports:
 import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
@@ -21,7 +27,7 @@ class AddAddressScreen extends StatelessWidget {
             return Column(
               children: [
                 WidgetAppBar(
-                  title: 'New address',
+                  title: 'new_address'.tr,
                   actions: [
                     IconButton(
                       icon: const Icon(Icons.check_outlined),
@@ -32,52 +38,52 @@ class AddAddressScreen extends StatelessWidget {
                 ListTile(
                   onTap: () => vm.onCitySelected(),
                   contentPadding: AppStyles.paddingBody,
-                  title: const Text('City'),
+                  title: Text('city'.tr),
                   trailing: vm.city == null
-                      ? const Text(
-                          'Set city',
-                          style: TextStyle(color: AppColors.dark45),
+                      ? Text(
+                          'set_city'.tr,
+                          style: const TextStyle(color: AppColors.dark45),
                         )
                       : Text(vm.cityName),
                 ),
                 ListTile(
                   onTap: () async => vm.onDistrictSelected(),
                   contentPadding: AppStyles.paddingBody,
-                  title: const Text('District'),
+                  title: Text('district'.tr),
                   trailing: vm.districtName == null
-                      ? const Text(
-                          'Set district',
-                          style: TextStyle(color: AppColors.dark45),
+                      ? Text(
+                          'set_district'.tr,
+                          style: const TextStyle(color: AppColors.dark45),
                         )
                       : Text(vm.districtName),
                 ),
                 ListTile(
                   onTap: () => vm.onWardSelected(),
                   contentPadding: AppStyles.paddingBody,
-                  title: const Text('Ward'),
+                  title: Text('ward'.tr),
                   trailing: vm.wardName == null
-                      ? const Text(
-                          'Set ward',
-                          style: TextStyle(color: AppColors.dark45),
+                      ? Text(
+                          'set_ward'.tr,
+                          style: const TextStyle(color: AppColors.dark45),
                         )
                       : Text(vm.wardName),
                 ),
                 const SizedBox(height: 10),
                 WidgetInput(
                   onChanged: (value) => vm.address = value,
-                  hint: 'Address',
+                  hint: 'address'.tr,
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                 ),
                 const SizedBox(height: 10),
                 WidgetInput(
                   onChanged: (value) => vm.name = value,
-                  hint: 'Name',
+                  hint: 'name'.tr,
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                 ),
                 const SizedBox(height: 10),
                 WidgetInput(
                   onChanged: (value) => vm.phone = value,
-                  hint: 'Phone',
+                  hint: 'register_phone'.tr,
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                 ),
               ],

@@ -1,8 +1,14 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:get/get.dart';
+
+// Project imports:
 import '../../../configs/configs.dart';
-import '../../../utils/utils.dart';
 import '../../../resources/resources.dart';
+import '../../../utils/utils.dart';
 import '../../presentation.dart';
 
 class OrderDetailScreen extends StatelessWidget {
@@ -16,9 +22,7 @@ class OrderDetailScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: theme.backgroundColor,
-      appBar: const WidgetAppBar(
-        title: 'Order Details',
-      ),
+      appBar: WidgetAppBar(title: 'order_detail'.tr),
       body: SafeArea(
         child: BaseWidget<OrderDetailViewModel>(
           viewModel: OrderDetailViewModel(repository: OrderRepository()),
@@ -49,7 +53,7 @@ class OrderDetailScreen extends StatelessWidget {
               const SizedBox(height: 10),
               ListTile(
                 title: Text(
-                  'Delivery Address',
+                  'delivery_address'.tr,
                   style: theme.textTheme.bodyText2,
                 ),
                 subtitle: Column(
@@ -149,13 +153,12 @@ class OrderDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Order No. ${order.id}',
-                      /* style: const TextStyle(fontSize: 16),*/
+                      '${'order_no'.tr} ${order.id}',
                       style: theme.textTheme.bodyText2,
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Placed on ${Formats.dateTime(order.createdAt)}',
+                      '${'placed_on'.tr} ${Formats.dateTime(order.createdAt)}',
                       style: const TextStyle(color: AppColors.dark45),
                     ),
                   ],
@@ -171,7 +174,7 @@ class OrderDetailScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Subtotal ()',
+                          'subtotal'.tr,
                           style: theme.textTheme.bodyText2,
                         ),
                         Text(
@@ -185,7 +188,7 @@ class OrderDetailScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Shipping Fee',
+                          'shipping_fee'.tr,
                           style: theme.textTheme.bodyText2,
                         ),
                         Text(
@@ -199,7 +202,7 @@ class OrderDetailScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Total (VAT Incl.)',
+                          '${'total'.tr}(VAT Incl.)',
                           style: theme.textTheme.bodyText2.copyWith(
                             fontSize: 16,
                           ),
@@ -222,7 +225,7 @@ class OrderDetailScreen extends StatelessWidget {
         if (vm.isCanCancel(order))
           WidgetButton(
             onTap: () => vm.cancelOrder(order.id),
-            text: 'Cancel',
+            text: 'cancel'.tr,
             color: Colors.red,
           )
         else
@@ -235,16 +238,16 @@ class OrderDetailScreen extends StatelessWidget {
     var text;
     switch (status) {
       case OrderStatus.pending:
-        text = 'Pending';
+        text = 'pending'.tr;
         break;
       case OrderStatus.completed:
-        text = 'Completed';
+        text = 'completed'.tr;
         break;
       case OrderStatus.cancelled:
-        text = 'Cancelled';
+        text = 'cancelled'.tr;
         break;
       case OrderStatus.shipping:
-        text = 'Shipping';
+        text = 'shipping'.tr;
         break;
     }
 

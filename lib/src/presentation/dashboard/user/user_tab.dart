@@ -1,8 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import '../../../utils/utils.dart';
+
+// Project imports:
 import '../../../configs/configs.dart';
+import '../../../utils/utils.dart';
 import '../../presentation.dart';
 
 class UserTab extends StatelessWidget {
@@ -20,7 +25,7 @@ class UserTab extends StatelessWidget {
         builder: (context, vm, widget) {
           return Column(
             children: [
-              const WidgetAppBar(title: 'User', centerTitle: false),
+              WidgetAppBar(title: 'user'.tr, centerTitle: false),
               const SizedBox(height: 14),
               Material(
                 color: Colors.transparent,
@@ -48,7 +53,7 @@ class UserTab extends StatelessWidget {
                   screen: FavoriteScreen(),
                   withNavBar: false,
                 ),
-                title: 'My favorites',
+                title: 'favorite'.tr,
               ),
               WidgetTile(
                 onTap: () => pushNewScreen(
@@ -58,10 +63,10 @@ class UserTab extends StatelessWidget {
                       : OrderScreen(),
                   withNavBar: false,
                 ),
-                title: 'My orders',
+                title: 'order'.tr,
               ),
               WidgetTile(
-                title: 'Address',
+                title: 'address'.tr,
                 onTap: () => pushNewScreen(
                   context,
                   screen: SharedPref.getUser() == null
@@ -71,25 +76,17 @@ class UserTab extends StatelessWidget {
                 ),
               ),
               WidgetTile(
-                title: 'Settings',
+                title: 'setting'.tr,
                 onTap: () => pushNewScreen(
                   context,
                   screen: SettingScreen(),
                   withNavBar: false,
                 ),
               ),
-              const WidgetTile(
-                title: 'Feedback',
-              ),
-              const WidgetTile(
-                title: 'Customer Support',
-              ),
-              const WidgetTile(
-                title: 'About the app',
-              ),
+              WidgetTile(title: 'about'.tr),
               if (vm.user != null)
                 WidgetTile(
-                  title: 'Logout',
+                  title: 'logout'.tr,
                   onTap: () {
                     vm.logout();
                   },
@@ -113,9 +110,9 @@ class UserTab extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          const Text(
-            'Login',
-            style: TextStyle(fontSize: 16),
+           Text(
+            'login'.tr,
+            style: const TextStyle(fontSize: 16),
           ),
         ],
       );
@@ -141,9 +138,9 @@ class UserTab extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 2),
-                const Text(
-                  'edit you profile',
-                  style: TextStyle(
+                 Text(
+                  'edit_you_profile'.tr,
+                  style:const TextStyle(
                     color: AppColors.dark45,
                     fontSize: 12,
                   ),

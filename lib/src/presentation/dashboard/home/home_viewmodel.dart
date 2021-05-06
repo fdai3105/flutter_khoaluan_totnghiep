@@ -1,8 +1,13 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
+
+// Package imports:
+import 'package:rxdart/rxdart.dart';
+
+// Project imports:
 import '../../../resources/repositories/product.dart';
 import '../../../resources/resources.dart';
 import '../../../utils/shared_pref.dart';
-import 'package:rxdart/rxdart.dart';
 import '../../presentation.dart';
 
 class HomeViewModel extends BaseViewModel {

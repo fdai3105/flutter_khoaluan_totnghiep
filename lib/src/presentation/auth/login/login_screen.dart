@@ -1,11 +1,17 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:get/get.dart';
+
+// Project imports:
+import '../../../configs/configs.dart';
+import '../../../resources/repositories/auth.dart';
 import '../../../utils/utils.dart';
 import '../../base/base.dart';
-import 'login.dart';
-import '../../../resources/repositories/auth.dart';
 import '../../widgets/widgets.dart';
-import '../../../configs/configs.dart';
+import 'login.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -36,31 +42,31 @@ class LoginScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 20),
-                        const Text(
-                          'Welcome back',
-                          style: TextStyle(
+                        Text(
+                          'login_title'.tr,
+                          style: const TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(height: 4),
-                        const Text(
-                          'Log in to your account',
+                        Text(
+                          'login_desc'.tr,
                         ),
                         const SizedBox(height: 20),
                         WidgetInput(
                           onChanged: (value) => {email = value},
-                          hint: 'Email',
+                          hint: 'email'.tr,
                         ),
                         const SizedBox(height: 20),
                         WidgetInput(
                           onChanged: (value) => {password = value},
-                          hint: 'Password',
+                          hint: 'password'.tr,
                         ),
                         const SizedBox(height: 20),
                         WidgetButton(
                           onTap: () => vm.login(email, password),
-                          text: 'Login',
+                          text: 'login'.tr,
                         ),
                         TextButton(
                           onPressed: () {
@@ -71,7 +77,7 @@ class LoginScreen extends StatelessWidget {
                                 MaterialStateProperty.all(Colors.transparent),
                           ),
                           child: Text(
-                            'Forgot password?',
+                            'forgot_password'.tr,
                             style: theme.textTheme.subtitle1.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -85,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't have an account? ",
+                      "sign_up_title".tr,
                       style: theme.textTheme.subtitle1.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
@@ -98,9 +104,9 @@ class LoginScreen extends StatelessWidget {
                         overlayColor:
                             MaterialStateProperty.all(Colors.transparent),
                       ),
-                      child: const Text(
-                        'Sign up',
-                        style: TextStyle(
+                      child: Text(
+                        'sign_up'.tr,
+                        style: const TextStyle(
                           color: AppColors.primary,
                           fontWeight: FontWeight.w800,
                         ),

@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class WidgetTile extends StatelessWidget {
@@ -18,7 +19,7 @@ class WidgetTile extends StatelessWidget {
       onTap: onTap,
       title: Text(
         title ?? '',
-        style: Theme.of(context).textTheme.bodyText2,
+        style: Theme.of(context).textTheme.bodyText1,
       ),
       trailing: Icon(
         icon,

@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
 
 class WidgetIndicator extends StatelessWidget {

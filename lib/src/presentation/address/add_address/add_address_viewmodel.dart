@@ -1,9 +1,14 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/resources/resources.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
+
+// Package imports:
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:rxdart/rxdart.dart';
 
+// Project imports:
+import '../../../resources/resources.dart';
+import '../../../utils/utils.dart';
 import '../../presentation.dart';
 
 class AddAddressViewModel extends BaseViewModel {
@@ -104,7 +109,7 @@ class AddAddressViewModel extends BaseViewModel {
         district = routes as District;
       }
     } else {
-      snackBar(context, 'Please select city');
+      snackBar(context, 'city_null'.tr);
     }
   }
 
@@ -118,7 +123,7 @@ class AddAddressViewModel extends BaseViewModel {
         ward = routes as Ward;
       }
     } else {
-      snackBar(context, 'Please select district');
+      snackBar(context, 'district_null'.tr);
     }
   }
 
@@ -129,8 +134,7 @@ class AddAddressViewModel extends BaseViewModel {
         district == null ||
         ward == null ||
         address == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Please check your input')));
+      snackBar(context, 'input_null'.tr);
       return;
     }
     final data = AddressDatum(

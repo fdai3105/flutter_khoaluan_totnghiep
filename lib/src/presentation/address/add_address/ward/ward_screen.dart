@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
+
+// Package imports:
+import 'package:get/get.dart';
+
+// Project imports:
 import '../../../../resources/resources.dart';
 import '../../../presentation.dart';
 
@@ -12,7 +17,7 @@ class WardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: const WidgetAppBar(title: 'Ward'),
+      appBar: WidgetAppBar(title: 'ward'.tr),
       body: SafeArea(
         child: FutureBuilder<List<Ward>>(
             future: AddressRepository().getWards(districtID),

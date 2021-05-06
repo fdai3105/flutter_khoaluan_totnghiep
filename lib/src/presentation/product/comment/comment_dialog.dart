@@ -1,10 +1,15 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:timeago/timeago.dart' as timeago;
-import '../../presentation.dart';
-import '../../../resources/resources.dart';
+
+// Project imports:
 import '../../../configs/configs.dart';
+import '../../../resources/resources.dart';
 import '../../../utils/shared_pref.dart';
+import '../../presentation.dart';
 
 class CommentDialog extends StatelessWidget {
   final int productId;
@@ -40,7 +45,7 @@ class CommentDialog extends StatelessWidget {
 
   Widget _body(CommentViewModel vm) {
     if (vm.isLoading) {
-      return WidgetLoading();
+      return const WidgetLoading();
     }
     if (vm.comments.data.isEmpty) {
       return const Center(child: Text('No comment yet'));

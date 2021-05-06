@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:rxdart/rxdart.dart';
-import '../../utils/utils.dart';
+
+// Project imports:
 import '../../resources/resources.dart';
+import '../../utils/utils.dart';
 import '../presentation.dart';
 
 class FavoriteViewModel extends BaseViewModel {

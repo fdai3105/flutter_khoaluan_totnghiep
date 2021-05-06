@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
 
 class WidgetInput extends StatelessWidget {
@@ -32,7 +35,7 @@ class WidgetInput extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         onChanged: onChanged,
-        initialValue: value ?? '',
+        initialValue: value,
         readOnly: readOnly,
         style: Theme.of(context)
             .textTheme
@@ -51,7 +54,7 @@ class WidgetInput extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
             borderRadius: AppStyles.radiusNormal,
             borderSide: const BorderSide(
-              color: AppColors.primary,
+              color: AppColors.tertiary,
               width: 2,
             ),
           ),

@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -27,7 +28,7 @@ class WidgetAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: centerTitle,
       title: Text(
         title ?? '',
-        style: theme.textTheme.headline6,
+        style: theme.textTheme.headline6.copyWith(color: theme.iconTheme.color),
       ),
       iconTheme: theme.iconTheme,
       actions: actions,

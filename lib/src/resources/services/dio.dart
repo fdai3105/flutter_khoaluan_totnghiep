@@ -1,7 +1,10 @@
+// Package imports:
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
-import '../../utils/utils.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
+import '../../utils/utils.dart';
 
 class DioService extends DioForNative {
   final bool withToken;

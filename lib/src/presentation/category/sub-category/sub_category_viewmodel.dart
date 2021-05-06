@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:rxdart/rxdart.dart';
-import '../../presentation.dart';
+
+// Project imports:
 import '../../../resources/resources.dart';
+import '../../presentation.dart';
 
 class SubCategoryViewModel extends BaseViewModel {
   final ProductResponse productResponse;

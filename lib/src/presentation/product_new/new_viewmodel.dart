@@ -1,7 +1,12 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
+
+// Package imports:
 import 'package:rxdart/rxdart.dart';
-import '../presentation.dart';
+
+// Project imports:
 import '../../resources/resources.dart';
+import '../presentation.dart';
 
 class NewProductViewModel extends BaseViewModel {
   final ProductResponse response;

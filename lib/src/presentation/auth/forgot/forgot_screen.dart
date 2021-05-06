@@ -1,7 +1,13 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
+
+// Package imports:
+import 'package:get/get.dart';
 import 'package:regexpattern/regexpattern.dart';
+
+// Project imports:
 import '../../../resources/resources.dart';
+import '../../../utils/utils.dart';
 import '../../presentation.dart';
 
 class ForgotScreen extends StatelessWidget {
@@ -13,7 +19,7 @@ class ForgotScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: theme.backgroundColor,
-      appBar: const WidgetAppBar(title: 'Find your account'),
+      appBar: WidgetAppBar(title: 'find_your_account'.tr),
       body: SafeArea(
         child: BaseWidget<ForgotViewModel>(
           viewModel: ForgotViewModel(authRepository: AuthRepository()),
@@ -25,28 +31,31 @@ class ForgotScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 20),
-                  const Text(
-                    'Enter Your Email',
-                    style: TextStyle(fontSize: 16),
+                  Text(
+                    'enter_your_email'.tr,
+                    style: const TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 20),
                   WidgetInput(
                     onChanged: (value) => email = value,
-                    hint: 'Email',
+                    hint: 'email'.tr,
                   ),
                   const SizedBox(height: 20),
                   WidgetButton(
                     onTap: () {
                       if (email != null) {
+                        // todo
                         final exp = RegExp(RegexPattern.email);
                         if (exp.hasMatch(email)) {
                           vm.forgotPassword(email);
+                        } else {
+                          snackBar(context, 'incorrect_email'.tr);
                         }
                       } else {
-                        snackBar(context, 'Please enter your email');
+                        snackBar(context, 'email_empty'.tr);
                       }
                     },
-                    text: 'Find Your Account',
+                    text: 'find_your_account'.tr,
                   ),
                 ],
               ),

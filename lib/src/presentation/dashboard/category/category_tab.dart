@@ -1,6 +1,12 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
+// Project imports:
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
 
@@ -28,7 +34,7 @@ class CategoryTab extends StatelessWidget {
   Widget _mobile(BuildContext context, CategoryTabViewModel vm) {
     return Column(
       children: [
-        const WidgetAppBar(title: 'Categories', centerTitle: false),
+         WidgetAppBar(title: 'category'.tr, centerTitle: false),
         WidgetIndicator(
           onRefresh: () => vm.init(),
           child: WidgetListCategory(

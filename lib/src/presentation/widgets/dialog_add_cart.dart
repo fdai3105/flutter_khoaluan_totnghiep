@@ -1,7 +1,14 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../utils/utils.dart';
+
+// Package imports:
+import 'package:get/get.dart';
+
+// Project imports:
 import '../../configs/configs.dart';
+import '../../utils/utils.dart';
+import '../presentation.dart';
 
 class DialogAddCart {
   final BuildContext context;
@@ -20,7 +27,10 @@ class DialogAddCart {
   void hide() => Navigator.pop(context);
 
   Widget _loading() {
+    final theme = Theme.of(context);
+
     return Dialog(
+      backgroundColor: theme.cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -44,12 +54,8 @@ class DialogAddCart {
             ),
             const SizedBox(height: 20),
             Text(
-              'Added to cart success',
-              style: TextStyle(
-                color: AppColors.dark,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              'added_to_cart_success'.tr,
+              style: theme.textTheme.bodyText1,
             ),
             const SizedBox(height: 10),
             SizedBox(
@@ -63,26 +69,15 @@ class DialogAddCart {
                   backgroundColor: AppColors.primary,
                   elevation: 0,
                 ),
-                child: const Text(
-                  'Go to cart',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                child: Text(
+                  'go_to_cart'.tr,
+                  style: theme.textTheme.bodyText1,
                 ),
               ),
             ),
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: hide,
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: AppColors.primary.withOpacity(0.4)),
-                ),
-                child: Text(
-                  'Continue shopping',
-                  style: TextStyle(color: AppColors.dark),
-                ),
-              ),
+            WidgetButton(
+              onTap: hide,
+              text: 'continue_shopping'.tr,
             ),
           ],
         ),

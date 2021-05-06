@@ -1,5 +1,9 @@
-import '../resources/resources.dart';
+// Package imports:
 import 'package:shared_preferences/shared_preferences.dart';
+
+// Project imports:
+import '../configs/configs.dart';
+import '../resources/resources.dart';
 
 class SharedPref {
   SharedPref._();
@@ -125,6 +129,23 @@ class SharedPref {
     return _pref.getBool('dark_mode') ?? false;
   }
 
+  static Future setLanguage(Language language) async {
+    await _pref.setString(
+      'language',
+      AppTranslations.getLocale(language).languageCode,
+    );
+  }
+
+  static Language getLanguage() {
+    final lang = _pref.getString('language');
+    if (lang == 'en') {
+      return Language.english;
+    } else if (lang == 'vi') {
+      return Language.vietnamese;
+    }
+    return null;
+  }
+
   /// favorite item
   static List<ProductDatum> getFavorites() {
     final products = <ProductDatum>[];
@@ -150,4 +171,9 @@ class SharedPref {
       current.map((e) => e.toRawJson()).toList(),
     );
   }
+}
+
+enum Language {
+  english,
+  vietnamese,
 }

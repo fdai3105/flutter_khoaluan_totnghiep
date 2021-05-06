@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
 import '../../../utils/shared_pref.dart';
@@ -10,7 +13,7 @@ class ResendMailScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.backgroundColor,
       appBar: const WidgetAppBar(
         title: 'Verify your email ',
       ),
@@ -33,7 +36,7 @@ class ResendMailScreen extends StatelessWidget {
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  style: TextStyle(color: AppColors.dark),
+                  style: theme.textTheme.bodyText1,
                   children: [
                     const TextSpan(text: 'You\'ve entered '),
                     TextSpan(
@@ -51,15 +54,7 @@ class ResendMailScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                  onPressed: () => verify(context),
-                  style: ElevatedButton.styleFrom(
-                    primary: AppColors.primary,
-                    elevation: 0,
-                    padding: const EdgeInsets.symmetric(horizontal: 60),
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: const Text('Send'))
+              WidgetButton(onTap: () => verify(context), text: 'Send'),
             ],
           ),
         ),

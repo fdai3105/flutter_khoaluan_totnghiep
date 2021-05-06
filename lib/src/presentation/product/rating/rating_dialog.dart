@@ -1,6 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
+// Project imports:
 import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';
@@ -17,13 +22,13 @@ class RatingDialog extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Ratings',
           style: TextStyle(color: AppColors.dark),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.close_outlined, color: AppColors.dark),
+          icon:const Icon(Icons.close_outlined, color: AppColors.dark),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -70,7 +75,7 @@ class RatingDialog extends StatelessWidget {
                     initialRating: vm.sumRating,
                     unratedColor: Colors.grey.shade400,
                     itemBuilder: (context, index) {
-                      return Icon(Icons.star_outlined, color: AppColors.dark);
+                      return const Icon(Icons.star_outlined, color: AppColors.dark);
                     },
                     onRatingUpdate: (rating) {},
                   ),
@@ -118,7 +123,7 @@ class WidgetRatingList extends StatelessWidget {
                   unratedColor: Colors.grey.shade400,
                   initialRating: item.rating.toDouble(),
                   itemBuilder: (context, index) {
-                    return Icon(Icons.star_outlined, color: AppColors.dark);
+                    return const Icon(Icons.star_outlined, color: AppColors.dark);
                   },
                   onRatingUpdate: (rating) {},
                 ),
