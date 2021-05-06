@@ -3,10 +3,8 @@ export 'shared_pref.dart';
 export 'maths.dart';
 export 'formats.dart';
 
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Project imports:
 import '../resources/resources.dart';
 
 void snackBar(BuildContext context, String message) {

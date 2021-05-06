@@ -1,11 +1,8 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-// Project imports:
 import '../../../../main_viewmodel.dart';
 import '../../../utils/shared_pref.dart';
 import '../../presentation.dart';
@@ -25,7 +22,7 @@ class LanguageScreen extends StatelessWidget {
             ListTile(
               title: Text(
                 'vietnamese'.tr,
-                style: theme.textTheme.subtitle1,
+                style: theme.textTheme.bodyText1,
               ),
               onTap: () {
                 mainVM.language = Language.vietnamese;
@@ -35,7 +32,7 @@ class LanguageScreen extends StatelessWidget {
             ListTile(
               title: Text(
                 'english'.tr,
-                style: theme.textTheme.subtitle1,
+                style: theme.textTheme.bodyText1,
               ),
               onTap: () {
                 mainVM.language = Language.english;

@@ -1,12 +1,9 @@
-// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:rxdart/rxdart.dart';
 
-// Project imports:
 import '../../../resources/resources.dart';
 import '../../../utils/utils.dart';
 import '../../presentation.dart';

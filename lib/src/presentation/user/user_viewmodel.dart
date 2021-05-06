@@ -1,14 +1,10 @@
-// Dart imports:
 import 'dart:io';
 
-// Flutter imports:
 import 'package:flutter/cupertino.dart';
 
-// Package imports:
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:rxdart/rxdart.dart';
 
-// Project imports:
 import '../../resources/resources.dart';
 import '../../utils/shared_pref.dart';
 import '../presentation.dart';

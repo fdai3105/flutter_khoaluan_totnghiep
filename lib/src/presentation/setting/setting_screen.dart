@@ -1,12 +1,9 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
-// Project imports:
 import '../../../main_viewmodel.dart';
 import '../../utils/shared_pref.dart';
 import '../presentation.dart';

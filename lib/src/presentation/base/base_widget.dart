@@ -1,10 +1,7 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:provider/provider.dart';
 
-// Project imports:
 import 'base.dart';
 
 class BaseWidget<T extends BaseViewModel> extends StatefulWidget {

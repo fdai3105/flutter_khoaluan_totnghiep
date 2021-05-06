@@ -1,13 +1,10 @@
-// Flutter imports:
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// Project imports:
 import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';

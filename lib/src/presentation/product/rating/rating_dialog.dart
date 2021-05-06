@@ -1,11 +1,8 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-// Project imports:
 import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';

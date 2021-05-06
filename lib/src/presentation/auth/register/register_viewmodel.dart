@@ -1,12 +1,9 @@
-// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 
-// Project imports:
 import '../../../resources/resources.dart';
 import '../../../utils/utils.dart';
 import '../../presentation.dart';

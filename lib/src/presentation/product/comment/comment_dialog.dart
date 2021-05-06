@@ -1,11 +1,8 @@
-// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:timeago/timeago.dart' as timeago;
 
-// Project imports:
 import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
 import '../../../utils/shared_pref.dart';

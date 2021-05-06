@@ -1,7 +1,5 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Project imports:
 import '../../../../resources/resources.dart';
 import '../../../../utils/routers.dart';
 import '../../../../utils/shared_pref.dart';

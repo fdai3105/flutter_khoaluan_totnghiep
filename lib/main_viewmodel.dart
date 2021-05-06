@@ -1,8 +1,6 @@
-// Package imports:
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 
-// Project imports:
 import 'src/configs/configs.dart';
 import 'src/presentation/presentation.dart';
 import 'src/utils/utils.dart';

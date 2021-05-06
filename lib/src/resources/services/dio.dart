@@ -1,8 +1,6 @@
-// Package imports:
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
 
-// Project imports:
 import '../../configs/configs.dart';
 import '../../utils/utils.dart';
 

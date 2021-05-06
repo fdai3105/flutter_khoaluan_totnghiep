@@ -1,11 +1,8 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get/get.dart';
 
-// Project imports:
 import 'main_viewmodel.dart';
 import 'src/configs/configs.dart';
 import 'src/presentation/presentation.dart';

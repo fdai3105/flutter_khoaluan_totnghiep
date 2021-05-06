@@ -1,13 +1,10 @@
-// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:badges/badges.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-// Project imports:
 import '../../../configs/configs.dart';
 import '../../../resources/resources.dart';
 import '../../presentation.dart';

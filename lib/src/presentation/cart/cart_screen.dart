@@ -1,11 +1,8 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 
-// Project imports:
 import '../../configs/configs.dart';
 import '../../presentation/presentation.dart';
 import '../../resources/resources.dart';

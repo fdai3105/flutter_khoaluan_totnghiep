@@ -1,11 +1,8 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:get/get.dart';
 import 'package:regexpattern/regexpattern.dart';
 
-// Project imports:
 import '../../../resources/resources.dart';
 import '../../../utils/utils.dart';
 import '../../presentation.dart';
