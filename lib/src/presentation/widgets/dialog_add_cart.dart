@@ -55,22 +55,12 @@ class DialogAddCart {
               style: theme.textTheme.bodyText1,
             ),
             const SizedBox(height: 10),
-            SizedBox(
-              width: double.infinity,
-              child: TextButton(
-                onPressed: () {
-                  hide();
-                  Navigator.pushNamed(context, Routes.cart);
-                },
-                style: TextButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  elevation: 0,
-                ),
-                child: Text(
-                  'go_to_cart'.tr,
-                  style: theme.textTheme.bodyText1,
-                ),
-              ),
+            WidgetButton(
+              onTap: () {
+                hide();
+                Navigator.pushNamed(context, Routes.cart);
+              },
+              text: 'go_to_cart'.tr,
             ),
             WidgetButton(
               onTap: hide,

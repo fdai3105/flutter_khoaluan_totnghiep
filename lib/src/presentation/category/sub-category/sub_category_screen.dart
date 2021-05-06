@@ -24,6 +24,7 @@ class SubCategoryScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
+      appBar: WidgetAppBar(title: name),
       backgroundColor: theme.backgroundColor,
       body: SafeArea(
         child: BaseWidget<SubCategoryViewModel>(
@@ -34,30 +35,7 @@ class SubCategoryScreen extends StatelessWidget {
             await vm.init(id);
           },
           builder: (context, vm, widget) {
-            return NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return <Widget>[
-                  SliverAppBar(
-                    expandedHeight: 200,
-                    pinned: true,
-                    backgroundColor: theme.backgroundColor,
-                    elevation: 0,
-                    iconTheme: theme.iconTheme,
-                    title: Text(
-                      name,
-                      style: theme.textTheme.headline6,
-                    ),
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Image.network(
-                        AppEndpoint.domain + image,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ];
-              },
-              body: _body(context, vm),
-            );
+            return _body(context, vm);
           },
         ),
       ),

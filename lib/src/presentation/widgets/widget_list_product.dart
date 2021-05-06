@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:shimmer/shimmer.dart';
@@ -118,22 +119,78 @@ class WidgetListProduct extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Flexible(child: _imageItem(item.images)),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  Flexible(
+                    flex: 2,
+                    child: Stack(
+                      fit: StackFit.expand,
                       children: [
-                        Text(
-                          item.name ?? "",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: /*nameStyle*/ theme.textTheme.bodyText2,
-                        ),
-                        const SizedBox(height: 4),
-                        _money(item.discount, item.price,
-                            theme.textTheme.bodyText2),
+                        _imageItem(item.images),
+                        if (item.discount == 0)
+                          const SizedBox()
+                        else
+                          Positioned(
+                            right: 10,
+                            top: 0,
+                            child: Container(
+                              height: 26,
+                              width: 26,
+                              decoration: const BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.vertical(
+                                  bottom: Radius.circular(4),
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '-${item.discount}%',
+                                  textAlign: TextAlign.center,
+                                  style: theme.textTheme.bodyText2.copyWith(
+                                      color: Colors.white, fontSize: 10),
+                                ),
+                              ),
+                            ),
+                          )
                       ],
+                    ),
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            item.name ?? "",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: /*nameStyle*/ theme.textTheme.bodyText1,
+                          ),
+                          const SizedBox(height: 2),
+                          SizedBox(
+                            width: double.infinity,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  Formats.money(item.price),
+                                  textAlign: TextAlign.right,
+                                  style: theme.textTheme.bodyText2.copyWith(
+                                    fontSize: 8,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                ),
+                                Text(
+                                  Formats.money(item.price *
+                                      ((100 - item.discount) / 100)),
+                                  textAlign: TextAlign.right,
+                                  style: theme.textTheme.bodyText2,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -241,26 +298,59 @@ class WidgetListProduct extends StatelessWidget {
                 child: Column(
                   children: [
                     Flexible(
-                      flex: 1,
-                      fit: FlexFit.loose,
-                      child: SizedBox(
-                          width: double.infinity,
-                          child: _imageItem(item.images)),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                      flex: 3,
+                      child: Stack(
+                        fit: StackFit.expand,
                         children: [
-                          Text(
-                            item.name ?? '',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.bodyText1,
-                          ),
-                          _money(item.discount, item.price,
-                              theme.textTheme.bodyText1),
+                          _imageItem(item.images),
+                          if (item.discount == 0)
+                            const SizedBox()
+                          else
+                            Positioned(
+                              right: 10,
+                              top: 0,
+                              child: Container(
+                                height: 26,
+                                width: 26,
+                                decoration: const BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.vertical(
+                                    bottom: Radius.circular(4),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '-${item.discount}%',
+                                    textAlign: TextAlign.center,
+                                    style: theme.textTheme.bodyText2.copyWith(
+                                        color: Colors.white, fontSize: 10),
+                                  ),
+                                ),
+                              ),
+                            ),
                         ],
+                      ),
+                    ),
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              item.name ?? '',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.bodyText1,
+                            ),
+                            _money(
+                              item.discount,
+                              item.price,
+                              theme.textTheme.bodyText2,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -314,7 +404,10 @@ class WidgetListProduct extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Container(color: Colors.white, height: 10, width: double.infinity),
+                          Container(
+                              color: Colors.white,
+                              height: 10,
+                              width: double.infinity),
                           const SizedBox(height: 4),
                           Container(color: Colors.white, height: 10),
                         ],
@@ -378,8 +471,6 @@ class WidgetListProduct extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text(Formats.money(p), style: /*priceStyle*/ style),
-          const SizedBox(width: 4),
           Text(
             Formats.money(price),
             style: style.copyWith(
@@ -387,6 +478,8 @@ class WidgetListProduct extends StatelessWidget {
               decoration: TextDecoration.lineThrough,
             ),
           ),
+          const SizedBox(width: 4),
+          Text(Formats.money(p), style: style),
         ],
       );
     }

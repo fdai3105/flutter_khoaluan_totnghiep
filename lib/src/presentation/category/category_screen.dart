@@ -24,11 +24,12 @@ class CategoryScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
+      appBar: WidgetAppBar(title: parentName),
       backgroundColor: theme.backgroundColor,
       body: SafeArea(
         child: BaseWidget<CategoryViewModel>(
           viewModel: CategoryViewModel(
-            categoryResponse: CategoryResponse(),
+            response: CategoryResponse(),
             productResponse: ProductResponse(),
           ),
           onViewModelReady: (vm) async {
@@ -43,69 +44,47 @@ class CategoryScreen extends StatelessWidget {
   }
 
   Widget _body(BuildContext context, CategoryViewModel vm) {
-    final theme = Theme.of(context);
-    return NestedScrollView(
-      headerSliverBuilder: (context, innerBoxIsScrolled) {
-        return <Widget>[
-          SliverAppBar(
-            expandedHeight: 200,
-            pinned: true,
-            backgroundColor: theme.backgroundColor,
-            iconTheme: theme.iconTheme,
-            elevation: 0,
-            title: Text(
-              parentName,
-              style: theme.textTheme.headline6,
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                AppEndpoint.domain + parentImage,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ];
-      },
-      body: vm.isLoading
-          ? const WidgetLoading()
-          : WidgetIndicator(
-              expanded: false,
-              onRefresh: () => vm.init(id),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 20),
-                    WidgetListCategory(
-                      onTap: (item) => pushNewScreen(
-                        context,
-                        screen: SubCategoryScreen(
-                          id: item.id,
-                          name: item.name,
-                          image: item.image,
-                        ),
+    return vm.isLoading
+        ? const WidgetLoading()
+        : WidgetIndicator(
+            expanded: false,
+            onRefresh: () => vm.init(id),
+            child: SingleChildScrollView(
+              controller: vm.scroll,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20),
+                  WidgetListCategory(
+                    onTap: (item) => pushNewScreen(
+                      context,
+                      screen: SubCategoryScreen(
+                        id: item.id,
+                        name: item.name,
+                        image: item.image,
                       ),
-                      category: vm.subCategory,
-                      axis: Axis.horizontal,
                     ),
-                    const SizedBox(height: 20),
-                    WidgetListProduct(
-                      axis: Axis.vertical,
-                      showSeeAll: false,
-                      padding: AppStyles.paddingBody,
-                      product: vm.products,
-                      onTap: (item) {
-                        pushNewScreen(
-                          context,
-                          screen: ProductScreen(id: item.id,name: item.name),
-                          withNavBar: false,
-                        );
-                      },
-                    ),
-                  ],
-                ),
+                    category: vm.subCategory,
+                    axis: Axis.horizontal,
+                  ),
+                  const SizedBox(height: 20),
+                  WidgetListProduct(
+                    axis: Axis.vertical,
+                    showSeeAll: false,
+                    padding: AppStyles.paddingBody,
+                    product: vm.products,
+                    loadingMore: vm.loadingMore,
+                    onTap: (item) {
+                      pushNewScreen(
+                        context,
+                        screen: ProductScreen(id: item.id, name: item.name),
+                        withNavBar: false,
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
-    );
+          );
   }
 }

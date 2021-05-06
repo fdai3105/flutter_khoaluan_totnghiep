@@ -9,6 +9,7 @@ class WidgetInput extends StatelessWidget {
   final String value;
   final bool readOnly;
   final EdgeInsets margin;
+  final bool obscureText;
 
   const WidgetInput({
     Key key,
@@ -18,6 +19,7 @@ class WidgetInput extends StatelessWidget {
     this.value,
     this.readOnly = false,
     this.margin = EdgeInsets.zero,
+    this.obscureText = false,
   }) : super(key: key);
 
   @override
@@ -40,6 +42,7 @@ class WidgetInput extends StatelessWidget {
             .bodyText1
             .copyWith(color: AppColors.lightModeText),
         cursorColor: AppColors.tertiary,
+        obscureText: obscureText,
         decoration: InputDecoration(
           hintText: hint ?? '',
           hintStyle: TextStyle(color: theme.hintColor),

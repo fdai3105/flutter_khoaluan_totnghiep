@@ -110,6 +110,13 @@ class AppTranslations extends Translations {
     'set_ward': 'Set ward',
     'ward_null': 'Please select you ward',
     'input_null': 'Please check your input',
+    'place_order' : 'Place order',
+    'checkout' : 'Checkout',
+    'cart': 'Cart',
+    'added_to_cart_success' : 'Added to cart success',
+    'go_to_cart' : 'Go to cart',
+    'continue_shopping' : 'Continue shopping',
+    'delete': 'Delete',
   };
 
   final Map<String, String> viVN = {

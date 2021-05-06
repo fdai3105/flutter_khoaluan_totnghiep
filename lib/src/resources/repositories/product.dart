@@ -65,10 +65,16 @@ class ProductResponse {
     }
   }
 
-  Future<Response> getProductsByParentCategory(int parentId) async {
+  Future<Response> getProductsByParentCategory(int parentId, int page) async {
+    final params = {
+      'page': page ?? 1,
+    };
+
     try {
-      final products = await DioService()
-          .get(AppEndpoint.getProductsByParentCategory + parentId.toString());
+      final products = await DioService().get(
+        AppEndpoint.getProductsByParentCategory + parentId.toString(),
+        queryParameters: params,
+      );
       return products;
     } on DioError catch (e) {
       return e.response;

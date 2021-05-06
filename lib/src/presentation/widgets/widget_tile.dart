@@ -16,10 +16,7 @@ class WidgetTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      title: Text(
-        title ?? '',
-        style: Theme.of(context).textTheme.bodyText1,
-      ),
+      title: Text(title ?? '', style: Theme.of(context).textTheme.bodyText2),
       trailing: Icon(
         icon,
       ),

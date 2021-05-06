@@ -14,62 +14,76 @@ class WidgetListHotCategory extends StatelessWidget {
       height: 40,
       child: ListView(
         padding: AppStyles.paddingBody,
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         children: [
-          _item('assets/icons/bed.png', 'Beds', () {
+          _item('assets/icons/bed.png', 'Gường', () {
+            pushNewScreen(
+              context,
+              screen: const CategoryScreen(
+                id: 8,
+                parentName: 'Gường',
+                parentImage: 'upload/Gường_p4_d9b5b79a079c4085a4b5b9c7561cd8be_medium.png',
+              ),
+              withNavBar: false,
+            );
+          }),
+          _item('assets/icons/table.png', 'Bàn', () {
             pushNewScreen(
               context,
               screen: const CategoryScreen(
                 id: 1,
-                parentName: 'Beds',
-                parentImage: 'upload/Beds_beds_bm003-us.webp',
+                parentName: 'Bàn',
+                parentImage:
+                'upload\Bàn_2_16b84acbefe24232a46fbf952a107bbd_medium.jpg',
               ),
               withNavBar: false,
             );
           }),
-          _item('assets/icons/closet.png', 'Armories & wardrobes', () {
+          _item('assets/icons/decorate.png', 'Trang trí', () {
             pushNewScreen(
               context,
               screen: const CategoryScreen(
-                id: 4,
-                parentName: 'Armoires & wardrobes',
-                parentImage: 'upload/Armoires & wardrobes_wardrobes_19053.webp',
+                id: 10,
+                parentName: 'Trang trí',
+                parentImage:
+                    'upload/Trang trí_vuong_1ff9b74779fe4ebdbbee01ba5c8c897e_medium.png',
               ),
               withNavBar: false,
             );
           }),
-          _item('assets/icons/television.png', 'TV & media furniture', () {
+          _item('assets/icons/sofa.png', 'Sofa', () {
             pushNewScreen(
               context,
               screen: const CategoryScreen(
                 id: 7,
-                parentName: 'TV & media furniture',
+                parentName: 'Sofa',
                 parentImage:
-                    'upload/TV & media furniture_Category_tv-and-media-storage.jpg',
+                    'upload/Sofa_4_ce368213d8d546bfa4970d12f1eedad0_medium.png',
               ),
               withNavBar: false,
             );
           }),
-          _item('assets/icons/sofa.png', 'Sofas & sectionals', () {
+          _item('assets/icons/lamp.png', 'Đèn', () {
             pushNewScreen(
               context,
               screen: const CategoryScreen(
-                id: 3,
-                parentName: 'Sofas & sectionals',
+                id: 4,
+                parentName: 'Đèn',
                 parentImage:
-                    'upload/Sofas & sectionals_Category_sofas-and-armchairs.jpg',
+                    'upload/Đèn_pixar_d_12f93e1649744f1e8e5f6ece7e6e4744_medium.jpg',
               ),
               withNavBar: false,
             );
           }),
-          _item('assets/icons/cupboard.png', 'Dressers & storage drawer', () {
+          _item('assets/icons/mirror.png', 'Gương', () {
             pushNewScreen(
               context,
               screen: const CategoryScreen(
-                id: 9,
-                parentName: 'Dressers & storage drawers',
+                id: 6,
+                parentName: 'Gương',
                 parentImage:
-                    'upload/Dressers & storage drawers_dressers-storage-drawers_st004-us.webp',
+                'upload/Gương_2_178bb757c9d742c7ae1fc8c2f807db7d_medium.jpg',
               ),
               withNavBar: false,
             );
@@ -86,7 +100,7 @@ class WidgetListHotCategory extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
         margin: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
-          color: AppColors.primary,
+          color: AppColors.tertiary,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(

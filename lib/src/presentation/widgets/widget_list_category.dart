@@ -46,8 +46,9 @@ class WidgetListCategory extends StatelessWidget {
         itemCount: category.data.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          childAspectRatio: 1 / 0.8,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
+          childAspectRatio: 1,
         ),
         itemBuilder: (context, index) {
           return _item(context, category.data[index]);
@@ -67,7 +68,7 @@ class WidgetListCategory extends StatelessWidget {
         padding: AppStyles.paddingBody,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 2 / 2.2,
+          childAspectRatio: 1.2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
         ),
@@ -101,25 +102,48 @@ class WidgetListCategory extends StatelessWidget {
   }
 
   Widget _item(BuildContext context, CategoryDatum category) {
+    final theme = Theme.of(context);
+
     return GestureDetector(
       onTap: () => onTap(category),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 120,
-            child: WidgetImage(
-              image: category.image,
-              fit: BoxFit.cover,
+      child: Container(
+        decoration: BoxDecoration(
+          color: theme.cardColor,
+          borderRadius: AppStyles.radiusNormal,
+          boxShadow: AppStyles.shadow,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flexible(
+              fit: FlexFit.tight,
+              child: SizedBox(
+                width: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.vertical(
+                      top: AppStyles.radiusNormal.bottomRight),
+                  child: WidgetImage(
+                    image: category.image,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            category.name ?? '',
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
+            const SizedBox(height: 4),
+            Flexible(
+              flex: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(
+                  category.name ?? '',
+                  style: Theme.of(context).textTheme.bodyText2,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -135,24 +159,41 @@ class WidgetListCategory extends StatelessWidget {
         itemCount: 10,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: 1 / 0.75,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
+          childAspectRatio: 1,
         ),
         itemBuilder: (context, index) {
-          return Shimmer.fromColors(
-            baseColor: theme.cardColor,
-            highlightColor: theme.primaryColor,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(child: Container(color: Colors.grey)),
-                const SizedBox(height: 4),
-                Container(
-                    color: Colors.grey,
-                    width: double.infinity,
-                    child: const Text('')),
-              ],
+          return Container(
+            decoration: BoxDecoration(
+              color: theme.cardColor,
+              borderRadius: AppStyles.radiusNormal,
+              boxShadow: AppStyles.shadow,
+            ),
+            child: Shimmer.fromColors(
+              baseColor: theme.cardColor,
+              highlightColor: theme.primaryColor,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Flexible(
+                    fit: FlexFit.tight,
+                    child: WidgetImage(image: null),
+                  ),
+                  const SizedBox(height: 4),
+                  Flexible(
+                    flex: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Container(
+                        color: Colors.grey,
+                        width: double.infinity,
+                        child: const Text(''),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },

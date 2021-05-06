@@ -90,16 +90,28 @@ class ProductScreen extends StatelessWidget {
                                                     theme.textTheme.headline6,
                                               ),
                                               Text(
-                                                'bed frame, birch/Luroy, Queen',
+                                                vm.product.data.sortDesc,
                                                 style:
                                                     theme.textTheme.bodyText2,
                                               ),
                                             ],
                                           ),
                                         ),
-                                        Text(
-                                          Formats.money(vm.product.data.price),
-                                          style: theme.textTheme.bodyText1,
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              Formats.money(vm.product.data.price * ((100 - vm.product.data.discount) / 100)),
+                                              style: theme.textTheme.bodyText2.copyWith(
+                                                fontSize: 12,
+                                                decoration: TextDecoration.lineThrough,
+                                              ),
+                                            ),
+                                            Text(
+                                              Formats.money(vm.product.data.price),
+                                              style: theme.textTheme.bodyText1,
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -121,7 +133,8 @@ class ProductScreen extends StatelessWidget {
                                           margin: const EdgeInsets.symmetric(
                                               horizontal: 16),
                                         ),
-                                        Text('${'sold'.tr}: ${vm.product.data.bought}'),
+                                        Text(
+                                            '${'sold'.tr}: ${vm.product.data.bought}'),
                                       ],
                                     ),
                                     const SizedBox(height: 16),
@@ -131,7 +144,7 @@ class ProductScreen extends StatelessWidget {
                               const SizedBox(height: 16),
                               WidgetExpansion(
                                 title: 'detail'.tr,
-                                children: [Text(vm.product.data.desc)],
+                                children: [Text(vm.product.data.desc ?? '')],
                               ),
                               WidgetTile(
                                 title: 'comment'.tr,

@@ -75,6 +75,7 @@ class ProductDatum {
   final String name;
   final int price;
   final String desc;
+  final String sortDesc;
   final int stock;
   final int bought;
   final int warranty;
@@ -94,6 +95,7 @@ class ProductDatum {
     this.price,
     this.desc,
     this.stock,
+    this.sortDesc,
     this.bought,
     this.warranty,
     this.discount,
@@ -117,6 +119,7 @@ class ProductDatum {
         name: json["name"],
         price: json["price"],
         desc: json["desc"],
+        sortDesc: json["sort_desc"],
         stock: json["stock"],
         bought: json["bought"],
         warranty: json["warranty"],
@@ -141,6 +144,7 @@ class ProductDatum {
         "price": price,
         "desc": desc,
         "stock": stock,
+        "sort_desc": sortDesc,
         "bought": bought,
         "warranty": warranty,
         "discount": discount,

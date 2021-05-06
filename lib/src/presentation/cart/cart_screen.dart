@@ -213,7 +213,7 @@ class CartScreen extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              'check_out'.tr,
+                              'checkout'.tr,
                               style:const  TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,

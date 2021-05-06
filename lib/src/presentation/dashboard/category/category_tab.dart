@@ -31,7 +31,7 @@ class CategoryTab extends StatelessWidget {
   Widget _mobile(BuildContext context, CategoryTabViewModel vm) {
     return Column(
       children: [
-         WidgetAppBar(title: 'category'.tr, centerTitle: false),
+        WidgetAppBar(title: 'category'.tr, centerTitle: false),
         WidgetIndicator(
           onRefresh: () => vm.init(),
           child: WidgetListCategory(
