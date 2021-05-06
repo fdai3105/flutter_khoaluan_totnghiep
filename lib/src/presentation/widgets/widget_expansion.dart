@@ -18,7 +18,7 @@ class WidgetExpansion extends StatelessWidget {
       child: ExpansionTile(
         title: Text(
           title,
-          style: TextStyle(color: AppColors.dark),
+          style: Theme.of(context).textTheme.bodyText2,
         ),
         childrenPadding: const EdgeInsets.all(10),
         children: children,

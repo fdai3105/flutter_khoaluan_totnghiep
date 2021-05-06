@@ -1,10 +1,9 @@
+import 'package:khoaluan_totnghiep_mobile/src/resources/resources.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:rxdart/rxdart.dart';
-import '../../../resources/repositories/address.dart';
-import '../../../utils/shared_pref.dart';
-import '../../../resources/resources.dart';
-import '../../base/base.dart';
-import '../../presentation.dart';
+
+import '../presentation.dart';
 
 class AddressViewModel extends BaseViewModel {
   final AddressRepository addressRepository;

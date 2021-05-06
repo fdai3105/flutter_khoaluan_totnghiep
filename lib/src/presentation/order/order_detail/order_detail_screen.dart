@@ -8,12 +8,14 @@ import '../../presentation.dart';
 class OrderDetailScreen extends StatelessWidget {
   final OrderDatum order;
 
-  const OrderDetailScreen({Key key, this.order}) : super(key: key);
+  const OrderDetailScreen({Key key, @required this.order}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.backgroundColor,
       appBar: const WidgetAppBar(
         title: 'Order Details',
       ),
@@ -36,6 +38,8 @@ class OrderDetailScreen extends StatelessWidget {
   }
 
   Widget _body(BuildContext context, OrderDetailViewModel vm) {
+    final theme = Theme.of(context);
+
     return Column(
       children: [
         Expanded(
@@ -44,7 +48,10 @@ class OrderDetailScreen extends StatelessWidget {
               _header(order.status),
               const SizedBox(height: 10),
               ListTile(
-                title: const Text('Delivery Address'),
+                title: Text(
+                  'Delivery Address',
+                  style: theme.textTheme.bodyText2,
+                ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -143,7 +150,8 @@ class OrderDetailScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Order No. ${order.id}',
-                      style: const TextStyle(fontSize: 16),
+                      /* style: const TextStyle(fontSize: 16),*/
+                      style: theme.textTheme.bodyText2,
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -162,26 +170,46 @@ class OrderDetailScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Subtotal ()'),
-                        Text(Formats.money(order.total)),
+                        Text(
+                          'Subtotal ()',
+                          style: theme.textTheme.bodyText2,
+                        ),
+                        Text(
+                          Formats.money(order.total),
+                          style: theme.textTheme.bodyText2,
+                        ),
                       ],
                     ),
                     const SizedBox(height: 6),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Shipping Fee'),
-                        Text(Formats.money(0)),
+                        Text(
+                          'Shipping Fee',
+                          style: theme.textTheme.bodyText2,
+                        ),
+                        Text(
+                          Formats.money(0),
+                          style: theme.textTheme.bodyText2,
+                        ),
                       ],
                     ),
                     const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Total (VAT Incl.)',
-                            style: TextStyle(fontSize: 16)),
-                        Text(Formats.money(order.total),
-                            style: const TextStyle(fontSize: 16)),
+                        Text(
+                          'Total (VAT Incl.)',
+                          style: theme.textTheme.bodyText2.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          Formats.money(order.total),
+                          style: theme.textTheme.bodyText2.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -205,6 +233,21 @@ class OrderDetailScreen extends StatelessWidget {
 
   Widget _header(OrderStatus status) {
     var text;
+    switch (status) {
+      case OrderStatus.pending:
+        text = 'Pending';
+        break;
+      case OrderStatus.completed:
+        text = 'Completed';
+        break;
+      case OrderStatus.cancelled:
+        text = 'Cancelled';
+        break;
+      case OrderStatus.shipping:
+        text = 'Shipping';
+        break;
+    }
+
     return Container(
       height: 80,
       width: double.infinity,

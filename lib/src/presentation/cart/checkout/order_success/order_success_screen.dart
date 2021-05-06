@@ -5,7 +5,10 @@ import '../../../../configs/configs.dart';
 class OrderSuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
+      backgroundColor: theme.backgroundColor,
       body: SafeArea(
         child: Center(
           child: Column(

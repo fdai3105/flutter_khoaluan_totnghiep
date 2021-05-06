@@ -7,8 +7,10 @@ import '../../presentation.dart';
 class CategoryTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
-      color: Colors.white,
+      color: theme.backgroundColor,
       child: BaseWidget<CategoryTabViewModel>(
         viewModel: CategoryTabViewModel(
           response: CategoryResponse(),

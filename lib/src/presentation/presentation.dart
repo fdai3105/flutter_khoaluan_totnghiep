@@ -17,3 +17,5 @@ export 'product_popular/popular.dart';
 export 'product_new/new.dart';
 export 'widgets/widgets.dart';
 export 'favorite/favorite.dart';
+export 'address/address.dart';
+export 'setting/setting.dart';

@@ -45,6 +45,7 @@ class DashboardScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
         child: PersistentTabView(
           context,

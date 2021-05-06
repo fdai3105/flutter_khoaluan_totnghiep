@@ -9,14 +9,16 @@ import '../../resources/resources.dart';
 class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: WidgetAppBar(
+        backgroundColor: theme.backgroundColor,
+        appBar:  WidgetAppBar(
           title: 'My order',
           bottom: TabBar(
-            tabs: const [
+            tabs: [
               Tab(text: 'All'),
               Tab(text: 'Pending'),
               Tab(text: 'Shipping'),
@@ -24,8 +26,7 @@ class OrderScreen extends StatelessWidget {
               Tab(text: 'Cancelled'),
             ],
             isScrollable: true,
-            unselectedLabelColor: AppColors.dark45,
-            labelColor: AppColors.dark,
+            labelColor: theme.textTheme.bodyText1.color,
             indicatorColor: AppColors.primary,
           ),
         ),
@@ -35,7 +36,7 @@ class OrderScreen extends StatelessWidget {
             onViewModelReady: (vm) => vm.init(),
             builder: (context, vm, widget) {
               if (vm.isLoading) {
-                return WidgetLoading();
+                return const WidgetLoading();
               } else {
                 return TabBarView(
                   children: [

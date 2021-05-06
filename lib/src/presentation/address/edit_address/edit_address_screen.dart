@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../../configs/configs.dart';
-import '../../../../resources/resources.dart';
-import '../../../presentation.dart';
+import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
+import 'package:khoaluan_totnghiep_mobile/src/resources/resources.dart';
+
+import '../../presentation.dart';
 
 class EditAddressScreen extends StatelessWidget {
   final AddressDatum address;
@@ -71,7 +72,7 @@ class EditAddressScreen extends StatelessWidget {
                             )
                           : Text(vm.wardName),
                 ),
-                WidgetTextField(
+                WidgetInput(
                   onChanged: (value) => vm.address = value,
                 ),
                 const SizedBox(height: 20),

@@ -8,8 +8,10 @@ import '../../presentation.dart';
 class UserTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Container(
-      color: Colors.white,
+      color: theme.backgroundColor,
       child: BaseWidget<UserTabViewModel>(
         viewModel: UserTabViewModel(),
         onViewModelReady: (vm) async {
@@ -65,6 +67,14 @@ class UserTab extends StatelessWidget {
                   screen: SharedPref.getUser() == null
                       ? LoginScreen()
                       : AddressScreen(),
+                  withNavBar: false,
+                ),
+              ),
+              WidgetTile(
+                title: 'Settings',
+                onTap: () => pushNewScreen(
+                  context,
+                  screen: SettingScreen(),
                   withNavBar: false,
                 ),
               ),

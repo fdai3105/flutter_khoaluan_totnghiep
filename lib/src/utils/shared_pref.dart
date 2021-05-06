@@ -117,6 +117,14 @@ class SharedPref {
     await _pref.clear();
   }
 
+  static Future setDarkMode({bool value}) async {
+    await _pref.setBool('dark_mode', value);
+  }
+
+  static bool isDarkMode() {
+    return _pref.getBool('dark_mode') ?? false;
+  }
+
   /// favorite item
   static List<ProductDatum> getFavorites() {
     final products = <ProductDatum>[];

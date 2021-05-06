@@ -28,6 +28,7 @@ class DialogLoading {
 
   Widget _loading() {
     return Dialog(
+      backgroundColor: Theme.of(_builderContext).cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),

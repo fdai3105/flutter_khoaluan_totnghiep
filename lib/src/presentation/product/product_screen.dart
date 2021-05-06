@@ -24,8 +24,10 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.backgroundColor,
       appBar: WidgetAppBar(
         title: name,
         centerTitle: false,
@@ -52,7 +54,7 @@ class ProductScreen extends StatelessWidget {
           },
           builder: (context, vm, widget) {
             if (vm.isLoading) {
-              return WidgetLoading();
+              return const WidgetLoading();
             } else {
               return Column(
                 children: [
@@ -82,28 +84,20 @@ class ProductScreen extends StatelessWidget {
                                             children: [
                                               Text(
                                                 vm.product.data.name,
-                                                style: TextStyle(
-                                                  color: AppColors.dark,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                                style:
+                                                    theme.textTheme.headline6,
                                               ),
                                               Text(
                                                 'bed frame, birch/Luroy, Queen',
-                                                style: TextStyle(
-                                                  color: AppColors.dark,
-                                                ),
+                                                style:
+                                                    theme.textTheme.bodyText2,
                                               ),
                                             ],
                                           ),
                                         ),
                                         Text(
                                           Formats.money(vm.product.data.price),
-                                          style: TextStyle(
-                                            color: AppColors.dark,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                          style: theme.textTheme.bodyText1,
                                         ),
                                       ],
                                     ),
@@ -271,7 +265,8 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
                   return Center(
                     child: CircularProgressIndicator(
                       value: progress.progress,
-                      valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                          AppColors.primary),
                     ),
                   );
                 },
@@ -300,7 +295,7 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             margin: const EdgeInsets.only(bottom: 20, right: 10),
             decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: AppColors.secondary,
                 borderRadius: BorderRadius.circular(10)),
             child: widget.images.isEmpty
                 ? const Text('0/0')

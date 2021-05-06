@@ -45,7 +45,7 @@ class WidgetListProduct extends StatelessWidget {
 
   /// horizon list
   Widget _horizon(BuildContext context) {
-    if (true) {
+    if (product == null) {
       return _horizonShimmer(context);
     } else {
       if (product.data.isEmpty) {
@@ -165,13 +165,13 @@ class WidgetListProduct extends StatelessWidget {
               top: 10,
             ),
             decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
+              color: theme.cardColor,
               borderRadius: AppStyles.radiusNormal,
               boxShadow: AppStyles.shadow,
             ),
             child: Shimmer.fromColors(
               baseColor: theme.cardColor,
-              highlightColor: Colors.grey.shade700,
+              highlightColor: theme.primaryColor,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -241,7 +241,9 @@ class WidgetListProduct extends StatelessWidget {
                     Flexible(
                       flex: 1,
                       fit: FlexFit.loose,
-                      child: SizedBox(width: double.infinity,child: _imageItem(item.images)),
+                      child: SizedBox(
+                          width: double.infinity,
+                          child: _imageItem(item.images)),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10),
@@ -254,7 +256,8 @@ class WidgetListProduct extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.bodyText1,
                           ),
-                          _money(item.discount, item.price, theme.textTheme.bodyText1),
+                          _money(item.discount, item.price,
+                              theme.textTheme.bodyText1),
                         ],
                       ),
                     ),
@@ -270,6 +273,8 @@ class WidgetListProduct extends StatelessWidget {
   }
 
   Widget _verticalShimmer(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Column(
       children: [
         const SizedBox(height: 10),
@@ -286,13 +291,13 @@ class WidgetListProduct extends StatelessWidget {
           itemBuilder: (context, index) {
             return Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: theme.cardColor,
                 borderRadius: AppStyles.radiusNormal,
                 boxShadow: AppStyles.shadow,
               ),
               child: Shimmer.fromColors(
-                baseColor: Colors.grey[300],
-                highlightColor: Colors.grey[100],
+                baseColor: theme.cardColor,
+                highlightColor: theme.primaryColor,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -307,12 +312,9 @@ class WidgetListProduct extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Container(
-                              color: Colors.grey,
-                              height: 10,
-                              width: double.infinity),
+                          Container(color: Colors.white, height: 10, width: double.infinity),
                           const SizedBox(height: 4),
-                          Container(color: Colors.grey, height: 10),
+                          Container(color: Colors.white, height: 10),
                         ],
                       ),
                     ),
@@ -355,7 +357,8 @@ class WidgetListProduct extends StatelessWidget {
   Widget _imageItem(List<ProductImage> images) {
     return ClipRRect(
       borderRadius: BorderRadius.vertical(top: AppStyles.radiusNormal.topRight),
-      child: WidgetImage(image: images.isEmpty ? null : images.first.image,fit: BoxFit.cover),
+      child: WidgetImage(
+          image: images.isEmpty ? null : images.first.image, fit: BoxFit.cover),
     );
   }
 

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../../../configs/configs.dart';
-import '../../../../resources/resources.dart';
-import '../../../presentation.dart';
+import '../../../configs/configs.dart';
+import '../../../resources/resources.dart';
+import '../../presentation.dart';
 
 class AddAddressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.backgroundColor,
       body: SafeArea(
         child: BaseWidget<AddAddressViewModel>(
           viewModel:
@@ -61,19 +63,22 @@ class AddAddressScreen extends StatelessWidget {
                       : Text(vm.wardName),
                 ),
                 const SizedBox(height: 10),
-                WidgetTextField(
+                WidgetInput(
                   onChanged: (value) => vm.address = value,
                   hint: 'Address',
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
                 ),
                 const SizedBox(height: 10),
-                WidgetTextField(
+                WidgetInput(
                   onChanged: (value) => vm.name = value,
                   hint: 'Name',
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
                 ),
                 const SizedBox(height: 10),
-                WidgetTextField(
+                WidgetInput(
                   onChanged: (value) => vm.phone = value,
                   hint: 'Phone',
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
                 ),
               ],
             );

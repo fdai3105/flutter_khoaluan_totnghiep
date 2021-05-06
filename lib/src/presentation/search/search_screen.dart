@@ -10,7 +10,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: const WidgetAppBar(title: 'Search'),
       body: SafeArea(
         child: BaseWidget<SearchViewModel>(
@@ -51,7 +51,7 @@ class SearchScreen extends StatelessWidget {
 
   Widget _result(BuildContext context, SearchViewModel vm) {
     if (vm.isLoading && vm.result == null) {
-      return WidgetLoading();
+      return const WidgetLoading();
     }
     if (vm.result == null) {
       return const SizedBox();
@@ -68,7 +68,7 @@ class SearchScreen extends StatelessWidget {
                     height: 40,
                     width: 40,
                     padding: const EdgeInsets.all(8),
-                    child: WidgetLoading(),
+                    child: const WidgetLoading(),
                   )
                 else
                   ListView.builder(
@@ -89,12 +89,24 @@ class SearchScreen extends StatelessWidget {
                         },
                         leading: const Icon(Icons.search_rounded),
                         minLeadingWidth: 0,
-                        title: Text(item.name),
+                        title: Text(
+                          item.name,
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
                       );
                     },
                   ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    controller
+                      ..text = vm.keyWord
+                      ..selection = TextSelection(
+                          baseOffset: vm.keyWord.length,
+                          extentOffset: vm.keyWord.length);
+                    vm
+                      ..keyWord = vm.keyWord
+                      ..isSearching = false;
+                  },
                   leading: const Icon(Icons.search_rounded,
                       color: Colors.transparent),
                   minLeadingWidth: 0,

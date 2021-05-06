@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../resources/models/models.dart';
-import '../../../../utils/utils.dart';
+import 'package:khoaluan_totnghiep_mobile/src/resources/resources.dart';
+import 'package:khoaluan_totnghiep_mobile/src/utils/utils.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import '../../../../resources/repositories/repositories.dart';
 import 'package:rxdart/rxdart.dart';
-import '../../../presentation.dart';
+
+import '../../presentation.dart';
 
 class AddAddressViewModel extends BaseViewModel {
   final AddressRepository addressRepository;
@@ -103,6 +103,8 @@ class AddAddressViewModel extends BaseViewModel {
       if (routes != null) {
         district = routes as District;
       }
+    } else {
+      snackBar(context, 'Please select city');
     }
   }
 
@@ -115,6 +117,8 @@ class AddAddressViewModel extends BaseViewModel {
       if (routes != null) {
         ward = routes as Ward;
       }
+    } else {
+      snackBar(context, 'Please select district');
     }
   }
 

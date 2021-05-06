@@ -14,8 +14,10 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.backgroundColor,
       appBar: const WidgetAppBar(
         title: 'Checkout',
       ),
@@ -30,7 +32,7 @@ class CheckoutScreen extends StatelessWidget {
           },
           builder: (context, vm, widget) {
             if (vm.isLoading) {
-              return WidgetLoading();
+              return const WidgetLoading();
             }
             return Column(
               children: [
@@ -42,21 +44,10 @@ class CheckoutScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         _list(),
                         const SizedBox(height: 10),
-                        Container(
+                        WidgetInput(
+                          onChanged: (value) => vm.note = value,
+                          hint: 'Note',
                           margin: const EdgeInsets.symmetric(horizontal: 10),
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            color: AppColors.dark45.withOpacity(0.06),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: TextFormField(
-                            onChanged: (value) => vm.note = value,
-                            cursorColor: AppColors.dark,
-                            decoration: const InputDecoration(
-                              hintText: 'Note',
-                              border: InputBorder.none,
-                            ),
-                          ),
                         ),
                         const SizedBox(height: 10),
                         Column(
@@ -85,42 +76,45 @@ class CheckoutScreen extends StatelessWidget {
                   ),
                 ),
                 const Divider(color: AppColors.dark45, height: 0),
-                Row(
-                  children: [
-                    Flexible(
-                      fit: FlexFit.tight,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          const Text('Total Payment'),
-                          Text(
-                            Formats.money(Maths.calTotalCart(carts)),
-                            style: const TextStyle(
-                              color: AppColors.primary,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                Container(
+                  color: theme.cardColor,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        fit: FlexFit.tight,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Text('Total Payment'),
+                            Text(
+                              Formats.money(Maths.calTotalCart(carts)),
+                              style: const TextStyle(
+                                color: AppColors.primary,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      onPressed: () => vm.checkout(),
-                      style: ElevatedButton.styleFrom(
-                        primary: AppColors.primary,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 16,
-                          horizontal: 20,
+                          ],
                         ),
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero),
-                        elevation: 0,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
-                      child: const Text('Place order'),
-                    ),
-                  ],
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        onPressed: () => vm.checkout(),
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.primary,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 16,
+                            horizontal: 20,
+                          ),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.zero),
+                          elevation: 0,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        child: const Text('Place order'),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             );
@@ -191,7 +185,7 @@ class CheckoutScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text('Items (${carts.length.toString()})'),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 10),
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),

@@ -3,47 +3,56 @@ import '../../configs/configs.dart';
 
 class WidgetInput extends StatelessWidget {
   final Function(String) onChanged;
+  final TextEditingController controller;
   final String hint;
   final String value;
   final bool readOnly;
+  final EdgeInsets margin;
 
   const WidgetInput({
     Key key,
     this.hint,
     this.onChanged,
-    this.value, this.readOnly = false,
+    this.controller,
+    this.value,
+    this.readOnly = false,
+    this.margin = EdgeInsets.zero,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Flexible(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.grey.shade100,
-          borderRadius: AppStyles.radiusNormal,
-        ),
-        child: TextFormField(
-          onChanged: onChanged,
-          initialValue: value ?? '',
-          readOnly: readOnly,
-          style: theme.textTheme.subtitle2,
-          decoration: InputDecoration(
-            hintText: hint ?? '',
-            hintStyle: TextStyle(color: theme.hintColor),
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 14,
-              horizontal: 14,
-            ),
-            isDense: true,
-            enabledBorder: InputBorder.none,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: AppStyles.radiusNormal,
-              borderSide: const BorderSide(
-                color: AppColors.primary,
-                width: 2,
-              ),
+    return Container(
+      margin: margin,
+      decoration: BoxDecoration(
+        color: Colors.grey.shade100,
+        borderRadius: AppStyles.radiusNormal,
+      ),
+      child: TextFormField(
+        controller: controller,
+        onChanged: onChanged,
+        initialValue: value ?? '',
+        readOnly: readOnly,
+        style: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(color: AppColors.lightModeText),
+        cursorColor: AppColors.tertiary,
+        decoration: InputDecoration(
+          hintText: hint ?? '',
+          hintStyle: TextStyle(color: theme.hintColor),
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 14,
+            horizontal: 14,
+          ),
+          isDense: true,
+          enabledBorder: InputBorder.none,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: AppStyles.radiusNormal,
+            borderSide: const BorderSide(
+              color: AppColors.primary,
+              width: 2,
             ),
           ),
         ),

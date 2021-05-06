@@ -12,9 +12,10 @@ class UserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     String name;
     int gender;
+    final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.backgroundColor,
       body: SafeArea(
         child: BaseWidget<UserViewModel>(
           viewModel: UserViewModel(authRepository: AuthRepository()),

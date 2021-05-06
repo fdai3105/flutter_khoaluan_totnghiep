@@ -27,8 +27,9 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.backgroundColor,
       appBar: WidgetAppBar(
         title: 'Select address',
         actions: [

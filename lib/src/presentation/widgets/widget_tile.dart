@@ -18,7 +18,7 @@ class WidgetTile extends StatelessWidget {
       onTap: onTap,
       title: Text(
         title ?? '',
-        style: const TextStyle(fontSize: 14),
+        style: Theme.of(context).textTheme.bodyText2,
       ),
       trailing: Icon(
         icon,

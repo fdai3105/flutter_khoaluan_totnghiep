@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../../../presentation.dart';
-import '../../../../../resources/resources.dart';
+import '../../../presentation.dart';
+import '../../../../resources/resources.dart';
 
-class DistrictScreen extends StatelessWidget {
-  final String cityID;
-
-  const DistrictScreen({Key key, this.cityID}) : super(key: key);
-
+class CityScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: const WidgetAppBar(title: 'District'),
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: const WidgetAppBar(title: 'City'),
       body: SafeArea(
-        child: FutureBuilder<List<District>>(
-            future: AddressRepository().getDistricts(cityID),
+        child: FutureBuilder<List<City>>(
+            future: AddressRepository().getCities(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(
@@ -25,12 +21,15 @@ class DistrictScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.pop(context, item);
                       },
-                      title: Text(item.nameWithType ?? ""),
+                      title: Text(
+                        item.name ?? "",
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
                     );
                   },
                 );
               }
-              return const Center(child: CircularProgressIndicator());
+              return const WidgetLoading();
             }),
       ),
     );

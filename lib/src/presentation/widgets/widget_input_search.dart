@@ -34,7 +34,10 @@ class WidgetInputSearch extends StatelessWidget {
           children: [
             Flexible(
               child: Container(
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
@@ -48,6 +51,12 @@ class WidgetInputSearch extends StatelessWidget {
                     input = value;
                   },
                   autofocus: autoFocus,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: AppColors.lightModeText),
+                  cursorColor: AppColors.tertiary,
                   decoration: InputDecoration(
                     hintText: 'Search',
                     hintStyle: TextStyle(
@@ -69,7 +78,7 @@ class WidgetInputSearch extends StatelessWidget {
                 height: double.infinity,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
+                  color: Colors.grey.shade100,
                   borderRadius: AppStyles.radiusNormal,
                 ),
                 child: Icon(

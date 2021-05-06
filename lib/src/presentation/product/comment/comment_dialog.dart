@@ -54,10 +54,10 @@ class CommentDialog extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: WidgetTextField(
+          child: WidgetInput(
             controller: vm.controller,
             hint: 'Write a comment',
-            onChanged: (value) {},
+            margin: AppStyles.paddingBody,
           ),
         ),
         IconButton(

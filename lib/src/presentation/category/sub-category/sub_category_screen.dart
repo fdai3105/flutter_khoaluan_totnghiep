@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../../../configs/configs.dart';
@@ -18,8 +19,10 @@ class SubCategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.backgroundColor,
       body: SafeArea(
         child: BaseWidget<SubCategoryViewModel>(
           viewModel: SubCategoryViewModel(
@@ -35,12 +38,12 @@ class SubCategoryScreen extends StatelessWidget {
                   SliverAppBar(
                     expandedHeight: 200,
                     pinned: true,
-                    backgroundColor: Colors.white,
+                    backgroundColor: theme.backgroundColor,
                     elevation: 0,
-                    iconTheme: IconThemeData(color: AppColors.dark),
+                    iconTheme: theme.iconTheme,
                     title: Text(
                       name,
-                      style: TextStyle(color: AppColors.dark),
+                      style: theme.textTheme.headline6,
                     ),
                     flexibleSpace: FlexibleSpaceBar(
                       background: Image.network(

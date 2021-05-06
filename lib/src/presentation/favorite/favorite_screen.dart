@@ -8,8 +8,10 @@ import '../presentation.dart';
 class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.backgroundColor,
       appBar: const WidgetAppBar(title: 'My Favorites'),
       body: SafeArea(
         child: BaseWidget<FavoriteViewModel>(
@@ -17,7 +19,7 @@ class FavoriteScreen extends StatelessWidget {
           onViewModelReady: (vm) => vm.init(),
           builder: (context, vm, widget) {
             if (vm.isLoading) {
-              return WidgetLoading();
+              return const WidgetLoading();
             }
             if (vm.favorites.isEmpty) {
               return Padding(

@@ -123,6 +123,8 @@ class WidgetListCategory extends StatelessWidget {
   }
 
   Widget _shimmer(BuildContext context) {
+    final theme = Theme.of(context);
+
     return GlowingOverscrollIndicator(
       color: AppColors.primary,
       axisDirection: AxisDirection.down,
@@ -137,8 +139,8 @@ class WidgetListCategory extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           return Shimmer.fromColors(
-            baseColor: AppColors.shimmerBase,
-            highlightColor: AppColors.shimmerHighlight,
+            baseColor: theme.cardColor,
+            highlightColor: theme.primaryColor,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

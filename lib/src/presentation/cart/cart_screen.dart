@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../resources/resources.dart';
 import '../../configs/configs.dart';
@@ -7,27 +8,20 @@ import '../../presentation/presentation.dart';
 class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    CartViewModel _vm;
+    final theme = Theme.of(context);
+
     return Scaffold(
-      appBar: WidgetAppBar(
-        title: 'Carts',
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.clear_outlined),
-            onPressed: () => _vm.clearCart(),
-          ),
-        ],
-      ),
-      backgroundColor: Colors.white,
+      appBar: const WidgetAppBar(title: 'Carts'),
+      backgroundColor: theme.backgroundColor,
       body: SafeArea(
         child: BaseWidget<CartViewModel>(
           viewModel: CartViewModel(orderRepository: OrderRepository()),
           onViewModelReady: (vm) {
-            _vm = vm..init();
+            vm.init();
           },
           builder: (context, vm, child) {
             if (vm.isLoading) {
-              return WidgetLoading();
+              return const WidgetLoading();
             }
             if (vm.carts.isEmpty) {
               return Center(
@@ -80,10 +74,18 @@ class CartScreen extends StatelessWidget {
                                 child: cart.product.images.isEmpty
                                     ? Image.asset(
                                         'assets/images/placeholder.jpg')
-                                    : Image.network(
-                                        AppEndpoint.domain +
+                                    : CachedNetworkImage(
+                                        imageUrl: AppEndpoint.domain +
                                             cart.product.images.first.image,
                                         fit: BoxFit.cover,
+                                        placeholder: (context, url) {
+                                          return Image.asset(
+                                              'assets/images/placeholder.jpg');
+                                        },
+                                        errorWidget: (context, url, err) {
+                                          return Image.asset(
+                                              'assets/images/placeholder.jpg');
+                                        },
                                       ),
                               ),
                             ),
@@ -100,17 +102,12 @@ class CartScreen extends StatelessWidget {
                                     children: [
                                       Text(
                                         cart.product.name,
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                        style: theme.textTheme.bodyText1,
                                       ),
                                       const SizedBox(height: 2),
                                       Text(
                                         Formats.money(cart.product.price),
-                                        style: const TextStyle(
-                                          color: AppColors.dark45,
-                                        ),
+                                        style: theme.textTheme.subtitle1,
                                       ),
                                     ],
                                   ),
@@ -125,9 +122,7 @@ class CartScreen extends StatelessWidget {
                                         alignment: Alignment.center,
                                         child: Text(
                                           cart.quantity.toString(),
-                                          style: const TextStyle(
-                                            color: AppColors.dark45,
-                                          ),
+                                          style: theme.textTheme.subtitle1,
                                         ),
                                       ),
                                       _quantityButton(
@@ -163,66 +158,69 @@ class CartScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                Row(
-                  children: [
-                    Flexible(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              const Text('Total: '),
-                              Text(
-                                Formats.money(Maths.calTotalCart(vm.carts)),
-                                style: const TextStyle(
-                                  color: AppColors.primary,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                Container(
+                  color: theme.cardColor,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                const Text('Total: '),
+                                Text(
+                                  Formats.money(Maths.calTotalCart(vm.carts)),
+                                  style: const TextStyle(
+                                    color: AppColors.primary,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              const Text('Items: '),
-                              Text(
-                                vm.carts.length.toString(),
-                                style: const TextStyle(
-                                  color: AppColors.primary,
-                                  fontSize: 14,
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                const Text('Items: '),
+                                Text(
+                                  vm.carts.length.toString(),
+                                  style: const TextStyle(
+                                    color: AppColors.primary,
+                                    fontSize: 14,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    GestureDetector(
-                      onTap: () => vm.checkout(),
-                      child: Container(
-                        height: 50,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 40,
-                        ),
-                        decoration: const BoxDecoration(
-                          color: AppColors.primary,
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Check out',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                      const SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () => vm.checkout(),
+                        child: Container(
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 40,
+                          ),
+                          decoration: const BoxDecoration(
+                            color: AppColors.primary,
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'Check out',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             );

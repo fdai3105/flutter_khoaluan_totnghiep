@@ -19,9 +19,10 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      // appBar: WidgetAppBar(title: parentName),
-      backgroundColor: Colors.white,
+      backgroundColor: theme.backgroundColor,
       body: SafeArea(
         child: BaseWidget<CategoryViewModel>(
           viewModel: CategoryViewModel(
@@ -40,18 +41,19 @@ class CategoryScreen extends StatelessWidget {
   }
 
   Widget _body(BuildContext context, CategoryViewModel vm) {
+    final theme = Theme.of(context);
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return <Widget>[
           SliverAppBar(
             expandedHeight: 200,
             pinned: true,
-            backgroundColor: Colors.white,
+            backgroundColor: theme.backgroundColor,
+            iconTheme: theme.iconTheme,
             elevation: 0,
-            iconTheme: IconThemeData(color: AppColors.dark),
             title: Text(
               parentName,
-              style: TextStyle(color: AppColors.dark),
+              style: theme.textTheme.headline6,
             ),
             flexibleSpace: FlexibleSpaceBar(
               background: Image.network(
@@ -63,7 +65,7 @@ class CategoryScreen extends StatelessWidget {
         ];
       },
       body: vm.isLoading
-          ? WidgetLoading()
+          ? const WidgetLoading()
           : WidgetIndicator(
               expanded: false,
               onRefresh: () => vm.init(id),

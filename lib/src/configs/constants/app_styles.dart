@@ -21,7 +21,8 @@ class AppStyles {
     return ThemeData(
       brightness: Brightness.dark,
       backgroundColor: AppColors.secondary,
-      cardColor: const Color.fromRGBO(37, 40, 54, 1),
+      cardColor: AppColors.darkModeCard,
+      primaryColor: AppColors.darkModeShimmerHighlight,
       iconTheme: const IconThemeData(color: Colors.white),
       textTheme: const TextTheme(
         headline6: TextStyle(color: AppColors.darkModeText),
@@ -35,6 +36,7 @@ class AppStyles {
           backgroundColor: Colors.black87,
           contentTextStyle: TextStyle(color: AppColors.darkModeText),
           elevation: 1),
+
     );
   }
 
@@ -42,12 +44,14 @@ class AppStyles {
     return ThemeData(
       brightness: Brightness.light,
       backgroundColor: AppColors.lightModeBg,
+      cardColor: AppColors.lightModeCard,
+      primaryColor: AppColors.lightModeShimmerHighlight,
       iconTheme: const IconThemeData(),
-      textTheme: const TextTheme(
-        headline6: TextStyle(color: AppColors.darkModeText),
-        bodyText1: TextStyle(color: AppColors.darkModeText, fontSize: 16),
-        bodyText2: TextStyle(color: AppColors.darkModeText),
-        subtitle1: TextStyle(color: AppColors.lightModeHint, fontSize: 14),
+      textTheme:  const TextTheme(
+        headline6: TextStyle(color: AppColors.lightModeText),
+        bodyText1: TextStyle(color: AppColors.lightModeText, fontSize: 16),
+        bodyText2: TextStyle(color: AppColors.lightModeText),
+        subtitle1: TextStyle(color: AppColors.lightModeText, fontSize: 14),
         subtitle2: TextStyle(color: Colors.black87),
       ),
       hintColor: Colors.grey,
