@@ -49,6 +49,7 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text(
                           'login_desc'.tr,
+                          style: theme.textTheme.bodyText1,
                         ),
                         const SizedBox(height: 20),
                         WidgetInput(

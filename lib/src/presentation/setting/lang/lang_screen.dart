@@ -22,7 +22,7 @@ class LanguageScreen extends StatelessWidget {
             ListTile(
               title: Text(
                 'vietnamese'.tr,
-                style: theme.textTheme.bodyText1,
+                style: theme.textTheme.bodyText2,
               ),
               onTap: () {
                 mainVM.language = Language.vietnamese;
@@ -32,7 +32,7 @@ class LanguageScreen extends StatelessWidget {
             ListTile(
               title: Text(
                 'english'.tr,
-                style: theme.textTheme.bodyText1,
+                style: theme.textTheme.bodyText2,
               ),
               onTap: () {
                 mainVM.language = Language.english;

@@ -1,4 +1,5 @@
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../resources/resources.dart';
@@ -24,7 +25,7 @@ class UserTabViewModel extends BaseViewModel {
   }
 
   Future logout() async {
-    await SharedPref.clear();
+    await SharedPref.logout();
     Phoenix.rebirth(context);
   }
 

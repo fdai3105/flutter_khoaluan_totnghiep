@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+
 import 'package:get/get.dart';
 
 import 'main_viewmodel.dart';
@@ -12,7 +12,7 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPref.getInstance();
 
-  runApp(Phoenix(child: MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,18 +22,23 @@ class MyApp extends StatelessWidget {
       viewModel: MainViewModel(),
       onViewModelReady: (vm) => vm.init(),
       builder: (context, vm, widget) {
-        return GetMaterialApp(
-          translations: AppTranslations(),
-          locale: AppTranslations.getLocale(vm.language) ?? Get.deviceLocale,
-          fallbackLocale: const Locale('vi', 'VN'),
-          title: 'Flutter Demo',
-          debugShowCheckedModeBanner: false,
-          home: DashboardScreen(),
-          initialRoute: Routes.home,
-          routes: Routes.routes,
-          themeMode: vm.darkMode ? ThemeMode.dark : ThemeMode.light,
-          theme: AppStyles.lightMode(),
-          darkTheme: AppStyles.darkMode(context),
+        return Phoenix(
+          child: MaterialApp(
+            title: 'Flutter Demo',
+            debugShowCheckedModeBanner: false,
+            initialRoute: Routes.home,
+            routes: Routes.routes,
+            themeMode: vm.darkMode ? ThemeMode.dark : ThemeMode.light,
+            theme: AppStyles.lightMode(),
+            darkTheme: AppStyles.darkMode(context),
+            home: GetMaterialApp(
+              translations: AppTranslations(),
+              locale:
+              AppTranslations.getLocale(vm.language) ?? Get.deviceLocale,
+              fallbackLocale: const Locale('vi', 'VN'),
+              home: DashboardScreen(),
+            ),
+          ),
         );
       },
     );

@@ -44,6 +44,10 @@ class SharedPref {
     return getUser().accessToken;
   }
 
+  static Future logout() async {
+    await _pref.remove('pref_user');
+  }
+
   /// cart
   static Future addCart(Cart cart) async {
     final currentCarts = getCarts();
@@ -113,10 +117,6 @@ class SharedPref {
 
   static Future removeCarts() async {
     await _pref.remove('pref_carts');
-  }
-
-  static Future clear() async {
-    await _pref.clear();
   }
 
   static Future setDarkMode({bool value}) async {
