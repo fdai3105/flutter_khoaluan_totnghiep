@@ -60,10 +60,10 @@ class AddressScreen extends StatelessWidget {
           final item = vm.address.data[index];
           return ListTile(
             // todo
-            onTap: () => pushNewScreen(
-              context,
-              screen: EditAddressScreen(address: item),
-            ),
+            // onTap: () => pushNewScreen(
+            //   context,
+            //   screen: EditAddressScreen(address: item),
+            // ),
             title: RichText(
               text: TextSpan(
                 children: [

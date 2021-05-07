@@ -33,8 +33,7 @@ class MyApp extends StatelessWidget {
             darkTheme: AppStyles.darkMode(context),
             home: GetMaterialApp(
               translations: AppTranslations(),
-              locale:
-              AppTranslations.getLocale(vm.language) ?? Get.deviceLocale,
+              locale: vm.language,
               fallbackLocale: const Locale('vi', 'VN'),
               home: DashboardScreen(),
             ),

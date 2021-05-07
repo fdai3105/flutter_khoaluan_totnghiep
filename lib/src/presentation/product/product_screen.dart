@@ -98,17 +98,26 @@ class ProductScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Column(
-                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
                                           children: [
                                             Text(
-                                              Formats.money(vm.product.data.price * ((100 - vm.product.data.discount) / 100)),
-                                              style: theme.textTheme.bodyText2.copyWith(
+                                              Formats.money(
+                                                  vm.product.data.price *
+                                                      ((100 -
+                                                              vm.product.data
+                                                                  .discount) /
+                                                          100)),
+                                              style: theme.textTheme.bodyText2
+                                                  .copyWith(
                                                 fontSize: 12,
-                                                decoration: TextDecoration.lineThrough,
+                                                decoration:
+                                                    TextDecoration.lineThrough,
                                               ),
                                             ),
                                             Text(
-                                              Formats.money(vm.product.data.price),
+                                              Formats.money(
+                                                  vm.product.data.price),
                                               style: theme.textTheme.bodyText1,
                                             ),
                                           ],
@@ -179,7 +188,9 @@ class ProductScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
                     child: Row(
                       children: [
                         GestureDetector(
@@ -282,6 +293,7 @@ class _WidgetImageCarouselState extends State<WidgetImageCarousel> {
             }).toList(),
             options: CarouselOptions(
                 autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 10),
                 viewportFraction: 1,
                 height: 420,
                 onPageChanged: (index, reason) {

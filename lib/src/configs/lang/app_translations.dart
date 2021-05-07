@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
-import '../../utils/utils.dart';
 
 class AppTranslations extends Translations {
   @override
@@ -10,6 +7,9 @@ class AppTranslations extends Translations {
         'en_US': enUS,
         'vi_VN': viVN,
       };
+
+  static const Locale vi = Locale('vi', 'VN');
+  static const Locale en = Locale('en', 'US');
 
   final Map<String, String> enUS = {
     'login_title': 'Welcome back',
@@ -110,13 +110,15 @@ class AppTranslations extends Translations {
     'set_ward': 'Set ward',
     'ward_null': 'Please select you ward',
     'input_null': 'Please check your input',
-    'place_order' : 'Place order',
-    'checkout' : 'Checkout',
+    'place_order': 'Place order',
+    'checkout': 'Checkout',
     'cart': 'Cart',
-    'added_to_cart_success' : 'Added to cart success',
-    'go_to_cart' : 'Go to cart',
-    'continue_shopping' : 'Continue shopping',
+    'added_to_cart_success': 'Added to cart success',
+    'go_to_cart': 'Go to cart',
+    'continue_shopping': 'Continue shopping',
     'delete': 'Delete',
+    'edit': 'Edit',
+    'write_a_comment': 'Write a comment',
   };
 
   final Map<String, String> viVN = {
@@ -220,24 +222,14 @@ class AppTranslations extends Translations {
     'set_ward': 'Chọn phường',
     'ward_null': 'Vui lòng chọn phường',
     'input_null': 'Vui lòng kiểm tra lại dữ liệu',
-    'place_order' : 'Đặt hàng',
-    'checkout' : 'Thanh toán',
+    'place_order': 'Đặt hàng',
+    'checkout': 'Thanh toán',
     'cart': 'Giỏ hàng',
-    'added_to_cart_success' : 'Đã thêm sản phẩm vào giỏ',
-    'go_to_cart' : 'Tới giỏ hàng',
-    'continue_shopping' : 'Tiếp tục mua hàng',
+    'added_to_cart_success': 'Đã thêm sản phẩm vào giỏ',
+    'go_to_cart': 'Tới giỏ hàng',
+    'continue_shopping': 'Tiếp tục mua hàng',
     'delete': 'Xoá',
-   };
-
-  static Locale getLocale(Language language) {
-    switch (language) {
-      case Language.english:
-        return const Locale('en', 'US');
-        break;
-      case Language.vietnamese:
-        return const Locale('vi', 'VN');
-        break;
-    }
-    return const Locale('vi', 'VN');
-  }
+    'write_a_comment': 'Viết bình luận',
+    'edit': 'Edit',
+  };
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../main_viewmodel.dart';
-import '../../../utils/shared_pref.dart';
 import '../../presentation.dart';
 
 class LanguageScreen extends StatelessWidget {
@@ -25,7 +25,7 @@ class LanguageScreen extends StatelessWidget {
                 style: theme.textTheme.bodyText2,
               ),
               onTap: () {
-                mainVM.language = Language.vietnamese;
+                mainVM.language = AppTranslations.vi;
                 Navigator.pop(context);
               },
             ),
@@ -35,7 +35,7 @@ class LanguageScreen extends StatelessWidget {
                 style: theme.textTheme.bodyText2,
               ),
               onTap: () {
-                mainVM.language = Language.english;
+                mainVM.language = AppTranslations.en;
                 Navigator.pop(context);
               },
             ),

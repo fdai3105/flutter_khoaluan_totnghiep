@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -11,13 +13,17 @@ import '../../presentation.dart';
 class CommentDialog extends StatelessWidget {
   final int productId;
 
-  const CommentDialog({Key key, this.productId}) : super(key: key);
+  CommentDialog({Key key, this.productId}) : super(key: key);
+
+  final myFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: const WidgetAppBar(title: 'Comments'),
+      backgroundColor: theme.backgroundColor,
+      appBar: WidgetAppBar(title: 'comment'.tr),
       body: SafeArea(
         child: BaseWidget<CommentViewModel>(
           viewModel: CommentViewModel(
@@ -30,7 +36,7 @@ class CommentDialog extends StatelessWidget {
           builder: (context, vm, widget) {
             return Column(
               children: [
-                Expanded(child: _body(vm)),
+                Expanded(child: _body(context, vm)),
                 _field(vm),
               ],
             );
@@ -40,7 +46,7 @@ class CommentDialog extends StatelessWidget {
     );
   }
 
-  Widget _body(CommentViewModel vm) {
+  Widget _body(BuildContext context, CommentViewModel vm) {
     if (vm.isLoading) {
       return const WidgetLoading();
     }
@@ -48,31 +54,37 @@ class CommentDialog extends StatelessWidget {
       return const Center(child: Text('No comment yet'));
     }
     return SingleChildScrollView(
-      child: _listComments(vm.comments.data, vm),
+      child: _listComments(context,vm.comments.data, vm),
     );
   }
 
   Widget _field(CommentViewModel vm) {
-    return Row(
-      children: [
-        Expanded(
-          child: WidgetInput(
-            controller: vm.controller,
-            hint: 'Write a comment',
-            margin: AppStyles.paddingBody,
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        children: [
+          Expanded(
+            child: WidgetInput(
+              controller: vm.controller,
+              node: myFocusNode,
+              hint: 'write_a_comment'.tr,
+            ),
           ),
-        ),
-        IconButton(
-          icon: const Icon(Icons.send, color: AppColors.primary),
-          onPressed: () {
-            vm.isEditing ? vm.editComment() : vm.addComment(productId);
-          },
-        ),
-      ],
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: () {
+              vm.isEditing ? vm.editComment() : vm.addComment(productId);
+            },
+            child: const Icon(Icons.send, color: AppColors.primary),
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _listComments(List<CommentDatum> comments, CommentViewModel vm) {
+  Widget _listComments(BuildContext context, List<CommentDatum> comments, CommentViewModel vm) {
+    final theme = Theme.of(context);
+    timeago.setLocaleMessages('vi', timeago.ViMessages());
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -85,28 +97,42 @@ class CommentDialog extends StatelessWidget {
               : {},
           child: Padding(
             padding: AppStyles.paddingBody,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                WidgetAvatar(
+                  image: item.user.avatar,
+                  size: 40,
+                ),
+                const SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(height: 10),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          item.user.name,
-                          style: const TextStyle(fontWeight: FontWeight.w600),
+                        Row(
+                          children: [
+                            Text(
+                              item.user.name,
+                              style: theme.textTheme.bodyText1,
+                            ),
+                            const Text(' · '),
+                            Text(
+                              timeago.format(
+                                item.createdAt,
+                                locale: SharedPref.getLanguage().languageCode,
+                              ),
+                            ),
+                          ],
                         ),
-                        const Text(' · '),
-                        Text(timeago.format(item.createdAt)),
                       ],
                     ),
+                    const SizedBox(height: 15),
+                    Text(item.comment),
+                    const SizedBox(height: 10),
                   ],
                 ),
-                const SizedBox(height: 15),
-                Text(item.comment),
-                const SizedBox(height: 10),
               ],
             ),
           ),
@@ -125,18 +151,19 @@ class CommentDialog extends StatelessWidget {
             ListTile(
               onTap: () => vm.deleteComment(comment.id),
               leading: const Icon(Icons.delete_rounded),
-              title: const Text('Delete'),
+              title: Text('delete'.tr),
             ),
             ListTile(
               onTap: () {
                 Navigator.pop(context);
+                myFocusNode.requestFocus();
                 vm
                   ..isEditing = true
                   ..editingSelect = comment.id
                   ..controller.text = comment.comment;
               },
               leading: const Icon(Icons.edit_rounded),
-              title: const Text('Edit'),
+              title: Text('edit'.tr),
             ),
           ],
         );

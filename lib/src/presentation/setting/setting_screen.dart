@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:khoaluan_totnghiep_mobile/src/configs/configs.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +30,7 @@ class SettingScreen extends StatelessWidget {
             onTap: () => pushNewScreen(context, screen: LanguageScreen()),
             title: Text('language'.tr, style: theme.textTheme.bodyText1),
             trailing: Text(
-              mainVM.language == Language.english
+              mainVM.language == AppTranslations.en
                   ? 'english'.tr
                   : 'vietnamese'.tr,
               style: theme.textTheme.subtitle1,

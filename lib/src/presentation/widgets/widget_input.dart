@@ -5,6 +5,7 @@ import '../../configs/configs.dart';
 class WidgetInput extends StatelessWidget {
   final Function(String) onChanged;
   final TextEditingController controller;
+  final FocusNode node;
   final String hint;
   final String value;
   final bool readOnly;
@@ -16,6 +17,7 @@ class WidgetInput extends StatelessWidget {
     this.hint,
     this.onChanged,
     this.controller,
+    this.node,
     this.value,
     this.readOnly = false,
     this.margin = EdgeInsets.zero,
@@ -34,6 +36,7 @@ class WidgetInput extends StatelessWidget {
       ),
       child: TextFormField(
         controller: controller,
+        focusNode: node,
         onChanged: onChanged,
         initialValue: value,
         readOnly: readOnly,

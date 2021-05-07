@@ -65,6 +65,8 @@ class CommentViewModel extends BaseViewModel {
   }
 
   Future addComment(int productID) async {
+    final loading = DialogLoading.of(context)..show();
+
     if (controller.text.isEmpty) return;
     if (SharedPref.getUser() == null) {
       await pushNewScreen(context, screen: LoginScreen());
@@ -75,10 +77,13 @@ class CommentViewModel extends BaseViewModel {
     if (rs.statusCode == 200) {
       await fetchComments(productID);
     }
+
+    loading.hide();
   }
 
   Future editComment() async {
     if (controller.text.isEmpty || editingSelect == null) return;
+    final loading = DialogLoading.of(context)..show();
 
     final rs = await response.editComment(editingSelect, controller.text);
     if (rs.statusCode == 200) {
@@ -87,6 +92,8 @@ class CommentViewModel extends BaseViewModel {
       isEditing = false;
       controller.text = '';
     }
+
+    loading.hide();
   }
 
   Future deleteComment(int id) async {

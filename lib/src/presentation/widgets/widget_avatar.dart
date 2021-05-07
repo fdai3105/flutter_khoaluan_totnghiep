@@ -9,7 +9,7 @@ class WidgetAvatar extends StatelessWidget {
   final String image;
   final double size;
 
-  const WidgetAvatar({Key key, this.image, this.size}) : super(key: key);
+  const WidgetAvatar({Key key,@required this.image, this.size}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

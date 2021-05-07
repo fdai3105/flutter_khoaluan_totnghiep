@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -7,7 +8,7 @@ import 'src/utils/utils.dart';
 
 class MainViewModel extends BaseViewModel {
   final _darkMode = BehaviorSubject<bool>();
-  final _language = BehaviorSubject<Language>();
+  final _language = BehaviorSubject<Locale>();
 
   bool get darkMode => _darkMode.value;
 
@@ -17,12 +18,12 @@ class MainViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Language get language => _language.value;
+  Locale get language => _language.value;
 
-  set language(Language value) {
+  set language(Locale value) {
     _language.add(value);
     SharedPref.setLanguage(language);
-    Get.updateLocale(AppTranslations.getLocale(language));
+    Get.updateLocale(language);
     notifyListeners();
   }
 

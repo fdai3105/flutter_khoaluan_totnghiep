@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../configs/configs.dart';
@@ -124,24 +126,25 @@ class SharedPref {
   }
 
   static bool isDarkMode() {
-    return _pref.getBool('dark_mode') ?? false;
+    return _pref.getBool('dark_mode') ?? true;
   }
 
-  static Future setLanguage(Language language) async {
+  static Future setLanguage(Locale locale) async {
     await _pref.setString(
       'language',
-      AppTranslations.getLocale(language).languageCode,
+      locale.languageCode,
     );
   }
 
-  static Language getLanguage() {
+  static Locale getLanguage() {
     final lang = _pref.getString('language');
     if (lang == 'en') {
-      return Language.english;
+      return AppTranslations.en;
     } else if (lang == 'vi') {
-      return Language.vietnamese;
+      return AppTranslations.vi;
+    } else {
+      return Get.deviceLocale;
     }
-    return null;
   }
 
   /// favorite item
@@ -169,9 +172,4 @@ class SharedPref {
       current.map((e) => e.toRawJson()).toList(),
     );
   }
-}
-
-enum Language {
-  english,
-  vietnamese,
 }
