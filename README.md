@@ -1,6 +1,7 @@
 # khoaluan_totnghiep_mobile
 
-A new Flutter application.
+A Flutter Futunite App with Provider package, use MVVP pattern
+For more detail pls open KHOÁ LUẬN TỐT NGHIỆP.pptx
 
 ## Getting Started
 
